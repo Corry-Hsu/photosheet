@@ -133,7 +133,15 @@
     .input-row label { color: #6b665f; font-weight: 700; }
     .input-row input {
       border: 1px solid var(--border); border-radius: 12px; background: #fff; height: 44px; padding: 0 14px;
+      min-width: 0;
     }
+    .input-row.with-action { grid-template-columns: 110px 1fr auto; }
+    .refresh-btn {
+      width: 44px; height: 44px; border-radius: 12px; border: 1px solid var(--border);
+      background: #fff; color: var(--teal); display: grid; place-items: center;
+      transition: background .15s, color .15s;
+    }
+    .refresh-btn:hover { background: var(--teal); color: #fff; border-color: var(--teal); }
     .note {
       color: var(--muted); font-size: 14px; line-height: 1.6; background: #efede8; border-radius: 16px; padding: 14px 16px;
     }
@@ -145,6 +153,8 @@
       .upload-grid, .record-grid, .upload-actions, .upload-actions.two-row { grid-template-columns: 1fr; }
       .field-add-row { grid-template-columns: 1fr 64px; }
       .input-row, .data-row { grid-template-columns: 1fr; }
+      .input-row.with-action { grid-template-columns: 1fr auto; row-gap: 6px; }
+      .input-row.with-action label { grid-column: 1 / -1; }
       .topbar { padding: 0 20px; }
       .brand { font-size: 18px; }
     }
@@ -160,9 +170,6 @@
         <div>Photo<span class="accent">Sheet</span></div>
       </div>
       <div class="icons">
-        <button class="icon-btn" type="button" aria-label="重新定位" id="refreshGpsBtn" title="重新取得 GPS">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.93 4.93l2.12 2.12M16.95 16.95l2.12 2.12M4.93 19.07l2.12-2.12M16.95 7.05l2.12-2.12"></path></svg>
-        </button>
       </div>
     </header>
 
@@ -240,16 +247,22 @@
           <span>填寫資料</span>
         </div>
         <div class="note" style="margin-bottom: 14px;">
-          浮水印會優先使用目前定位；若無法取得，則嘗試讀取照片 EXIF 座標。你也可以手動輸入座標文字。Geolocation 在 HTTPS 或安全環境下較容易正常使用。每張新照片會以當下時間為時間戳記，可手動覆寫。
+          時間每秒自動更新、座標持續追蹤定位（watchPosition）。手動編輯欄位後會停止自動更新；按下右側 ↻ 按鈕可恢復為現在時間 / 重新取得 GPS。Geolocation 在 HTTPS 或安全環境下較容易正常使用。
         </div>
         <div class="form-area" id="dynamicFields"></div>
-        <div class="input-row" style="margin-top: 10px;">
+        <div class="input-row with-action" style="margin-top: 10px;">
           <label for="watermarkTime">浮水印時間</label>
           <input id="watermarkTime" type="text" placeholder="例如 115/05/06 17:03:22" />
+          <button class="refresh-btn" id="refreshTimeBtn" type="button" aria-label="更新為現在時間" title="更新為現在時間">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>
+          </button>
         </div>
-        <div class="input-row">
+        <div class="input-row with-action">
           <label for="watermarkCoords">浮水印座標</label>
           <input id="watermarkCoords" type="text" placeholder="例如 22.676123, 120.494321" />
+          <button class="refresh-btn" id="refreshCoordsBtn" type="button" aria-label="重新取得 GPS" title="重新取得 GPS">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 1 1-3-6.7"></path><polyline points="21 4 21 10 15 10"></polyline></svg>
+          </button>
         </div>
         <div class="input-row">
           <label for="watermarkExtra">浮水印文字</label>
@@ -605,19 +618,34 @@
       }
     }
 
-    function requestLiveLocation() {
+    let geoWatchId = null;
+    function startWatchingLocation() {
       if (!navigator.geolocation) return;
-      navigator.geolocation.getCurrentPosition(
+      if (geoWatchId !== null) {
+        try { navigator.geolocation.clearWatch(geoWatchId); } catch (_) {}
+        geoWatchId = null;
+      }
+      geoWatchId = navigator.geolocation.watchPosition(
         pos => {
           liveCoordsText = `${pos.coords.latitude.toFixed(6)}, ${pos.coords.longitude.toFixed(6)}`;
-          if (!userEditedCoords && !$('watermarkCoords').value.trim()) {
+          if (!userEditedCoords) {
             $('watermarkCoords').value = liveCoordsText;
           }
         },
         err => { console.warn('geolocation error:', err && err.message); },
-        { enableHighAccuracy: true, timeout: 10000, maximumAge: 60000 }
+        { enableHighAccuracy: true, timeout: 10000, maximumAge: 3000 }
       );
     }
+
+    // 每秒刷新時間（除非使用者手動編輯了）
+    setInterval(() => {
+      if (!userEditedTime) {
+        $('watermarkTime').value = formatMinguoDateTime();
+      }
+    }, 1000);
+
+    // 舊版 API 保留別名以相容
+    function requestLiveLocation() { startWatchingLocation(); }
 
     async function exportXlsx() {
       if (!records.length) {
@@ -736,14 +764,22 @@
     $('camera2').addEventListener('change', e => handlePick('camera2', 'preview2', d => photo2 = d, e.target.files?.[0]));
     $('gallery2').addEventListener('change', e => handlePick('gallery2', 'preview2', d => photo2 = d, e.target.files?.[0]));
 
-    $('watermarkTime').addEventListener('input', () => { userEditedTime = true; });
-    $('watermarkCoords').addEventListener('input', () => { userEditedCoords = true; });
+    $('watermarkTime').addEventListener('input', () => {
+      userEditedTime = $('watermarkTime').value.trim() !== '';
+    });
+    $('watermarkCoords').addEventListener('input', () => {
+      userEditedCoords = $('watermarkCoords').value.trim() !== '';
+    });
 
-    $('refreshGpsBtn').addEventListener('click', () => {
+    $('refreshTimeBtn').addEventListener('click', () => {
+      userEditedTime = false;
+      $('watermarkTime').value = formatMinguoDateTime();
+    });
+    $('refreshCoordsBtn').addEventListener('click', () => {
       userEditedCoords = false;
       liveCoordsText = '';
       $('watermarkCoords').value = '';
-      requestLiveLocation();
+      startWatchingLocation();
     });
 
     $('addRecordBtn').addEventListener('click', () => {
@@ -785,7 +821,7 @@
     renderRecords();
     resetPreviews();
     $('watermarkTime').value = formatMinguoDateTime();
-    requestLiveLocation();
+    startWatchingLocation();
   </script>
 </body>
 </html>
