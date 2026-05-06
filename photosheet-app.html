@@ -253,7 +253,7 @@
           <button class="action-btn" id="clearBtn" type="button">清空資料</button>
         </div>
         <div class="note" style="margin-top: 14px;">
-          欄位可自由命名；若欄位名稱為「日期」，新增欄位時會自動帶入民國年月日，仍可手動修改。匯出 XLSX 時會輸出資料表與原尺寸照片表兩個工作表，照片會依原始像素大小嵌入。
+          欄位可自由命名；若欄位名稱為「日期」，新增欄位時會自動帶入民國年月日，仍可手動修改。匯出 XLSX 時會在同一個工作表中放入較大且清晰的照片區，不再另外建立照片工作表。
         </div>
       </section>
 
@@ -436,17 +436,20 @@
       }
       const allFieldNames = [...new Set(records.flatMap(r => Object.keys(r.fields)))];
       const wb = new ExcelJS.Workbook();
-
-      const ws = wb.addWorksheet('資料表');
-      const headers = [...allFieldNames, '備註', '照片1工作表', '照片2工作表'];
+      const ws = wb.addWorksheet('PhotoSheet');
+      const headers = [...allFieldNames, '備註', '照片1', '照片2'];
       ws.addRow(headers);
       ws.views = [{ state: 'frozen', ySplit: 1 }];
+
+      const photo1Col = allFieldNames.length + 2;
+      const photo2Col = allFieldNames.length + 3;
       headers.forEach((h, idx) => {
         const col = ws.getColumn(idx + 1);
-        if (h.includes('工作表')) col.width = 18;
-        else if (h === '備註') col.width = 28;
+        if (idx + 1 === photo1Col || idx + 1 === photo2Col) col.width = 42;
+        else if (h === '備註') col.width = 24;
         else col.width = 16;
       });
+
       const headerRow = ws.getRow(1);
       headerRow.height = 24;
       headerRow.eachCell(cell => {
@@ -459,29 +462,18 @@
         };
       });
 
-      const photoSheet = wb.addWorksheet('原尺寸照片');
-      photoSheet.views = [{ state: 'frozen', ySplit: 1 }];
-      photoSheet.addRow(['序號', '照片別', '圖片', '檔名', '寬(px)', '高(px)']);
-      photoSheet.getRow(1).height = 24;
-      photoSheet.getRow(1).eachCell(cell => {
-        cell.font = { bold: true, color: { argb: 'FFFFFFFF' } };
-        cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FF0F7A80' } };
-        cell.alignment = { vertical: 'middle', horizontal: 'center' };
-      });
-      photoSheet.getColumn(1).width = 10;
-      photoSheet.getColumn(2).width = 10;
-      photoSheet.getColumn(3).width = 18;
-      photoSheet.getColumn(4).width = 26;
-      photoSheet.getColumn(5).width = 12;
-      photoSheet.getColumn(6).width = 12;
+      const maxDisplayWidth = 520;
+      const maxDisplayHeight = 520;
 
-      let photoRow = 2;
+      for (const record of records) {
+        const scaled1 = fitSize(record.photo1?.width, record.photo1?.height, maxDisplayWidth, maxDisplayHeight);
+        const scaled2 = fitSize(record.photo2?.width, record.photo2?.height, maxDisplayWidth, maxDisplayHeight);
+        const contentHeight = Math.max(scaled1.height || 0, scaled2.height || 0, 120);
+        const rowHeight = Math.max(90, Math.ceil(contentHeight * 0.78));
 
-      for (let idx = 0; idx < records.length; idx++) {
-        const record = records[idx];
-        const rowValues = [...allFieldNames.map(name => record.fields[name] || ''), record.memo || '', record.photo1 ? `圖${idx + 1}-1` : '', record.photo2 ? `圖${idx + 1}-2` : ''];
+        const rowValues = [...allFieldNames.map(name => record.fields[name] || ''), record.memo || '', '', ''];
         const row = ws.addRow(rowValues);
-        row.height = 24;
+        row.height = rowHeight;
         row.eachCell(cell => {
           cell.alignment = { vertical: 'middle', horizontal: 'left', wrapText: true };
           cell.border = {
@@ -490,38 +482,36 @@
           };
         });
 
-        for (const [label, photo] of [['照片1', record.photo1], ['照片2', record.photo2]]) {
-          if (!photo?.dataUrl) continue;
-          const width = Math.max(1, Number(photo.width || 1600));
-          const height = Math.max(1, Number(photo.height || 1200));
-          const rowSpan = Math.max(8, Math.ceil(height / 20));
-          photoSheet.mergeCells(`C${photoRow}:C${photoRow + rowSpan - 1}`);
-          photoSheet.getRow(photoRow).getCell(1).value = idx + 1;
-          photoSheet.getRow(photoRow).getCell(2).value = label;
-          photoSheet.getRow(photoRow).getCell(4).value = photo.name || '';
-          photoSheet.getRow(photoRow).getCell(5).value = width;
-          photoSheet.getRow(photoRow).getCell(6).value = height;
-          for (let r = photoRow; r < photoRow + rowSpan; r++) {
-            photoSheet.getRow(r).height = 15;
-            for (let c = 1; c <= 6; c++) {
-              photoSheet.getRow(r).getCell(c).border = {
-                top: { style: 'thin', color: { argb: 'FFE5E0D8' } }, left: { style: 'thin', color: { argb: 'FFE5E0D8' } },
-                bottom: { style: 'thin', color: { argb: 'FFE5E0D8' } }, right: { style: 'thin', color: { argb: 'FFE5E0D8' } }
-              };
-            }
-          }
-          const id = wb.addImage({ base64: photo.dataUrl, extension: normalizeExt(photo.extension) });
-          photoSheet.addImage(id, {
-            tl: { col: 2 + 0.05, row: photoRow - 1 + 0.05 },
-            ext: { width, height },
-            editAs: 'absolute'
+        const rowNo = row.number;
+
+        if (record.photo1?.dataUrl && scaled1.width && scaled1.height) {
+          const id1 = wb.addImage({ base64: record.photo1.dataUrl, extension: normalizeExt(record.photo1.extension) });
+          ws.addImage(id1, {
+            tl: { col: photo1Col - 1 + 0.05, row: rowNo - 1 + 0.05 },
+            ext: { width: scaled1.width, height: scaled1.height },
+            editAs: 'oneCell'
           });
-          photoRow += rowSpan + 1;
+        }
+        if (record.photo2?.dataUrl && scaled2.width && scaled2.height) {
+          const id2 = wb.addImage({ base64: record.photo2.dataUrl, extension: normalizeExt(record.photo2.extension) });
+          ws.addImage(id2, {
+            tl: { col: photo2Col - 1 + 0.05, row: rowNo - 1 + 0.05 },
+            ext: { width: scaled2.width, height: scaled2.height },
+            editAs: 'oneCell'
+          });
         }
       }
 
       const buffer = await wb.xlsx.writeBuffer();
       saveAs(new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' }), `photosheet-${new Date().toISOString().slice(0,10)}.xlsx`);
+    }
+
+    function fitSize(width, height, maxW, maxH) {
+      width = Number(width || 0);
+      height = Number(height || 0);
+      if (!width || !height) return { width: 0, height: 0 };
+      const ratio = Math.min(maxW / width, maxH / height, 1);
+      return { width: Math.round(width * ratio), height: Math.round(height * ratio) };
     }
 
     $('addFieldBtn').addEventListener('click', () => {
