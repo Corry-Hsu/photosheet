@@ -253,7 +253,7 @@
           <button class="action-btn" id="clearBtn" type="button">清空資料</button>
         </div>
         <div class="note" style="margin-top: 14px;">
-          欄位可自由命名；若欄位名稱為「日期」，新增欄位時會自動帶入民國年月日，仍可手動修改。匯出 XLSX 時會把兩張照片直接嵌入 Excel 工作表中。
+          欄位可自由命名；若欄位名稱為「日期」，新增欄位時會自動帶入民國年月日，仍可手動修改。匯出 XLSX 時會輸出資料表與原尺寸照片表兩個工作表，照片會依原始像素大小嵌入。
         </div>
       </section>
 
@@ -361,7 +361,10 @@
           const mime = (meta.match(/data:(.*?);base64/) || [])[1] || 'image/jpeg';
           let extension = mime.split('/')[1] || 'jpeg';
           if (extension === 'jpg') extension = 'jpeg';
-          resolve({ dataUrl, extension, name: file.name });
+          const probe = new Image();
+          probe.onload = () => resolve({ dataUrl, extension, name: file.name, width: probe.naturalWidth, height: probe.naturalHeight });
+          probe.onerror = () => resolve({ dataUrl, extension, name: file.name, width: 1600, height: 1200 });
+          probe.src = dataUrl;
         };
         reader.onerror = reject;
         reader.readAsDataURL(file);
@@ -433,13 +436,14 @@
       }
       const allFieldNames = [...new Set(records.flatMap(r => Object.keys(r.fields)))];
       const wb = new ExcelJS.Workbook();
-      const ws = wb.addWorksheet('PhotoSheet');
-      const headers = [...allFieldNames, '備註', '照片1', '照片2'];
+
+      const ws = wb.addWorksheet('資料表');
+      const headers = [...allFieldNames, '備註', '照片1工作表', '照片2工作表'];
       ws.addRow(headers);
       ws.views = [{ state: 'frozen', ySplit: 1 }];
       headers.forEach((h, idx) => {
         const col = ws.getColumn(idx + 1);
-        if (h === '照片1' || h === '照片2') col.width = 18;
+        if (h.includes('工作表')) col.width = 18;
         else if (h === '備註') col.width = 28;
         else col.width = 16;
       });
@@ -455,10 +459,29 @@
         };
       });
 
-      for (const record of records) {
-        const rowValues = [...allFieldNames.map(name => record.fields[name] || ''), record.memo || '', '', ''];
+      const photoSheet = wb.addWorksheet('原尺寸照片');
+      photoSheet.views = [{ state: 'frozen', ySplit: 1 }];
+      photoSheet.addRow(['序號', '照片別', '圖片', '檔名', '寬(px)', '高(px)']);
+      photoSheet.getRow(1).height = 24;
+      photoSheet.getRow(1).eachCell(cell => {
+        cell.font = { bold: true, color: { argb: 'FFFFFFFF' } };
+        cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FF0F7A80' } };
+        cell.alignment = { vertical: 'middle', horizontal: 'center' };
+      });
+      photoSheet.getColumn(1).width = 10;
+      photoSheet.getColumn(2).width = 10;
+      photoSheet.getColumn(3).width = 18;
+      photoSheet.getColumn(4).width = 26;
+      photoSheet.getColumn(5).width = 12;
+      photoSheet.getColumn(6).width = 12;
+
+      let photoRow = 2;
+
+      for (let idx = 0; idx < records.length; idx++) {
+        const record = records[idx];
+        const rowValues = [...allFieldNames.map(name => record.fields[name] || ''), record.memo || '', record.photo1 ? `圖${idx + 1}-1` : '', record.photo2 ? `圖${idx + 1}-2` : ''];
         const row = ws.addRow(rowValues);
-        row.height = 96;
+        row.height = 24;
         row.eachCell(cell => {
           cell.alignment = { vertical: 'middle', horizontal: 'left', wrapText: true };
           cell.border = {
@@ -467,17 +490,33 @@
           };
         });
 
-        const rowNo = row.number;
-        const photo1Col = allFieldNames.length + 2;
-        const photo2Col = allFieldNames.length + 3;
-
-        if (record.photo1?.dataUrl) {
-          const id = wb.addImage({ base64: record.photo1.dataUrl, extension: normalizeExt(record.photo1.extension) });
-          ws.addImage(id, { tl: { col: photo1Col - 1 + 0.08, row: rowNo - 1 + 0.08 }, br: { col: photo1Col - 1 + 0.92, row: rowNo - 1 + 0.92 }, editAs: 'oneCell' });
-        }
-        if (record.photo2?.dataUrl) {
-          const id = wb.addImage({ base64: record.photo2.dataUrl, extension: normalizeExt(record.photo2.extension) });
-          ws.addImage(id, { tl: { col: photo2Col - 1 + 0.08, row: rowNo - 1 + 0.08 }, br: { col: photo2Col - 1 + 0.92, row: rowNo - 1 + 0.92 }, editAs: 'oneCell' });
+        for (const [label, photo] of [['照片1', record.photo1], ['照片2', record.photo2]]) {
+          if (!photo?.dataUrl) continue;
+          const width = Math.max(1, Number(photo.width || 1600));
+          const height = Math.max(1, Number(photo.height || 1200));
+          const rowSpan = Math.max(8, Math.ceil(height / 20));
+          photoSheet.mergeCells(`C${photoRow}:C${photoRow + rowSpan - 1}`);
+          photoSheet.getRow(photoRow).getCell(1).value = idx + 1;
+          photoSheet.getRow(photoRow).getCell(2).value = label;
+          photoSheet.getRow(photoRow).getCell(4).value = photo.name || '';
+          photoSheet.getRow(photoRow).getCell(5).value = width;
+          photoSheet.getRow(photoRow).getCell(6).value = height;
+          for (let r = photoRow; r < photoRow + rowSpan; r++) {
+            photoSheet.getRow(r).height = 15;
+            for (let c = 1; c <= 6; c++) {
+              photoSheet.getRow(r).getCell(c).border = {
+                top: { style: 'thin', color: { argb: 'FFE5E0D8' } }, left: { style: 'thin', color: { argb: 'FFE5E0D8' } },
+                bottom: { style: 'thin', color: { argb: 'FFE5E0D8' } }, right: { style: 'thin', color: { argb: 'FFE5E0D8' } }
+              };
+            }
+          }
+          const id = wb.addImage({ base64: photo.dataUrl, extension: normalizeExt(photo.extension) });
+          photoSheet.addImage(id, {
+            tl: { col: 2 + 0.05, row: photoRow - 1 + 0.05 },
+            ext: { width, height },
+            editAs: 'absolute'
+          });
+          photoRow += rowSpan + 1;
         }
       }
 
