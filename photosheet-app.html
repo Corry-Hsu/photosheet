@@ -7,6 +7,7 @@
   <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/exceljs/dist/exceljs.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/exifr/dist/full.umd.js"></script>
   <style>
     :root {
       --bg: #f4f2ef;
@@ -159,11 +160,8 @@
         <div>Photo<span class="accent">Sheet</span></div>
       </div>
       <div class="icons">
-        <button class="icon-btn" type="button" aria-label="設定">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33h.01A1.65 1.65 0 0 0 10 3.09V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51h.01a1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v.01a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
-        </button>
-        <button class="icon-btn" type="button" aria-label="主題切換">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        <button class="icon-btn" type="button" aria-label="重新定位" id="refreshGpsBtn" title="重新取得 GPS">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.93 4.93l2.12 2.12M16.95 16.95l2.12 2.12M4.93 19.07l2.12-2.12M16.95 7.05l2.12-2.12"></path></svg>
         </button>
       </div>
     </header>
@@ -241,8 +239,23 @@
           <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"></path></svg>
           <span>填寫資料</span>
         </div>
+        <div class="note" style="margin-bottom: 14px;">
+          浮水印會優先使用目前定位；若無法取得，則嘗試讀取照片 EXIF 座標。你也可以手動輸入座標文字。Geolocation 在 HTTPS 或安全環境下較容易正常使用。每張新照片會以當下時間為時間戳記，可手動覆寫。
+        </div>
         <div class="form-area" id="dynamicFields"></div>
         <div class="input-row" style="margin-top: 10px;">
+          <label for="watermarkTime">浮水印時間</label>
+          <input id="watermarkTime" type="text" placeholder="例如 115/05/06 17:03:22" />
+        </div>
+        <div class="input-row">
+          <label for="watermarkCoords">浮水印座標</label>
+          <input id="watermarkCoords" type="text" placeholder="例如 22.676123, 120.494321" />
+        </div>
+        <div class="input-row">
+          <label for="watermarkExtra">浮水印文字</label>
+          <input id="watermarkExtra" type="text" placeholder="可填地段、地號或自訂文字" />
+        </div>
+        <div class="input-row">
           <label for="memo">備註</label>
           <input id="memo" type="text" placeholder="可填補充說明..." />
         </div>
@@ -253,7 +266,7 @@
           <button class="action-btn" id="clearBtn" type="button">清空資料</button>
         </div>
         <div class="note" style="margin-top: 14px;">
-          欄位可自由命名；若欄位名稱為「日期」，新增欄位時會自動帶入民國年月日，仍可手動修改。匯出 XLSX 時會在同一個工作表中放入較大且清晰的照片區，不再另外建立照片工作表。
+          欄位可自由命名；若欄位名稱為「日期」，新增欄位時會自動帶入民國年月日，仍可手動修改。選圖後會自動後製日期時間與座標浮水印，匯出 XLSX 時使用浮水印後的照片，並在同一個工作表中放入較大且清晰的照片區。
         </div>
       </section>
 
@@ -274,6 +287,9 @@
     const records = [];
     let photo1 = null;
     let photo2 = null;
+    let liveCoordsText = '';
+    let userEditedTime = false;
+    let userEditedCoords = false;
 
     const $ = id => document.getElementById(id);
 
@@ -284,9 +300,32 @@
       return `${y}/${m}/${d}`;
     }
 
+    function formatMinguoDateTime(date = new Date()) {
+      const y = date.getFullYear() - 1911;
+      const m = String(date.getMonth() + 1).padStart(2, '0');
+      const d = String(date.getDate()).padStart(2, '0');
+      const hh = String(date.getHours()).padStart(2, '0');
+      const mm = String(date.getMinutes()).padStart(2, '0');
+      const ss = String(date.getSeconds()).padStart(2, '0');
+      return `${y}/${m}/${d} ${hh}:${mm}:${ss}`;
+    }
+
     function isDateField(name) {
       const n = String(name).trim();
       return ['日期', '拍攝日期', '時間', '年月日', 'date', 'Date'].includes(n);
+    }
+
+    function escapeHtml(str) {
+      return String(str ?? '')
+        .replaceAll('&', '&amp;')
+        .replaceAll('<', '&lt;')
+        .replaceAll('>', '&gt;')
+        .replaceAll('"', '&quot;')
+        .replaceAll("'", '&#39;');
+    }
+
+    function escapeAttr(str) {
+      return escapeHtml(str);
     }
 
     function renderFieldChips() {
@@ -317,34 +356,26 @@
       }).join('');
     }
 
-    function escapeHtml(str) {
-      return String(str ?? '')
-        .replaceAll('&', '&amp;')
-        .replaceAll('<', '&lt;')
-        .replaceAll('>', '&gt;')
-        .replaceAll('"', '&quot;')
-        .replaceAll("'", '&#39;');
-    }
-
-    function escapeAttr(str) {
-      return escapeHtml(str);
+    function placeholderHTML(num, hint) {
+      return `
+        <div class="photo-placeholder">
+          <div class="cam"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg></div>
+          <strong>照片 ${num}</strong><div>${hint}</div><div style="margin-top:6px;">支援 JPEG、PNG、HEIF</div>
+        </div>`;
     }
 
     function resetPreviews() {
-      $('preview1').innerHTML = `
-        <div class="photo-placeholder">
-          <div class="cam"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg></div>
-          <strong>照片 1</strong><div>點擊拍照或選擇圖片</div><div style="margin-top:6px;">支援 JPEG、PNG、HEIF</div>
-        </div>`;
-      $('preview2').innerHTML = `
-        <div class="photo-placeholder">
-          <div class="cam"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg></div>
-          <strong>照片 2</strong><div>可補充環境或細部照片</div><div style="margin-top:6px;">支援 JPEG、PNG、HEIF</div>
-        </div>`;
+      $('preview1').innerHTML = placeholderHTML(1, '點擊拍照或選擇圖片');
+      $('preview2').innerHTML = placeholderHTML(2, '可補充環境或細部照片');
     }
 
     function resetForm() {
       renderDynamicInputs();
+      userEditedTime = false;
+      userEditedCoords = false;
+      $('watermarkTime').value = formatMinguoDateTime();
+      $('watermarkCoords').value = liveCoordsText || '';
+      $('watermarkExtra').value = '';
       $('memo').value = '';
       ['camera1', 'gallery1', 'camera2', 'gallery2'].forEach(id => $(id).value = '');
       photo1 = null;
@@ -357,7 +388,7 @@
         const reader = new FileReader();
         reader.onload = () => {
           const dataUrl = reader.result;
-          const [meta] = dataUrl.split(',');
+          const meta = dataUrl.split(',')[0] || '';
           const mime = (meta.match(/data:(.*?);base64/) || [])[1] || 'image/jpeg';
           let extension = mime.split('/')[1] || 'jpeg';
           if (extension === 'jpg') extension = 'jpeg';
@@ -371,12 +402,31 @@
       });
     }
 
-    async function handlePick(inputId, previewId, setter) {
-      const file = $(inputId).files?.[0];
-      if (!file) return;
-      const data = await fileToData(file);
-      setter(data);
-      $(previewId).innerHTML = `<img src="${data.dataUrl}" alt="照片預覽">`;
+    async function handlePick(inputId, previewId, setter, file) {
+      try {
+        const picked = file || $(inputId).files?.[0];
+        if (!picked) return;
+
+        // 每張新照片若使用者沒手動編輯，就刷新時間為當下
+        if (!userEditedTime) {
+          $('watermarkTime').value = formatMinguoDateTime();
+        }
+        // 若使用者沒手動填座標，且尚未取得即時定位，再嘗試一次
+        if (!userEditedCoords && !liveCoordsText) {
+          requestLiveLocation();
+        }
+        if (!userEditedCoords && liveCoordsText && !$('watermarkCoords').value.trim()) {
+          $('watermarkCoords').value = liveCoordsText;
+        }
+
+        let data = await fileToData(picked);
+        data = await applyWatermarkToPhoto(data);
+        setter(data);
+        $(previewId).innerHTML = `<img src="${data.dataUrl}" alt="照片預覽">`;
+      } catch (err) {
+        console.error('handlePick error:', err);
+        alert('讀取照片時發生錯誤，請再試一次。');
+      }
     }
 
     function collectFieldValues() {
@@ -425,8 +475,148 @@
     function normalizeExt(ext) {
       const e = String(ext || '').toLowerCase();
       if (e === 'jpg') return 'jpeg';
-      if (['jpeg','png','gif'].includes(e)) return e;
+      if (['jpeg', 'png', 'gif'].includes(e)) return e;
       return 'jpeg';
+    }
+
+    async function applyWatermarkToPhoto(photo) {
+      const timeText = ($('watermarkTime').value || '').trim() || formatMinguoDateTime();
+      let coordsText = ($('watermarkCoords').value || '').trim();
+      const extraText = ($('watermarkExtra').value || '').trim();
+
+      if (!coordsText) {
+        let fromExif = '';
+        try {
+          fromExif = await getCoordsFromExif(photo.dataUrl);
+        } catch (e) { fromExif = ''; }
+        coordsText = liveCoordsText || fromExif || '';
+        if (coordsText && !userEditedCoords) {
+          $('watermarkCoords').value = coordsText;
+        }
+      }
+
+      const lines = [];
+      if (timeText) lines.push(timeText);
+      if (coordsText) lines.push(coordsText);
+      if (extraText) lines.push(extraText);
+      if (!lines.length) return photo;
+
+      try {
+        return await drawWatermark(photo, lines);
+      } catch (err) {
+        console.error('drawWatermark failed:', err);
+        return photo;
+      }
+    }
+
+    function drawWatermark(photo, lines) {
+      return new Promise((resolve, reject) => {
+        const img = new Image();
+        img.onload = () => {
+          try {
+            const canvas = document.createElement('canvas');
+            canvas.width = img.naturalWidth || img.width || 1600;
+            canvas.height = img.naturalHeight || img.height || 1200;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+            const padding = Math.max(28, Math.round(canvas.width * 0.022));
+            const fontSize = Math.max(26, Math.round(canvas.width * 0.026));
+            const lineHeight = Math.round(fontSize * 1.32);
+
+            const fontFamily = (getComputedStyle(document.body).fontFamily || 'sans-serif');
+            ctx.font = `700 ${fontSize}px ${fontFamily}`;
+            ctx.textBaseline = 'top';
+            ctx.textAlign = 'center';
+
+            const blockHeight = lineHeight * lines.length;
+            const startY = canvas.height - padding - blockHeight;
+            const centerX = canvas.width / 2;
+
+            // 描邊寬度，依字體大小動態調整
+            const strokeWidth = Math.max(3, Math.round(fontSize * 0.18));
+
+            lines.forEach((line, i) => {
+              const y = startY + i * lineHeight;
+
+              // 第一層：陰影 + 深色描邊，把白字包起來，避免任何背景下看不清
+              ctx.save();
+              ctx.shadowColor = 'rgba(0, 0, 0, 0.85)';
+              ctx.shadowBlur = Math.max(6, Math.round(fontSize * 0.35));
+              ctx.shadowOffsetX = 0;
+              ctx.shadowOffsetY = Math.max(2, Math.round(fontSize * 0.06));
+              ctx.lineJoin = 'round';
+              ctx.miterLimit = 2;
+              ctx.lineWidth = strokeWidth;
+              ctx.strokeStyle = 'rgba(0, 0, 0, 0.95)';
+              ctx.strokeText(line, centerX, y);
+              ctx.restore();
+
+              // 第二層：白色填字
+              ctx.save();
+              ctx.fillStyle = '#ffffff';
+              ctx.fillText(line, centerX, y);
+              ctx.restore();
+            });
+
+            const mime = photo.extension === 'png' ? 'image/png' : 'image/jpeg';
+            const dataUrl = canvas.toDataURL(mime, 0.96);
+            resolve({
+              ...photo,
+              dataUrl,
+              extension: photo.extension === 'png' ? 'png' : 'jpeg',
+              width: canvas.width,
+              height: canvas.height
+            });
+          } catch (e) {
+            reject(e);
+          }
+        };
+        img.onerror = () => reject(new Error('image load failed'));
+        img.src = photo.dataUrl;
+      });
+    }
+
+    function roundRect(ctx, x, y, width, height, radius) {
+      ctx.beginPath();
+      ctx.moveTo(x + radius, y);
+      ctx.lineTo(x + width - radius, y);
+      ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+      ctx.lineTo(x + width, y + height - radius);
+      ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+      ctx.lineTo(x + radius, y + height);
+      ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+      ctx.lineTo(x, y + radius);
+      ctx.quadraticCurveTo(x, y, x + radius, y);
+      ctx.closePath();
+    }
+
+    async function getCoordsFromExif(dataUrl) {
+      try {
+        if (!window.exifr) return '';
+        // 把 base64 dataUrl 轉成 ArrayBuffer 餵給 exifr，避免某些版本對 dataUrl 字串解析失敗
+        const res = await fetch(dataUrl);
+        const buf = await res.arrayBuffer();
+        const gps = await window.exifr.gps(buf);
+        if (!gps || gps.latitude == null || gps.longitude == null) return '';
+        return `${Number(gps.latitude).toFixed(6)}, ${Number(gps.longitude).toFixed(6)}`;
+      } catch (err) {
+        return '';
+      }
+    }
+
+    function requestLiveLocation() {
+      if (!navigator.geolocation) return;
+      navigator.geolocation.getCurrentPosition(
+        pos => {
+          liveCoordsText = `${pos.coords.latitude.toFixed(6)}, ${pos.coords.longitude.toFixed(6)}`;
+          if (!userEditedCoords && !$('watermarkCoords').value.trim()) {
+            $('watermarkCoords').value = liveCoordsText;
+          }
+        },
+        err => { console.warn('geolocation error:', err && err.message); },
+        { enableHighAccuracy: true, timeout: 10000, maximumAge: 60000 }
+      );
     }
 
     async function exportXlsx() {
@@ -503,7 +693,7 @@
       }
 
       const buffer = await wb.xlsx.writeBuffer();
-      saveAs(new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' }), `photosheet-${new Date().toISOString().slice(0,10)}.xlsx`);
+      saveAs(new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' }), `photosheet-${new Date().toISOString().slice(0, 10)}.xlsx`);
     }
 
     function fitSize(width, height, maxW, maxH) {
@@ -513,6 +703,8 @@
       const ratio = Math.min(maxW / width, maxH / height, 1);
       return { width: Math.round(width * ratio), height: Math.round(height * ratio) };
     }
+
+    // === 事件綁定 ===
 
     $('addFieldBtn').addEventListener('click', () => {
       const input = $('newFieldName');
@@ -539,10 +731,20 @@
       btn.addEventListener('click', () => $(btn.dataset.pick).click());
     });
 
-    $('camera1').addEventListener('change', () => handlePick('camera1', 'preview1', data => photo1 = data));
-    $('gallery1').addEventListener('change', () => handlePick('gallery1', 'preview1', data => photo1 = data));
-    $('camera2').addEventListener('change', () => handlePick('camera2', 'preview2', data => photo2 = data));
-    $('gallery2').addEventListener('change', () => handlePick('gallery2', 'preview2', data => photo2 = data));
+    $('camera1').addEventListener('change', e => handlePick('camera1', 'preview1', d => photo1 = d, e.target.files?.[0]));
+    $('gallery1').addEventListener('change', e => handlePick('gallery1', 'preview1', d => photo1 = d, e.target.files?.[0]));
+    $('camera2').addEventListener('change', e => handlePick('camera2', 'preview2', d => photo2 = d, e.target.files?.[0]));
+    $('gallery2').addEventListener('change', e => handlePick('gallery2', 'preview2', d => photo2 = d, e.target.files?.[0]));
+
+    $('watermarkTime').addEventListener('input', () => { userEditedTime = true; });
+    $('watermarkCoords').addEventListener('input', () => { userEditedCoords = true; });
+
+    $('refreshGpsBtn').addEventListener('click', () => {
+      userEditedCoords = false;
+      liveCoordsText = '';
+      $('watermarkCoords').value = '';
+      requestLiveLocation();
+    });
 
     $('addRecordBtn').addEventListener('click', () => {
       const fieldValues = collectFieldValues();
@@ -559,7 +761,11 @@
         alert('至少放入一張照片。');
         return;
       }
-      records.push({ fields: fieldValues, memo: $('memo').value.trim(), photo1, photo2 });
+      records.push({
+        fields: fieldValues,
+        memo: $('memo').value.trim(),
+        photo1, photo2
+      });
       renderRecords();
       resetForm();
     });
@@ -573,10 +779,13 @@
       resetForm();
     });
 
+    // === 初始化 ===
     renderFieldChips();
     renderDynamicInputs();
     renderRecords();
     resetPreviews();
+    $('watermarkTime').value = formatMinguoDateTime();
+    requestLiveLocation();
   </script>
 </body>
 </html>
