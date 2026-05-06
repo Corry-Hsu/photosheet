@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>PhotoSheet App</title>
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/exceljs/dist/exceljs.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
+  <style>
+    :root {
+      --bg: #f4f2ef;
+      --surface: #fbfaf7;
+      --surface-2: #f1efeb;
+      --border: #d6d1ca;
+      --border-soft: #e5e0d8;
+      --text: #2f2d29;
+      --muted: #77736c;
+      --faint: #a8a39b;
+      --teal: #0f7a80;
+      --teal-dark: #0b6368;
+      --chip: #c8d8d5;
+      --chip-text: #204447;
+      --shadow: 0 8px 24px rgba(29, 28, 26, .06);
+      --radius: 22px;
+      --radius-lg: 18px;
+      --radius-md: 14px;
+      --radius-sm: 10px;
+      --font: 'Satoshi', 'Noto Sans TC', sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); }
+    body { font-family: var(--font); min-height: 100dvh; }
+    img { display: block; max-width: 100%; height: auto; }
+    button, input, textarea { font: inherit; }
+    button { cursor: pointer; }
+
+    .app { max-width: 760px; margin: 0 auto; background: var(--bg); min-height: 100dvh; }
+    .topbar {
+      height: 92px; display: flex; align-items: center; justify-content: space-between;
+      padding: 0 28px; border-bottom: 1px solid var(--border-soft); background: rgba(251,250,247,.78);
+      backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 10;
+    }
+    .brand { display: flex; align-items: center; gap: 14px; font-weight: 700; font-size: 20px; }
+    .logo {
+      width: 34px; height: 34px; border-radius: 10px; background: var(--teal); color: white;
+      display: grid; place-items: center; box-shadow: var(--shadow);
+    }
+    .brand .accent { color: var(--teal); }
+    .icons { display: flex; gap: 18px; color: var(--muted); }
+    .icon-btn {
+      width: 36px; height: 36px; border: none; background: transparent; color: inherit; display: grid; place-items: center;
+    }
+
+    .content { padding: 22px; display: grid; gap: 20px; }
+    .card {
+      background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+      box-shadow: var(--shadow); padding: 24px;
+    }
+    .section-title {
+      display: flex; align-items: center; gap: 10px; font-size: 18px; font-weight: 700; margin-bottom: 16px;
+      color: #5e5a53;
+    }
+    .section-title svg { color: #77736c; }
+
+    .chips { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 14px; }
+    .chip {
+      display: inline-flex; align-items: center; gap: 10px; padding: 10px 16px; border-radius: 999px;
+      border: 1px solid #aac3bf; background: var(--chip); color: var(--chip-text); font-weight: 500;
+    }
+    .chip button {
+      border: none; background: transparent; color: #3f6669; padding: 0; line-height: 1; font-size: 18px;
+    }
+    .field-add-row { display: grid; grid-template-columns: 1fr 72px; gap: 10px; }
+    .field-add-row input {
+      height: 50px; border-radius: var(--radius-md); border: 1px solid var(--border); background: #fff;
+      padding: 0 16px; color: var(--text);
+    }
+    .field-add-row button {
+      border-radius: var(--radius-md); border: 1px dashed var(--border); background: #fff; color: var(--muted); font-size: 34px;
+    }
+
+    .upload-box {
+      border: 2px dashed var(--border); border-radius: 24px; background: #efede8; padding: 20px;
+    }
+    .upload-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 16px; }
+    .photo-panel {
+      min-height: 270px; background: rgba(255,255,255,.16); border-radius: 20px; display: grid; place-items: center;
+      overflow: hidden; position: relative;
+    }
+    .photo-panel img { width: 100%; height: 100%; object-fit: cover; }
+    .photo-placeholder { text-align: center; color: var(--faint); padding: 20px; }
+    .photo-placeholder .cam {
+      width: 72px; height: 72px; border-radius: 999px; background: rgba(255,255,255,.6); display: grid; place-items: center;
+      margin: 0 auto 16px; color: var(--teal);
+    }
+    .photo-placeholder strong { display: block; color: #858079; font-size: 17px; margin-bottom: 8px; }
+    .upload-actions { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 14px; margin-top: 18px; }
+    .upload-actions.two-row { grid-template-columns: repeat(4, minmax(0,1fr)); }
+    .action-btn {
+      min-height: 62px; border-radius: 18px; border: 1px solid var(--border); background: #fff; color: var(--text);
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px; font-size: 18px; font-weight: 700;
+    }
+    .action-btn.primary { background: var(--teal); color: #fff; border-color: var(--teal); }
+    .action-btn.primary:hover { background: var(--teal-dark); }
+
+    .records { display: grid; gap: 14px; }
+    .record-card {
+      border: 1px solid var(--border); border-radius: 20px; background: #fff; padding: 18px;
+      display: grid; gap: 12px;
+    }
+    .record-grid {
+      display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 12px 14px;
+    }
+    .data-row {
+      display: grid; grid-template-columns: 110px 1fr; gap: 10px; align-items: center;
+      border: 1px solid var(--border-soft); border-radius: 14px; padding: 12px 14px; background: #fcfbf9;
+    }
+    .data-row .label { color: #6f6a63; font-weight: 700; }
+    .data-row .value { color: var(--text); word-break: break-word; }
+    .thumbs { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 10px; }
+    .thumbs img, .thumb-empty {
+      width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 14px; border: 1px solid var(--border-soft); background: #f3f0eb;
+    }
+    .thumb-empty { display: grid; place-items: center; color: var(--faint); }
+
+    .form-area { display: grid; gap: 12px; }
+    .input-row {
+      display: grid; grid-template-columns: 110px 1fr; gap: 10px; align-items: center;
+      border: 1px solid var(--border); border-radius: 18px; background: var(--surface); padding: 14px 18px;
+    }
+    .input-row label { color: #6b665f; font-weight: 700; }
+    .input-row input {
+      border: 1px solid var(--border); border-radius: 12px; background: #fff; height: 44px; padding: 0 14px;
+    }
+    .note {
+      color: var(--muted); font-size: 14px; line-height: 1.6; background: #efede8; border-radius: 16px; padding: 14px 16px;
+    }
+    .hidden { display: none !important; }
+
+    @media (max-width: 640px) {
+      .content { padding: 18px; }
+      .card { padding: 20px; }
+      .upload-grid, .record-grid, .upload-actions, .upload-actions.two-row { grid-template-columns: 1fr; }
+      .field-add-row { grid-template-columns: 1fr 64px; }
+      .input-row, .data-row { grid-template-columns: 1fr; }
+      .topbar { padding: 0 20px; }
+      .brand { font-size: 18px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <div class="brand">
+        <div class="logo" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="3"></rect><circle cx="9" cy="9" r="2"></circle><path d="M21 15l-5-5L5 21"></path></svg>
+        </div>
+        <div>Photo<span class="accent">Sheet</span></div>
+      </div>
+      <div class="icons">
+        <button class="icon-btn" type="button" aria-label="設定">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33h.01A1.65 1.65 0 0 0 10 3.09V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51h.01a1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v.01a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+        </button>
+        <button class="icon-btn" type="button" aria-label="主題切換">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        </button>
+      </div>
+    </header>
+
+    <main class="content">
+      <section class="card">
+        <div class="section-title">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"></rect><path d="M3 10h18"></path><path d="M8 4v16"></path></svg>
+          <span>目標欄位</span>
+        </div>
+        <div class="chips" id="fieldChips"></div>
+        <div class="field-add-row">
+          <input id="newFieldName" type="text" placeholder="輸入欄位名稱..." />
+          <button id="addFieldBtn" type="button" aria-label="新增欄位">+</button>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="upload-box">
+          <div class="upload-grid">
+            <div>
+              <div class="photo-panel" id="preview1">
+                <div class="photo-placeholder">
+                  <div class="cam">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
+                  </div>
+                  <strong>照片 1</strong>
+                  <div>點擊拍照或選擇圖片</div>
+                  <div style="margin-top:6px;">支援 JPEG、PNG、HEIF</div>
+                </div>
+              </div>
+              <div class="upload-actions" style="margin-top:14px;">
+                <button class="action-btn primary" type="button" data-pick="camera1">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
+                  拍照
+                </button>
+                <button class="action-btn" type="button" data-pick="gallery1">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><path d="M21 15l-5-5L5 21"></path></svg>
+                  相簿
+                </button>
+              </div>
+            </div>
+            <div>
+              <div class="photo-panel" id="preview2">
+                <div class="photo-placeholder">
+                  <div class="cam">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
+                  </div>
+                  <strong>照片 2</strong>
+                  <div>可補充環境或細部照片</div>
+                  <div style="margin-top:6px;">支援 JPEG、PNG、HEIF</div>
+                </div>
+              </div>
+              <div class="upload-actions" style="margin-top:14px;">
+                <button class="action-btn primary" type="button" data-pick="camera2">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
+                  拍照
+                </button>
+                <button class="action-btn" type="button" data-pick="gallery2">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><path d="M21 15l-5-5L5 21"></path></svg>
+                  相簿
+                </button>
+              </div>
+            </div>
+          </div>
+          <input id="camera1" class="hidden" type="file" accept="image/*" capture="environment" />
+          <input id="gallery1" class="hidden" type="file" accept="image/*" />
+          <input id="camera2" class="hidden" type="file" accept="image/*" capture="environment" />
+          <input id="gallery2" class="hidden" type="file" accept="image/*" />
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="section-title">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"></path></svg>
+          <span>填寫資料</span>
+        </div>
+        <div class="form-area" id="dynamicFields"></div>
+        <div class="input-row" style="margin-top: 10px;">
+          <label for="memo">備註</label>
+          <input id="memo" type="text" placeholder="可填補充說明..." />
+        </div>
+        <div class="upload-actions two-row" style="margin-top:18px;">
+          <button class="action-btn primary" id="addRecordBtn" type="button">新增到清單</button>
+          <button class="action-btn primary" id="exportBtn" type="button">匯出 XLSX</button>
+          <button class="action-btn" id="resetBtn" type="button">重設表單</button>
+          <button class="action-btn" id="clearBtn" type="button">清空資料</button>
+        </div>
+        <div class="note" style="margin-top: 14px;">
+          欄位可自由命名；若欄位名稱為「日期」，新增欄位時會自動帶入民國年月日，仍可手動修改。匯出 XLSX 時會把兩張照片直接嵌入 Excel 工作表中。
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="section-title">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 6h13"></path><path d="M8 12h13"></path><path d="M8 18h13"></path><path d="M3 6h.01"></path><path d="M3 12h.01"></path><path d="M3 18h.01"></path></svg>
+          <span>資料清單</span>
+        </div>
+        <div class="records" id="recordList">
+          <div class="note">目前尚無資料。</div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    const fields = ['日期', '地段', '地號'];
+    const records = [];
+    let photo1 = null;
+    let photo2 = null;
+
+    const $ = id => document.getElementById(id);
+
+    function formatMinguoDate(date = new Date()) {
+      const y = date.getFullYear() - 1911;
+      const m = String(date.getMonth() + 1).padStart(2, '0');
+      const d = String(date.getDate()).padStart(2, '0');
+      return `${y}/${m}/${d}`;
+    }
+
+    function isDateField(name) {
+      const n = String(name).trim();
+      return ['日期', '拍攝日期', '時間', '年月日', 'date', 'Date'].includes(n);
+    }
+
+    function renderFieldChips() {
+      $('fieldChips').innerHTML = fields.map((name, idx) => `
+        <div class="chip">
+          <span>${escapeHtml(name)}</span>
+          <button type="button" data-remove-index="${idx}" aria-label="移除 ${escapeHtml(name)}">×</button>
+        </div>
+      `).join('');
+      document.querySelectorAll('[data-remove-index]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          fields.splice(Number(btn.dataset.removeIndex), 1);
+          renderFieldChips();
+          renderDynamicInputs();
+        });
+      });
+    }
+
+    function renderDynamicInputs() {
+      $('dynamicFields').innerHTML = fields.map(name => {
+        const defaultValue = isDateField(name) ? formatMinguoDate() : '';
+        return `
+          <div class="input-row">
+            <label>${escapeHtml(name)}</label>
+            <input type="text" data-field-input="${escapeAttr(name)}" placeholder="輸入 ${escapeAttr(name)}..." value="${escapeAttr(defaultValue)}">
+          </div>
+        `;
+      }).join('');
+    }
+
+    function escapeHtml(str) {
+      return String(str ?? '')
+        .replaceAll('&', '&amp;')
+        .replaceAll('<', '&lt;')
+        .replaceAll('>', '&gt;')
+        .replaceAll('"', '&quot;')
+        .replaceAll("'", '&#39;');
+    }
+
+    function escapeAttr(str) {
+      return escapeHtml(str);
+    }
+
+    function resetPreviews() {
+      $('preview1').innerHTML = `
+        <div class="photo-placeholder">
+          <div class="cam"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg></div>
+          <strong>照片 1</strong><div>點擊拍照或選擇圖片</div><div style="margin-top:6px;">支援 JPEG、PNG、HEIF</div>
+        </div>`;
+      $('preview2').innerHTML = `
+        <div class="photo-placeholder">
+          <div class="cam"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg></div>
+          <strong>照片 2</strong><div>可補充環境或細部照片</div><div style="margin-top:6px;">支援 JPEG、PNG、HEIF</div>
+        </div>`;
+    }
+
+    function resetForm() {
+      renderDynamicInputs();
+      $('memo').value = '';
+      ['camera1', 'gallery1', 'camera2', 'gallery2'].forEach(id => $(id).value = '');
+      photo1 = null;
+      photo2 = null;
+      resetPreviews();
+    }
+
+    function fileToData(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => {
+          const dataUrl = reader.result;
+          const [meta] = dataUrl.split(',');
+          const mime = (meta.match(/data:(.*?);base64/) || [])[1] || 'image/jpeg';
+          let extension = mime.split('/')[1] || 'jpeg';
+          if (extension === 'jpg') extension = 'jpeg';
+          resolve({ dataUrl, extension, name: file.name });
+        };
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
+    }
+
+    async function handlePick(inputId, previewId, setter) {
+      const file = $(inputId).files?.[0];
+      if (!file) return;
+      const data = await fileToData(file);
+      setter(data);
+      $(previewId).innerHTML = `<img src="${data.dataUrl}" alt="照片預覽">`;
+    }
+
+    function collectFieldValues() {
+      const values = {};
+      document.querySelectorAll('[data-field-input]').forEach(input => {
+        values[input.dataset.fieldInput] = input.value.trim();
+      });
+      return values;
+    }
+
+    function renderRecords() {
+      const host = $('recordList');
+      if (!records.length) {
+        host.innerHTML = '<div class="note">目前尚無資料。</div>';
+        return;
+      }
+      host.innerHTML = records.map((record, idx) => `
+        <article class="record-card">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+            <strong>第 ${idx + 1} 筆</strong>
+            <span style="color:var(--muted);font-size:14px;">${Object.keys(record.fields).length} 個欄位</span>
+          </div>
+          <div class="record-grid">
+            ${Object.entries(record.fields).map(([key, val]) => `
+              <div class="data-row">
+                <div class="label">${escapeHtml(key)}</div>
+                <div class="value">${escapeHtml(val || '')}</div>
+              </div>
+            `).join('')}
+            <div class="data-row" style="grid-column:1/-1;">
+              <div class="label">備註</div>
+              <div class="value">${escapeHtml(record.memo || '')}</div>
+            </div>
+            <div style="grid-column:1/-1;">
+              <div style="font-weight:700;color:#6f6a63;margin-bottom:8px;">照片</div>
+              <div class="thumbs">
+                ${record.photo1 ? `<img src="${record.photo1.dataUrl}" alt="照片1">` : '<div class="thumb-empty">無照片 1</div>'}
+                ${record.photo2 ? `<img src="${record.photo2.dataUrl}" alt="照片2">` : '<div class="thumb-empty">無照片 2</div>'}
+              </div>
+            </div>
+          </div>
+        </article>
+      `).join('');
+    }
+
+    function normalizeExt(ext) {
+      const e = String(ext || '').toLowerCase();
+      if (e === 'jpg') return 'jpeg';
+      if (['jpeg','png','gif'].includes(e)) return e;
+      return 'jpeg';
+    }
+
+    async function exportXlsx() {
+      if (!records.length) {
+        alert('目前沒有資料可匯出。');
+        return;
+      }
+      const allFieldNames = [...new Set(records.flatMap(r => Object.keys(r.fields)))];
+      const wb = new ExcelJS.Workbook();
+      const ws = wb.addWorksheet('PhotoSheet');
+      const headers = [...allFieldNames, '備註', '照片1', '照片2'];
+      ws.addRow(headers);
+      ws.views = [{ state: 'frozen', ySplit: 1 }];
+      headers.forEach((h, idx) => {
+        const col = ws.getColumn(idx + 1);
+        if (h === '照片1' || h === '照片2') col.width = 18;
+        else if (h === '備註') col.width = 28;
+        else col.width = 16;
+      });
+      const headerRow = ws.getRow(1);
+      headerRow.height = 24;
+      headerRow.eachCell(cell => {
+        cell.font = { bold: true, color: { argb: 'FFFFFFFF' } };
+        cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FF0F7A80' } };
+        cell.alignment = { vertical: 'middle', horizontal: 'center' };
+        cell.border = {
+          top: { style: 'thin', color: { argb: 'FFD6D1CA' } }, left: { style: 'thin', color: { argb: 'FFD6D1CA' } },
+          bottom: { style: 'thin', color: { argb: 'FFD6D1CA' } }, right: { style: 'thin', color: { argb: 'FFD6D1CA' } }
+        };
+      });
+
+      for (const record of records) {
+        const rowValues = [...allFieldNames.map(name => record.fields[name] || ''), record.memo || '', '', ''];
+        const row = ws.addRow(rowValues);
+        row.height = 96;
+        row.eachCell(cell => {
+          cell.alignment = { vertical: 'middle', horizontal: 'left', wrapText: true };
+          cell.border = {
+            top: { style: 'thin', color: { argb: 'FFE5E0D8' } }, left: { style: 'thin', color: { argb: 'FFE5E0D8' } },
+            bottom: { style: 'thin', color: { argb: 'FFE5E0D8' } }, right: { style: 'thin', color: { argb: 'FFE5E0D8' } }
+          };
+        });
+
+        const rowNo = row.number;
+        const photo1Col = allFieldNames.length + 2;
+        const photo2Col = allFieldNames.length + 3;
+
+        if (record.photo1?.dataUrl) {
+          const id = wb.addImage({ base64: record.photo1.dataUrl, extension: normalizeExt(record.photo1.extension) });
+          ws.addImage(id, { tl: { col: photo1Col - 1 + 0.08, row: rowNo - 1 + 0.08 }, br: { col: photo1Col - 1 + 0.92, row: rowNo - 1 + 0.92 }, editAs: 'oneCell' });
+        }
+        if (record.photo2?.dataUrl) {
+          const id = wb.addImage({ base64: record.photo2.dataUrl, extension: normalizeExt(record.photo2.extension) });
+          ws.addImage(id, { tl: { col: photo2Col - 1 + 0.08, row: rowNo - 1 + 0.08 }, br: { col: photo2Col - 1 + 0.92, row: rowNo - 1 + 0.92 }, editAs: 'oneCell' });
+        }
+      }
+
+      const buffer = await wb.xlsx.writeBuffer();
+      saveAs(new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' }), `photosheet-${new Date().toISOString().slice(0,10)}.xlsx`);
+    }
+
+    $('addFieldBtn').addEventListener('click', () => {
+      const input = $('newFieldName');
+      const name = input.value.trim();
+      if (!name) return;
+      if (fields.includes(name)) {
+        alert('欄位已存在。');
+        return;
+      }
+      fields.push(name);
+      input.value = '';
+      renderFieldChips();
+      renderDynamicInputs();
+    });
+
+    $('newFieldName').addEventListener('keydown', e => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        $('addFieldBtn').click();
+      }
+    });
+
+    document.querySelectorAll('[data-pick]').forEach(btn => {
+      btn.addEventListener('click', () => $(btn.dataset.pick).click());
+    });
+
+    $('camera1').addEventListener('change', () => handlePick('camera1', 'preview1', data => photo1 = data));
+    $('gallery1').addEventListener('change', () => handlePick('gallery1', 'preview1', data => photo1 = data));
+    $('camera2').addEventListener('change', () => handlePick('camera2', 'preview2', data => photo2 = data));
+    $('gallery2').addEventListener('change', () => handlePick('gallery2', 'preview2', data => photo2 = data));
+
+    $('addRecordBtn').addEventListener('click', () => {
+      const fieldValues = collectFieldValues();
+      if (!Object.keys(fieldValues).length) {
+        alert('請至少建立一個欄位。');
+        return;
+      }
+      const hasEmpty = Object.entries(fieldValues).some(([_, v]) => !String(v).trim());
+      if (hasEmpty) {
+        alert('請完成所有欄位內容。');
+        return;
+      }
+      if (!photo1 && !photo2) {
+        alert('至少放入一張照片。');
+        return;
+      }
+      records.push({ fields: fieldValues, memo: $('memo').value.trim(), photo1, photo2 });
+      renderRecords();
+      resetForm();
+    });
+
+    $('exportBtn').addEventListener('click', exportXlsx);
+    $('resetBtn').addEventListener('click', resetForm);
+    $('clearBtn').addEventListener('click', () => {
+      if (!confirm('確定要清空全部資料嗎？')) return;
+      records.length = 0;
+      renderRecords();
+      resetForm();
+    });
+
+    renderFieldChips();
+    renderDynamicInputs();
+    renderRecords();
+    resetPreviews();
+  </script>
+</body>
+</html>
