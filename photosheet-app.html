@@ -135,6 +135,7 @@
       border: 1px solid var(--border); border-radius: 12px; background: #fff; height: 44px; padding: 0 14px;
       min-width: 0;
     }
+    .input-row input[readonly] { background: #f1efeb; color: #5e5a53; cursor: default; }
     .input-row.with-action { grid-template-columns: 110px 1fr auto; }
     .refresh-btn {
       width: 44px; height: 44px; border-radius: 12px; border: 1px solid var(--border);
@@ -247,15 +248,12 @@
           <span>填寫資料</span>
         </div>
         <div class="note" style="margin-bottom: 14px;">
-          時間每秒自動更新、座標持續追蹤定位（watchPosition）。手動編輯欄位後會停止自動更新；按下右側 ↻ 按鈕可恢復為現在時間 / 重新取得 GPS。Geolocation 在 HTTPS 或安全環境下較容易正常使用。
+          浮水印時間 = 上方「日期」欄位的日期 + 現在的時:分:秒（每秒自動更新，不可手動編輯；要修改日期請改上方的日期欄位即可）。座標持續追蹤定位（watchPosition），手動編輯後會停止自動更新；按右側 ↻ 可重新取得 GPS。
         </div>
         <div class="form-area" id="dynamicFields"></div>
-        <div class="input-row with-action" style="margin-top: 10px;">
+        <div class="input-row" style="margin-top: 10px;">
           <label for="watermarkTime">浮水印時間</label>
-          <input id="watermarkTime" type="text" placeholder="例如 115/05/06 17:03:22" />
-          <button class="refresh-btn" id="refreshTimeBtn" type="button" aria-label="更新為現在時間" title="更新為現在時間">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>
-          </button>
+          <input id="watermarkTime" type="text" readonly tabindex="-1" />
         </div>
         <div class="input-row with-action">
           <label for="watermarkCoords">浮水印座標</label>
@@ -301,7 +299,6 @@
     let photo1 = null;
     let photo2 = null;
     let liveCoordsText = '';
-    let userEditedTime = false;
     let userEditedCoords = false;
 
     const $ = id => document.getElementById(id);
@@ -326,6 +323,48 @@
     function isDateField(name) {
       const n = String(name).trim();
       return ['日期', '拍攝日期', '時間', '年月日', 'date', 'Date'].includes(n);
+    }
+
+    // 解析「日期」欄位輸入，支援 115/05/06、115-05-06、115年05月06日、2026/05/06 等格式
+    function parseMinguoDate(text) {
+      if (!text) return null;
+      const t = String(text).trim();
+      const m = t.match(/^(\d{1,4})[\/\-年](\d{1,2})[\/\-月](\d{1,2})日?$/);
+      if (!m) return null;
+      let y = parseInt(m[1], 10);
+      const mo = parseInt(m[2], 10);
+      const d = parseInt(m[3], 10);
+      if (y >= 1911) y = y - 1911; // 西元年自動轉民國
+      if (y < 1 || y > 999) return null;
+      if (mo < 1 || mo > 12 || d < 1 || d > 31) return null;
+      return { y, m: mo, d };
+    }
+
+    function formatMinguoDateChinese(y, m, d) {
+      return `${y}年${String(m).padStart(2, '0')}月${String(d).padStart(2, '0')}日`;
+    }
+
+    // 從動態欄位中找出「日期」欄位，回傳解析後的 {y, m, d}；找不到或解析失敗則回傳今天
+    function getDateFromFields() {
+      const inputs = document.querySelectorAll('[data-field-input]');
+      for (const inp of inputs) {
+        if (isDateField(inp.dataset.fieldInput)) {
+          const parsed = parseMinguoDate(inp.value);
+          if (parsed) return parsed;
+        }
+      }
+      const now = new Date();
+      return { y: now.getFullYear() - 1911, m: now.getMonth() + 1, d: now.getDate() };
+    }
+
+    // 浮水印時間 = 日期欄位的日期 + 現在的時:分:秒
+    function getCurrentWatermarkTimeText() {
+      const { y, m, d } = getDateFromFields();
+      const now = new Date();
+      const hh = String(now.getHours()).padStart(2, '0');
+      const mm = String(now.getMinutes()).padStart(2, '0');
+      const ss = String(now.getSeconds()).padStart(2, '0');
+      return `${formatMinguoDateChinese(y, m, d)} ${hh}:${mm}:${ss}`;
     }
 
     function escapeHtml(str) {
@@ -384,9 +423,8 @@
 
     function resetForm() {
       renderDynamicInputs();
-      userEditedTime = false;
       userEditedCoords = false;
-      $('watermarkTime').value = formatMinguoDateTime();
+      $('watermarkTime').value = getCurrentWatermarkTimeText();
       $('watermarkCoords').value = liveCoordsText || '';
       $('watermarkExtra').value = '';
       $('memo').value = '';
@@ -420,13 +458,11 @@
         const picked = file || $(inputId).files?.[0];
         if (!picked) return;
 
-        // 每張新照片若使用者沒手動編輯，就刷新時間為當下
-        if (!userEditedTime) {
-          $('watermarkTime').value = formatMinguoDateTime();
-        }
+        // 拍照當下立刻刷新時間（時分秒會跟拍照時間最接近）
+        $('watermarkTime').value = getCurrentWatermarkTimeText();
         // 若使用者沒手動填座標，且尚未取得即時定位，再嘗試一次
         if (!userEditedCoords && !liveCoordsText) {
-          requestLiveLocation();
+          startWatchingLocation();
         }
         if (!userEditedCoords && liveCoordsText && !$('watermarkCoords').value.trim()) {
           $('watermarkCoords').value = liveCoordsText;
@@ -493,7 +529,7 @@
     }
 
     async function applyWatermarkToPhoto(photo) {
-      const timeText = ($('watermarkTime').value || '').trim() || formatMinguoDateTime();
+      const timeText = ($('watermarkTime').value || '').trim() || getCurrentWatermarkTimeText();
       let coordsText = ($('watermarkCoords').value || '').trim();
       const extraText = ($('watermarkExtra').value || '').trim();
 
@@ -637,11 +673,9 @@
       );
     }
 
-    // 每秒刷新時間（除非使用者手動編輯了）
+    // 每秒刷新時間：日期取自「日期」欄位、時分秒取現在
     setInterval(() => {
-      if (!userEditedTime) {
-        $('watermarkTime').value = formatMinguoDateTime();
-      }
+      $('watermarkTime').value = getCurrentWatermarkTimeText();
     }, 1000);
 
     // 舊版 API 保留別名以相容
@@ -764,17 +798,10 @@
     $('camera2').addEventListener('change', e => handlePick('camera2', 'preview2', d => photo2 = d, e.target.files?.[0]));
     $('gallery2').addEventListener('change', e => handlePick('gallery2', 'preview2', d => photo2 = d, e.target.files?.[0]));
 
-    $('watermarkTime').addEventListener('input', () => {
-      userEditedTime = $('watermarkTime').value.trim() !== '';
-    });
     $('watermarkCoords').addEventListener('input', () => {
       userEditedCoords = $('watermarkCoords').value.trim() !== '';
     });
 
-    $('refreshTimeBtn').addEventListener('click', () => {
-      userEditedTime = false;
-      $('watermarkTime').value = formatMinguoDateTime();
-    });
     $('refreshCoordsBtn').addEventListener('click', () => {
       userEditedCoords = false;
       liveCoordsText = '';
@@ -820,7 +847,7 @@
     renderDynamicInputs();
     renderRecords();
     resetPreviews();
-    $('watermarkTime').value = formatMinguoDateTime();
+    $('watermarkTime').value = getCurrentWatermarkTimeText();
     startWatchingLocation();
   </script>
 </body>
