@@ -586,27 +586,27 @@
             const strokeWidth = Math.max(1, Math.round(fontSize * 0.1));
 
             lines.forEach((line, i) => {
-              const y = startY + i * lineHeight;
+            const y = startY + i * lineHeight;
 
-              // 第一層：陰影 + 深色描邊，把白字包起來，避免任何背景下看不清
-              ctx.save();
-              ctx.shadowColor = 'rgba(0, 0, 0, 0.25)';
-              ctx.shadowBlur = Math.max(0, Math.round(fontSize * 0.05));
-              ctx.shadowOffsetX = 1;
-              ctx.shadowOffsetY = Math.max(2, Math.round(fontSize * 0.06));
-              ctx.lineJoin = 'round';
-              ctx.miterLimit = 2;
-              ctx.lineWidth = strokeWidth;
-              ctx.strokeStyle = 'rgba(0, 0, 0, 0.95)';
-              ctx.strokeText(line, centerX, y);
-              ctx.restore();
+            // 第一層：深色描邊輪廓（不帶陰影，避免陰影模糊輪廓）
+            ctx.save();
+            ctx.lineJoin = 'round';
+            ctx.miterLimit = 2;
+            ctx.lineWidth = strokeWidth;
+            ctx.strokeStyle = 'rgba(0, 0, 0, 0.95)';
+            ctx.strokeText(line, centerX, y);
+            ctx.restore();
 
-              // 第二層：白色填字
-              ctx.save();
-              ctx.fillStyle = '#ffffff';
-              ctx.fillText(line, centerX, y);
-              ctx.restore();
-            });
+            // 第二層：白色填字 + 向下陰影
+            ctx.save();
+            ctx.shadowColor = 'rgba(0, 0, 0, 0.65)';
+            ctx.shadowBlur = Math.max(4, Math.round(fontSize * 0.18));
+            ctx.shadowOffsetX = 0;
+            ctx.shadowOffsetY = Math.max(3, Math.round(fontSize * 0.12));
+            ctx.fillStyle = '#ffffff';
+            ctx.fillText(line, centerX, y);
+            ctx.restore();
+          });
 
             const mime = photo.extension === 'png' ? 'image/png' : 'image/jpeg';
             const dataUrl = canvas.toDataURL(mime, 0.96);
