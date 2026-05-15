@@ -590,9 +590,9 @@
 
               // 第一層：陰影 + 深色描邊，把白字包起來，避免任何背景下看不清
               ctx.save();
-              ctx.shadowColor = 'rgba(0, 0, 0, 0.85)';
-              ctx.shadowBlur = Math.max(6, Math.round(fontSize * 0.35));
-              ctx.shadowOffsetX = 0;
+              ctx.shadowColor = 'rgba(0, 0, 0, 0.25)';
+              ctx.shadowBlur = Math.max(0, Math.round(fontSize * 0.35));
+              ctx.shadowOffsetX = 1;
               ctx.shadowOffsetY = Math.max(2, Math.round(fontSize * 0.06));
               ctx.lineJoin = 'round';
               ctx.miterLimit = 2;
