@@ -273,6 +273,15 @@
         <div class="upload-actions two-row" style="margin-top:18px;">
           <button class="action-btn primary" id="addRecordBtn" type="button">新增到清單</button>
           <button class="action-btn primary" id="exportBtn" type="button">匯出 XLSX</button>
+          <!-- 新增：同步 Google Sheet 按鈕 -->
+          <button class="action-btn primary" id="syncSheetBtn" type="button" style="background: #238636; border-color: #238636;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="17 8 12 3 7 8"></polyline>
+              <line x1="12" y1="3" x2="12" y2="15"></line>
+            </svg>
+            同步至 Google Sheet
+          </button>
           <button class="action-btn" id="resetBtn" type="button">重設表單</button>
           <button class="action-btn" id="clearBtn" type="button">清空資料</button>
         </div>
@@ -294,14 +303,115 @@
   </div>
 
   <script>
-    const fields = ['日期', '地段', '地號'];
-    const records = [];
-    let photo1 = null;
-    let photo2 = null;
+    let fields = ['日期', '地段', '地號'];
+    const DB_NAME = 'SurveyPhotoDB';
+    const DB_VERSION = 1;
+    let dbInstance = null;
+    let currentBlobs = { photo1: null, photo2: null };
+    let currentPhotoMeta = { photo1: null, photo2: null };
+    let previewObjectUrls = { preview1: null, preview2: null };
+    let recordObjectUrls = [];
+    let draftTimer = null;
     let liveCoordsText = '';
     let userEditedCoords = false;
 
     const $ = id => document.getElementById(id);
+
+    function openDB() {
+      return new Promise((resolve, reject) => {
+        if (dbInstance) return resolve(dbInstance);
+        const request = indexedDB.open(DB_NAME, DB_VERSION);
+        request.onupgradeneeded = event => {
+          const db = event.target.result;
+          if (!db.objectStoreNames.contains('form_draft')) {
+            db.createObjectStore('form_draft', { keyPath: 'id' });
+          }
+          if (!db.objectStoreNames.contains('records')) {
+            db.createObjectStore('records', { keyPath: 'id', autoIncrement: true });
+          }
+        };
+        request.onsuccess = event => {
+          dbInstance = event.target.result;
+          dbInstance.onversionchange = () => {
+            dbInstance.close();
+            dbInstance = null;
+          };
+          resolve(dbInstance);
+        };
+        request.onerror = event => reject(event.target.error);
+      });
+    }
+
+    async function saveDraftToDB(draftData) {
+      const db = await openDB();
+      return new Promise((resolve, reject) => {
+        const tx = db.transaction('form_draft', 'readwrite');
+        tx.objectStore('form_draft').put({ id: 'current_draft', ...draftData, updatedAt: Date.now() });
+        tx.oncomplete = resolve;
+        tx.onerror = () => reject(tx.error);
+        tx.onabort = () => reject(tx.error);
+      });
+    }
+
+    async function loadDraftFromDB() {
+      const db = await openDB();
+      return new Promise((resolve, reject) => {
+        const request = db.transaction('form_draft', 'readonly').objectStore('form_draft').get('current_draft');
+        request.onsuccess = () => resolve(request.result || null);
+        request.onerror = () => reject(request.error);
+      });
+    }
+
+    async function clearDraftFromDB() {
+      const db = await openDB();
+      return new Promise((resolve, reject) => {
+        const tx = db.transaction('form_draft', 'readwrite');
+        tx.objectStore('form_draft').delete('current_draft');
+        tx.oncomplete = resolve;
+        tx.onerror = () => reject(tx.error);
+        tx.onabort = () => reject(tx.error);
+      });
+    }
+
+    async function addRecordToDB(record) {
+      const db = await openDB();
+      return new Promise((resolve, reject) => {
+        const request = db.transaction('records', 'readwrite').objectStore('records').add(record);
+        request.onsuccess = () => resolve(request.result);
+        request.onerror = () => reject(request.error);
+      });
+    }
+
+    async function updateRecordInDB(record) {
+      const db = await openDB();
+      return new Promise((resolve, reject) => {
+        const tx = db.transaction('records', 'readwrite');
+        tx.objectStore('records').put(record);
+        tx.oncomplete = resolve;
+        tx.onerror = () => reject(tx.error);
+        tx.onabort = () => reject(tx.error);
+      });
+    }
+
+    async function getAllRecordsFromDB() {
+      const db = await openDB();
+      return new Promise((resolve, reject) => {
+        const request = db.transaction('records', 'readonly').objectStore('records').getAll();
+        request.onsuccess = () => resolve(request.result || []);
+        request.onerror = () => reject(request.error);
+      });
+    }
+
+    async function clearAllRecordsFromDB() {
+      const db = await openDB();
+      return new Promise((resolve, reject) => {
+        const tx = db.transaction('records', 'readwrite');
+        tx.objectStore('records').clear();
+        tx.oncomplete = resolve;
+        tx.onerror = () => reject(tx.error);
+        tx.onabort = () => reject(tx.error);
+      });
+    }
 
     function formatMinguoDate(date = new Date()) {
       const y = date.getFullYear() - 1911;
@@ -389,20 +499,25 @@
       `).join('');
       document.querySelectorAll('[data-remove-index]').forEach(btn => {
         btn.addEventListener('click', () => {
+          const values = collectFieldValues();
+          const removedName = fields[Number(btn.dataset.removeIndex)];
           fields.splice(Number(btn.dataset.removeIndex), 1);
+          delete values[removedName];
           renderFieldChips();
-          renderDynamicInputs();
+          renderDynamicInputs(values);
+          triggerDraftSave();
         });
       });
     }
 
-    function renderDynamicInputs() {
+    function renderDynamicInputs(values = {}) {
       $('dynamicFields').innerHTML = fields.map(name => {
         const defaultValue = isDateField(name) ? formatMinguoDate() : '';
+        const value = Object.prototype.hasOwnProperty.call(values, name) ? values[name] : defaultValue;
         return `
           <div class="input-row">
             <label>${escapeHtml(name)}</label>
-            <input type="text" data-field-input="${escapeAttr(name)}" placeholder="輸入 ${escapeAttr(name)}..." value="${escapeAttr(defaultValue)}">
+            <input type="text" data-field-input="${escapeAttr(name)}" placeholder="輸入 ${escapeAttr(name)}..." value="${escapeAttr(value)}">
           </div>
         `;
       }).join('');
@@ -417,11 +532,15 @@
     }
 
     function resetPreviews() {
+      Object.entries(previewObjectUrls).forEach(([key, url]) => {
+        if (url) URL.revokeObjectURL(url);
+        previewObjectUrls[key] = null;
+      });
       $('preview1').innerHTML = placeholderHTML(1, '點擊拍照或選擇圖片');
       $('preview2').innerHTML = placeholderHTML(2, '可補充環境或細部照片');
     }
 
-    function resetForm() {
+    function resetFormUI() {
       renderDynamicInputs();
       userEditedCoords = false;
       $('watermarkTime').value = getCurrentWatermarkTimeText();
@@ -429,9 +548,65 @@
       $('watermarkExtra').value = '';
       $('memo').value = '';
       ['camera1', 'gallery1', 'camera2', 'gallery2'].forEach(id => $(id).value = '');
-      photo1 = null;
-      photo2 = null;
       resetPreviews();
+    }
+
+    function dataUrlToBlob(dataUrl) {
+      const parts = dataUrl.split(',');
+      const mime = (parts[0].match(/data:(.*?);base64/) || [])[1] || 'image/jpeg';
+      const binary = atob(parts[1] || '');
+      const bytes = new Uint8Array(binary.length);
+      for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
+      return new Blob([bytes], { type: mime });
+    }
+
+    function blobToDataUrl(blob) {
+      return new Promise((resolve, reject) => {
+        if (!blob) return resolve(null);
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = () => reject(reader.error);
+        reader.readAsDataURL(blob);
+      });
+    }
+
+    function blobToBase64(blob) {
+      return blobToDataUrl(blob).then(dataUrl => dataUrl ? dataUrl.split(',')[1] : null);
+    }
+
+    function renderImagePreview(containerId, blob) {
+      if (previewObjectUrls[containerId]) URL.revokeObjectURL(previewObjectUrls[containerId]);
+      const url = URL.createObjectURL(blob);
+      previewObjectUrls[containerId] = url;
+      $(containerId).innerHTML = `<img src="${url}" alt="照片預覽">`;
+    }
+
+    function getFormValues() {
+      return {
+        fields: [...fields],
+        fieldValues: collectFieldValues(),
+        watermarkTime: $('watermarkTime').value,
+        watermarkCoords: $('watermarkCoords').value,
+        watermarkExtra: $('watermarkExtra').value,
+        memo: $('memo').value
+      };
+    }
+
+    function triggerDraftSave() {
+      clearTimeout(draftTimer);
+      draftTimer = setTimeout(async () => {
+        try {
+          await saveDraftToDB({
+            ...getFormValues(),
+            photo1: currentBlobs.photo1,
+            photo2: currentBlobs.photo2,
+            photo1Meta: currentPhotoMeta.photo1,
+            photo2Meta: currentPhotoMeta.photo2
+          });
+        } catch (err) {
+          console.error('暫存草稿失敗:', err);
+        }
+      }, 400);
     }
 
     function fileToData(file) {
@@ -453,7 +628,7 @@
       });
     }
 
-    async function handlePick(inputId, previewId, setter, file) {
+    async function handlePick(inputId, previewId, photoKey, file) {
       try {
         const picked = file || $(inputId).files?.[0];
         if (!picked) return;
@@ -470,8 +645,16 @@
 
         let data = await fileToData(picked);
         data = await applyWatermarkToPhoto(data);
-        setter(data);
-        $(previewId).innerHTML = `<img src="${data.dataUrl}" alt="照片預覽">`;
+        const blob = data.blob || dataUrlToBlob(data.dataUrl);
+        currentBlobs[photoKey] = blob;
+        currentPhotoMeta[photoKey] = {
+          name: data.name || picked.name,
+          extension: data.extension || (blob.type === 'image/png' ? 'png' : 'jpeg'),
+          width: data.width,
+          height: data.height
+        };
+        renderImagePreview(previewId, blob);
+        triggerDraftSave();
       } catch (err) {
         console.error('handlePick error:', err);
         alert('讀取照片時發生錯誤，請再試一次。');
@@ -486,20 +669,35 @@
       return values;
     }
 
-    function renderRecords() {
+    function recordPhotoUrl(photo) {
+      if (!photo) return '';
+      if (photo instanceof Blob) {
+        const url = URL.createObjectURL(photo);
+        recordObjectUrls.push(url);
+        return url;
+      }
+      return photo.dataUrl || '';
+    }
+
+    function renderRecordList(records) {
       const host = $('recordList');
+      recordObjectUrls.forEach(url => URL.revokeObjectURL(url));
+      recordObjectUrls = [];
       if (!records.length) {
         host.innerHTML = '<div class="note">目前尚無資料。</div>';
         return;
       }
-      host.innerHTML = records.map((record, idx) => `
+      host.innerHTML = records.map((record, idx) => {
+        const photo1Url = recordPhotoUrl(record.photo1);
+        const photo2Url = recordPhotoUrl(record.photo2);
+        return `
         <article class="record-card">
           <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
             <strong>第 ${idx + 1} 筆</strong>
-            <span style="color:var(--muted);font-size:14px;">${Object.keys(record.fields).length} 個欄位</span>
+            <span style="color:var(--muted);font-size:14px;">${Object.keys(record.fields || {}).length} 個欄位 · ${record.synced ? '已同步' : '未同步'}</span>
           </div>
           <div class="record-grid">
-            ${Object.entries(record.fields).map(([key, val]) => `
+            ${Object.entries(record.fields || {}).map(([key, val]) => `
               <div class="data-row">
                 <div class="label">${escapeHtml(key)}</div>
                 <div class="value">${escapeHtml(val || '')}</div>
@@ -512,13 +710,13 @@
             <div style="grid-column:1/-1;">
               <div style="font-weight:700;color:#6f6a63;margin-bottom:8px;">照片</div>
               <div class="thumbs">
-                ${record.photo1 ? `<img src="${record.photo1.dataUrl}" alt="照片1">` : '<div class="thumb-empty">無照片 1</div>'}
-                ${record.photo2 ? `<img src="${record.photo2.dataUrl}" alt="照片2">` : '<div class="thumb-empty">無照片 2</div>'}
+                ${photo1Url ? `<img src="${photo1Url}" alt="照片1">` : '<div class="thumb-empty">無照片 1</div>'}
+                ${photo2Url ? `<img src="${photo2Url}" alt="照片2">` : '<div class="thumb-empty">無照片 2</div>'}
               </div>
             </div>
           </div>
         </article>
-      `).join('');
+      `; }).join('');
     }
 
     function normalizeExt(ext) {
@@ -609,14 +807,19 @@
           });
 
             const mime = photo.extension === 'png' ? 'image/png' : 'image/jpeg';
-            const dataUrl = canvas.toDataURL(mime, 0.96);
-            resolve({
-              ...photo,
-              dataUrl,
-              extension: photo.extension === 'png' ? 'png' : 'jpeg',
-              width: canvas.width,
-              height: canvas.height
-            });
+            canvas.toBlob(blob => {
+              if (!blob) {
+                reject(new Error('無法建立浮水印照片 Blob'));
+                return;
+              }
+              resolve({
+                blob,
+                name: photo.name,
+                extension: photo.extension === 'png' ? 'png' : 'jpeg',
+                width: canvas.width,
+                height: canvas.height
+              });
+            }, mime, 0.96);
           } catch (e) {
             reject(e);
           }
@@ -665,7 +868,9 @@
         pos => {
           liveCoordsText = `${pos.coords.latitude.toFixed(6)}, ${pos.coords.longitude.toFixed(6)}`;
           if (!userEditedCoords) {
+            const coordsChanged = $('watermarkCoords').value !== liveCoordsText;
             $('watermarkCoords').value = liveCoordsText;
+            if (coordsChanged) triggerDraftSave();
           }
         },
         err => { console.warn('geolocation error:', err && err.message); },
@@ -682,6 +887,7 @@
     function requestLiveLocation() { startWatchingLocation(); }
 
     async function exportXlsx() {
+      const records = await getAllRecordsFromDB();
       if (!records.length) {
         alert('目前沒有資料可匯出。');
         return;
@@ -718,8 +924,10 @@
       const maxDisplayHeight = 520;
 
       for (const record of records) {
-        const scaled1 = fitSize(record.photo1?.width, record.photo1?.height, maxDisplayWidth, maxDisplayHeight);
-        const scaled2 = fitSize(record.photo2?.width, record.photo2?.height, maxDisplayWidth, maxDisplayHeight);
+        const meta1 = record.photo1Meta || record.photo1 || {};
+        const meta2 = record.photo2Meta || record.photo2 || {};
+        const scaled1 = fitSize(meta1.width, meta1.height, maxDisplayWidth, maxDisplayHeight);
+        const scaled2 = fitSize(meta2.width, meta2.height, maxDisplayWidth, maxDisplayHeight);
         const contentHeight = Math.max(scaled1.height || 0, scaled2.height || 0, 120);
         const rowHeight = Math.max(90, Math.ceil(contentHeight * 0.78));
 
@@ -736,16 +944,18 @@
 
         const rowNo = row.number;
 
-        if (record.photo1?.dataUrl && scaled1.width && scaled1.height) {
-          const id1 = wb.addImage({ base64: record.photo1.dataUrl, extension: normalizeExt(record.photo1.extension) });
+        const photo1DataUrl = record.photo1 instanceof Blob ? await blobToDataUrl(record.photo1) : record.photo1?.dataUrl;
+        const photo2DataUrl = record.photo2 instanceof Blob ? await blobToDataUrl(record.photo2) : record.photo2?.dataUrl;
+        if (photo1DataUrl && scaled1.width && scaled1.height) {
+          const id1 = wb.addImage({ base64: photo1DataUrl, extension: normalizeExt(meta1.extension) });
           ws.addImage(id1, {
             tl: { col: photo1Col - 1 + 0.05, row: rowNo - 1 + 0.05 },
             ext: { width: scaled1.width, height: scaled1.height },
             editAs: 'oneCell'
           });
         }
-        if (record.photo2?.dataUrl && scaled2.width && scaled2.height) {
-          const id2 = wb.addImage({ base64: record.photo2.dataUrl, extension: normalizeExt(record.photo2.extension) });
+        if (photo2DataUrl && scaled2.width && scaled2.height) {
+          const id2 = wb.addImage({ base64: photo2DataUrl, extension: normalizeExt(meta2.extension) });
           ws.addImage(id2, {
             tl: { col: photo2Col - 1 + 0.05, row: rowNo - 1 + 0.05 },
             ext: { width: scaled2.width, height: scaled2.height },
@@ -776,10 +986,12 @@
         alert('欄位已存在。');
         return;
       }
+      const values = collectFieldValues();
       fields.push(name);
       input.value = '';
       renderFieldChips();
-      renderDynamicInputs();
+      renderDynamicInputs(values);
+      triggerDraftSave();
     });
 
     $('newFieldName').addEventListener('keydown', e => {
@@ -793,10 +1005,15 @@
       btn.addEventListener('click', () => $(btn.dataset.pick).click());
     });
 
-    $('camera1').addEventListener('change', e => handlePick('camera1', 'preview1', d => photo1 = d, e.target.files?.[0]));
-    $('gallery1').addEventListener('change', e => handlePick('gallery1', 'preview1', d => photo1 = d, e.target.files?.[0]));
-    $('camera2').addEventListener('change', e => handlePick('camera2', 'preview2', d => photo2 = d, e.target.files?.[0]));
-    $('gallery2').addEventListener('change', e => handlePick('gallery2', 'preview2', d => photo2 = d, e.target.files?.[0]));
+    $('camera1').addEventListener('change', e => handlePick('camera1', 'preview1', 'photo1', e.target.files?.[0]));
+    $('gallery1').addEventListener('change', e => handlePick('gallery1', 'preview1', 'photo1', e.target.files?.[0]));
+    $('camera2').addEventListener('change', e => handlePick('camera2', 'preview2', 'photo2', e.target.files?.[0]));
+    $('gallery2').addEventListener('change', e => handlePick('gallery2', 'preview2', 'photo2', e.target.files?.[0]));
+
+    $('dynamicFields').addEventListener('input', triggerDraftSave);
+    $('watermarkCoords').addEventListener('input', triggerDraftSave);
+    $('watermarkExtra').addEventListener('input', triggerDraftSave);
+    $('memo').addEventListener('input', triggerDraftSave);
 
     $('watermarkCoords').addEventListener('input', () => {
       userEditedCoords = $('watermarkCoords').value.trim() !== '';
@@ -807,9 +1024,10 @@
       liveCoordsText = '';
       $('watermarkCoords').value = '';
       startWatchingLocation();
+      triggerDraftSave();
     });
 
-    $('addRecordBtn').addEventListener('click', () => {
+    $('addRecordBtn').addEventListener('click', async () => {
       const fieldValues = collectFieldValues();
       if (!Object.keys(fieldValues).length) {
         alert('請至少建立一個欄位。');
@@ -820,35 +1038,158 @@
         alert('請完成所有欄位內容。');
         return;
       }
-      if (!photo1 && !photo2) {
+      if (!currentBlobs.photo1 && !currentBlobs.photo2) {
         alert('至少放入一張照片。');
         return;
       }
-      records.push({
-        fields: fieldValues,
-        memo: $('memo').value.trim(),
-        photo1, photo2
-      });
-      renderRecords();
-      resetForm();
+      const button = $('addRecordBtn');
+      button.disabled = true;
+      try {
+        await addRecordToDB({
+          fields: fieldValues,
+          watermarkTime: $('watermarkTime').value,
+          watermarkCoords: $('watermarkCoords').value.trim(),
+          watermarkExtra: $('watermarkExtra').value.trim(),
+          memo: $('memo').value.trim(),
+          photo1: currentBlobs.photo1,
+          photo2: currentBlobs.photo2,
+          photo1Meta: currentPhotoMeta.photo1,
+          photo2Meta: currentPhotoMeta.photo2,
+          createdAt: new Date().toISOString(),
+          synced: false
+        });
+        clearTimeout(draftTimer);
+        await clearDraftFromDB();
+        currentBlobs = { photo1: null, photo2: null };
+        currentPhotoMeta = { photo1: null, photo2: null };
+        resetFormUI();
+        renderRecordList(await getAllRecordsFromDB());
+      } catch (err) {
+        console.error('新增紀錄失敗:', err);
+        alert('新增紀錄失敗，請確認瀏覽器儲存空間後再試一次。');
+      } finally {
+        button.disabled = false;
+      }
     });
 
     $('exportBtn').addEventListener('click', exportXlsx);
-    $('resetBtn').addEventListener('click', resetForm);
-    $('clearBtn').addEventListener('click', () => {
-      if (!confirm('確定要清空全部資料嗎？')) return;
-      records.length = 0;
-      renderRecords();
-      resetForm();
+    $('resetBtn').addEventListener('click', async () => {
+      if (!confirm('確定要重設當前填寫的表單與照片嗎？')) return;
+      try {
+        clearTimeout(draftTimer);
+        await clearDraftFromDB();
+        currentBlobs = { photo1: null, photo2: null };
+        currentPhotoMeta = { photo1: null, photo2: null };
+        resetFormUI();
+      } catch (err) {
+        console.error('重設草稿失敗:', err);
+        alert('重設草稿失敗，請再試一次。');
+      }
+    });
+    $('clearBtn').addEventListener('click', async () => {
+      if (!confirm('確定要清空所有已建立的紀錄嗎？此動作無法復原！')) return;
+      try {
+        await clearAllRecordsFromDB();
+        renderRecordList([]);
+      } catch (err) {
+        console.error('清空紀錄失敗:', err);
+        alert('清空紀錄失敗，請再試一次。');
+      }
     });
 
-    // === 初始化 ===
-    renderFieldChips();
-    renderDynamicInputs();
-    renderRecords();
-    resetPreviews();
-    $('watermarkTime').value = getCurrentWatermarkTimeText();
-    startWatchingLocation();
+    const GAS_WEBAPP_URL = 'https://script.google.com/macros/s/你的GAS部署ID/exec';
+
+    $('syncSheetBtn').addEventListener('click', async () => {
+      if (GAS_WEBAPP_URL.includes('你的GAS部署ID')) {
+        alert('請先在程式碼的 GAS_WEBAPP_URL 填入 Google Apps Script Web App 網址。');
+        return;
+      }
+      const syncBtn = $('syncSheetBtn');
+      try {
+        const records = await getAllRecordsFromDB();
+        const unsyncedRecords = records.filter(record => !record.synced);
+        if (!unsyncedRecords.length) {
+          alert('所有資料皆已完成同步！');
+          return;
+        }
+        if (!navigator.onLine) {
+          alert('目前處於離線狀態，請等候網路恢復後再同步。');
+          return;
+        }
+
+        syncBtn.disabled = true;
+        syncBtn.textContent = '同步中，請稍候...';
+        let syncedCount = 0;
+        for (const record of unsyncedRecords) {
+          const response = await fetch(GAS_WEBAPP_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+            body: JSON.stringify({
+              time: record.watermarkTime,
+              coords: record.watermarkCoords,
+              extra: record.watermarkExtra,
+              memo: record.memo,
+              fields: record.fields,
+              dynamicValues: record.fields,
+              photo1: await blobToBase64(record.photo1),
+              photo2: await blobToBase64(record.photo2)
+            })
+          });
+          if (!response.ok) throw new Error(`HTTP ${response.status}`);
+          const result = await response.json();
+          if (result.status !== 'success') throw new Error(result.message || 'Google Apps Script 回傳失敗');
+          record.synced = true;
+          record.syncedAt = new Date().toISOString();
+          await updateRecordInDB(record);
+          syncedCount++;
+        }
+        alert(`成功同步 ${syncedCount} 筆資料至 Google Sheet！`);
+        renderRecordList(await getAllRecordsFromDB());
+      } catch (err) {
+        console.error('同步失敗:', err);
+        alert('同步過程中發生錯誤：' + (err.message || err));
+      } finally {
+        syncBtn.disabled = false;
+        syncBtn.textContent = '同步至 Google Sheet';
+      }
+    });
+
+    window.addEventListener('DOMContentLoaded', async () => {
+      renderFieldChips();
+      renderDynamicInputs();
+      resetPreviews();
+      $('watermarkTime').value = getCurrentWatermarkTimeText();
+      startWatchingLocation();
+
+      try {
+        renderRecordList(await getAllRecordsFromDB());
+        const draft = await loadDraftFromDB();
+        if (!draft) return;
+
+        if (Array.isArray(draft.fields)) fields = [...draft.fields];
+        renderFieldChips();
+        renderDynamicInputs(draft.fieldValues || {});
+        $('watermarkTime').value = draft.watermarkTime || getCurrentWatermarkTimeText();
+        $('watermarkCoords').value = draft.watermarkCoords || '';
+        $('watermarkExtra').value = draft.watermarkExtra || '';
+        $('memo').value = draft.memo || '';
+        userEditedCoords = Boolean((draft.watermarkCoords || '').trim());
+
+        if (draft.photo1 instanceof Blob) {
+          currentBlobs.photo1 = draft.photo1;
+          currentPhotoMeta.photo1 = draft.photo1Meta || null;
+          renderImagePreview('preview1', draft.photo1);
+        }
+        if (draft.photo2 instanceof Blob) {
+          currentBlobs.photo2 = draft.photo2;
+          currentPhotoMeta.photo2 = draft.photo2Meta || null;
+          renderImagePreview('preview2', draft.photo2);
+        }
+      } catch (err) {
+        console.error('載入本機暫存資料失敗:', err);
+        alert('載入本機暫存資料失敗，頁面仍可繼續使用。');
+      }
+    });
   </script>
 </body>
 </html>
