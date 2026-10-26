@@ -1,0 +1,1 @@
+{"name":"photosheet-static","version":"1.0.0-rc.1","private":true,"scripts":{"test":"node tests/core.test.cjs"}}
