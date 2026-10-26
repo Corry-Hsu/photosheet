@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>現場任務｜人員 2</title>
+    <link rel="stylesheet" href="vendor/leaflet.css" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body data-tab="list" data-worker="p2">
+    <header>
+      <div>
+        <small>PHOTOSHEET · 靜態派工</small>
+        <h1 id="title">地籍任務管理</h1>
+        <div id="edition">Excel × 地籍 × 三人派工</div>
+      </div>
+      <a href="photosheet-app.html">原照片排版工具</a>
+    </header>
+    <main>
+      <section class="panel" id="admin-tools">
+        <div class="toolbar">
+          <button class="primary" id="import-excel">匯入 Excel</button
+          ><button id="import-geo">匯入 KML／XML／ZIP</button
+          ><button id="people">三人設定</button
+          ><button id="backup">下載本機備份</button
+          ><button id="restore">還原備份</button
+          ><button id="publish" class="primary">產生三人發布檔</button>
+        </div>
+        <p class="muted">
+          資料保存在此瀏覽器；請定期備份。發布檔將放在公開網站，分開網址不構成權限隔離。
+        </p>
+        <div id="geo-summary" class="status-bar">尚未匯入地籍資料</div>
+        <div id="progress" hidden></div>
+        <button id="cancel-geo" hidden>取消地籍匯入</button>
+      </section>
+      <section class="panel" id="worker-tools" hidden>
+        <div id="worker-version"></div>
+        <button id="reload-worker">重新整理派工資料</button>
+        <p>
+          照片只存於這台裝置，不會回傳。請下載備份；清除瀏覽器資料會移除暫存照片。
+        </p>
+      </section>
+      <div class="summary" id="summary"></div>
+      <div class="toolbar">
+        <input
+          id="search"
+          placeholder="搜尋地段、地號、鄉鎮、案件編號"
+          aria-label="搜尋任務"
+        /><select id="type-filter" aria-label="工作類型">
+          <option value="">全部類型</option>
+          <option>雜草垃圾</option>
+          <option>砍樹</option>
+          <option>圍籬</option></select
+        ><select id="person-filter" aria-label="負責人"></select
+        ><select id="geo-filter" aria-label="位置核對">
+          <option value="">全部位置結果</option>
+          <option value="all">全部配對</option>
+          <option value="partial">部分配對</option>
+          <option value="none">未配對</option>
+          <option value="ambiguous">有歧義</option>
+        </select>
+      </div>
+      <details id="date-filters" class="panel">
+        <summary>依成果日期篩選</summary>
+        <div class="toolbar">
+          <label>起日<input id="date-from" type="date" /></label
+          ><label>迄日<input id="date-to" type="date" /></label>
+        </div>
+      </details>
+      <div class="mobile-tabs">
+        <button data-tab="list" class="active">任務清單</button
+        ><button data-tab="map">地圖核對</button>
+      </div>
+      <div class="layout">
+        <section class="panel list-panel">
+          <div class="toolbar">
+            <button id="select-page">選取本頁</button
+            ><button id="clear-select">清除選取</button
+            ><span id="count" class="muted"></span>
+          </div>
+          <div id="tasks"></div>
+          <div class="pages">
+            <button id="prev">上一頁</button><span id="page"></span
+            ><button id="next">下一頁</button>
+          </div>
+          <div id="batch" class="batch" hidden>
+            <strong id="selected-count"></strong
+            ><button id="batch-assign">分派／日期</button
+            ><button id="boards">輸出白板</button
+            ><button id="orders">輸出工作單</button>
+          </div>
+        </section>
+        <section class="panel map-panel">
+          <div class="toolbar">
+            <button id="fit-map">縮放至目前任務</button
+            ><button id="show-context">顯示附近地籍</button
+            ><button id="pin-mode">點地圖設定入口</button>
+          </div>
+          <div id="map" class="map"></div>
+          <p id="map-status" class="map-note">
+            點選任務查看全部地號。橘色圖釘為導航位置。
+          </p>
+          <p class="map-note">
+            地籍範圍不代表可通行入口。底圖需連網；底圖故障仍可核對已匯入的地籍。
+          </p>
+        </section>
+      </div>
+    </main>
+    <div id="message" role="status" hidden></div>
+    <input id="excel-file" type="file" accept=".xlsx" hidden /><input
+      id="geo-files"
+      type="file"
+      multiple
+      accept=".kml,.xml,.zip"
+      hidden
+    /><input id="restore-file" type="file" accept=".json" hidden />
+    <dialog id="dialog">
+      <div class="dialog-head">
+        <h2 id="dialog-title"></h2>
+        <button id="close-dialog" aria-label="關閉">×</button>
+      </div>
+      <div id="dialog-body"></div>
+    </dialog>
+    <script src="vendor/leaflet.js"></script>
+    <script src="vendor/fflate.js"></script>
+    <script src="vendor/exceljs.js"></script>
+    <script src="vendor/rbush.js"></script>
+    <script src="vendor/exifr.js"></script>
+    <script src="core.js"></script>
+    <script src="excel.js"></script>
+    <script src="db.js"></script>
+    <script src="documents.js"></script>
+    <script src="camera.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "batch": "尚未發布",
+  "generatedAt": null,
+  "person": {
+    "id": "p3",
+    "name": "人員 3"
+  },
+  "tasks": [],
+  "features": [],
+  "settings": {
+    "guide": "全威測量工程有限公司",
+    "contact": "許書桓",
+    "agency": "財政部國有財產署",
+    "project": ""
+  }
+}
