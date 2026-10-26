@@ -1,17 +1,1 @@
-{
-  "schemaVersion": 1,
-  "batch": "尚未發布",
-  "generatedAt": null,
-  "person": {
-    "id": "p2",
-    "name": "人員 2"
-  },
-  "tasks": [],
-  "features": [],
-  "settings": {
-    "guide": "全威測量工程有限公司",
-    "contact": "許書桓",
-    "agency": "財政部國有財產署",
-    "project": ""
-  }
-}
+{"schemaVersion":1,"batch":"2026-10-26-1c2b8820","generatedAt":"2026-10-26T08:21:09.109Z","person":{"id":"p2","name":"康哥"},"settings":{"guide":"全威測量工程有限公司","contact":"許書桓","agency":"財政部國有財產署南區分署屏東辦事處","project":"國有土地作業","tender":"","phone":"08-7364773","fax":"08-7363187","contract_deadline":"依契約規定","fence_terms":"依契約規定辦理。"},"tasks":[{"id":"雜草垃圾:639","type":"雜草垃圾","row":641,"serial":"639","caseNo":"1014-636","district":"潮州鎮","section":"延平段","sectionCode":"0492","parcels":[{"county":"屏東縣","district":"潮州鎮","section":"延平段","lot":"325"}],"notice":"2026-10-27","resultDate":"2026-10-27","due":"2026-10-27T18:18","vendor":"迎騰工程行","sourcePerson":"范文彬","area":"","items":[],"assignee":"p2","navigation":null},{"id":"雜草垃圾:640","type":"雜草垃圾","row":642,"serial":"640","caseNo":"1015-637","district":"潮州鎮","section":"延平段","sectionCode":"0492","parcels":[{"county":"屏東縣","district":"潮州鎮","section":"延平段","lot":"167"}],"notice":"2026-10-27","resultDate":"2026-10-27","due":"2026-10-27T18:18","vendor":"迎騰工程行","sourcePerson":"范文彬","area":"","items":[],"assignee":"p2","navigation":null}],"features":[]}
