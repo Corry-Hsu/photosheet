@@ -295,4 +295,40 @@ test("完成註記可取消，已完成不能重新分派", () => {
     "p2",
   );
 });
+test("依鄉鎮自動分派，保留第三人與已完成／舊案", () => {
+  const now = new Date("2026-10-27T00:00:00Z"),
+    base = { resultDate: "2026-10-27", assignee: "", parcels: [] };
+  for (const district of C.selfDistricts) {
+    assert.equal(C.autoAssign({ ...base, district }, now).assignee, "p1");
+    assert.equal(
+      C.autoAssign({ ...base, district: "屏東縣" + district }, now).assignee,
+      "p1",
+    );
+  }
+  assert.equal(
+    C.autoAssign({ ...base, district: "東港鎮", assignee: "p1" }, now).assignee,
+    "p2",
+  );
+  for (const patch of [
+    { assignee: "p3" },
+    { completed: true },
+    { resultDate: "2026-09-30" },
+    { resultDate: "2027-01-01" },
+    { assignmentClosed: true },
+    { assignmentLockedTo: "p2" },
+    { district: "" },
+  ]) {
+    const t = { ...base, district: "屏東市", ...patch };
+    assert.equal(C.autoAssign(t, now), t);
+  }
+  const t = { ...base, district: "", parcels: [{ district: "內埔鄉" }] };
+  assert.equal(C.autoAssign(t, now).assignee, "p1");
+  assert.equal(t.assignee, "");
+  const mixed = {
+    ...base,
+    district: "",
+    parcels: [{ district: "內埔鄉" }, { district: "東港鎮" }],
+  };
+  assert.equal(C.autoAssign(mixed, now), mixed);
+});
 console.log("FINAL TOTAL", passed, "tests passed");

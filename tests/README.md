@@ -19,6 +19,7 @@ python tests/field_location_qa.py
 python tests/gps_native_qa.py
 python tests/code_kml_qa.py
 python tests/admin_scope_completion_qa.py
+python tests/auto_dispatch_qa.py
 ```
 
 測試只使用新的瀏覽器 context，不會操作你平常瀏覽器的任務或照片。日期固定在 2026-10-26，避免日後測試受跨月規則影響。測試期間阻擋底圖網路，驗證底圖失敗時的地籍功能；不能據此宣稱實際底圖服務可用或完成實機測試。
@@ -34,3 +35,5 @@ python tests/admin_scope_completion_qa.py
 另外驗證純KML標示0582/1198、Excel段對照、原始資料保留、今年本月起的管理清單、單筆與批次完成／取消、完成狀態篩選、儲存失敗回滾及全部完成後發布空清單。
 
 GPS測試包含Chromium／WebKit的定位回呼與原生watchPosition API（以模擬裝置座標注入）：移動、精度圈、回到手機位置、不覆寫任務、拒絕與逾時、舊位置標記、前背景生命週期及關閉後忽略遲到回呼。測試不代表已在真實手機GPS硬體驗證。
+
+`auto_dispatch_qa.py` 驗證11個指定鄉鎮給人員一、其他鄉鎮給人員二，新匯入與既有任務套用、保留手動人員三、舊案／完成／鎖定不改派、儲存失敗回滾、按人員選擇直接下載JSON及手機寬度。

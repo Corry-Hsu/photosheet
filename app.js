@@ -34,7 +34,8 @@
     pinMode = false,
     importWorker = null,
     geoCounts = null,
-    urls = [];
+    urls = [],
+    publishURLs = [];
   const tell = (s, error = false) => {
     const m = $("#message");
     m.textContent = s;
@@ -226,7 +227,7 @@
     $("#prev").disabled = page === 1;
     $("#next").disabled = page === max;
     $("#summary").innerHTML =
-      `<span><strong>${visible.length}</strong> 任務</span><span><strong>${visible.reduce((n, t) => n + t.parcels.length, 0)}</strong> 地號</span>${worker ? "" : `<span><strong>${visible.filter((t) => t.assignee).length}</strong> 已分派</span><span><strong>${visible.filter((t) => t.completed).length}</strong> 已完成</span>`}`;
+      `<span><strong>${visible.length}</strong> 任務</span>${worker ? "" : `<span><strong>${visible.filter((t) => t.assignee).length}</strong> 已分派</span><span><strong>${visible.filter((t) => t.completed).length}</strong> 已完成</span>`}`;
     const rows = list.slice((page - 1) * PAGE, page * PAGE);
     $("#tasks").innerHTML = rows.length
       ? rows
@@ -1064,6 +1065,27 @@
     bind("#orders", () => documentDialog(chosen(), "order"));
     bind("#reload-worker", loadWorker);
     if (worker) return;
+    bind("#auto-assign", () => {
+      const next = state.tasks.map((t) => C.autoAssign(t));
+      const changed = next.filter((t, i) => t !== state.tasks[i]);
+      open(
+        "依鄉鎮自動分派",
+        `<p>${C.selfDistricts.map(E).join("、")} → ${E(state.people[0].name)}（人員一）。其餘鄉鎮 → ${E(state.people[1].name)}（人員二）。</p><p>套用今年本月起的未完成任務，會調整人員一、二的既有分派；人員三、舊月份、已完成及鎖定任務維持原設定。鄉鎮缺漏時保留原設定。</p><p>將更新 ${changed.length} 筆任務。</p><button id="confirm-auto-assign" class="primary">套用自動分派</button>`,
+      );
+      bind("#confirm-auto-assign", async () => {
+        const previous = state.tasks;
+        state.tasks = next;
+        try {
+          await persist();
+        } catch (e) {
+          state.tasks = previous;
+          throw e;
+        }
+        $("#dialog").close();
+        render();
+        tell(`已依鄉鎮更新 ${changed.length} 筆任務；發布檔需另行產生與上傳`);
+      });
+    });
     bind("#import-excel", () => $("#excel-file").click());
     $("#excel-file").onchange = async () => {
       try {
@@ -1076,7 +1098,7 @@
         if (!result.tasks.length) throw Error("沒有有效任務");
         open(
           "Excel 匯入預覽",
-          `<p>共 ${result.tasks.length} 筆任務／${result.tasks.reduce((n, t) => n + t.parcels.length, 0)} 地號。每列一筆。</p><div class="toolbar">${["雜草垃圾", "砍樹", "圍籬"].map((n) => `<label><input type="checkbox" data-import-type="${n}" checked>${n} ${result.tasks.filter((t) => t.type === n).length}</label>`).join("")}</div><label>統一成果日期（選填）<input id="import-date" type="date"></label><div class="preview">${result.tasks.map((t, i) => `<div class="preview-row"><span>${E(t.type)} 第${t.row}列 · ${E(location(t))} ${E(t.parcels.map((p) => p.lot).join("、"))}</span><input type="date" data-import-date="${i}" value="${t.resultDate}" aria-label="第${i + 1}筆成果日期"></div>`).join("")}</div><details><summary>${result.warnings.length} 項資料提醒</summary><pre>${E(result.warnings.join("\n"))}</pre></details><button id="commit-import" class="primary">確認匯入</button>`,
+          `<p>共 ${result.tasks.length} 筆任務。每列一筆；新任務依鄉鎮自動分派。</p><div class="toolbar">${["雜草垃圾", "砍樹", "圍籬"].map((n) => `<label><input type="checkbox" data-import-type="${n}" checked>${n} ${result.tasks.filter((t) => t.type === n).length}</label>`).join("")}</div><label>統一成果日期（選填）<input id="import-date" type="date"></label><div class="preview">${result.tasks.map((t, i) => `<div class="preview-row"><span>${E(t.type)} 第${t.row}列 · ${E(location(t))} ${E(t.parcels.map((p) => p.lot).join("、"))}</span><input type="date" data-import-date="${i}" value="${t.resultDate}" aria-label="第${i + 1}筆成果日期"></div>`).join("")}</div><details><summary>${result.warnings.length} 項資料提醒</summary><pre>${E(result.warnings.join("\n"))}</pre></details><button id="commit-import" class="primary">確認匯入</button>`,
         );
         $("#import-date").onchange = () => {
           if ($("#import-date").value)
@@ -1095,7 +1117,7 @@
           );
           const add = result.tasks
             .filter((t) => types.includes(t.type) && !ids.has(t.id))
-            .map((t) => C.monthPolicy(t));
+            .map((t) => C.autoAssign(C.monthPolicy(t)));
           if (!types.length) throw Error("請勾選工作類型");
           const old = state.tasks,
             oldReference = state.sectionReference;
@@ -1228,19 +1250,27 @@
     bind("#publish", () => {
       state.tasks.forEach((t) => C.monthPolicy(t));
       const assigned = state.tasks.filter((t) => t.assignee && !t.completed);
-      if (assigned.some((t) => !C.date(t.resultDate)))
-        throw Error("已分派任務有成果日期缺漏，請先補齊");
-
       open(
-        "確認產生公開派工檔",
-        `<p>將產生三份 JSON，不含完整地籍索引、原始 Excel、XML 或照片。</p><p>${state.tasks.filter((t) => t.completed).length} 筆已完成任務不列入派工；若三人皆無任務，會產生空清單供清除舊派工。</p><p>${assigned.length} 筆任務。</p><ul>${state.people.map((p) => `<li>${E(p.name)}：${assigned.filter((t) => t.assignee === p.id).length} 筆</li>`).join("")}</ul><p class="warning">這些內容將公開。入口核對與成果日期請在發布前確認。</p><button id="confirm-publish" class="primary">下載三人發布 ZIP</button>`,
+        "選擇人員發布",
+        `<p>勾選要更新的人員，直接產生各自的 JSON 檔，不壓縮。</p><p>已完成任務不列入；沒有任務仍可產生空清單以清除該人員舊派工。</p><div class="form-grid">${state.people.map((p, i) => `<label><input type="checkbox" data-publish-person="${p.id}" checked>${E(p.name)}（人員${i + 1}）：${assigned.filter((t) => t.assignee === p.id).length} 筆任務</label>`).join("")}</div><p class="warning">內容將公開。請確認成果日期與導航位置。</p><button id="confirm-publish" class="primary">產生所選人員 JSON</button>`,
       );
       bind("#confirm-publish", () => {
+        const people = state.people.filter((p) =>
+          $$("[data-publish-person]:checked").some(
+            (el) => el.dataset.publishPerson === p.id,
+          ),
+        );
+        if (!people.length) throw Error("請至少勾選一位人員");
+        const chosenTasks = assigned.filter((t) =>
+          people.some((p) => p.id === t.assignee),
+        );
+        if (chosenTasks.some((t) => !C.date(t.resultDate)))
+          throw Error("所選人員的任務有成果日期缺漏，請先補齊");
         const batch = C.today() + "-" + crypto.randomUUID().slice(0, 8),
           generatedAt = new Date().toISOString(),
-          files = {};
-        for (let i = 0; i < 3; i++) {
-          const p = state.people[i],
+          files = [];
+        for (const p of people) {
+          const i = state.people.findIndex((person) => person.id === p.id),
             tasks = assigned
               .filter((t) => t.assignee === p.id)
               .map((t) => ({
@@ -1270,34 +1300,35 @@
               polygons: f.polygons,
               bbox: f.bbox,
             }));
-          files[`data/worker-${i + 1}.json`] = fflate.strToU8(
-            JSON.stringify({
-              schemaVersion: 1,
-              batch,
-              generatedAt,
-              person: p,
-              settings: state.settings,
-              tasks,
-              features: fs,
-            }),
-          );
+          files.push({
+            name: `worker-${i + 1}.json`,
+            person: p.name,
+            blob: new Blob(
+              [
+                JSON.stringify(
+                  {
+                    schemaVersion: 1,
+                    batch,
+                    generatedAt,
+                    person: p,
+                    settings: state.settings,
+                    tasks,
+                    features: fs,
+                  },
+                  null,
+                  2,
+                ),
+              ],
+              { type: "application/json" },
+            ),
+          });
         }
-        files["發布說明.txt"] = fflate.strToU8(
-          "批次：" +
-            batch +
-            "\n把 data 內三份 JSON 一次上傳到 GitHub 專案的 data 資料夾。等待 Pages 部署完成，再開三個固定網址，核對批次及任務數。\n不需上傳管理備份或任何憑證。\n" +
-            state.people
-              .map((p, i) => p.name + "：worker-" + (i + 1) + ".html")
-              .join("\n"),
+        publishURLs.forEach((u) => URL.revokeObjectURL(u));
+        publishURLs = files.map((f) => URL.createObjectURL(f.blob));
+        open(
+          "下載發布檔",
+          `<p>批次：${E(batch)}</p><p>逐一下載以下 JSON，直接放入 GitHub 專案的 data 資料夾，取代同名檔案。未勾選的人員維持原派工；產生檔案尚未更新網站。</p><div class="form-grid">${files.map((f, i) => `<a class="button dispatch-download" href="${publishURLs[i]}" download="${f.name}">${E(f.person)}：下載 ${f.name}</a>`).join("")}</div>`,
         );
-        download(
-          new Blob([fflate.zipSync(files, { level: 6 })], {
-            type: "application/zip",
-          }),
-          "三人派工_" + batch + ".zip",
-        );
-        $("#dialog").close();
-        tell("發布檔已產生；尚未上傳 GitHub");
       });
     });
   }
