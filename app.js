@@ -5,7 +5,7 @@
     $ = (s) => document.querySelector(s),
     $$ = (s) => [...document.querySelectorAll(s)],
     worker = document.body.dataset.worker || "",
-    PAGE = 25;
+    PAGE = worker ? 50 : 25;
   let state = {
       id: "manager",
       schemaVersion: 1,
@@ -203,6 +203,8 @@
           .map((t) => {
             const m = matching(t),
               person = state.people.find((p) => p.id === t.assignee);
+            if (worker)
+              return `<article class="task worker-task ${t.id === focused ? "selected" : ""}" data-id="${E(t.id)}"><input type="checkbox" aria-label="選取 ${E(t.serial)}" data-check="${E(t.id)}" ${selected.has(t.id) ? "checked" : ""}><div class="task-content"><div class="task-topline"><h3>${E(location(t))}</h3><span class="badge">${E(t.type)}</span></div><p class="task-lots">${E(t.parcels.map((p) => p.lot).join("、"))}</p><p class="task-deadline">期限 ${E(t.due ? t.due.slice(5).replace("T", " ") : "未設定")} · 成果 ${E(t.resultDate ? t.resultDate.slice(5) : "待補")}</p></div><button data-detail="${E(t.id)}" aria-label="查看 ${E(location(t))} ${E(t.parcels.map((p) => p.lot).join("、"))}">›</button></article>`;
             return `<article class="task ${t.id === focused ? "selected" : ""}" data-id="${E(t.id)}"><input type="checkbox" aria-label="選取 ${E(t.serial)}" data-check="${E(t.id)}" ${selected.has(t.id) ? "checked" : ""}><div><h3>${E(location(t))}</h3><p>${E(t.parcels.map((p) => p.lot).join("、"))}</p><span class="badge">${E(t.type)}</span> <span class="badge">${resultName[m.status]} ${m.ok}/${t.parcels.length}</span><p class="muted">${worker ? "" : E(person?.name || "未指派") + " · "}成果日期 ${E(t.resultDate || "待補")}<br>期限 ${E(t.due.replace("T", " ") || "未設定")}</p></div><button data-detail="${E(t.id)}">查看任務</button></article>`;
           })
           .join("")
@@ -220,7 +222,7 @@
       (el) =>
         (el.onclick = (e) => {
           if (e.target.closest("button,input")) return;
-          focus(el.dataset.id);
+          worker ? detail(el.dataset.id) : focus(el.dataset.id);
         }),
     );
     $$("[data-detail]").forEach(
@@ -337,7 +339,7 @@
           maxZoom: 18,
           animate: false,
         });
-      else if (n) map.setView([n.point[1], n.point[0]], 17, {animate:false});
+      else if (n) map.setView([n.point[1], n.point[0]], 17, { animate: false });
     }
     setTimeout(() => map.invalidateSize(), 20);
   }
@@ -535,7 +537,7 @@
               )
               .join("")}</div>`
           : ""
-      }<div class="toolbar"><button id="doc-print" class="primary">列印／另存 PDF</button><button id="doc-xlsx">下載 Excel</button></div>`,
+      }<div class="toolbar"><button id="doc-print" class="primary">${kind === "board" ? "產生 PDF／圖片" : "列印／另存 PDF"}</button><button id="doc-xlsx">下載 Excel</button></div><section id="doc-result" aria-live="polite"></section>`,
     );
     const settings = async () => {
       const next = { ...state.settings };
@@ -547,11 +549,66 @@
       return next;
     };
     bind("#doc-print", async () => {
+      if (kind === "board") {
+        const button = $("#doc-print"),
+          result = $("#doc-result");
+        button.disabled = true;
+        try {
+          const settingsValue = await settings();
+          result.textContent = "正在產生白板…";
+          const outputs = await Whiteboards.generate(
+            tasks,
+            { ...Documents.settings, ...settingsValue },
+            (n, total) => {
+              result.textContent = `正在產生白板 ${n} / ${total}…`;
+            },
+          );
+          const links = [];
+          const link = (blob) => {
+            const u = URL.createObjectURL(blob);
+            links.push(u);
+            return u;
+          };
+          const pdf = link(outputs.pdf);
+          result.innerHTML = `<div class="toolbar"><a class="button primary doc-pdf-download" href="${pdf}" download="拍攝白板.pdf">下載 PDF</a><a class="button" href="${pdf}" target="_blank" rel="noopener">開啟 PDF</a></div><p class="muted">白板預覽如下；可直接下載 PDF 或圖片。手機可從檔案預覽選擇儲存／分享。</p>${outputs.images
+            .map((im, i) => {
+              const u = link(im.blob);
+              return `<figure class="board-preview"><img loading="lazy" decoding="async" src="${u}" alt="第 ${i + 1} 張白板，含完整日期、地段及地號"><figcaption><a class="button doc-image-download" href="${u}" download="${E(im.name)}">下載第 ${i + 1} 張圖片</a></figcaption></figure>`;
+            })
+            .join("")}`;
+          if (outputs.images.length > 1) {
+            const zip = {};
+            for (const im of outputs.images)
+              zip[im.name] = new Uint8Array(await im.blob.arrayBuffer());
+            const u = link(
+              new Blob([fflate.zipSync(zip, { level: 0 })], {
+                type: "application/zip",
+              }),
+            );
+            const a = document.createElement("a");
+            a.href = u;
+            a.download = "白板圖片.zip";
+            a.className = "button";
+            a.textContent = "全部圖片 ZIP";
+            result.querySelector(".toolbar").append(a);
+          }
+          // Keep PDF links alive after closing the dialog: iOS may open the viewer lazily.
+          setTimeout(
+            () => links.forEach((u) => URL.revokeObjectURL(u)),
+            30 * 60 * 1000,
+          );
+        } catch (e) {
+          result.textContent = "白板產生失敗：" + e.message;
+          throw e;
+        } finally {
+          button.disabled = false;
+        }
+        return;
+      }
       const w = window.open("about:blank", "_blank");
       if (!w) throw Error("請允許開啟文件視窗");
       try {
-        const s = await settings();
-        await Documents.show(tasks, kind, s, "print", w);
+        await Documents.show(tasks, kind, await settings(), "print", w);
       } catch (e) {
         w.close();
         throw e;
@@ -657,8 +714,10 @@
       $("#edition").textContent = "固定派工網址 · 無需匯入";
       $("#worker-version").textContent =
         `批次：${data.batch} · 產生時間：${data.generatedAt ? new Date(data.generatedAt).toLocaleString("zh-TW", { timeZone: "Asia/Taipei" }) : "尚未發布"}`;
-      tell("派工資料已更新");
     } catch (e) {
+      if (!state.tasks.length)
+        $("#tasks").innerHTML =
+          '<p class="warning">派工資料尚未載入，請確認網路，並在頁尾重新整理派工資料。</p>';
       $("#worker-version").textContent =
         "更新失敗：" + e.message + "。畫面若有任務，仍為上一批資料。";
       throw e;
@@ -797,6 +856,18 @@
       $("#date-filters").hidden = true;
       $("#pin-mode").hidden = true;
       $("#show-context").hidden = true;
+      bind("#worker-filter-toggle", () => {
+        const open = document.body.classList.toggle("worker-filters-open");
+        $("#worker-filter-toggle").setAttribute("aria-expanded", String(open));
+      });
+      bind("#worker-select-toggle", () => {
+        const open = document.body.classList.toggle("worker-selecting");
+        $("#worker-select-toggle").setAttribute("aria-pressed", String(open));
+        if (!open) {
+          selected.clear();
+          render();
+        }
+      });
       try {
         await loadWorker();
       } catch (e) {

@@ -22,10 +22,11 @@ with sync_playwright() as p:
  page.locator('#search').fill(task['parcels'][0]['lot']);page.locator('[data-detail]').first.click();page.wait_for_selector('#detail-board');page.screenshot(path=str(ROOT/'evidence/admin-desktop.png'));page.locator('#close-dialog').click()
  # Whiteboard and editable Excel.
  page.evaluate('(id)=>{PSApp.selected.clear();PSApp.selected.add(id)}',tid);page.locator('#search').fill('');page.click('#boards');
- with ctx.expect_page() as pop:page.click('#doc-print')
- board=pop.value;board.wait_for_timeout(400);assert board.locator('.board').count()==1
- fit=board.evaluate('''()=>[...document.querySelectorAll('.main')].every(x=>x.scrollHeight<=x.clientHeight+1&&x.scrollWidth<=x.clientWidth+1)''');assert fit
- board.pdf(path=str(ROOT/'evidence/whiteboard.pdf'),prefer_css_page_size=True,print_background=True);board.close()
+ page.click('#doc-print');page.wait_for_selector('.doc-pdf-download',timeout=60000)
+ with page.expect_download() as dl:page.click('.doc-pdf-download')
+ dl.value.save_as(str(ROOT/'evidence/whiteboard.pdf'))
+ import fitz
+ assert len(fitz.open(ROOT/'evidence/whiteboard.pdf'))==1
  with page.expect_download() as dl:page.click('#doc-xlsx')
  dl.value.save_as(str(ROOT/'evidence/whiteboard.xlsx'));page.click('#close-dialog')
  # Published ZIP validation and worker view.
@@ -37,11 +38,11 @@ with sync_playwright() as p:
   assert len(payloads[0]['tasks'])==1 and not payloads[1]['tasks'];assert '統一編號' not in json.dumps(payloads,ensure_ascii=False);assert len(payloads[0]['features'])<20
  for i,d in enumerate(payloads,1):ctx.route('**/data/worker-'+str(i)+'.json',lambda r,request,d=d:r.fulfill(json=d))
  wp=ctx.new_page();wp.clock.set_fixed_time(QA_NOW);wp.on('pageerror',lambda e:errors.append(str(e)));wp.goto(BASE+'worker-1.html');wp.wait_for_function('PSApp.state.tasks.length===1');wp.set_viewport_size({'width':390,'height':844});wp.screenshot(path=str(ROOT/'evidence/worker-mobile.png'));assert wp.evaluate('document.documentElement.scrollWidth<=innerWidth')
- wp.locator('[data-detail]').first.click();wp.click('#detail-camera');wp.wait_for_function('document.querySelector("#video").videoWidth>0');wp.click('#shutter');wp.wait_for_function('document.querySelector("#capture-count").textContent.includes("1 張")',timeout=30000);wp.click('#shutter');wp.wait_for_function('document.querySelector("#capture-count").textContent.includes("2 張")',timeout=30000);wp.screenshot(path=str(ROOT/'evidence/camera-mobile.png'));wp.click('#camera-back');wp.wait_for_selector('[data-photo-download]');assert wp.locator('[data-photo-download]').count()==2
+ wp.locator('[data-detail]').first.click();wp.click('#detail-camera');wp.wait_for_function('document.querySelector("#video").videoWidth>0');wp.click('#shutter');wp.wait_for_function('document.querySelector("#capture-count").textContent.startsWith("本機照片 1 張")',timeout=30000);wp.click('#shutter');wp.wait_for_function('document.querySelector("#capture-count").textContent.startsWith("本機照片 2 張")',timeout=30000);wp.screenshot(path=str(ROOT/'evidence/camera-mobile.png'));wp.click('#camera-back');wp.wait_for_selector('[data-photo-download]');assert wp.locator('[data-photo-download]').count()==2
  with wp.expect_download() as dl:wp.locator('[data-photo-download]').first.click()
  dl.value.save_as(str(ROOT/'evidence/watermarked-test.jpg'));wp.reload();wp.wait_for_function('PSApp.state.tasks.length===1');wp.locator('[data-detail]').first.click();wp.wait_for_selector('[data-photo-download]');assert wp.locator('[data-photo-download]').count()==2
  # Failed update keeps previous tasks and shows failure.
- ctx.route('**/data/worker-1.json',lambda r:r.fulfill(status=500,body='failure'));wp.click('#close-dialog');wp.click('#reload-worker');wp.wait_for_function('document.querySelector("#worker-version").textContent.includes("更新失敗")');assert wp.evaluate('PSApp.state.tasks.length')==1
+ ctx.route('**/data/worker-1.json',lambda r:r.fulfill(status=500,body='failure'));wp.click('#close-dialog');wp.click('#worker-tools summary');wp.click('#reload-worker');wp.wait_for_function('document.querySelector("#worker-version").textContent.includes("更新失敗")');assert wp.evaluate('PSApp.state.tasks.length')==1
  for width in [360,390,768,1440]:
   page.set_viewport_size({'width':width,'height':900});page.screenshot(path=str(ROOT/'evidence'/f'admin-{width}.png'));assert page.evaluate('document.documentElement.scrollWidth<=innerWidth'),width
  assert not errors,errors

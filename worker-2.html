@@ -5,19 +5,19 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>現場任務｜人員 2</title>
     <link rel="stylesheet" href="vendor/leaflet.css" />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="style.css?v=20261027-1" />
   </head>
   <body data-tab="list" data-worker="p2">
     <header>
       <div>
         <small>PHOTOSHEET · 靜態派工</small>
-        <h1 id="title">地籍任務管理</h1>
+        <h1 id="title">我的任務</h1>
         <div id="edition">Excel × 地籍 × 三人派工</div>
       </div>
       <a href="photosheet-app.html">原照片排版工具</a>
     </header>
     <main>
-      <section class="panel" id="admin-tools">
+      <section class="panel" id="admin-tools" hidden>
         <div class="toolbar">
           <button class="primary" id="import-excel">匯入 Excel</button
           ><button id="import-geo">匯入 KML／XML／ZIP</button
@@ -33,15 +33,9 @@
         <div id="progress" hidden></div>
         <button id="cancel-geo" hidden>取消地籍匯入</button>
       </section>
-      <section class="panel" id="worker-tools" hidden>
-        <div id="worker-version"></div>
-        <button id="reload-worker">重新整理派工資料</button>
-        <p>
-          照片只存於這台裝置，不會回傳。請下載備份；清除瀏覽器資料會移除暫存照片。
-        </p>
-      </section>
+
       <div class="summary" id="summary"></div>
-      <div class="toolbar">
+      <div class="toolbar worker-search">
         <input
           id="search"
           placeholder="搜尋地段、地號、鄉鎮、案件編號"
@@ -69,7 +63,9 @@
       </details>
       <div class="mobile-tabs">
         <button data-tab="list" class="active">任務清單</button
-        ><button data-tab="map">地圖核對</button>
+        ><button data-tab="map">地圖</button
+        ><button id="worker-filter-toggle" aria-expanded="false">篩選</button
+        ><button id="worker-select-toggle" aria-pressed="false">選取</button>
       </div>
       <div class="layout">
         <section class="panel list-panel">
@@ -78,7 +74,7 @@
             ><button id="clear-select">清除選取</button
             ><span id="count" class="muted"></span>
           </div>
-          <div id="tasks"></div>
+          <div id="tasks"><p class="muted" role="status">正在載入任務…</p></div>
           <div class="pages">
             <button id="prev">上一頁</button><span id="page"></span
             ><button id="next">下一頁</button>
@@ -105,6 +101,15 @@
           </p>
         </section>
       </div>
+      <details class="panel worker-notes" id="worker-tools" hidden>
+        <summary>注意事項與派工資訊</summary>
+        <div id="worker-version"></div>
+        <button id="reload-worker">重新整理派工資料</button>
+        <p>
+          照片只存於這台裝置，不會回傳。請下載備份；清除瀏覽器資料會移除暫存照片。
+        </p>
+        <a href="photosheet-app.html">原照片排版工具</a>
+      </details>
     </main>
     <div id="message" role="status" hidden></div>
     <input id="excel-file" type="file" accept=".xlsx" hidden /><input
@@ -126,11 +131,13 @@
     <script src="vendor/exceljs.js"></script>
     <script src="vendor/rbush.js"></script>
     <script src="vendor/exifr.js"></script>
+    <script src="vendor/jspdf.js"></script>
     <script src="core.js"></script>
     <script src="excel.js"></script>
     <script src="db.js"></script>
-    <script src="documents.js"></script>
-    <script src="camera.js"></script>
-    <script src="app.js"></script>
+    <script src="whiteboard.js?v=20261027-1"></script>
+    <script src="documents.js?v=20261027-1"></script>
+    <script src="camera.js?v=20261027-1"></script>
+    <script src="app.js?v=20261027-1"></script>
   </body>
 </html>

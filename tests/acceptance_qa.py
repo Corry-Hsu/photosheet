@@ -33,9 +33,13 @@ with sync_playwright() as pw:
  bad=Path('/tmp/photosheet-bad-backup.json');bad.write_text('{"schemaVersion":9}');pg.locator('#restore-file').set_input_files(str(bad));pg.wait_for_function('document.querySelector("#message").textContent.includes("備份格式錯誤")');assert pg.evaluate('PSApp.state.tasks.length')==3;results['bad_backup_preserves_state']=True
  # 12 lots + all 3 workorder types in a single PDF / XLSX.
  pg.click('#select-page');pg.click('#boards')
- with c.expect_page() as pop:pg.click('#doc-print')
- bp=pop.value;bp.wait_for_function('document.querySelectorAll(".board").length===3');bp.wait_for_timeout(200)
- assert bp.evaluate('''()=>[...document.querySelectorAll('.main')].every(m=>m.scrollWidth<=m.clientWidth+1&&m.scrollHeight<=m.clientHeight+1)''');assert not bp.evaluate('document.querySelector(".board").textContent.includes("任務編號")');bp.pdf(path=str(ROOT/'evidence/whiteboard-stress.pdf'),prefer_css_page_size=True);bp.close();pg.click('#close-dialog');pg.click('#orders')
+ pg.click('#doc-print');pg.wait_for_function('document.querySelectorAll(".doc-image-download").length===3',timeout=60000)
+ with pg.expect_download() as dl:pg.click('.doc-pdf-download')
+ dl.value.save_as(str(ROOT/'evidence/whiteboard-stress.pdf'))
+ import fitz
+ assert len(fitz.open(ROOT/'evidence/whiteboard-stress.pdf'))==3
+ assert pg.evaluate('document.querySelectorAll(".board-preview img").length')==3
+ pg.click('#close-dialog');pg.click('#orders')
  with c.expect_page() as pop:pg.click('#doc-print')
  op=pop.value;op.wait_for_selector('.order');assert op.locator('h1',has_text='開口契約訂單通知表').count()==1;op.pdf(path=str(ROOT/'evidence/three-workorders.pdf'),prefer_css_page_size=True);op.close()
  with pg.expect_download() as dl:pg.click('#doc-xlsx')
