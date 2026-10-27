@@ -14,10 +14,11 @@ with sync_playwright() as p:
  pg.locator('[data-detail="scope-0"]').click();pg.click('#detail-complete');pg.wait_for_function('PSApp.state.tasks[0].completed===false');pg.click('#close-dialog');pg.click('#select-page');assert pg.locator('[data-check]:checked').count()==4;pg.click('#batch-complete');pg.wait_for_function('PSApp.state.tasks.slice(0,4).every(t=>t.completed)');pg.wait_for_timeout(100)
  # Completion must allow publishing empty lists to remove all finished dispatches.
  pg.click('#publish')
- with pg.expect_download() as dl:pg.click('#confirm-publish')
- dl.value.save_as('/tmp/finished-dispatch.zip')
- with zipfile.ZipFile('/tmp/finished-dispatch.zip') as z:
-  counts=[len(json.loads(z.read(f'data/worker-{i}.json'))['tasks']) for i in range(1,4)]
+ pg.click('#confirm-publish');counts=[]
+ for i in range(1,4):
+  with pg.expect_download() as dl:pg.locator(f'.dispatch-download[download="worker-{i}.json"]').click()
+  dest=f'/tmp/finished-worker-{i}.json';dl.value.save_as(dest);counts.append(len(json.loads(__import__('pathlib').Path(dest).read_text())['tasks']))
+ pg.click('#close-dialog')
  assert counts==[0,0,0],counts
  pg.click('#batch-assign');pg.select_option('#assign-complete','no');pg.click('#commit-assign');pg.wait_for_function('!document.querySelector("#dialog").open');assert pg.evaluate('PSApp.state.tasks.slice(0,4).every(t=>!t.completed)')
  # A failed write must leave both the screen state and database incomplete.

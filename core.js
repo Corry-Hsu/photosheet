@@ -197,6 +197,41 @@
       t.assignmentClosed = true;
     return { ...t, assignee: person };
   };
+  C.selfDistricts = Object.freeze([
+    "屏東市",
+    "九如鄉",
+    "里港鄉",
+    "高樹鄉",
+    "鹽埔鄉",
+    "長治鄉",
+    "麟洛鄉",
+    "內埔鄉",
+    "三地門鄉",
+    "霧台鄉",
+    "瑪家鄉",
+  ]);
+  C.autoAssign = (task, now) => {
+    if (
+      task.assignee === "p3" ||
+      task.completed ||
+      !C.adminVisible(task, now) ||
+      task.assignmentClosed ||
+      task.assignmentLockedTo
+    )
+      return task;
+    const districts = [
+      ...new Set(
+        (task.parcels || []).map((p) => norm(p.district)).filter(Boolean),
+      ),
+    ];
+    const district =
+      norm(task.district) || (districts.length === 1 ? districts[0] : "");
+    if (!district) return task;
+    const person = C.selfDistricts.includes(district.replace(/^屏東縣/, ""))
+      ? "p1"
+      : "p2";
+    return task.assignee === person ? task : C.assign(task, person, now);
+  };
   C.markComplete = (task, done, now = new Date()) => ({
     ...task,
     completed: done,
