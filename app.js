@@ -216,15 +216,29 @@
             ? selected.add(el.dataset.check)
             : selected.delete(el.dataset.check);
           updateBatch();
+          if (worker) focus(el.dataset.check, false);
         }),
     );
     $$(".task").forEach(
       (el) =>
         (el.onclick = (e) => {
           if (e.target.closest("button,input")) return;
-          worker ? detail(el.dataset.id) : focus(el.dataset.id);
+          focus(el.dataset.id);
+          if (worker) scrollFieldMap();
         }),
     );
+    if (worker)
+      $$(".task-content").forEach((el) => {
+        el.tabIndex = 0;
+        el.setAttribute("role", "button");
+        el.setAttribute("aria-label", "在下方地圖查看此任務");
+        el.onkeydown = (e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            el.click();
+          }
+        };
+      });
     $$("[data-detail]").forEach(
       (el) => (el.onclick = () => detail(el.dataset.detail)),
     );
@@ -254,6 +268,20 @@
     if (!t) return;
     render();
     draw(t, fit);
+    if (worker && $("#field-map-title")) {
+      $("#field-map-title").textContent =
+        location(t) + " " + t.parcels.map((p) => p.lot).join("、");
+      $("#worker-open-task").disabled = false;
+    }
+  }
+  function scrollFieldMap() {
+    map.invalidateSize();
+    $(".map-panel").scrollIntoView({
+      block: "start",
+      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
+        ? "auto"
+        : "smooth",
+    });
   }
   function polygonLayer(fs, style, onClick) {
     return L.geoJSON(
@@ -856,6 +884,19 @@
       $("#date-filters").hidden = true;
       $("#pin-mode").hidden = true;
       $("#show-context").hidden = true;
+      bind("#worker-map-jump", scrollFieldMap);
+      bind("#worker-open-task", () => {
+        const t = state.tasks.find((t) => t.id === focused) || filtered()[0];
+        if (t) return detail(t.id);
+        throw Error("目前沒有任務");
+      });
+      bind("#worker-back-list", () => {
+        const task = $$(".task").find((el) => el.dataset.id === focused);
+        (task || $(".list-panel")).scrollIntoView({
+          block: "start",
+          behavior: "smooth",
+        });
+      });
       bind("#worker-filter-toggle", () => {
         const open = document.body.classList.toggle("worker-filters-open");
         $("#worker-filter-toggle").setAttribute("aria-expanded", String(open));

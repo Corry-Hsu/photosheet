@@ -609,3 +609,38 @@ body[data-worker] .worker-notes #worker-version {
     font-size: 19px;
   }
 }
+
+/* Field task list and map remain visible on one page, followed by notes. */
+body[data-worker] .layout {
+  display: block;
+}
+body[data-worker] .map-panel {
+  display: block !important;
+  position: static;
+  margin-top: 12px;
+  scroll-margin-top: 8px;
+}
+body[data-worker] .list-panel {
+  display: block !important;
+}
+body[data-worker] .map {
+  height: 48dvh;
+  min-height: 280px;
+  max-height: 460px;
+}
+body[data-worker] #field-map-title {
+  font-size: 17px;
+  line-height: 1.5;
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+body[data-worker] .task-content:focus-visible {
+  outline: 2px solid #176950;
+  outline-offset: 3px;
+}
+
+body[data-worker] .map-panel .toolbar > button {
+  flex: 1 1 90px;
+  padding: 8px 4px;
+  font-size: 13px;
+}

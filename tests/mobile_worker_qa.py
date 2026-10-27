@@ -18,10 +18,18 @@ with sync_playwright() as p:
  ctx.route('https://tile.openstreetmap.org/**',lambda r:r.abort());ctx.route('**/data/worker-1.json',lambda r:r.fulfill(json=fixture))
  pg=ctx.new_page();pg.clock.set_fixed_time(QA_NOW);pg.on('pageerror',lambda e:errors.append(str(e)));pg.goto(BASE+'worker-1.html');pg.wait_for_function('PSApp.state.tasks.length===20');pg.wait_for_function('document.querySelectorAll(".task").length===20')
  dimensions=pg.evaluate('''()=>{let rows=[...document.querySelectorAll('.task')].map(x=>x.getBoundingClientRect());return {firstTop:rows[0].top,fullVisible:rows.filter(r=>r.bottom<=innerHeight&&r.top>=0).length,rowHeight:rows[1].height,notesTop:document.querySelector('#worker-tools').getBoundingClientRect().top,listBottom:document.querySelector('.layout').getBoundingClientRect().bottom,overflow:document.documentElement.scrollWidth>innerWidth}}''');assert dimensions['firstTop']<=230,dimensions;assert dimensions['fullVisible']>=6,dimensions;assert dimensions['rowHeight']<=100,dimensions;assert dimensions['notesTop']>=dimensions['listBottom'],dimensions;assert not dimensions['overflow'];results['390px_list']=dimensions;pg.screenshot(path=str(out/f'{engine}-worker-list.png'))
+ # Selecting a task reveals the map below the list, without opening a dialog.
+ pg.locator('.task-content').nth(1).click();pg.wait_for_function('document.querySelector("#field-map-title").textContent.includes("101")');pg.wait_for_function('document.querySelector(".map-panel").getBoundingClientRect().bottom<=innerHeight',timeout=10000)
+ assert not pg.locator('#dialog').evaluate('(el)=>el.open')
+ assert pg.locator('.list-panel').is_visible() and pg.locator('.map-panel').is_visible()
+ positions=pg.evaluate("""()=>({listEnd:document.querySelector('.list-panel').getBoundingClientRect().bottom,mapStart:document.querySelector('.map-panel').getBoundingClientRect().top,mapEnd:document.querySelector('.map-panel').getBoundingClientRect().bottom,notesStart:document.querySelector('#worker-tools').getBoundingClientRect().top})""");assert positions['mapStart']>=positions['listEnd'];assert positions['notesStart']>=positions['mapEnd'];assert abs(pg.evaluate('PSApp.map.getCenter().lng')-fixture['tasks'][1]['navigation']['point'][0])<.001
+ pg.screenshot(path=str(out/f'{engine}-map-below-list.png'));results['map_below_list']=positions
+ pg.click('#worker-open-task');pg.wait_for_selector('#detail-camera');pg.click('#close-dialog')
+ pg.click('#worker-back-list');pg.wait_for_timeout(400)
  pg.click('#worker-filter-toggle');assert pg.locator('#type-filter').is_visible();pg.select_option('#type-filter','砍樹');pg.click('#worker-filter-toggle');assert not pg.locator('#type-filter').is_visible()
  pg.click('#worker-select-toggle');pg.click('#select-page');assert pg.locator('[data-check]:checked').count()==20;pg.click('#worker-select-toggle');assert pg.locator('[data-check]:checked').count()==0
  # A task opens by tapping its content, not only a small action button.
- pg.locator('.task-content').first.click();pg.wait_for_selector('#detail-board');pg.click('#detail-board');pg.click('#doc-print');pg.wait_for_selector('.doc-pdf-download',timeout=60000);assert pg.locator('.board-preview img').count()==1
+ pg.locator('[data-detail]').first.click();pg.wait_for_selector('#detail-board');pg.click('#detail-board');pg.click('#doc-print');pg.wait_for_selector('.doc-pdf-download',timeout=60000);assert pg.locator('.board-preview img').count()==1
  pg.wait_for_function('document.querySelector(".board-preview img").naturalWidth===2400');assert pg.evaluate('document.querySelector(".board-preview img").naturalWidth')==2400;assert ctx.pages==[pg], 'Generating a board must not open an empty tab'
  with pg.expect_download() as dl:pg.click('.doc-pdf-download')
  pdf=out/f'{engine}-whiteboard.pdf';dl.value.save_as(str(pdf));doc=fitz.open(pdf);assert len(doc)==1;pix=doc[0].get_pixmap();im=Image.frombytes('RGB',[pix.width,pix.height],pix.samples);nonwhite=sum(1 for v in im.convert('L').get_flattened_data() if v<100);assert nonwhite>12000,nonwhite
@@ -37,13 +45,13 @@ with sync_playwright() as p:
   pg.set_viewport_size({'width':width,'height':height});assert pg.evaluate('document.documentElement.scrollWidth<=innerWidth'),(width,height)
  pg.set_viewport_size({'width':390,'height':844})
  if engine=='chromium':
-  pg.locator('.task-content').first.click();pg.click('#detail-camera');pg.wait_for_function('document.querySelector("#video").videoWidth>0');frame=pg.locator('#video').bounding_box();assert abs(frame['width']/frame['height']-4/3)<.01
+  pg.locator('[data-detail]').first.click();pg.click('#detail-camera');pg.wait_for_function('document.querySelector("#video").videoWidth>0');frame=pg.locator('#video').bounding_box();assert abs(frame['width']/frame['height']-4/3)<.01
   pg.click('#shutter');pg.wait_for_function('document.querySelector("#capture-count").textContent.startsWith("本機照片 1 張")',timeout=30000);pg.click('#camera-back');pg.wait_for_selector('[data-photo-download]')
   with pg.expect_download() as dl:pg.locator('[data-photo-download]').first.click()
   dl.value.save_as(str(out/'landscape-web-photo.jpg'));im=Image.open(out/'landscape-web-photo.jpg');assert abs(im.width/im.height-4/3)<.005
-  pg.click('#detail-camera');pg.wait_for_selector('#native-file',state='attached');pg.evaluate('''()=>{window.stampedText=[];let fill=CanvasRenderingContext2D.prototype.fillText;CanvasRenderingContext2D.prototype.fillText=function(text,...a){stampedText.push({text,shadowColor:this.shadowColor,shadowBlur:this.shadowBlur});return fill.call(this,text,...a)}}''')
+  pg.click('#detail-camera');pg.wait_for_selector('#native-file',state='attached');pg.evaluate('''()=>{window.stampedText=[];let fill=CanvasRenderingContext2D.prototype.fillText;CanvasRenderingContext2D.prototype.fillText=function(text,...a){stampedText.push({text,x:a[0],y:a[1],align:this.textAlign,shadowColor:this.shadowColor,shadowBlur:this.shadowBlur});return fill.call(this,text,...a)}}''')
   src=Image.new('RGB',(400,800),(80,150,90));exif=Image.Exif();exif[34665]={36867:'2026:10:25 13:04:05'};src.save('/tmp/mobile-portrait.jpg',exif=exif);pg.locator('#native-file').set_input_files('/tmp/mobile-portrait.jpg');pg.wait_for_function('document.querySelector("#capture-count").textContent.startsWith("本機照片 2 張")',timeout=30000)
-  stamp=pg.evaluate('stampedText');assert stamp[0]['text']=='115年10月26日 13:04:05',stamp;assert stamp[0]['shadowBlur']>0 and stamp[0]['shadowColor']!='rgba(0, 0, 0, 0)'
+  stamp=pg.evaluate('stampedText');assert stamp[0]['text']=='115年10月26日 13:04:05',stamp;assert all(t['x']==200 and t['y']>150 and t['align']=='center' for t in stamp);assert stamp[0]['shadowBlur']>0 and stamp[0]['shadowColor']!='rgba(0, 0, 0, 0)'
   pg.click('#camera-back');pg.wait_for_selector('[data-photo-download]')
   nativeId=pg.evaluate("Store.photosFor('p1',PSApp.state.tasks[0].id).then(rows=>rows.find(r=>r.timeSource==='EXIF-Taiwan').id)")
   with pg.expect_download() as dl:pg.locator('[data-photo-download=\"'+nativeId+'\"]').click()

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>現場任務｜人員 3</title>
     <link rel="stylesheet" href="vendor/leaflet.css" />
-    <link rel="stylesheet" href="style.css?v=20261027-1" />
+    <link rel="stylesheet" href="style.css?v=20261027-2" />
   </head>
   <body data-tab="list" data-worker="p3">
     <header>
@@ -62,8 +62,7 @@
         </div>
       </details>
       <div class="mobile-tabs">
-        <button data-tab="list" class="active">任務清單</button
-        ><button data-tab="map">地圖</button
+        <button id="worker-map-jump">查看地圖</button
         ><button id="worker-filter-toggle" aria-expanded="false">篩選</button
         ><button id="worker-select-toggle" aria-pressed="false">選取</button>
       </div>
@@ -87,8 +86,12 @@
           </div>
         </section>
         <section class="panel map-panel">
+          <h2 id="field-map-title">任務地圖</h2>
           <div class="toolbar">
-            <button id="fit-map">縮放至目前任務</button
+            <button id="worker-back-list">返回清單</button
+            ><button id="worker-open-task" class="primary" disabled>
+              任務內容／拍照</button
+            ><button id="fit-map">重設位置</button
             ><button id="show-context">顯示附近地籍</button
             ><button id="pin-mode">點地圖設定入口</button>
           </div>
@@ -96,13 +99,13 @@
           <p id="map-status" class="map-note">
             點選任務查看全部地號。橘色圖釘為導航位置。
           </p>
-          <p class="map-note">
-            地籍範圍不代表可通行入口。底圖需連網；底圖故障仍可核對已匯入的地籍。
-          </p>
         </section>
       </div>
       <details class="panel worker-notes" id="worker-tools" hidden>
         <summary>注意事項與派工資訊</summary>
+        <p>
+          地籍範圍不代表可通行入口。底圖需連網；底圖故障仍可核對已匯入的地籍。
+        </p>
         <div id="worker-version"></div>
         <button id="reload-worker">重新整理派工資料</button>
         <p>
@@ -135,9 +138,9 @@
     <script src="core.js"></script>
     <script src="excel.js"></script>
     <script src="db.js"></script>
-    <script src="whiteboard.js?v=20261027-1"></script>
-    <script src="documents.js?v=20261027-1"></script>
-    <script src="camera.js?v=20261027-1"></script>
-    <script src="app.js?v=20261027-1"></script>
+    <script src="whiteboard.js?v=20261027-2"></script>
+    <script src="documents.js?v=20261027-2"></script>
+    <script src="camera.js?v=20261027-2"></script>
+    <script src="app.js?v=20261027-2"></script>
   </body>
 </html>
