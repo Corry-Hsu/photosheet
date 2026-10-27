@@ -4,9 +4,8 @@
   window.FieldLocation = {
     attach(map) {
       const locate = document.querySelector("#field-locate"),
-        stop = document.querySelector("#field-location-stop"),
         status = document.querySelector("#field-location-status");
-      if (!locate || !stop || !status) return;
+      if (!locate || !status) return;
       let enabled = false,
         watch = null,
         generation = 0,
@@ -53,7 +52,7 @@
         enabled = false;
         clearWatch();
         removePoint();
-        stop.hidden = true;
+        locate.setAttribute("aria-pressed", "false");
         locate.textContent = "定位到我";
         say(message, state);
       }
@@ -113,7 +112,7 @@
         dot.bringToFront();
         const wasStale = stale;
         stale = false;
-        locate.textContent = "定位到我";
+        locate.textContent = "關閉定位";
         if (centerNext) {
           map.invalidateSize();
           map.stop();
@@ -144,7 +143,7 @@
         }
         const request = ++generation;
         say("正在取得手機位置，請允許定位權限…", "locating");
-        locate.textContent = "重新定位";
+        locate.textContent = "關閉定位";
         try {
           const id = navigator.geolocation.watchPosition(
             (p) => onPosition(p, request),
@@ -159,7 +158,7 @@
               }
               paintStale(
                 error.code === 3
-                  ? "定位逾時，請到訊號較好的位置後重新定位。"
+                  ? "定位逾時，正在等待訊號；可關閉後重新開啟定位。"
                   : "暫時無法取得位置，請確認手機定位已開啟。",
                 "error",
               );
@@ -178,20 +177,19 @@
           disable("無法啟動手機定位，請確認權限後重試。", "error");
         }
       }
+      locate.setAttribute("aria-pressed", "false");
       locate.onclick = () => {
-        if (enabled && watch !== null && last && !stale) {
-          map.invalidateSize();
-          map.stop();
-          map.setView([last.lat, last.lng], 17, { animate: false });
+        if (enabled) {
+          disable("手機定位已關閉。");
           return;
         }
         clearWatch();
         enabled = true;
-        stop.hidden = false;
+        locate.textContent = "關閉定位";
+        locate.setAttribute("aria-pressed", "true");
         centerNext = true;
         begin();
       };
-      stop.onclick = () => disable("手機定位已關閉。");
       function pause() {
         if (!enabled) return;
         clearWatch();
