@@ -15,6 +15,8 @@ python tests/acceptance_qa.py
 python tests/performance_qa.py
 python tests/photo_edges_qa.py
 python tests/mobile_worker_qa.py
+python tests/code_kml_qa.py
+python tests/admin_scope_completion_qa.py
 ```
 
 測試只使用新的瀏覽器 context，不會操作你平常瀏覽器的任務或照片。日期固定在 2026-10-26，避免日後測試受跨月規則影響。測試期間阻擋底圖網路，驗證底圖失敗時的地籍功能；不能據此宣稱實際底圖服務可用或完成實機測試。
@@ -25,4 +27,6 @@ python tests/mobile_worker_qa.py
 
 `mobile_worker_qa.py` 使用20筆虛構任務，驗證390px首屏至少6筆、注意事項位於清單後、單筆與批次白板PDF/PNG非空白、4:3取景／輸出及無黑底陰影浮水印。預設Chromium；可設定 `PS_TEST_ENGINE=webkit` 驗證WebKit版面與白板。WebKit測試需先安裝Playwright WebKit及其系統相依套件；仍不能替代真實iPhone硬體測試。
 
-現場同頁地圖版本另外驗證：任務列點選同步地圖、地圖位於清單後且注意事項位於地圖後、返回清單與從地圖開啟任務，以及浮水印兩行均以照片寬度一半為中心錨點。
+現場同頁地圖版本另外驗證：任務列點選同步地圖、地圖位於清單後且注意事項位於地圖後、導航按鈕開啟正確Google Maps位置與從地圖開啟任務，以及浮水印兩行均以照片寬度一半為中心錨點。
+
+另外驗證純KML標示0582/1198、Excel段對照、原始資料保留、今年本月起的管理清單、單筆與批次完成／取消、完成狀態篩選、儲存失敗回滾及全部完成後發布空清單。

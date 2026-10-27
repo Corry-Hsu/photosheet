@@ -15,10 +15,12 @@
         { id: "p3", name: "人員三" },
       ],
       tasks: [],
+      sectionReference: [],
       settings: { ...Documents.settings },
     },
     features = [],
     index = new Map(),
+    sectionCatalog = new Map(),
     featureMap = new Map(),
     spatial = new RBush(),
     selected = new Set(),
@@ -82,6 +84,11 @@
   }
   function rebuild() {
     index = C.makeIndex(features);
+    sectionCatalog = C.sectionCatalog(
+      state.tasks,
+      index.sectionCodes,
+      state.sectionReference,
+    );
     featureMap = new Map(features.map((f) => [f.id, f]));
     spatial.clear();
     spatial.load(
@@ -95,7 +102,7 @@
     );
     $("#geo-summary").textContent =
       `地籍索引：${features.length.toLocaleString()} 筆土地${geoCounts ? "；" + geoCounts.kml + " 個 KML／" + geoCounts.xml + " 個 XML" : ""}`;
-    const t = state.tasks.find((t) => t.id === focused);
+    const t = listSource().find((t) => t.id === focused);
     if (t) draw(t, false);
     else {
       focused = "";
@@ -105,7 +112,10 @@
     }
   }
   function candidates(t, p) {
-    let xs = C.match(p, index);
+    let xs = C.match(
+      { ...p, sectionCode: C.parcelCode(t, p, sectionCatalog) },
+      index,
+    );
     const chosen = t.parcelChoices?.[C.key(p)];
     if (chosen) {
       let f = xs.find((x) => x.id === chosen);
@@ -147,22 +157,22 @@
   }
   const location = (t) =>
     [...new Set(t.parcels.map((p) => p.district + p.section))].join("；");
-  const resultName = {
-    all: "全部配對",
-    partial: "部分配對",
-    none: "未配對",
-    ambiguous: "有歧義",
-  };
+  function listSource() {
+    return worker ? state.tasks : state.tasks.filter((t) => C.adminVisible(t));
+  }
   function filtered() {
     let q = C.norm($("#search").value).toLowerCase(),
       ty = $("#type-filter").value,
       person = $("#person-filter").value,
       g = $("#geo-filter").value,
       from = $("#date-from").value,
-      to = $("#date-to").value;
-    return state.tasks
+      to = $("#date-to").value,
+      completedFilter = $("#complete-filter")?.value || "";
+    return listSource()
       .filter(
         (t) =>
+          (!completedFilter ||
+            (completedFilter === "done" ? !!t.completed : !t.completed)) &&
           (!ty || t.type === ty) &&
           (!from || t.resultDate >= from) &&
           (!to || (!!t.resultDate && t.resultDate <= to)) &&
@@ -188,6 +198,26 @@
       );
   }
   function render() {
+    const visible = listSource();
+    if (!worker) {
+      const ids = new Set(visible.map((t) => t.id));
+      for (const id of selected) if (!ids.has(id)) selected.delete(id);
+      if (focused && !ids.has(focused)) {
+        focused = "";
+        if (landLayer) map.removeLayer(landLayer);
+        if (pin) map.removeLayer(pin);
+        pin = null;
+      }
+      if ($("#task-date-scope")) {
+        $("#task-date-scope").textContent =
+          `清單只顯示 ${C.today().slice(0, 7)}-01 至 ${C.today().slice(0, 4)}-12-31 的成果指定日期；${state.tasks.length - visible.length} 筆其他年度、舊月份或未填日期資料未列入。`;
+      }
+    }
+    sectionCatalog = C.sectionCatalog(
+      state.tasks,
+      index.sectionCodes,
+      state.sectionReference,
+    );
     const list = filtered(),
       max = Math.max(1, Math.ceil(list.length / PAGE));
     page = Math.min(page, max);
@@ -196,16 +226,15 @@
     $("#prev").disabled = page === 1;
     $("#next").disabled = page === max;
     $("#summary").innerHTML =
-      `<span><strong>${state.tasks.length}</strong> 任務</span><span><strong>${state.tasks.reduce((n, t) => n + t.parcels.length, 0)}</strong> 地號</span>${worker ? "" : `<span><strong>${state.tasks.filter((t) => t.assignee).length}</strong> 已分派</span>`}`;
+      `<span><strong>${visible.length}</strong> 任務</span><span><strong>${visible.reduce((n, t) => n + t.parcels.length, 0)}</strong> 地號</span>${worker ? "" : `<span><strong>${visible.filter((t) => t.assignee).length}</strong> 已分派</span><span><strong>${visible.filter((t) => t.completed).length}</strong> 已完成</span>`}`;
     const rows = list.slice((page - 1) * PAGE, page * PAGE);
     $("#tasks").innerHTML = rows.length
       ? rows
           .map((t) => {
-            const m = matching(t),
-              person = state.people.find((p) => p.id === t.assignee);
+            const person = state.people.find((p) => p.id === t.assignee);
             if (worker)
               return `<article class="task worker-task ${t.id === focused ? "selected" : ""}" data-id="${E(t.id)}"><input type="checkbox" aria-label="選取 ${E(t.serial)}" data-check="${E(t.id)}" ${selected.has(t.id) ? "checked" : ""}><div class="task-content"><div class="task-topline"><h3>${E(location(t))}</h3><span class="badge">${E(t.type)}</span></div><p class="task-lots">${E(t.parcels.map((p) => p.lot).join("、"))}</p><p class="task-deadline">期限 ${E(t.due ? t.due.slice(5).replace("T", " ") : "未設定")} · 成果 ${E(t.resultDate ? t.resultDate.slice(5) : "待補")}</p></div><button data-detail="${E(t.id)}" aria-label="查看 ${E(location(t))} ${E(t.parcels.map((p) => p.lot).join("、"))}">›</button></article>`;
-            return `<article class="task ${t.id === focused ? "selected" : ""}" data-id="${E(t.id)}"><input type="checkbox" aria-label="選取 ${E(t.serial)}" data-check="${E(t.id)}" ${selected.has(t.id) ? "checked" : ""}><div><h3>${E(location(t))}</h3><p>${E(t.parcels.map((p) => p.lot).join("、"))}</p><span class="badge">${E(t.type)}</span> <span class="badge">${resultName[m.status]} ${m.ok}/${t.parcels.length}</span><p class="muted">${worker ? "" : E(person?.name || "未指派") + " · "}成果日期 ${E(t.resultDate || "待補")}<br>期限 ${E(t.due.replace("T", " ") || "未設定")}</p></div><button data-detail="${E(t.id)}">查看任務</button></article>`;
+            return `<article class="task ${t.id === focused ? "selected" : ""}" data-id="${E(t.id)}"><input type="checkbox" aria-label="選取 ${E(t.serial)}" data-check="${E(t.id)}" ${selected.has(t.id) ? "checked" : ""}><div><h3>${E(location(t))}</h3><p>${E(t.parcels.map((p) => p.lot).join("、"))}</p><span class="badge">${E(t.type)}</span> ${t.completed ? '<span class="badge task-completed">已完成</span>' : ""}<p class="muted">${worker ? "" : E(person?.name || "未指派") + " · "}成果日期 ${E(t.resultDate || "待補")}<br>期限 ${E(t.due.replace("T", " ") || "未設定")}</p></div><div class="task-row-actions"><button data-detail="${E(t.id)}">查看任務</button><button data-complete="${E(t.id)}">${t.completed ? "取消完成" : "標記完成"}</button></div></article>`;
           })
           .join("")
       : '<p class="muted">沒有符合條件的任務。</p>';
@@ -239,10 +268,40 @@
           }
         };
       });
+    $$("[data-complete]").forEach(
+      (b) =>
+        (b.onclick = async () => {
+          b.disabled = true;
+          try {
+            const t = state.tasks.find((t) => t.id === b.dataset.complete);
+            await markCompleted([t], !t.completed);
+          } catch (e) {
+            tell(e.message, true);
+          } finally {
+            b.disabled = false;
+          }
+        }),
+    );
     $$("[data-detail]").forEach(
       (el) => (el.onclick = () => detail(el.dataset.detail)),
     );
     updateBatch();
+  }
+  async function markCompleted(tasks, done) {
+    const ids = new Set(tasks.map((t) => t.id));
+    if (!ids.size) throw Error("請先選取任務");
+    const before = state.tasks;
+    state.tasks = state.tasks.map((t) =>
+      ids.has(t.id) ? C.markComplete(t, done) : t,
+    );
+    try {
+      await persist();
+    } catch (e) {
+      state.tasks = before;
+      throw e;
+    }
+    render();
+    tell(done ? "已標記完成；現場清單請重新發布派工檔後更新。" : "已取消完成");
   }
   function updateBatch() {
     $("#batch").hidden = !selected.size;
@@ -263,15 +322,20 @@
     if (!$("#dialog").open) $("#dialog").showModal();
   }
   function focus(id, fit = true) {
-    focused = id;
-    const t = state.tasks.find((t) => t.id === id);
+    const t = listSource().find((t) => t.id === id);
     if (!t) return;
+    focused = id;
     render();
     draw(t, fit);
     if (worker && $("#field-map-title")) {
       $("#field-map-title").textContent =
         location(t) + " " + t.parcels.map((p) => p.lot).join("、");
       $("#worker-open-task").disabled = false;
+      const route = nav(t),
+        a = $("#worker-navigate");
+      a.setAttribute("aria-disabled", String(!route));
+      if (route) a.href = C.navURL(route.point);
+      else a.removeAttribute("href");
     }
   }
   function scrollFieldMap() {
@@ -320,7 +384,7 @@
     );
   }
   function taskForFeature(id) {
-    return state.tasks.find((t) =>
+    return listSource().find((t) =>
       matching(t).features.some((f) => f.id === id),
     );
   }
@@ -357,8 +421,7 @@
         }
       });
     }
-    $("#map-status").textContent =
-      `${location(t)} · ${matching(t).ok}/${t.parcels.length} 地號配對。${n?.confirmed ? "已核對入口" : "自動位置僅供地籍參考，請核對實際入口。"}`;
+    $("#map-status").textContent = worker ? "" : location(t);
     if (fit) {
       map.stop();
       if (fs.length)
@@ -419,21 +482,11 @@
       `<h2>${E(location(t))}</h2><p>${E(t.type)} · 原表第${t.row}列 · ${E(t.serial)}</p><p>成果指定日期：${E(t.resultDate || "待補")}<br>完成期限：${E(t.due.replace("T", " ") || "未設定")}</p><h3>全部地號</h3>${worker ? "" : '<button id="edit-parcels">修正地段地號</button>'}${t.parcels
         .map((p, i) => {
           const xs = m.groups[i];
-          return `<div class="parcel-row"><strong>${E(p.district + p.section + " " + p.lot)}</strong><p class="muted">${xs.length === 1 ? "已配對 · " + E(xs[0].sources?.join("、") || xs[0].source) : xs.length ? "有多個候選，請核對" : "未配對；請核對地籍資料及原案欄位"}</p>${xs.length > 1 && !worker ? `<select data-choice="${i}"><option value="">請核對後選取</option>${xs.map((f) => `<option value="${E(f.id)}">${E(f.id + " " + f.source)}</option>`).join("")}</select>` : ""}${xs.length === 1 ? `<button data-parcel-nav="${i}">導航此地號參考位置</button>` : ""}</div>`;
+          return `<div class="parcel-row"><strong>${E(p.district + p.section + " " + p.lot)}</strong>${xs.length === 1 ? `<button data-parcel-nav="${i}">導航此地號參考位置</button>` : ""}</div>`;
         })
         .join(
           "",
-        )}<h3>工作項目</h3><ul>${t.items.map((i) => `<li>${E(i.name)}　${E(i.quantity)} ${E(i.unit)} ${E(i.note)}</li>`).join("")}</ul><p>施作廠商：${E(t.vendor)}　${E(t.sourcePerson)}</p><h3>導航入口</h3><p>${n ? (n.confirmed ? "已核對入口" : "地籍參考位置") + "：" + n.point[1].toFixed(6) + ", " + n.point[0].toFixed(6) : "尚無導航位置，可由管理者在地圖上設定"}</p>${n ? `<a class="button" href="${E(C.navURL(n.point))}" target="_blank" rel="noopener">導航前往</a>` : ""}${!worker ? `<div class="nav-fields"><input id="nav-lat" type="number" step="any" placeholder="緯度" aria-label="入口緯度" value="${n?.point[1] ?? ""}"><input id="nav-lng" type="number" step="any" placeholder="經度" aria-label="入口經度" value="${n?.point[0] ?? ""}"><button id="save-nav">保存已核對入口</button><button id="map-pin">改在地圖設定</button></div><div class="form-grid"><label>任務鄉鎮（僅補空值）<input id="fix-district" placeholder="例如：南州鄉"></label><button id="save-district">補齊鄉鎮並重新配對</button></div>` : ""}<div class="toolbar"><button id="detail-board">輸出白板</button>${worker ? "" : '<button id="detail-edit">分派／日期</button>'}<button id="detail-camera">現場拍照</button></div><section id="local-photos"></section>`,
-    );
-    $$("[data-choice]").forEach(
-      (el) =>
-        (el.onchange = async () => {
-          if (!el.value) return;
-          t.parcelChoices ??= {};
-          t.parcelChoices[C.key(t.parcels[+el.dataset.choice])] = el.value;
-          await persist();
-          detail(id);
-        }),
+        )}<h3>工作項目</h3><ul>${t.items.map((i) => `<li>${E(i.name)}　${E(i.quantity)} ${E(i.unit)} ${E(i.note)}</li>`).join("")}</ul><p>施作廠商：${E(t.vendor)}　${E(t.sourcePerson)}</p><h3>導航入口</h3><p>${n ? (n.confirmed ? "已核對入口" : "地籍參考位置") + "：" + n.point[1].toFixed(6) + ", " + n.point[0].toFixed(6) : "尚無導航位置，可由管理者在地圖上設定"}</p>${n ? `<a class="button" href="${E(C.navURL(n.point))}" target="_blank" rel="noopener">導航前往</a>` : ""}${!worker ? `<div class="nav-fields"><input id="nav-lat" type="number" step="any" placeholder="緯度" aria-label="入口緯度" value="${n?.point[1] ?? ""}"><input id="nav-lng" type="number" step="any" placeholder="經度" aria-label="入口經度" value="${n?.point[0] ?? ""}"><button id="save-nav">保存已核對入口</button><button id="map-pin">改在地圖設定</button></div><div class="form-grid"><label>任務鄉鎮（僅補空值）<input id="fix-district" placeholder="例如：南州鄉"></label><button id="save-district">補齊鄉鎮</button></div>` : ""}<div class="toolbar"><button id="detail-board">輸出白板</button>${worker ? "" : `<button id="detail-edit">分派／日期</button><button id="detail-complete">${t.completed ? "取消已完成" : "標記已完成"}</button>`}<button id="detail-camera">現場拍照</button></div><section id="local-photos"></section>`,
     );
     $$("[data-parcel-nav]").forEach(
       (el) =>
@@ -446,7 +499,7 @@
       bind("#edit-parcels", () => {
         open(
           "修正原案地籍欄位",
-          `<p>任務仍是一整筆，不拆分地號。請依原案資料核對後修改；原始地號會留存供追溯。</p><div id="parcel-edit">${t.parcels.map((p, i) => `<div class="form-grid" data-parcel-edit="${i}"><label>鄉鎮<input data-field="district" value="${E(p.district)}"></label><label>地段<input data-field="section" value="${E(p.section)}"></label><label>地號<input data-field="lot" value="${E(p.lot)}"></label></div>`).join("")}</div><button id="save-parcels" class="primary">保存並重新配對</button>`,
+          `<p>任務仍是一整筆，不拆分地號。請依原案資料核對後修改；原始地號會留存供追溯。</p><div id="parcel-edit">${t.parcels.map((p, i) => `<div class="form-grid" data-parcel-edit="${i}"><label>鄉鎮<input data-field="district" value="${E(p.district)}"></label><label>地段<input data-field="section" value="${E(p.section)}"></label><label>地號<input data-field="lot" value="${E(p.lot)}"></label></div>`).join("")}</div><button id="save-parcels" class="primary">保存修改</button>`,
         );
         bind("#save-parcels", async () => {
           const ps = $$("[data-parcel-edit]").map((el) => {
@@ -501,6 +554,10 @@
         detail(id);
       });
       bind("#detail-edit", () => assignDialog([t]));
+      bind("#detail-complete", async () => {
+        await markCompleted([t], !t.completed);
+        await detail(id);
+      });
     }
     bind("#detail-board", () => documentDialog([t], "board"));
     bind("#detail-camera", () =>
@@ -511,16 +568,21 @@
   function assignDialog(tasks) {
     open(
       "批次分派與日期",
-      `<p>選取 ${tasks.length} 筆任務。空白日期維持原設定；上個月以前案件不可新增指派或改派。</p><div class="form-grid"><label>負責人<select id="assign-person"><option value="keep">維持原設定</option><option value="">解除指派</option>${state.people.map((p) => `<option value="${p.id}">${E(p.name)}</option>`).join("")}</select></label><label>成果指定日期<input type="date" id="assign-date"></label><label>完成期限（臺灣時間）<input type="datetime-local" id="assign-due"></label></div><button id="commit-assign" class="primary">儲存</button>`,
+      `<p>選取 ${tasks.length} 筆任務。空白日期維持原設定；上個月以前案件不可新增指派或改派。</p><div class="form-grid"><label>負責人<select id="assign-person"><option value="keep">維持原設定</option><option value="">解除指派</option>${state.people.map((p) => `<option value="${p.id}">${E(p.name)}</option>`).join("")}</select></label><label>完成註記<select id="assign-complete"><option value="keep">維持原設定</option><option value="yes">標記已完成</option><option value="no">取消完成</option></select></label><label>成果指定日期<input type="date" id="assign-date"></label><label>完成期限（臺灣時間）<input type="datetime-local" id="assign-due"></label></div><button id="commit-assign" class="primary">儲存</button>`,
     );
     bind("#commit-assign", async () => {
       const person = $("#assign-person").value,
         date = $("#assign-date").value,
-        due = $("#assign-due").value;
+        due = $("#assign-due").value,
+        completion = $("#assign-complete").value;
       if (date && !C.date(date)) throw Error("無效日期");
       let changes = tasks.map((t) => {
+        let initial = completion === "no" ? C.markComplete(t, false) : t;
         let next =
-          person === "keep" ? C.monthPolicy({ ...t }) : C.assign(t, person);
+          person === "keep"
+            ? C.monthPolicy({ ...initial })
+            : C.assign(initial, person);
+        if (completion === "yes") next = C.markComplete(next, true);
         if (date) next.resultDate = date;
         if (due) next.due = due;
         return next;
@@ -668,6 +730,7 @@
       typeof t.resultDate !== "string" ||
       (t.resultDate && C.date(t.resultDate) !== t.resultDate) ||
       typeof t.due !== "string" ||
+      (t.completed !== undefined && typeof t.completed !== "boolean") ||
       !["", "p1", "p2", "p3"].includes(t.assignee)
     )
       throw Error("任務資料格式錯誤");
@@ -757,7 +820,7 @@
     $("#progress").hidden = false;
     $("#cancel-geo").hidden = false;
     $("#progress").textContent = "背景解析中；先讀XML索引，再合併KML圖幅…";
-    importWorker = new Worker("geo-worker.js");
+    importWorker = new Worker("geo-worker.js?v=20261027-3");
     const w = importWorker;
     w.onmessage = async (e) => {
       const d = e.data;
@@ -862,7 +925,7 @@
     });
     map.on("click", async (e) => {
       if (!pinMode || worker) return;
-      const t = state.tasks.find((t) => t.id === focused);
+      const t = listSource().find((t) => t.id === focused);
       if (!t) {
         tell("請先選取一筆任務", true);
         return;
@@ -890,12 +953,11 @@
         if (t) return detail(t.id);
         throw Error("目前沒有任務");
       });
-      bind("#worker-back-list", () => {
-        const task = $$(".task").find((el) => el.dataset.id === focused);
-        (task || $(".list-panel")).scrollIntoView({
-          block: "start",
-          behavior: "smooth",
-        });
+      bind("#worker-navigate", (e) => {
+        if (!e.currentTarget.getAttribute("href")) {
+          e.preventDefault();
+          throw Error("此任務尚無導航位置，請由管理者核對");
+        }
       });
       bind("#worker-filter-toggle", () => {
         const open = document.body.classList.toggle("worker-filters-open");
@@ -954,8 +1016,9 @@
       "#geo-filter",
       "#date-from",
       "#date-to",
+      "#complete-filter",
     ])
-      $(s).addEventListener(s === "#search" ? "input" : "change", () => {
+      $(s)?.addEventListener(s === "#search" ? "input" : "change", () => {
         page = 1;
         render();
       });
@@ -989,6 +1052,8 @@
     });
     const chosen = () => state.tasks.filter((t) => selected.has(t.id));
     bind("#batch-assign", () => assignDialog(chosen()));
+    if ($("#batch-complete"))
+      bind("#batch-complete", () => markCompleted(chosen(), true));
     bind("#boards", () => documentDialog(chosen(), "board"));
     bind("#orders", () => documentDialog(chosen(), "order"));
     bind("#reload-worker", loadWorker);
@@ -1026,12 +1091,22 @@
             .filter((t) => types.includes(t.type) && !ids.has(t.id))
             .map((t) => C.monthPolicy(t));
           if (!types.length) throw Error("請勾選工作類型");
-          const old = state.tasks;
+          const old = state.tasks,
+            oldReference = state.sectionReference;
+          state.sectionReference = [
+            ...new Map(
+              [
+                ...(state.sectionReference || []),
+                ...(result.sectionReference || []),
+              ].map((p) => [C.sectionKey(p) + "|" + p.code, p]),
+            ).values(),
+          ];
           state.tasks = [...state.tasks, ...add];
           try {
             await persist();
           } catch (e) {
             state.tasks = old;
+            state.sectionReference = oldReference;
             throw e;
           }
           $("#dialog").close();
@@ -1107,7 +1182,9 @@
           b.state.people.some(
             (p, i) => p.id !== "p" + (i + 1) || typeof p.name !== "string",
           ) ||
-          !b.state.settings
+          !b.state.settings ||
+          (b.state.sectionReference !== undefined &&
+            !Array.isArray(b.state.sectionReference))
         )
           throw Error("備份格式錯誤");
         b.state.tasks.forEach(validateTask);
@@ -1144,16 +1221,13 @@
     };
     bind("#publish", () => {
       state.tasks.forEach((t) => C.monthPolicy(t));
-      const assigned = state.tasks.filter((t) => t.assignee);
+      const assigned = state.tasks.filter((t) => t.assignee && !t.completed);
       if (assigned.some((t) => !C.date(t.resultDate)))
         throw Error("已分派任務有成果日期缺漏，請先補齊");
-      if (!assigned.length) throw Error("請先分派至少一筆任務");
-      const missing = assigned.filter(
-        (t) => matching(t).status !== "all",
-      ).length;
+
       open(
         "確認產生公開派工檔",
-        `<p>將產生三份 JSON，不含完整地籍索引、原始 Excel、XML 或照片。</p><p>${assigned.length} 筆任務，其中 ${missing} 筆尚未全部配對。無地籍仍可發布，但需人工設定入口才有導航。</p><ul>${state.people.map((p) => `<li>${E(p.name)}：${assigned.filter((t) => t.assignee === p.id).length} 筆</li>`).join("")}</ul><p class="warning">這些內容將公開。入口核對與成果日期請在發布前確認。</p><button id="confirm-publish" class="primary">下載三人發布 ZIP</button>`,
+        `<p>將產生三份 JSON，不含完整地籍索引、原始 Excel、XML 或照片。</p><p>${state.tasks.filter((t) => t.completed).length} 筆已完成任務不列入派工；若三人皆無任務，會產生空清單供清除舊派工。</p><p>${assigned.length} 筆任務。</p><ul>${state.people.map((p) => `<li>${E(p.name)}：${assigned.filter((t) => t.assignee === p.id).length} 筆</li>`).join("")}</ul><p class="warning">這些內容將公開。入口核對與成果日期請在發布前確認。</p><button id="confirm-publish" class="primary">下載三人發布 ZIP</button>`,
       );
       bind("#confirm-publish", () => {
         const batch = C.today() + "-" + crypto.randomUUID().slice(0, 8),
@@ -1163,7 +1237,14 @@
           const p = state.people[i],
             tasks = assigned
               .filter((t) => t.assignee === p.id)
-              .map((t) => ({ ...t, navigation: nav(t) })),
+              .map((t) => ({
+                ...t,
+                navigation: nav(t),
+                parcels: t.parcels.map((p) => ({
+                  ...p,
+                  sectionCode: C.parcelCode(t, p, sectionCatalog),
+                })),
+              })),
             fs = [
               ...new Map(
                 tasks

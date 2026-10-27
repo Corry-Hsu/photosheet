@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>地籍任務｜管理頁</title>
     <link rel="stylesheet" href="vendor/leaflet.css" />
-    <link rel="stylesheet" href="style.css?v=20261027-2" />
+    <link rel="stylesheet" href="style.css?v=20261027-3" />
   </head>
   <body data-tab="list">
     <header>
@@ -40,6 +40,7 @@
           照片只存於這台裝置，不會回傳。請下載備份；清除瀏覽器資料會移除暫存照片。
         </p>
       </section>
+      <p id="task-date-scope" class="muted"></p>
       <div class="summary" id="summary"></div>
       <div class="toolbar">
         <input
@@ -52,13 +53,18 @@
           <option>砍樹</option>
           <option>圍籬</option></select
         ><select id="person-filter" aria-label="負責人"></select
-        ><select id="geo-filter" aria-label="位置核對">
-          <option value="">全部位置結果</option>
-          <option value="all">全部配對</option>
-          <option value="partial">部分配對</option>
-          <option value="none">未配對</option>
-          <option value="ambiguous">有歧義</option>
+        ><select id="geo-filter" hidden aria-hidden="true">
+          <option value="">全部</option>
         </select>
+      </div>
+      <div class="toolbar">
+        <label
+          >完成狀態<select id="complete-filter">
+            <option value="">全部</option>
+            <option value="open">未完成</option>
+            <option value="done">已完成</option>
+          </select></label
+        >
       </div>
       <details id="date-filters" class="panel">
         <summary>依成果日期篩選</summary>
@@ -86,6 +92,7 @@
           <div id="batch" class="batch" hidden>
             <strong id="selected-count"></strong
             ><button id="batch-assign">分派／日期</button
+            ><button id="batch-complete">標記已完成</button
             ><button id="boards">輸出白板</button
             ><button id="orders">輸出工作單</button>
           </div>
@@ -127,12 +134,12 @@
     <script src="vendor/rbush.js"></script>
     <script src="vendor/exifr.js"></script>
     <script src="vendor/jspdf.js"></script>
-    <script src="core.js"></script>
-    <script src="excel.js"></script>
+    <script src="core.js?v=20261027-3"></script>
+    <script src="excel.js?v=20261027-3"></script>
     <script src="db.js"></script>
-    <script src="whiteboard.js?v=20261027-2"></script>
-    <script src="documents.js?v=20261027-2"></script>
-    <script src="camera.js?v=20261027-2"></script>
-    <script src="app.js?v=20261027-2"></script>
+    <script src="whiteboard.js?v=20261027-3"></script>
+    <script src="documents.js?v=20261027-3"></script>
+    <script src="camera.js?v=20261027-3"></script>
+    <script src="app.js?v=20261027-3"></script>
   </body>
 </html>

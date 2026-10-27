@@ -35,6 +35,104 @@
       .join("-")
       .replace(/-0$/, "");
   };
+  C.sectionCode = (value) =>
+    /^\d{1,4}$/.test(norm(value)) ? norm(value).padStart(4, "0") : "";
+  C.codeKey = (county, code, lot) =>
+    "@code|" +
+    norm(county || "屏東縣") +
+    "|" +
+    C.sectionCode(code) +
+    "|" +
+    C.lot(lot);
+  C.sectionKey = (p) =>
+    [norm(p.county || "屏東縣"), norm(p.district), norm(p.section)].join("|");
+  C.parseSectionRows = (rows) => {
+    const out = [],
+      seen = new Set();
+    for (const row of rows.slice(1)) {
+      if (!row) continue;
+      const code = C.sectionCode(row[2]),
+        district = norm(row[5]),
+        base = norm(row[0]),
+        sub = norm(row[1]);
+      if (!code || !district || !base) continue;
+      const section =
+        (base.endsWith("段") ? base : base + "段") +
+        (sub ? (sub.endsWith("小段") ? sub : sub + "小段") : "");
+      const item = { county: "屏東縣", district, section, code },
+        key = C.sectionKey(item) + "|" + code;
+      if (!seen.has(key)) {
+        seen.add(key);
+        out.push(item);
+      }
+    }
+    return out;
+  };
+  C.sectionCatalog = (tasks, existing, reference = []) => {
+    const result = new Map(
+      [...(existing || [])].map(([key, codes]) => [key, new Set(codes)]),
+    );
+    result.authoritative = new Map(
+      [...(existing || [])].map(([key, codes]) => [key, new Set(codes)]),
+    );
+    const ref = new Map();
+    for (const p of Array.isArray(reference) ? reference : []) {
+      if (!p) continue;
+      const code = C.sectionCode(p.code);
+      if (!code || !p.district || !p.section) continue;
+      const key = C.sectionKey(p);
+      if (!ref.has(key)) ref.set(key, new Set());
+      ref.get(key).add(code);
+    }
+    for (const [key, codes] of ref)
+      if (!result.authoritative.has(key)) result.authoritative.set(key, codes);
+    const add = (p, code) => {
+      code = C.sectionCode(code);
+      if (!code || !norm(p.section) || !norm(p.district)) return;
+      const key = C.sectionKey(p);
+      if (!result.has(key)) result.set(key, new Set());
+      result.get(key).add(code);
+    };
+    for (const task of tasks) {
+      const main = (task.parcels || []).find(
+        (p) =>
+          norm(p.section) === norm(task.section) &&
+          norm(p.district) === norm(task.district),
+      );
+      add(
+        {
+          county: main?.county || "屏東縣",
+          district: task.district,
+          section: task.section,
+        },
+        task.sectionCode,
+      );
+      for (const p of task.parcels || [])
+        if (p.sectionCode) add(p, p.sectionCode);
+    }
+    return result;
+  };
+  C.parcelCode = (task, parcel, catalog) => {
+    if (C.sectionCode(parcel.sectionCode))
+      return C.sectionCode(parcel.sectionCode);
+    const official = catalog?.authoritative?.get(C.sectionKey(parcel));
+    if (official) return official.size === 1 ? [...official][0] : "";
+    if (
+      norm(parcel.section) === norm(task.section) &&
+      norm(parcel.district) === norm(task.district)
+    )
+      return C.sectionCode(task.sectionCode);
+    const codes = catalog?.get(C.sectionKey(parcel));
+    return codes?.size === 1 ? [...codes][0] : "";
+  };
+  C.adminVisible = (task, now) => {
+    const today = typeof now === "string" ? now : C.today(now);
+    return (
+      !!C.date(task.resultDate) &&
+      task.resultDate >= today.slice(0, 7) + "-01" &&
+      task.resultDate <= today.slice(0, 4) + "-12-31"
+    );
+  };
   C.xmlLot = (v) =>
     /^\d{8}$/.test(norm(v))
       ? C.lot(Number(String(v).slice(0, 4)) + "-" + Number(String(v).slice(4)))
@@ -87,6 +185,8 @@
   };
   C.assign = (t, person, now) => {
     t = C.monthPolicy({ ...t }, now);
+    if (t.completed && person && person !== t.assignee)
+      throw Error("已完成任務不可再分派，請先取消完成");
     if (
       person &&
       person !== t.assignee &&
@@ -97,6 +197,11 @@
       t.assignmentClosed = true;
     return { ...t, assignee: person };
   };
+  C.markComplete = (task, done, now = new Date()) => ({
+    ...task,
+    completed: done,
+    completedAt: done ? task.completedAt || now.toISOString() : "",
+  });
   C.roc = (d) => {
     let a = d.split("-");
     return `${+a[0] - 1911}年${+a[1]}月${+a[2]}日`;
@@ -294,6 +399,7 @@
         }
         if (s.at(-1) === "土地標示部" && row) {
           row.lot = C.xmlLot(row.rawLot);
+          row.code = C.sectionCode(row.code);
           if (row.code && row.lot && row.section && row.district)
             records.push(row);
           row = null;
@@ -317,7 +423,7 @@
         if (tag === "NetworkLink")
           warnings.push(source + "：略過外部NetworkLink");
         if (tag === "Placemark")
-          pm = { source, code: "", lot: "", polygons: [] };
+          pm = { source, code: "", lot: "", label: "", polygons: [] };
         if (!pm) return;
         if (tag === "SimpleData") {
           field = n.attributes.name;
@@ -336,6 +442,7 @@
       text: (s, t) => {
         if (!pm) return;
         if (s.at(-1) === "SimpleData" || s.at(-1) === "value") value += t;
+        if (s.at(-1) === "name" && s.at(-2) === "Placemark") pm.label += t;
         if (s.at(-1) === "coordinates" && ring) coord += t;
       },
       close: (s) => {
@@ -372,6 +479,21 @@
           poly = null;
         }
         if (tag === "Placemark") {
+          const label = norm(pm.label).match(
+            /^(\d{1,4})\s*\/\s*(\d{1,8}(?:[-之]\d{1,8})?)\s*(?:地號|號)?$/,
+          );
+          pm.code = C.sectionCode(pm.code);
+          if (label) {
+            const code = C.sectionCode(label[1]),
+              lot = C.lot(label[2]);
+            if ((pm.code && pm.code !== code) || (pm.lot && pm.lot !== lot)) {
+              warnings.push(source + "：KML標示與欄位代碼／地號不一致，未匯入");
+              pm.invalid = true;
+            } else {
+              pm.code = code;
+              pm.lot = lot;
+            }
+          }
           if (pm.code && pm.lot && pm.polygons.length && !pm.invalid) {
             pm.bbox = C.bbox(pm.polygons);
             pm.id =
@@ -465,6 +587,11 @@
     return null;
   };
   C.match = (parcel, index) => {
+    const code = C.sectionCode(parcel.sectionCode);
+    if (code)
+      return (
+        index.byCode?.get(C.codeKey(parcel.county, code, parcel.lot)) || []
+      );
     if (!norm(parcel.district) || !norm(parcel.section)) return [];
     return index.get(C.key(parcel)) || [];
   };
@@ -484,13 +611,31 @@
     );
   };
   C.makeIndex = (features) => {
-    let m = new Map();
-    for (const f of features)
+    const m = new Map();
+    m.byCode = new Map();
+    m.sectionCodes = new Map();
+    const add = (map, key, f) => {
+      if (!map.has(key)) map.set(key, []);
+      if (!map.get(key).some((x) => x.id === f.id)) map.get(key).push(f);
+    };
+    for (const f of features) {
+      const code = C.sectionCode(f.code),
+        counties = new Set();
       for (const land of f.lands || []) {
-        let k = C.key(land);
-        if (!m.has(k)) m.set(k, []);
-        if (!m.get(k).some((x) => x.id === f.id)) m.get(k).push(f);
+        add(m, C.key(land), f);
+        counties.add(norm(land.county || "屏東縣"));
+        if (code && norm(land.district) && norm(land.section)) {
+          const key = C.sectionKey(land);
+          if (!m.sectionCodes.has(key)) m.sectionCodes.set(key, new Set());
+          m.sectionCodes.get(key).add(code);
+        }
       }
+      if (code) {
+        if (!counties.size) counties.add(norm(f.county || "屏東縣"));
+        for (const county of counties)
+          add(m.byCode, C.codeKey(county, code, f.lot), f);
+      }
+    }
     return m;
   };
   root.PSCore = C;

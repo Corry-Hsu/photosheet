@@ -1,4 +1,4 @@
-importScripts("vendor/fflate.js", "vendor/sax.js", "core.js");
+importScripts("vendor/fflate.js", "vendor/sax.js", "core.js?v=20261027-3");
 const dec = new TextDecoder();
 self.onmessage = async (e) => {
   try {
@@ -33,8 +33,8 @@ self.onmessage = async (e) => {
       warnings.push(...r.warnings);
       for (const f of r.features) {
         f.lands = lands.get(f.code + "|" + f.lot) || [];
-        if (!f.lands.length)
-          warnings.push(name + "：" + f.code + "/" + f.lot + " 無XML名稱對照");
+        // A valid section code + lot can match Excel directly without XML names.
+        if (!f.lands.length) counts.codeOnly = (counts.codeOnly || 0) + 1;
         const key = f.code + ":" + f.lot;
         if (!features.has(key))
           features.set(key, {
