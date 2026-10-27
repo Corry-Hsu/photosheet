@@ -156,4 +156,143 @@ test("KML面狀識別及壞座標", () => {
   );
 });
 test("文字轉義", () => assert(!C.esc('<img onerror="x">').includes("<img")));
-console.log(`${passed} tests passed`);
+
+test("KML標示0582/1198可獨立配對，不需要XML", () => {
+  const kml =
+    "<kml><Document><name>不是地籍識別</name><Placemark><name>0582/1198</name><Polygon><outerBoundaryIs><LinearRing><coordinates>120,22 121,22 121,23 120,22</coordinates></LinearRing></outerBoundaryIs></Polygon></Placemark></Document></kml>";
+  const f = C.parseKML(kml, "only.kml").features;
+  assert.equal(f.length, 1);
+  assert.equal(f[0].code, "0582");
+  assert.equal(f[0].lot, "1198");
+  f[0].lands = [];
+  const task = {
+      district: "東港鎮",
+      section: "關帝段",
+      sectionCode: 582,
+      parcels: [
+        {
+          county: "屏東縣",
+          district: "東港鎮",
+          section: "關帝段",
+          lot: "1198",
+        },
+      ],
+    },
+    i = C.makeIndex(f),
+    catalog = C.sectionCatalog([task]);
+  const p = task.parcels[0];
+  assert.equal(C.parcelCode(task, p, catalog), "0582");
+  assert.equal(
+    C.match({ ...p, sectionCode: C.parcelCode(task, p, catalog) }, i).length,
+    1,
+  );
+  assert.equal(C.match({ ...p, sectionCode: "0583" }, i).length, 0);
+});
+test("KML代碼標示母子號與欄位矛盾", () => {
+  const shape =
+    "<Polygon><outerBoundaryIs><LinearRing><coordinates>120,22 121,22 121,23 120,22</coordinates></LinearRing></outerBoundaryIs></Polygon>";
+  assert.equal(
+    C.parseKML(
+      "<kml><Placemark><name>０５８２／００１１９８－００１</name>" +
+        shape +
+        "</Placemark></kml>",
+      "a",
+    ).features[0].lot,
+    "1198-1",
+  );
+  const bad =
+    '<kml><Placemark><name>0582/1198</name><ExtendedData><Data name="SECTNO"><value>0583</value></Data><Data name="PARCELNO"><value>1198</value></Data></ExtendedData>' +
+    shape +
+    "</Placemark></kml>";
+  assert.equal(C.parseKML(bad, "a").features.length, 0);
+});
+test("跨地段不能套用主地段代碼；有對照才帶入", () => {
+  const p1 = {
+      county: "屏東縣",
+      district: "東港鎮",
+      section: "關帝段",
+      lot: "1198",
+    },
+    p2 = {
+      county: "屏東縣",
+      district: "潮州鎮",
+      section: "延平段",
+      lot: "167",
+    };
+  const a = {
+      district: "東港鎮",
+      section: "關帝段",
+      sectionCode: "0582",
+      parcels: [p1, p2],
+    },
+    b = {
+      district: "潮州鎮",
+      section: "延平段",
+      sectionCode: "0492",
+      parcels: [p2],
+    };
+  assert.equal(C.parcelCode(a, p2, C.sectionCatalog([a])), "");
+  assert.equal(C.parcelCode(a, p2, C.sectionCatalog([a, b])), "0492");
+});
+
+test("段對照修正舊快取代碼，原始任務不變", () => {
+  const refs = C.parseSectionRows([
+    ["段", "小段", "代碼", "備註", "所區碼", "鄉鎮名稱"],
+    ["公園", "二", "0019", null, "TA", "屏東市"],
+  ]);
+  assert.equal(refs[0].section, "公園段二小段");
+  const p = {
+      county: "屏東縣",
+      district: "屏東市",
+      section: "公園段二小段",
+      lot: "5-234",
+    },
+    t = {
+      district: p.district,
+      section: p.section,
+      sectionCode: "0018",
+      parcels: [p],
+    };
+  assert.equal(
+    C.parcelCode(t, p, C.sectionCatalog([t], undefined, refs)),
+    "0019",
+  );
+  assert.equal(t.sectionCode, "0018");
+  const geometry = C.makeIndex([
+    { id: "geom", code: "0019", lot: "5-234", lands: [{ ...p, code: "0019" }] },
+  ]);
+  assert.equal(
+    C.parcelCode(t, p, C.sectionCatalog([t], geometry.sectionCodes)),
+    "0019",
+  );
+});
+test("管理清單只顯示今年本月起，臺灣跨年正確", () => {
+  const now = new Date("2026-10-27T00:00:00Z");
+  for (const date of ["2025-12-31", "2026-09-30", "2027-01-01", ""])
+    assert.equal(C.adminVisible({ resultDate: date }, now), false);
+  for (const date of ["2026-10-01", "2026-12-31"])
+    assert.equal(C.adminVisible({ resultDate: date }, now), true);
+  assert(
+    C.adminVisible(
+      { resultDate: "2027-01-01" },
+      new Date("2026-12-31T16:00:00Z"),
+    ),
+  );
+});
+test("完成註記可取消，已完成不能重新分派", () => {
+  const t = C.markComplete(
+    { resultDate: "2026-10-27", assignee: "p1" },
+    true,
+    new Date("2026-10-27T01:00:00Z"),
+  );
+  assert.equal(t.completed, true);
+  assert.equal(t.completedAt, "2026-10-27T01:00:00.000Z");
+  assert.throws(() => C.assign(t, "p2", new Date("2026-10-27T00:00:00Z")));
+  const restored = C.markComplete(t, false);
+  assert.equal(restored.completed, false);
+  assert.equal(
+    C.assign(restored, "p2", new Date("2026-10-27T00:00:00Z")).assignee,
+    "p2",
+  );
+});
+console.log("FINAL TOTAL", passed, "tests passed");

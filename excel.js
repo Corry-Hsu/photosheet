@@ -18,7 +18,7 @@ window.readExcel = async function (raw) {
     return null; // Formulas without cached results are not evaluated.
   }
   const sheets = {};
-  for (const name of ["砍樹", "圍籬", "雜草垃圾"]) {
+  for (const name of ["砍樹", "圍籬", "雜草垃圾", "段"]) {
     const ws = wb.getWorksheet(name);
     if (!ws) continue;
     if (ws.rowCount > 30000) throw Error("單一工作表超過30,000列");
@@ -32,5 +32,7 @@ window.readExcel = async function (raw) {
     });
     sheets[name] = rows;
   }
-  return PSCore.parseExcelRows(sheets);
+  const parsed = PSCore.parseExcelRows(sheets);
+  parsed.sectionReference = PSCore.parseSectionRows(sheets["段"] || []);
+  return parsed;
 };

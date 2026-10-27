@@ -644,3 +644,31 @@ body[data-worker] .map-panel .toolbar > button {
   padding: 8px 4px;
   font-size: 13px;
 }
+
+body[data-worker] .map-panel .toolbar > .button {
+  flex: 1 1 90px;
+  padding: 8px 4px;
+  font-size: 13px;
+}
+#worker-navigate[aria-disabled="true"] {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.task-row-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-self: center;
+}
+.task-completed {
+  background: #d9eee0;
+  color: #205838;
+}
+@media (max-width: 980px) {
+  body:not([data-worker]) .task-row-actions {
+    grid-column: 2;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+}

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>現場任務｜人員 1</title>
     <link rel="stylesheet" href="vendor/leaflet.css" />
-    <link rel="stylesheet" href="style.css?v=20261027-2" />
+    <link rel="stylesheet" href="style.css?v=20261027-3" />
   </head>
   <body data-tab="list" data-worker="p1">
     <header>
@@ -46,12 +46,8 @@
           <option>砍樹</option>
           <option>圍籬</option></select
         ><select id="person-filter" aria-label="負責人"></select
-        ><select id="geo-filter" aria-label="位置核對">
-          <option value="">全部位置結果</option>
-          <option value="all">全部配對</option>
-          <option value="partial">部分配對</option>
-          <option value="none">未配對</option>
-          <option value="ambiguous">有歧義</option>
+        ><select id="geo-filter" hidden aria-hidden="true">
+          <option value="">全部</option>
         </select>
       </div>
       <details id="date-filters" class="panel">
@@ -88,7 +84,13 @@
         <section class="panel map-panel">
           <h2 id="field-map-title">任務地圖</h2>
           <div class="toolbar">
-            <button id="worker-back-list">返回清單</button
+            <a
+              id="worker-navigate"
+              class="button"
+              target="_blank"
+              rel="noopener"
+              aria-disabled="true"
+              >導航前往</a
             ><button id="worker-open-task" class="primary" disabled>
               任務內容／拍照</button
             ><button id="fit-map">重設位置</button
@@ -135,12 +137,12 @@
     <script src="vendor/rbush.js"></script>
     <script src="vendor/exifr.js"></script>
     <script src="vendor/jspdf.js"></script>
-    <script src="core.js"></script>
-    <script src="excel.js"></script>
+    <script src="core.js?v=20261027-3"></script>
+    <script src="excel.js?v=20261027-3"></script>
     <script src="db.js"></script>
-    <script src="whiteboard.js?v=20261027-2"></script>
-    <script src="documents.js?v=20261027-2"></script>
-    <script src="camera.js?v=20261027-2"></script>
-    <script src="app.js?v=20261027-2"></script>
+    <script src="whiteboard.js?v=20261027-3"></script>
+    <script src="documents.js?v=20261027-3"></script>
+    <script src="camera.js?v=20261027-3"></script>
+    <script src="app.js?v=20261027-3"></script>
   </body>
 </html>

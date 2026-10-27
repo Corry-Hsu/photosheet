@@ -25,7 +25,11 @@ with sync_playwright() as p:
  positions=pg.evaluate("""()=>({listEnd:document.querySelector('.list-panel').getBoundingClientRect().bottom,mapStart:document.querySelector('.map-panel').getBoundingClientRect().top,mapEnd:document.querySelector('.map-panel').getBoundingClientRect().bottom,notesStart:document.querySelector('#worker-tools').getBoundingClientRect().top})""");assert positions['mapStart']>=positions['listEnd'];assert positions['notesStart']>=positions['mapEnd'];assert abs(pg.evaluate('PSApp.map.getCenter().lng')-fixture['tasks'][1]['navigation']['point'][0])<.001
  pg.screenshot(path=str(out/f'{engine}-map-below-list.png'));results['map_below_list']=positions
  pg.click('#worker-open-task');pg.wait_for_selector('#detail-camera');pg.click('#close-dialog')
- pg.click('#worker-back-list');pg.wait_for_timeout(400)
+ route=pg.locator('#worker-navigate');assert route.get_attribute('aria-disabled')=='false';assert '22.6004%2C120.5014' in route.get_attribute('href');assert route.get_attribute('target')=='_blank'
+ ctx.route('https://www.google.com/maps/dir/**',lambda r:r.fulfill(body='Navigation test',content_type='text/plain'))
+ with ctx.expect_page() as popup:route.click()
+ navPage=popup.value;navPage.wait_for_load_state();assert 'destination=22.6004%2C120.5014' in navPage.url;navPage.close();pg.bring_to_front();results['navigation_button_opens_maps']=True
+ pg.evaluate('scrollTo(0,0)');pg.wait_for_timeout(100)
  pg.click('#worker-filter-toggle');assert pg.locator('#type-filter').is_visible();pg.select_option('#type-filter','砍樹');pg.click('#worker-filter-toggle');assert not pg.locator('#type-filter').is_visible()
  pg.click('#worker-select-toggle');pg.click('#select-page');assert pg.locator('[data-check]:checked').count()==20;pg.click('#worker-select-toggle');assert pg.locator('[data-check]:checked').count()==0
  # A task opens by tapping its content, not only a small action button.
