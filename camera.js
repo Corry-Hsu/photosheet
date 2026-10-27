@@ -29,11 +29,23 @@
       width = image.videoWidth || image.naturalWidth || image.width,
       height = image.videoHeight || image.naturalHeight || image.height;
     if (!width || !height) throw Error("無法讀取照片尺寸");
-    const scale = Math.min(1, 4096 / Math.max(width, height));
-    canvas.width = Math.round(width * scale);
-    canvas.height = Math.round(height * scale);
+    const cropWidth = Math.min(width, (height * 4) / 3),
+      cropHeight = (cropWidth * 3) / 4,
+      scale = Math.min(1, 4096 / cropWidth);
+    canvas.width = Math.round(cropWidth * scale);
+    canvas.height = Math.round((canvas.width * 3) / 4);
     const x = canvas.getContext("2d");
-    x.drawImage(image, 0, 0, canvas.width, canvas.height);
+    x.drawImage(
+      image,
+      (width - cropWidth) / 2,
+      (height - cropHeight) / 2,
+      cropWidth,
+      cropHeight,
+      0,
+      0,
+      canvas.width,
+      canvas.height,
+    );
     const time = new Intl.DateTimeFormat("en-GB", {
       timeZone: "Asia/Taipei",
       hour: "2-digit",
@@ -55,8 +67,10 @@
     let line = font * 1.4,
       pad = Math.max(4, canvas.width * 0.025),
       box = line * 2 + pad * 2;
-    x.fillStyle = "rgba(0,0,0,.63)";
-    x.fillRect(0, canvas.height - box, canvas.width, box);
+    x.shadowColor = "rgba(0,0,0,.9)";
+    x.shadowBlur = Math.max(2, font * 0.16);
+    x.shadowOffsetX = Math.max(1, font * 0.06);
+    x.shadowOffsetY = Math.max(1, font * 0.08);
     x.fillStyle = "white";
     x.textBaseline = "top";
     lines.forEach((t, i) =>
@@ -113,7 +127,7 @@
       active = { task: structuredClone(task), person, back };
       $("#dialog-title").textContent = "現場拍照";
       $("#dialog-body").innerHTML =
-        `<p>${E(task.parcels.map((p) => p.district + p.section + " " + p.lot).join("；"))}</p><video id="video" class="camera" autoplay playsinline muted></video><p id="capture-count"></p><p id="capture-status">請允許相機及GPS。照片日期採 ${E(C.roc(task.resultDate))}。</p><div class="toolbar"><button id="shutter" class="primary">拍攝並暫存</button><button id="native">手機原生相機</button><button id="camera-back">返回任務</button></div><input id="native-file" type="file" accept="image/jpeg,image/png,image/heic" capture="environment" hidden><p class="muted">原生相機照片須保留 EXIF 拍攝時間；無法讀取時請使用網頁相機。裝置時間與定位不提供防偽保證。</p>`;
+        `<p>${E(task.parcels.map((p) => p.district + p.section + " " + p.lot).join("；"))}</p><video id="video" class="camera" autoplay playsinline muted></video><p id="capture-count"></p><p id="capture-status">請允許相機及GPS。照片日期採 ${E(C.roc(task.resultDate))}。</p><div class="toolbar"><button id="shutter" class="primary">拍攝並暫存</button><button id="native">手機原生相機</button><button id="camera-back">返回任務</button></div><input id="native-file" type="file" accept="image/jpeg,image/png,image/heic" capture="environment" hidden><p class="muted">預設橫式 4:3 中央取景，原圖另存。原生相機照片須保留 EXIF 拍攝時間；無法讀取時請使用網頁相機。</p>`;
       await count();
       const wrap = (fn) => async () => {
         const b = $("#shutter");
@@ -180,7 +194,12 @@
       };
       try {
         stream = await navigator.mediaDevices.getUserMedia({
-          video: { facingMode: { ideal: "environment" } },
+          video: {
+            facingMode: { ideal: "environment" },
+            width: { ideal: 1920 },
+            height: { ideal: 1440 },
+            aspectRatio: { ideal: 4 / 3 },
+          },
           audio: false,
         });
         if (!active) {

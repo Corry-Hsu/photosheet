@@ -14,6 +14,7 @@ python tests/browser_qa.py
 python tests/acceptance_qa.py
 python tests/performance_qa.py
 python tests/photo_edges_qa.py
+python tests/mobile_worker_qa.py
 ```
 
 測試只使用新的瀏覽器 context，不會操作你平常瀏覽器的任務或照片。日期固定在 2026-10-26，避免日後測試受跨月規則影響。測試期間阻擋底圖網路，驗證底圖失敗時的地籍功能；不能據此宣稱實際底圖服務可用或完成實機測試。
@@ -21,3 +22,5 @@ python tests/photo_edges_qa.py
 `reference_importer.py` 是既有 Python 匯入器的獨立驗證基準，用於比較真實 Excel 的地號、日期與工作數量；不會在部署網站執行。
 
 照片測試以瀏覽器假相機、假 GPS 或合成 EXIF 驗證流程，仍需 Android / iPhone 實測。自動化結果放入 evidence，不要把包含真實案例的測試報告、管理備份或上傳原檔放進公開部署。
+
+`mobile_worker_qa.py` 使用20筆虛構任務，驗證390px首屏至少6筆、注意事項位於清單後、單筆與批次白板PDF/PNG非空白、4:3取景／輸出及無黑底陰影浮水印。預設Chromium；可設定 `PS_TEST_ENGINE=webkit` 驗證WebKit版面與白板。WebKit測試需先安裝Playwright WebKit及其系統相依套件；仍不能替代真實iPhone硬體測試。

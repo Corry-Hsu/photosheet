@@ -9,6 +9,7 @@
 | fflate | 0.8.2 | 串流解壓與發布 ZIP | vendor/LICENSE-fflate |
 | sax | 1.4.1 | 背景 XML/KML 解析 | vendor/LICENSE-sax |
 | ExcelJS | 4.4.0 | 讀取快取欄位及輸出文件 | vendor/LICENSE-exceljs |
+| jsPDF | 3.0.4 | 直接產生含白板圖像的 PDF | vendor/LICENSE-jspdf |
 | exifr | 7.1.3 | 原生相機 EXIF 時間 | vendor/LICENSE-exifr |
 
 來源為 unpkg.com 對應版本的發行檔，雜湊見 vendor/SHA256SUMS。
