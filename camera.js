@@ -73,8 +73,9 @@
     x.shadowOffsetY = Math.max(1, font * 0.08);
     x.fillStyle = "white";
     x.textBaseline = "top";
+    x.textAlign = "center";
     lines.forEach((t, i) =>
-      x.fillText(t, pad, canvas.height - box + pad + i * line),
+      x.fillText(t, canvas.width / 2, canvas.height - box + pad + i * line),
     );
     const blob = await new Promise((yes, no) =>
       canvas.toBlob(
