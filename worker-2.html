@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>現場任務｜人員 2</title>
     <link rel="stylesheet" href="vendor/leaflet.css" />
-    <link rel="stylesheet" href="style.css?v=20261027-3" />
+    <link rel="stylesheet" href="style.css?v=20261027-4" />
   </head>
   <body data-tab="list" data-worker="p2">
     <header>
@@ -97,6 +97,15 @@
             ><button id="show-context">顯示附近地籍</button
             ><button id="pin-mode">點地圖設定入口</button>
           </div>
+          <div class="field-location-controls">
+            <button id="field-locate">定位到我</button
+            ><button id="field-location-stop" hidden>關閉定位</button>
+          </div>
+          <p
+            id="field-location-status"
+            class="field-location-status"
+            aria-live="polite"
+          ></p>
           <div id="map" class="map"></div>
           <p id="map-status" class="map-note">
             點選任務查看全部地號。橘色圖釘為導航位置。
@@ -137,12 +146,13 @@
     <script src="vendor/rbush.js"></script>
     <script src="vendor/exifr.js"></script>
     <script src="vendor/jspdf.js"></script>
-    <script src="core.js?v=20261027-3"></script>
-    <script src="excel.js?v=20261027-3"></script>
+    <script src="core.js?v=20261027-4"></script>
+    <script src="excel.js?v=20261027-4"></script>
     <script src="db.js"></script>
-    <script src="whiteboard.js?v=20261027-3"></script>
-    <script src="documents.js?v=20261027-3"></script>
-    <script src="camera.js?v=20261027-3"></script>
-    <script src="app.js?v=20261027-3"></script>
+    <script src="whiteboard.js?v=20261027-4"></script>
+    <script src="documents.js?v=20261027-4"></script>
+    <script src="camera.js?v=20261027-4"></script>
+    <script src="field-location.js?v=20261027-4"></script>
+    <script src="app.js?v=20261027-4"></script>
   </body>
 </html>

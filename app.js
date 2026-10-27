@@ -939,6 +939,12 @@
       }
     });
     if (worker) {
+      if (window.FieldLocation) FieldLocation.attach(map);
+      else {
+        const status = $("#field-location-status");
+        if (status) status.textContent = "定位功能未載入，請重新整理頁面。";
+        if ($("#field-locate")) $("#field-locate").disabled = true;
+      }
       $("#admin-tools").hidden = true;
       $("#worker-tools").hidden = false;
       $("#batch-assign").hidden = true;
