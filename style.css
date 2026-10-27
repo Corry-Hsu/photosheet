@@ -672,3 +672,24 @@ body[data-worker] .map-panel .toolbar > .button {
     flex-wrap: wrap;
   }
 }
+
+.field-location-controls {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin: 8px 0;
+}
+.field-location-status {
+  font-size: 13px;
+  line-height: 1.5;
+  color: #456b91;
+  margin: 6px 0;
+}
+.field-location-status[data-state="error"],
+.field-location-status[data-state="denied"] {
+  color: #9b4a24;
+}
+.field-location-status[data-state="paused"],
+.field-location-status[data-state="stale"] {
+  color: #68737d;
+}

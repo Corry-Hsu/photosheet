@@ -15,6 +15,8 @@ python tests/acceptance_qa.py
 python tests/performance_qa.py
 python tests/photo_edges_qa.py
 python tests/mobile_worker_qa.py
+python tests/field_location_qa.py
+python tests/gps_native_qa.py
 python tests/code_kml_qa.py
 python tests/admin_scope_completion_qa.py
 ```
@@ -30,3 +32,5 @@ python tests/admin_scope_completion_qa.py
 現場同頁地圖版本另外驗證：任務列點選同步地圖、地圖位於清單後且注意事項位於地圖後、導航按鈕開啟正確Google Maps位置與從地圖開啟任務，以及浮水印兩行均以照片寬度一半為中心錨點。
 
 另外驗證純KML標示0582/1198、Excel段對照、原始資料保留、今年本月起的管理清單、單筆與批次完成／取消、完成狀態篩選、儲存失敗回滾及全部完成後發布空清單。
+
+GPS測試包含Chromium／WebKit的定位回呼與原生watchPosition API（以模擬裝置座標注入）：移動、精度圈、回到手機位置、不覆寫任務、拒絕與逾時、舊位置標記、前背景生命週期及關閉後忽略遲到回呼。測試不代表已在真實手機GPS硬體驗證。
