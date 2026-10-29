@@ -139,15 +139,18 @@
       width = image.videoWidth || image.naturalWidth || image.width,
       height = image.videoHeight || image.naturalHeight || image.height;
     if (!width || !height) throw Error("無法讀取照片尺寸");
-    const cropWidth = Math.min(width, (height * 4) / 3),
-      cropHeight = (cropWidth * 3) / 4,
-      scale = Math.min(1, 4096 / cropWidth);
+    // Landscape photos keep every edge and their native aspect ratio.
+    // Portrait capture retains the previous horizontal 4:3 center-frame behavior.
+    const landscape = width >= height;
+    const cropWidth = width,
+      cropHeight = landscape ? height : (width * 3) / 4;
+    const scale = Math.min(1, 4096 / Math.max(cropWidth, cropHeight));
     canvas.width = Math.round(cropWidth * scale);
-    canvas.height = Math.round((canvas.width * 3) / 4);
+    canvas.height = Math.round(cropHeight * scale);
     const x = canvas.getContext("2d");
     x.drawImage(
       image,
-      (width - cropWidth) / 2,
+      0,
       (height - cropHeight) / 2,
       cropWidth,
       cropHeight,
@@ -199,12 +202,22 @@
 
   function guide() {
     const media = $("#camera-media"),
-      frame = $("#camera-guide");
-    if (!media || !frame) return;
+      frame = $("#camera-guide"),
+      video = $("#video");
+    if (!media || !frame || !video?.videoWidth) return;
     const r = media.getBoundingClientRect(),
-      w = Math.min(r.width, (r.height * 4) / 3);
-    frame.style.width = w + "px";
-    frame.style.height = (w * 3) / 4 + "px";
+      scale = Math.min(
+        r.width / video.videoWidth,
+        r.height / video.videoHeight,
+      );
+    const width = video.videoWidth * scale,
+      height = video.videoHeight * scale,
+      landscape = video.videoWidth >= video.videoHeight;
+    frame.style.width = width + "px";
+    frame.style.height = (landscape ? height : (width * 3) / 4) + "px";
+    frame.querySelector("span").textContent = landscape
+      ? "完整畫面，不裁切"
+      : "橫式照片範圍";
   }
   async function startVideo(token) {
     stopStream();
@@ -213,8 +226,7 @@
         video: {
           facingMode: { ideal: "environment" },
           width: { ideal: 1920 },
-          height: { ideal: 1440 },
-          aspectRatio: { ideal: 4 / 3 },
+          resizeMode: { ideal: "none" },
         },
         audio: false,
       });
@@ -229,7 +241,7 @@
       if (!active || token !== session) return;
       $("#shutter").disabled = false;
       $("#camera-restart").hidden = true;
-      message("框內為橫式照片；橫拿手機可放大取景。");
+      message("橫拍保留完整畫面；直拍使用框內範圍。");
       guide();
     } catch (e) {
       if (token === session && active) {
@@ -328,29 +340,9 @@
       raw.width = video.videoWidth;
       raw.height = video.videoHeight;
       raw.getContext("2d").drawImage(video, 0, 0);
-      // Match the visible cover crop before applying the horizontal 4:3 guide crop.
-      const rect = $("#camera-media").getBoundingClientRect(),
-        aspect = rect.width / rect.height;
-      const cropW = Math.min(raw.width, raw.height * aspect),
-        cropH = cropW / aspect,
-        frame = document.createElement("canvas");
-      frame.width = Math.max(1, Math.round(cropW));
-      frame.height = Math.max(1, Math.round(cropH));
-      frame
-        .getContext("2d")
-        .drawImage(
-          raw,
-          (raw.width - cropW) / 2,
-          (raw.height - cropH) / 2,
-          cropW,
-          cropH,
-          0,
-          0,
-          frame.width,
-          frame.height,
-        );
+      const frame = raw;
       const original = await blobOf(raw, 0.98),
-        frozen = await blobOf(frame);
+        frozen = original;
       if (!active || session !== token) return;
       current.pending = { original, frame, capturedAt };
       current.record = null;

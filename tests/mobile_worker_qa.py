@@ -24,7 +24,7 @@ with sync_playwright() as p:
  assert pg.locator('.list-panel').is_visible() and pg.locator('.map-panel').is_visible()
  positions=pg.evaluate("""()=>({listEnd:document.querySelector('.list-panel').getBoundingClientRect().bottom,mapStart:document.querySelector('.map-panel').getBoundingClientRect().top,mapEnd:document.querySelector('.map-panel').getBoundingClientRect().bottom,notesStart:document.querySelector('#worker-tools').getBoundingClientRect().top})""");assert positions['mapStart']>=positions['listEnd'];assert positions['notesStart']>=positions['mapEnd'];assert abs(pg.evaluate('PSApp.map.getCenter().lng')-fixture['tasks'][1]['navigation']['point'][0])<.001
  pg.screenshot(path=str(out/f'{engine}-map-below-list.png'));results['map_below_list']=positions
- pg.click('#worker-open-task');pg.wait_for_selector('#detail-camera');pg.click('#close-dialog')
+ pg.locator('[data-detail]').nth(1).click();pg.wait_for_selector('#detail-camera');pg.click('#close-dialog')
  route=pg.locator('#worker-navigate');assert route.get_attribute('aria-disabled')=='false';assert '22.6004%2C120.5014' in route.get_attribute('href');assert route.get_attribute('target')=='_blank'
  ctx.route('https://www.google.com/maps/dir/**',lambda r:r.fulfill(body='Navigation test',content_type='text/plain'))
  with ctx.expect_page() as popup:route.click()

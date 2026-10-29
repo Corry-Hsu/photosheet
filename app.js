@@ -333,7 +333,7 @@
     if (worker && $("#field-map-title")) {
       $("#field-map-title").textContent =
         location(t) + " " + t.parcels.map((p) => p.lot).join("、");
-      $("#worker-open-task").disabled = false;
+      if ($("#worker-open-task")) $("#worker-open-task").disabled = false;
       for (const id of ["#worker-board", "#worker-camera"])
         if ($(id)) $(id).disabled = false;
       const route = nav(t),
@@ -979,7 +979,7 @@
     }
   }
   async function start() {
-    if (vendorType) $("#pin-mode")?.remove();
+    if (worker) $("#pin-mode")?.remove();
     map = L.map("map", { preferCanvas: true, renderer: L.canvas() }).setView(
       [22.55, 120.58],
       10,
@@ -1037,16 +1037,18 @@
         if (!task) throw Error("請先點選任務");
         return task;
       };
-      bind("#worker-board", () => documentDialog([selectedTask()], "board"));
+      if ($("#worker-board"))
+        bind("#worker-board", () => documentDialog([selectedTask()], "board"));
       bind("#worker-camera", () => {
         const task = selectedTask();
         return FieldCamera.open(task, worker, () => detail(task.id));
       });
-      bind("#worker-open-task", () => {
-        const t = state.tasks.find((t) => t.id === focused) || filtered()[0];
-        if (t) return detail(t.id);
-        throw Error("目前沒有任務");
-      });
+      if ($("#worker-open-task"))
+        bind("#worker-open-task", () => {
+          const t = state.tasks.find((t) => t.id === focused) || filtered()[0];
+          if (t) return detail(t.id);
+          throw Error("目前沒有任務");
+        });
       bind("#worker-navigate", (e) => {
         if (!e.currentTarget.getAttribute("href")) {
           e.preventDefault();
