@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>廠商任務｜雜草垃圾</title>
     <link rel="stylesheet" href="vendor/leaflet.css" />
-    <link rel="stylesheet" href="style.css?v=20261029-2" />
+    <link rel="stylesheet" href="style.css?v=field-20261029-3" />
+    <link rel="stylesheet" href="field-camera.css?v=field-20261029-3" />
   </head>
   <body data-tab="list" data-worker="v1">
     <header>
@@ -58,9 +59,7 @@
         </div>
       </details>
       <div class="mobile-tabs">
-        <button id="worker-map-jump">查看地圖</button
-        ><button id="worker-filter-toggle" aria-expanded="false">篩選</button
-        ><button id="worker-select-toggle" aria-pressed="false">選取</button>
+        <button id="worker-select-toggle" aria-pressed="false">選取</button>
       </div>
       <div class="layout">
         <section class="panel list-panel">
@@ -84,6 +83,10 @@
         <section class="panel map-panel">
           <h2 id="field-map-title">任務地圖</h2>
           <div class="toolbar">
+            <button id="worker-board" class="primary" disabled>輸出白板</button
+            ><button id="worker-camera" class="primary" disabled>
+              現場拍照
+            </button>
             <a
               id="worker-navigate"
               class="button"
@@ -91,11 +94,9 @@
               rel="noopener"
               aria-disabled="true"
               >導航前往</a
-            ><button id="worker-open-task" class="primary" disabled>
-              任務內容／拍照</button
+            ><button id="worker-open-task" disabled>任務詳情</button
             ><button id="fit-map">重設位置</button
-            ><button id="show-context">顯示附近地籍</button
-            >
+            ><button id="show-context">顯示附近地籍</button>
           </div>
           <div class="field-location-controls">
             <button id="field-locate" aria-pressed="false">定位到我</button>
@@ -145,13 +146,13 @@
     <script src="vendor/rbush.js"></script>
     <script src="vendor/exifr.js"></script>
     <script src="vendor/jspdf.js"></script>
-    <script src="core.js?v=20261029-2"></script>
-    <script src="excel.js?v=20261029-2"></script>
+    <script src="core.js?v=field-20261029-3"></script>
+    <script src="excel.js?v=field-20261029-3"></script>
     <script src="db.js"></script>
-    <script src="whiteboard.js?v=20261029-2"></script>
-    <script src="documents.js?v=20261029-2"></script>
-    <script src="camera.js?v=20261029-2"></script>
-    <script src="field-location.js?v=20261029-2"></script>
-    <script src="app.js?v=20261029-2"></script>
+    <script src="whiteboard.js?v=field-20261029-3"></script>
+    <script src="documents.js?v=field-20261029-3"></script>
+    <script src="field-camera.js?v=field-20261029-3"></script>
+    <script src="field-location.js?v=field-20261029-3"></script>
+    <script src="app.js?v=field-20261029-3"></script>
   </body>
 </html>

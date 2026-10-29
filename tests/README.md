@@ -13,7 +13,7 @@ node tests/core.test.cjs
 python tests/browser_qa.py
 python tests/acceptance_qa.py
 python tests/performance_qa.py
-python tests/photo_edges_qa.py
+python tests/field_photo_flow_qa.py
 python tests/mobile_worker_qa.py
 python tests/field_location_qa.py
 python tests/gps_native_qa.py
@@ -40,3 +40,7 @@ GPS測試包含Chromium／WebKit的定位回呼與原生watchPosition API（以�
 `auto_dispatch_qa.py` 驗證11個指定鄉鎮給人員一、其他鄉鎮給人員二，新匯入與既有任務套用、保留手動人員三、舊案／完成／鎖定不改派、儲存失敗回滾、按人員選擇直接下載JSON及手機寬度。
 
 `vendor_manual_qa.py` 使用合成資料驗證手機手動新增三類任務、多地籍列、欄位錯誤／儲存失敗回滾、六份按入口JSON、廠商標籤隔離、KML多地號圖形、座標與地圖設定本機入口／重整／新批次重設、PDF非空白，以及廠商相機不顯示完成張數。支援Chromium與WebKit，WebKit不以假相機代替實機拍攝驗收。
+
+`field_photo_flow_qa.py` 驗證任務自動滑到地圖、地圖／詳情兩條白板及拍照路徑、滿版橫直取景與不溢出、拍後預覽含浮水印JPEG、連拍、相簿放大、GPS／寫入失敗保留畫面重試，以及廠商無篩選、人員保留篩選。Chromium使用模擬裝置相機及GPS；WebKit使用合成相機畫面與GPS回呼，但照片實際寫入IndexedDB。兩者皆不能代替實體手機驗收。
+
+舊 `photo_edges_qa.py` 保留為新測試的相容入口；原生相機選取／EXIF流程已從現場介面移除，因此以新流程測試取代。`mobile_worker_qa.py` 保留清單、地圖與文件測試，照片細節由新測試負責。
