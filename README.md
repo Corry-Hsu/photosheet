@@ -120,3 +120,13 @@ Leaflet + OpenStreetMap 標準底圖，保留來源標示，不批次預抓或�
 人員與廠商的任務詳情照片改成勾選／全選，顯示勾選張數；可打包勾選的含浮水印JPEG成ZIP，手機支援檔案分享時開啟分享面板，不支援時下載。ZIP已備妥後另提供下載／分享按鈕，處理手機要求再次點擊才允許分享的情況。更改勾選會清除舊ZIP，避免下載錯誤選取內容。JPEG以原檔位元組無損打包，不另收錄原始照片。
 
 照片下方不再逐張顯示儲存／刪除按鈕，仍可點縮圖放大；拍攝後的單張儲存保留。批次刪除先確認張數，只刪本機當前任務與人員的勾選照片，資料庫交易中途失敗會整批取消，其他照片不受影響。
+
+## 現場正射影像底圖（2026-10-30）
+
+人員及廠商頁在地圖上方提供「一般地圖／正射影像」切換；記住此瀏覽器的選擇，不能寫入localStorage時仍可正常操作。一般地圖沿用OpenStreetMap，正射影像採國土測繪中心PHOTO2 WMTS，矩陣GoogleMapsCompatible（EPSG:3857），路徑依z／y／x，最大層級19。只載入目前視野需要的圖磚，不預抓整縣；切換僅替換底圖，不移除KML地籍、任務入口或GPS，也不改變目前視野及導航。影像非即時畫面，年份依供應圖資；圖資載入失敗／無覆蓋時自動切回一般地圖，可再次手動選影像重試。保留來源標示，管理頁不載入此模組。
+
+官方介接規格（無需申請）：https://maps.nlsc.gov.tw/S09SOA/pro/Wmts_ajax_spec.jsp
+
+官方圖層列表（PHOTO2、JPEG、最大層級19）：https://maps.nlsc.gov.tw/S09SOA/pro/Wmts_ajax_list.jsp
+
+能力描述：https://wmts.nlsc.gov.tw/wmts?SERVICE=WMTS&REQUEST=GetCapabilities&VERSION=1.0.0
