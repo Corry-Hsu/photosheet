@@ -217,3 +217,46 @@ body[data-worker] #camera-optics-note {
     justify-content: safe center;
   }
 }
+
+body[data-worker] .field-photo-toolbar,
+body[data-worker] .field-photo-zip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin: 8px 0;
+}
+body[data-worker] #local-photos [hidden] {
+  display: none !important;
+}
+body[data-worker] .field-photo-select-all,
+body[data-worker] .field-photo-pick {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  cursor: pointer;
+}
+body[data-worker] #local-photos input[type="checkbox"] {
+  width: 22px;
+  height: 22px;
+  margin: 0;
+  flex: 0 0 22px;
+  accent-color: #176b51;
+}
+body[data-worker] .field-photo-toolbar button,
+body[data-worker] .field-photo-zip > * {
+  min-height: 44px;
+}
+body[data-worker] #local-photos .photo {
+  padding: 4px;
+  border: 2px solid transparent;
+  border-radius: 8px;
+}
+body[data-worker] #local-photos .field-photo-selected {
+  border-color: #176b51;
+  background: #edf8f1;
+}
+body[data-worker] .field-photo-status {
+  overflow-wrap: anywhere;
+}
