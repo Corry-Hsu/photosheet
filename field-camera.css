@@ -79,23 +79,6 @@ body[data-worker] .field-camera-media img {
 body[data-worker] .field-camera-shell [hidden] {
   display: none !important;
 }
-body[data-worker] #camera-guide {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  border: 1px solid #fffc;
-  box-shadow: 0 0 0 100vmax #0006;
-  pointer-events: none;
-  box-sizing: border-box;
-}
-body[data-worker] #camera-guide span {
-  position: absolute;
-  left: 6px;
-  top: 6px;
-  font-size: 12px;
-  text-shadow: 0 1px 3px black;
-}
 body[data-worker] .field-camera-controls {
   padding: 8px 12px calc(10px + env(safe-area-inset-bottom));
   background: #10231c;
@@ -198,4 +181,39 @@ body[data-worker] .field-camera-media img,
 body[data-worker] .field-image-shell img {
   min-width: 0;
   max-width: 100%;
+}
+
+body[data-worker] #camera-optics label {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+body[data-worker] #camera-optics select {
+  min-width: 0;
+  width: 100%;
+  min-height: 44px;
+  color: white;
+  background: #193e30;
+  border: 1px solid #8ba89b;
+  border-radius: 6px;
+}
+body[data-worker] #camera-zoom {
+  width: 100%;
+  min-width: 0;
+  min-height: 32px;
+  padding: 0;
+  accent-color: #b8e4ca;
+}
+body[data-worker] #camera-optics-note {
+  font-size: 12px;
+  color: #d2e6da;
+}
+@media (orientation: landscape) and (max-height: 600px) {
+  body[data-worker] .field-camera-controls {
+    overflow-y: auto;
+    justify-content: safe center;
+  }
 }

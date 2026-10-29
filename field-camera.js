@@ -200,31 +200,121 @@
     return blob;
   }
 
-  function guide() {
-    const media = $("#camera-media"),
-      frame = $("#camera-guide"),
-      video = $("#video");
-    if (!media || !frame || !video?.videoWidth) return;
-    const r = media.getBoundingClientRect(),
-      scale = Math.min(
-        r.width / video.videoWidth,
-        r.height / video.videoHeight,
+  // Use only camera capabilities exposed by the browser; never simulate a wide lens by cropping.
+  async function cameraTools(token) {
+    const currentStream = stream,
+      track = currentStream?.getVideoTracks?.()[0],
+      tools = $("#camera-optics"),
+      zoomRow = $("#camera-zoom-row"),
+      slider = $("#camera-zoom"),
+      output = $("#camera-zoom-value"),
+      lensRow = $("#camera-lens-row"),
+      select = $("#camera-lens"),
+      note = $("#camera-optics-note");
+    let caps = {},
+      settings = {};
+    try {
+      caps = track?.getCapabilities?.() || {};
+      settings = track?.getSettings?.() || {};
+    } catch (_) {}
+    const range = caps.zoom,
+      hasZoom =
+        !!track?.applyConstraints &&
+        Number.isFinite(range?.min) &&
+        Number.isFinite(range?.max) &&
+        range.min > 0 &&
+        range.max > range.min;
+    const showZoom = (value) => {
+      slider.value = value;
+      output.textContent =
+        Number(value)
+          .toFixed(2)
+          .replace(/\.?0+$/, "") + "×";
+    };
+    zoomRow.hidden = !hasZoom;
+    if (hasZoom) {
+      slider.min = range.min;
+      slider.max = range.max;
+      slider.step =
+        Number.isFinite(range.step) && range.step > 0 ? range.step : "any";
+      showZoom(
+        Math.min(range.max, Math.max(range.min, settings.zoom ?? range.min)),
       );
-    const width = video.videoWidth * scale,
-      height = video.videoHeight * scale,
-      landscape = video.videoWidth >= video.videoHeight;
-    frame.style.width = width + "px";
-    frame.style.height = (landscape ? height : (width * 3) / 4) + "px";
-    frame.querySelector("span").textContent = landscape
-      ? "完整畫面，不裁切"
-      : "橫式照片範圍";
+      let pending = null,
+        applying = false;
+      slider.oninput = async () => {
+        pending = Number(slider.value);
+        if (applying) return;
+        applying = true;
+        while (
+          pending !== null &&
+          active &&
+          token === session &&
+          stream === currentStream
+        ) {
+          const value = pending;
+          pending = null;
+          try {
+            await track.applyConstraints({ advanced: [{ zoom: value }] });
+            if (token !== session || stream !== currentStream) break;
+            if (pending === null) showZoom(track.getSettings?.().zoom ?? value);
+            note.textContent = "縮放已套用；超廣角需選擇手機提供的鏡頭。";
+          } catch (_) {
+            if (token !== session || stream !== currentStream) break;
+            pending = null;
+            showZoom(track.getSettings?.().zoom ?? settings.zoom ?? range.min);
+            note.textContent = "此鏡頭無法套用該縮放，已保留目前倍率。";
+          }
+        }
+        applying = false;
+      };
+    }
+    let cameras = [];
+    try {
+      cameras = (
+        (await navigator.mediaDevices.enumerateDevices?.()) || []
+      ).filter(
+        (d) =>
+          d.kind === "videoinput" &&
+          d.deviceId &&
+          !/front|user|facetime|前置|前鏡/i.test(d.label),
+      );
+    } catch (_) {}
+    if (!active || token !== session || stream !== currentStream) return;
+    const hasLenses = cameras.length > 1;
+    lensRow.hidden = !hasLenses;
+    if (hasLenses) {
+      select.innerHTML =
+        (cameras.some((d) => d.deviceId === settings.deviceId)
+          ? ""
+          : '<option value="" disabled selected>目前鏡頭</option>') +
+        cameras
+          .map(
+            (d, i) =>
+              `<option value="${E(d.deviceId)}">${E(d.label || "相機 " + (i + 1))}</option>`,
+          )
+          .join("");
+      if (cameras.some((d) => d.deviceId === settings.deviceId))
+        select.value = settings.deviceId;
+      select.onchange = () => startVideo(++session, select.value);
+    }
+    note.textContent = hasLenses
+      ? "可切換瀏覽器提供的鏡頭；若有超廣角，請在此選擇。"
+      : hasZoom
+        ? "縮放依手機支援；此瀏覽器未提供其他可選鏡頭。"
+        : "此瀏覽器未開放縮放或其他鏡頭；目前使用手機提供的相機。";
+    tools.hidden = false;
   }
-  async function startVideo(token) {
+  async function startVideo(token, deviceId = active?.deviceId) {
     stopStream();
+    $("#shutter").disabled = true;
+    $("#camera-optics").hidden = true;
     try {
       const obtained = await navigator.mediaDevices.getUserMedia({
         video: {
-          facingMode: { ideal: "environment" },
+          ...(deviceId
+            ? { deviceId: { exact: deviceId } }
+            : { facingMode: { ideal: "environment" } }),
           width: { ideal: 1920 },
           resizeMode: { ideal: "none" },
         },
@@ -239,10 +329,13 @@
       video.srcObject = stream;
       await video.play();
       if (!active || token !== session) return;
+      active.deviceId =
+        stream.getVideoTracks?.()[0]?.getSettings?.().deviceId || deviceId;
+      await cameraTools(token);
+      if (!active || token !== session) return;
       $("#shutter").disabled = false;
       $("#camera-restart").hidden = true;
-      message("橫拍保留完整畫面；直拍使用框內範圍。");
-      guide();
+      message("橫拍保留完整畫面；直拍輸出中央橫式範圍。");
     } catch (e) {
       if (token === session && active) {
         message("無法開啟相機。請允許瀏覽器使用相機後重試：" + e.message);
@@ -261,7 +354,7 @@
         viewImage(active.record.blob, fileName(active.task, active.record.id));
     };
     $("#video").hidden = true;
-    $("#camera-guide").hidden = true;
+    $("#camera-optics").hidden = true;
     $("#shutter").hidden = true;
     $("#capture-again").hidden = false;
     $("#capture-save").hidden = !saved;
@@ -376,11 +469,11 @@
     dialog.classList.add("camera-mode");
     $("#dialog-title").textContent = "現場拍照";
     $("#dialog-body").innerHTML =
-      `<section class="field-camera-shell"><header class="field-camera-header"><button id="camera-back">返回任務</button><div><strong id="capture-mode">現場拍照</strong><small>${E(task.parcels.map((p) => p.section + " " + p.lot).join("、"))}</small></div></header><div id="camera-media" class="field-camera-media"><video id="video" autoplay playsinline muted></video><div id="camera-guide" aria-hidden="true"><span>橫式照片範圍</span></div><img id="capture-preview" alt="本次拍攝的照片" hidden></div><footer class="field-camera-controls"><p id="capture-status" role="status" aria-live="polite">請允許相機及定位。</p><div class="field-camera-buttons"><button id="shutter" disabled>拍照</button><button id="camera-restart" hidden>重新開啟相機</button><button id="capture-save" hidden>儲存照片</button><button id="capture-again" hidden>繼續拍下一張</button><button id="capture-retry-save" hidden>重試儲存</button>${backend() ? '<button id="capture-retry">重試回傳</button>' : ""}</div></footer></section>`;
+      `<section class="field-camera-shell"><header class="field-camera-header"><button id="camera-back">返回任務</button><div><strong id="capture-mode">現場拍照</strong><small>${E(task.parcels.map((p) => p.section + " " + p.lot).join("、"))}</small></div></header><div id="camera-media" class="field-camera-media"><video id="video" autoplay playsinline muted></video><img id="capture-preview" alt="本次拍攝的照片" hidden></div><footer class="field-camera-controls"><div id="camera-optics" hidden><label id="camera-lens-row" hidden>鏡頭<select id="camera-lens" aria-label="選擇相機鏡頭"></select></label><label id="camera-zoom-row" hidden>縮放 <output id="camera-zoom-value" for="camera-zoom"></output><input id="camera-zoom" type="range" aria-label="相機縮放"></label><p id="camera-optics-note" role="status"></p></div><p id="capture-status" role="status" aria-live="polite">請允許相機及定位。</p><div class="field-camera-buttons"><button id="shutter" disabled>拍照</button><button id="camera-restart" hidden>重新開啟相機</button><button id="capture-save" hidden>儲存照片</button><button id="capture-again" hidden>繼續拍下一張</button><button id="capture-retry-save" hidden>重試儲存</button>${backend() ? '<button id="capture-retry">重試回傳</button>' : ""}</div></footer></section>`;
     if (!dialog.open) dialog.showModal();
     $("#camera-back").onclick = leave;
     $("#shutter").onclick = capture;
-    $("#camera-restart").onclick = () => startVideo(token);
+    $("#camera-restart").onclick = () => startVideo(++session);
     $("#capture-save").onclick = () => {
       if (active?.record)
         saveImage(active.record.blob, fileName(task, active.record.id)).catch(
@@ -395,7 +488,6 @@
       active.record = null;
       $("#capture-preview").hidden = true;
       $("#video").hidden = false;
-      $("#camera-guide").hidden = false;
       for (const id of [
         "#capture-save",
         "#capture-again",
@@ -405,7 +497,7 @@
       $("#shutter").hidden = false;
       $("#shutter").disabled = true;
       $("#capture-mode").textContent = "現場拍照";
-      startVideo(token);
+      startVideo(++session);
     };
     if ($("#capture-retry"))
       $("#capture-retry").onclick = () =>
@@ -495,7 +587,6 @@
     }
   });
   dialog.addEventListener("close", cleanup);
-  addEventListener("resize", guide);
   addEventListener("pagehide", cleanup);
   window.FieldCamera = { open: openCamera, gallery, stop: cleanup, viewImage };
 })();
