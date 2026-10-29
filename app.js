@@ -1014,6 +1014,7 @@
       }
     });
     if (worker) {
+      if (window.FieldBasemap) FieldBasemap.attach(map);
       if (window.FieldLocation) FieldLocation.attach(map);
       else {
         const status = $("#field-location-status");
