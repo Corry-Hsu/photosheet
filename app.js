@@ -5,6 +5,7 @@
     $ = (s) => document.querySelector(s),
     $$ = (s) => [...document.querySelectorAll(s)],
     worker = document.body.dataset.worker || "",
+    vendorType = C.vendorTypes[worker] || "",
     PAGE = worker ? 50 : 25;
   let state = {
       id: "manager",
@@ -25,6 +26,7 @@
     spatial = new RBush(),
     selected = new Set(),
     focused = "",
+    fieldBatch = "",
     page = 1,
     map,
     landLayer,
@@ -367,7 +369,7 @@
           layer.bindTooltip(E(text));
           layer.on("click", async (e) => {
             L.DomEvent.stopPropagation(e);
-            if (pinMode && !worker) {
+            if (pinMode) {
               const task = state.tasks.find((t) => t.id === focused);
               if (task) {
                 try {
@@ -402,7 +404,7 @@
     const n = nav(t);
     if (n) {
       pin = L.marker([n.point[1], n.point[0]], {
-        draggable: !worker,
+        draggable: true,
         icon: L.divIcon({
           className: "",
           html: '<div class="pin"></div>',
@@ -437,8 +439,18 @@
   }
   async function setNavigation(t, p) {
     C.navURL(p);
+    const next = { point: p, source: "manual", confirmed: true };
+    if (worker) {
+      const id = "field-navigation-" + worker;
+      const local = (await Store.get("state", id)) || { id, entries: {} };
+      local.entries[t.id] = { batch: fieldBatch, point: p };
+      await Store.put("state", local);
+      t.navigation = next;
+      draw(t, false);
+      return;
+    }
     const previous = t.navigation;
-    t.navigation = { point: p, source: "manual", confirmed: true };
+    t.navigation = next;
     try {
       await persist();
     } catch (e) {
@@ -480,7 +492,7 @@
       n = nav(t);
     open(
       "任務詳情",
-      `<h2>${E(location(t))}</h2><p>${E(t.type)} · 原表第${t.row}列 · ${E(t.serial)}</p><p>成果指定日期：${E(t.resultDate || "待補")}<br>完成期限：${E(t.due.replace("T", " ") || "未設定")}</p><h3>全部地號</h3>${worker ? "" : '<button id="edit-parcels">修正地段地號</button>'}${t.parcels
+      `<h2>${E(location(t))}</h2><p>${E(t.type)} · ${t.source === "manual" ? "手動新增" : "原表第" + t.row + "列"} · ${E(t.serial)}</p><p>成果指定日期：${E(t.resultDate || "待補")}<br>完成期限：${E(t.due.replace("T", " ") || "未設定")}</p><h3>全部地號</h3>${worker ? "" : '<button id="edit-parcels">修正地段地號</button>'}${t.parcels
         .map((p, i) => {
           const xs = m.groups[i];
           return `<div class="parcel-row"><strong>${E(p.district + p.section + " " + p.lot)}</strong>${xs.length === 1 ? `<button data-parcel-nav="${i}">導航此地號參考位置</button>` : ""}</div>`;
@@ -558,6 +570,28 @@
       bind("#detail-complete", async () => {
         await markCompleted([t], !t.completed);
         await detail(id);
+      });
+    }
+    if (worker) {
+      $("#local-photos").insertAdjacentHTML(
+        "beforebegin",
+        `<section class="panel"><h3>本機導航入口</h3><p class="muted">只保存在此裝置，不會改動管理端；新發布批次採管理端入口。</p><div class="nav-fields"><input id="field-nav-lat" type="number" step="any" aria-label="本機入口緯度" placeholder="緯度" value="${n?.point[1] ?? ""}"><input id="field-nav-lng" type="number" step="any" aria-label="本機入口經度" placeholder="經度" value="${n?.point[0] ?? ""}"><button id="field-nav-save">保存本機入口</button><button id="field-nav-map">改在地圖設定</button></div></section>`,
+      );
+      bind("#field-nav-save", async () => {
+        if (!$("#field-nav-lat").value || !$("#field-nav-lng").value)
+          throw Error("請填寫經緯度");
+        await setNavigation(t, [
+          Number($("#field-nav-lng").value),
+          Number($("#field-nav-lat").value),
+        ]);
+        await detail(id);
+        tell("本機入口已保存；不會同步到其他裝置");
+      });
+      bind("#field-nav-map", () => {
+        $("#dialog").close();
+        pinMode = true;
+        scrollFieldMap();
+        tell("點地圖設定本機入口");
       });
     }
     bind("#detail-board", () => documentDialog([t], "board"));
@@ -770,9 +804,12 @@
   }
   async function loadWorker() {
     try {
-      const r = await fetch(`data/worker-${worker.slice(1)}.json`, {
-        cache: "no-store",
-      });
+      const r = await fetch(
+        `data/${vendorType ? "vendor" : "worker"}-${worker.slice(1)}.json`,
+        {
+          cache: "no-store",
+        },
+      );
       if (!r.ok) throw Error("HTTP " + r.status);
       const data = await r.json();
       if (data.schemaVersion !== 1) throw Error("不支援此資料版本");
@@ -786,11 +823,32 @@
         throw Error("派工格式錯誤");
       data.tasks.forEach(validateTask);
       if (
-        data.tasks.some((t) => t.assignee !== worker) ||
+        (vendorType
+          ? data.vendorType !== vendorType ||
+            data.tasks.some((t) => t.type !== vendorType)
+          : data.tasks.some((t) => t.assignee !== worker)) ||
         new Set(data.tasks.map((t) => t.id)).size !== data.tasks.length
       )
         throw Error("派工人員或識別碼不一致");
       validateFeatures(data.features);
+      fieldBatch = data.batch;
+      const overrides = await Store.get(
+        "state",
+        "field-navigation-" + worker,
+      ).catch(() => null);
+      for (const task of data.tasks) {
+        const local = overrides?.entries?.[task.id];
+        if (local?.batch === data.batch) {
+          try {
+            C.navURL(local.point);
+            task.navigation = {
+              point: local.point,
+              source: "manual",
+              confirmed: true,
+            };
+          } catch {}
+        }
+      }
       state = {
         ...state,
         tasks: data.tasks,
@@ -798,10 +856,20 @@
         settings: { ...Documents.settings, ...data.settings },
       };
       features = data.features;
+      if (landLayer) map.removeLayer(landLayer);
+      if (pin) map.removeLayer(pin);
+      landLayer = pin = null;
+      focused = "";
+      if ($("#field-map-title")) $("#field-map-title").textContent = "任務地圖";
       selected.clear();
       rebuild();
       setupFilters();
       render();
+      if (vendorType) {
+        $("#type-filter").innerHTML = `<option>${E(vendorType)}</option>`;
+        $("#type-filter").value = vendorType;
+        $("#type-filter").disabled = true;
+      }
       $("#title").textContent = data.person.name + "的任務";
       $("#edition").textContent = "固定派工網址 · 無需匯入";
       $("#worker-version").textContent =
@@ -925,7 +993,7 @@
       mapTimer = setTimeout(context, 150);
     });
     map.on("click", async (e) => {
-      if (!pinMode || worker) return;
+      if (!pinMode) return;
       const t = listSource().find((t) => t.id === focused);
       if (!t) {
         tell("請先選取一筆任務", true);
@@ -952,7 +1020,8 @@
       $("#orders").hidden = true;
       $("#person-filter").hidden = true;
       $("#date-filters").hidden = true;
-      $("#pin-mode").hidden = true;
+      $("#pin-mode").hidden = false;
+      $("#pin-mode").textContent = "點地圖設定本機入口";
       $("#show-context").hidden = true;
       bind("#worker-map-jump", scrollFieldMap);
       bind("#worker-open-task", () => {
@@ -1086,6 +1155,53 @@
         tell(`已依鄉鎮更新 ${changed.length} 筆任務；發布檔需另行產生與上傳`);
       });
     });
+    bind("#manual-task", () =>
+      ManualTasks.open({
+        state,
+        features,
+        sectionCatalog,
+        onSave: async (input) => {
+          const task = C.createManualTask(
+            input,
+            "manual:" + crypto.randomUUID(),
+          );
+          const previous = state.tasks;
+          state.tasks = [...state.tasks, task];
+          try {
+            await persist();
+          } catch (e) {
+            state.tasks = previous;
+            throw e;
+          }
+          $("#dialog").close();
+          render();
+          if (C.adminVisible(task)) {
+            for (const selector of [
+              "#search",
+              "#type-filter",
+              "#person-filter",
+              "#geo-filter",
+              "#complete-filter",
+              "#date-from",
+              "#date-to",
+            ]) {
+              const el = $(selector);
+              if (el) el.value = "";
+            }
+            page =
+              Math.floor(filtered().findIndex((t) => t.id === task.id) / PAGE) +
+              1;
+            focus(task.id);
+            render();
+          }
+          tell(
+            C.adminVisible(task)
+              ? "手動任務已新增；發布檔需另外產生與上傳"
+              : "任務已保存，但不在今年本月起的清單範圍內",
+          );
+        },
+      }),
+    );
     bind("#import-excel", () => $("#excel-file").click());
     $("#excel-file").onchange = async () => {
       try {
@@ -1249,38 +1365,56 @@
     };
     bind("#publish", () => {
       state.tasks.forEach((t) => C.monthPolicy(t));
-      const assigned = state.tasks.filter((t) => t.assignee && !t.completed);
+      const recipients = [
+        ...state.people,
+        ...Object.entries(C.vendorTypes).map(([id, type]) => ({
+          id,
+          name: type + "廠商",
+          type,
+        })),
+      ];
+      const forRecipient = (p) => C.dispatchTasks(state.tasks, p.id);
       open(
-        "選擇人員發布",
-        `<p>勾選要更新的人員，直接產生各自的 JSON 檔，不壓縮。</p><p>已完成任務不列入；沒有任務仍可產生空清單以清除該人員舊派工。</p><div class="form-grid">${state.people.map((p, i) => `<label><input type="checkbox" data-publish-person="${p.id}" checked>${E(p.name)}（人員${i + 1}）：${assigned.filter((t) => t.assignee === p.id).length} 筆任務</label>`).join("")}</div><p class="warning">內容將公開。請確認成果日期與導航位置。</p><button id="confirm-publish" class="primary">產生所選人員 JSON</button>`,
+        "選擇人員／廠商發布",
+        `<p>勾選要更新的入口，直接產生各自的 JSON，不壓縮。廠商固定依標籤分組，不改動人員負責人。</p><h3>人員入口</h3>${recipients
+          .slice(0, 3)
+          .map(
+            (p) =>
+              `<label><input type="checkbox" data-publish-person="${p.id}" checked>${E(p.name)}：${forRecipient(p).length} 筆任務</label>`,
+          )
+          .join("")}<h3>廠商入口</h3>${recipients
+          .slice(3)
+          .map(
+            (p) =>
+              `<label><input type="checkbox" data-publish-person="${p.id}">${E(p.name)}：${forRecipient(p).length} 筆任務</label>`,
+          )
+          .join(
+            "",
+          )}<p>已完成不列入；空清單可清除舊派工。內容將公開，網址不構成權限隔離。</p><button id="confirm-publish" class="primary">產生所選入口 JSON</button>`,
       );
       bind("#confirm-publish", () => {
-        const people = state.people.filter((p) =>
+        const people = recipients.filter((p) =>
           $$("[data-publish-person]:checked").some(
             (el) => el.dataset.publishPerson === p.id,
           ),
         );
-        if (!people.length) throw Error("請至少勾選一位人員");
-        const chosenTasks = assigned.filter((t) =>
-          people.some((p) => p.id === t.assignee),
-        );
+        if (!people.length) throw Error("請至少勾選一位人員或廠商");
+        const chosenTasks = people.flatMap(forRecipient);
         if (chosenTasks.some((t) => !C.date(t.resultDate)))
-          throw Error("所選人員的任務有成果日期缺漏，請先補齊");
+          throw Error("所選入口的任務有成果日期缺漏，請先補齊");
         const batch = C.today() + "-" + crypto.randomUUID().slice(0, 8),
           generatedAt = new Date().toISOString(),
           files = [];
         for (const p of people) {
           const i = state.people.findIndex((person) => person.id === p.id),
-            tasks = assigned
-              .filter((t) => t.assignee === p.id)
-              .map((t) => ({
-                ...t,
-                navigation: nav(t),
-                parcels: t.parcels.map((p) => ({
-                  ...p,
-                  sectionCode: C.parcelCode(t, p, sectionCatalog),
-                })),
+            tasks = forRecipient(p).map((t) => ({
+              ...t,
+              navigation: nav(t),
+              parcels: t.parcels.map((p) => ({
+                ...p,
+                sectionCode: C.parcelCode(t, p, sectionCatalog),
               })),
+            })),
             fs = [
               ...new Map(
                 tasks
@@ -1301,7 +1435,7 @@
               bbox: f.bbox,
             }));
           files.push({
-            name: `worker-${i + 1}.json`,
+            name: `${p.type ? "vendor" : "worker"}-${p.id.slice(1)}.json`,
             person: p.name,
             blob: new Blob(
               [
@@ -1310,7 +1444,8 @@
                     schemaVersion: 1,
                     batch,
                     generatedAt,
-                    person: p,
+                    person: { id: p.id, name: p.name },
+                    ...(p.type ? { vendorType: p.type } : {}),
                     settings: state.settings,
                     tasks,
                     features: fs,

@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "batch": "尚未發布",
+  "generatedAt": "",
+  "person": {
+    "id": "v1",
+    "name": "雜草垃圾廠商"
+  },
+  "vendorType": "雜草垃圾",
+  "settings": {},
+  "tasks": [],
+  "features": []
+}

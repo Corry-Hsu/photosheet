@@ -232,6 +232,106 @@
       : "p2";
     return task.assignee === person ? task : C.assign(task, person, now);
   };
+  C.vendorTypes = Object.freeze({ v1: "雜草垃圾", v2: "砍樹", v3: "圍籬" });
+  C.dispatchTasks = (tasks, recipient, now) => {
+    const type = C.vendorTypes[recipient];
+    return tasks.filter(
+      (t) =>
+        !t.completed &&
+        (type
+          ? t.type === type &&
+            (C.adminVisible(t, now) || !!t.assignee) &&
+            !(t.assignmentClosed && !t.assignee)
+          : t.assignee === recipient),
+    );
+  };
+  C.createManualTask = (input, id, now = new Date()) => {
+    if (!id || !id.startsWith("manual:")) throw Error("手動任務識別碼錯誤");
+    if (!["雜草垃圾", "砍樹", "圍籬"].includes(input.type))
+      throw Error("請選擇工作類型");
+    const date = C.date(input.resultDate);
+    if (!date || date !== input.resultDate)
+      throw Error("請填寫有效的成果指定日期");
+    const due = norm(input.due);
+    if (
+      due &&
+      (!/^\d{4}-\d{2}-\d{2}T(?:[01]\d|2[0-3]):[0-5]\d$/.test(due) ||
+        C.date(due.slice(0, 10)) !== due.slice(0, 10))
+    )
+      throw Error("完成期限格式錯誤");
+    const parcels = [],
+      seen = new Set();
+    for (const row of input.parcels || []) {
+      const district = norm(row.district),
+        section = norm(row.section),
+        code = norm(row.sectionCode);
+      if (!district || !section || !norm(row.lots))
+        throw Error("每列地籍都需填寫鄉鎮、地段及地號");
+      if (code && !C.sectionCode(code)) throw Error("段代碼需為1至4位數字");
+      for (const p of C.parseParcels([row.lots], district, section)) {
+        if (code && p.district === district && p.section === section)
+          p.sectionCode = C.sectionCode(code);
+        const key = C.key(p);
+        if (seen.has(key)) throw Error("同一任務不可重複相同地號");
+        seen.add(key);
+        parcels.push(p);
+      }
+    }
+    if (!parcels.length) throw Error("請至少新增一筆地籍資料");
+    const items = (input.items || [])
+      .filter((i) => Object.values(i).some((v) => norm(v)))
+      .map((i) => {
+        if (!norm(i.name)) throw Error("工作項目需填寫名稱");
+        if (
+          norm(i.quantity) &&
+          (!Number.isFinite(Number(i.quantity)) || Number(i.quantity) < 0)
+        )
+          throw Error("工作數量需為非負數字");
+        return {
+          name: norm(i.name),
+          quantity: norm(i.quantity),
+          unit: norm(i.unit),
+          note: norm(i.note),
+        };
+      });
+    let navigation = null;
+    if (norm(input.latitude) || norm(input.longitude)) {
+      if (!norm(input.latitude) || !norm(input.longitude))
+        throw Error("入口緯度與經度需一起填寫");
+      const point = [Number(input.longitude), Number(input.latitude)];
+      C.navURL(point);
+      navigation = { point, source: "manual", confirmed: true };
+    }
+    let task = {
+      id,
+      source: "manual",
+      createdAt: now.toISOString(),
+      row: 0,
+      serial: norm(input.serial) || "手動-" + id.slice(-8),
+      caseNo: norm(input.caseNo),
+      type: input.type,
+      district: parcels[0].district,
+      section: parcels[0].section,
+      sectionCode: parcels[0].sectionCode || "",
+      parcels,
+      notice: date,
+      resultDate: date,
+      due,
+      vendor: norm(input.vendor),
+      sourcePerson: norm(input.sourcePerson),
+      area: norm(input.area),
+      items,
+      assignee: "",
+      navigation,
+      completed: false,
+    };
+    task = C.monthPolicy(task, now);
+    const person = input.assignee ?? "auto";
+    if (person === "auto") return C.autoAssign(task, now);
+    if (!["", "p1", "p2", "p3"].includes(person))
+      throw Error("負責人無效；廠商依標籤分組，不是人員負責人");
+    return C.assign(task, person, now);
+  };
   C.markComplete = (task, done, now = new Date()) => ({
     ...task,
     completed: done,
