@@ -99,6 +99,7 @@
     const record = {
       id: crypto.randomUUID(),
       person: a.person,
+      role: C.vendorTypes[a.person] ? "vendor" : "worker",
       taskId: a.task.id,
       taskSnapshot: structuredClone(a.task),
       capturedAt,
@@ -118,8 +119,10 @@
     const a = active;
     if (!a) return;
     const list = await Store.photosFor(a.person, a.task.id);
-    $("#capture-count").textContent =
-      `本機照片 ${list.length} 張 · 建議至少 2 張；不回傳、不標記完成。`;
+    if (active !== a || !$("#capture-count")) return;
+    $("#capture-count").textContent = C.vendorTypes[a.person]
+      ? "廠商施工照片：不計完成張數；只存本機，不回傳。"
+      : `本機照片 ${list.length} 張 · 建議至少 2 張；不回傳、不標記完成。`;
   }
   window.FieldCamera = {
     async open(task, person, back) {
@@ -220,7 +223,7 @@
       let rows = (await Store.photosFor(person, task.id)).sort((a, b) =>
         a.savedAt.localeCompare(b.savedAt),
       );
-      el.innerHTML = `<h3>本機照片 ${rows.length} 張</h3><p>建議至少 2 張；只存於這台裝置，請下載備份。</p>${rows.length ? '<button id="photos-zip">全部下載 ZIP</button>' : ""}<div class="photos">${rows
+      el.innerHTML = `<h3>${C.vendorTypes[person] ? "本機施工照片" : "本機照片 " + rows.length + " 張"}</h3><p>${C.vendorTypes[person] ? "廠商照片不計完成張數。" : "建議至少 2 張。"}只存於這台裝置，請下載備份。</p>${rows.length ? '<button id="photos-zip">全部下載 ZIP</button>' : ""}<div class="photos">${rows
         .map((p) => {
           let u = URL.createObjectURL(p.blob);
           objects.push(u);

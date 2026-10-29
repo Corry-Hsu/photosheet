@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>廠商任務｜雜草垃圾</title>
+    <link rel="stylesheet" href="vendor/leaflet.css" />
+    <link rel="stylesheet" href="style.css?v=20261029-1" />
+  </head>
+  <body data-tab="list" data-worker="v1">
+    <header>
+      <div>
+        <small>PHOTOSHEET · 靜態派工</small>
+        <h1 id="title">廠商任務</h1>
+        <div id="edition">Excel × 地籍 × 三人派工</div>
+      </div>
+      <a href="photosheet-app.html">原照片排版工具</a>
+    </header>
+    <main>
+      <section class="panel" id="admin-tools" hidden>
+        <div class="toolbar">
+          <button class="primary" id="import-excel">匯入 Excel</button
+          ><button id="import-geo">匯入 KML／XML／ZIP</button
+          ><button id="people">三人設定</button
+          ><button id="backup">下載本機備份</button
+          ><button id="restore">還原備份</button
+          ><button id="publish" class="primary">選擇人員發布</button>
+        </div>
+        <p class="muted">
+          資料保存在此瀏覽器；請定期備份。發布檔將放在公開網站，分開網址不構成權限隔離。
+        </p>
+        <div id="geo-summary" class="status-bar">尚未匯入地籍資料</div>
+        <div id="progress" hidden></div>
+        <button id="cancel-geo" hidden>取消地籍匯入</button>
+      </section>
+
+      <div class="summary" id="summary"></div>
+      <div class="toolbar worker-search">
+        <input
+          id="search"
+          placeholder="搜尋地段、地號、鄉鎮、案件編號"
+          aria-label="搜尋任務"
+        /><select id="type-filter" aria-label="工作類型">
+          <option value="">全部類型</option>
+          <option>雜草垃圾</option>
+          <option>砍樹</option>
+          <option>圍籬</option></select
+        ><select id="person-filter" aria-label="負責人"></select
+        ><select id="geo-filter" hidden aria-hidden="true">
+          <option value="">全部</option>
+        </select>
+      </div>
+      <details id="date-filters" class="panel">
+        <summary>依成果日期篩選</summary>
+        <div class="toolbar">
+          <label>起日<input id="date-from" type="date" /></label
+          ><label>迄日<input id="date-to" type="date" /></label>
+        </div>
+      </details>
+      <div class="mobile-tabs">
+        <button id="worker-map-jump">查看地圖</button
+        ><button id="worker-filter-toggle" aria-expanded="false">篩選</button
+        ><button id="worker-select-toggle" aria-pressed="false">選取</button>
+      </div>
+      <div class="layout">
+        <section class="panel list-panel">
+          <div class="toolbar">
+            <button id="select-page">選取本頁</button
+            ><button id="clear-select">清除選取</button
+            ><span id="count" class="muted"></span>
+          </div>
+          <div id="tasks"><p class="muted" role="status">正在載入任務…</p></div>
+          <div class="pages">
+            <button id="prev">上一頁</button><span id="page"></span
+            ><button id="next">下一頁</button>
+          </div>
+          <div id="batch" class="batch" hidden>
+            <strong id="selected-count"></strong
+            ><button id="batch-assign">分派／日期</button
+            ><button id="boards">輸出白板</button
+            ><button id="orders">輸出工作單</button>
+          </div>
+        </section>
+        <section class="panel map-panel">
+          <h2 id="field-map-title">任務地圖</h2>
+          <div class="toolbar">
+            <a
+              id="worker-navigate"
+              class="button"
+              target="_blank"
+              rel="noopener"
+              aria-disabled="true"
+              >導航前往</a
+            ><button id="worker-open-task" class="primary" disabled>
+              任務內容／拍照</button
+            ><button id="fit-map">重設位置</button
+            ><button id="show-context">顯示附近地籍</button
+            ><button id="pin-mode">點地圖設定入口</button>
+          </div>
+          <div class="field-location-controls">
+            <button id="field-locate" aria-pressed="false">定位到我</button>
+          </div>
+          <p
+            id="field-location-status"
+            class="field-location-status"
+            aria-live="polite"
+          ></p>
+          <div id="map" class="map"></div>
+          <p id="map-status" class="map-note">
+            點選任務查看全部地號。橘色圖釘為導航位置。
+          </p>
+        </section>
+      </div>
+      <details class="panel worker-notes" id="worker-tools" hidden>
+        <summary>注意事項與派工資訊</summary>
+        <p>
+          地籍範圍不代表可通行入口。底圖需連網；底圖故障仍可核對已匯入的地籍。
+        </p>
+        <div id="worker-version"></div>
+        <button id="reload-worker">重新整理派工資料</button>
+        <p>
+          照片只存於這台裝置，不會回傳。請下載備份；清除瀏覽器資料會移除暫存照片。
+        </p>
+        <a href="photosheet-app.html">原照片排版工具</a>
+      </details>
+    </main>
+    <div id="message" role="status" hidden></div>
+    <input id="excel-file" type="file" accept=".xlsx" hidden /><input
+      id="geo-files"
+      type="file"
+      multiple
+      accept=".kml,.xml,.zip"
+      hidden
+    /><input id="restore-file" type="file" accept=".json" hidden />
+    <dialog id="dialog">
+      <div class="dialog-head">
+        <h2 id="dialog-title"></h2>
+        <button id="close-dialog" aria-label="關閉">×</button>
+      </div>
+      <div id="dialog-body"></div>
+    </dialog>
+    <script src="vendor/leaflet.js"></script>
+    <script src="vendor/fflate.js"></script>
+    <script src="vendor/exceljs.js"></script>
+    <script src="vendor/rbush.js"></script>
+    <script src="vendor/exifr.js"></script>
+    <script src="vendor/jspdf.js"></script>
+    <script src="core.js?v=20261029-1"></script>
+    <script src="excel.js?v=20261029-1"></script>
+    <script src="db.js"></script>
+    <script src="whiteboard.js?v=20261029-1"></script>
+    <script src="documents.js?v=20261029-1"></script>
+    <script src="camera.js?v=20261029-1"></script>
+    <script src="field-location.js?v=20261029-1"></script>
+    <script src="app.js?v=20261029-1"></script>
+  </body>
+</html>

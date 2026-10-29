@@ -331,4 +331,109 @@ test("依鄉鎮自動分派，保留第三人與已完成／舊案", () => {
   };
   assert.equal(C.autoAssign(mixed, now), mixed);
 });
+test("廠商固定按標籤分組，不改動人員且排除已完成", () => {
+  const now = new Date("2026-10-29T00:00:00Z"),
+    tasks = [
+      { id: "g", type: "雜草垃圾", resultDate: "2026-10-29", assignee: "p3" },
+      { id: "t", type: "砍樹", resultDate: "2026-10-29", assignee: "" },
+      { id: "f", type: "圍籬", resultDate: "2026-10-29", assignee: "p1" },
+      {
+        id: "done",
+        type: "雜草垃圾",
+        resultDate: "2026-10-29",
+        assignee: "p3",
+        completed: true,
+      },
+      {
+        id: "old",
+        type: "砍樹",
+        resultDate: "2026-09-01",
+        assignee: "",
+        assignmentClosed: true,
+      },
+    ];
+  assert.deepEqual(
+    C.dispatchTasks(tasks, "v1", now).map((t) => t.id),
+    ["g"],
+  );
+  assert.deepEqual(
+    C.dispatchTasks(tasks, "v2", now).map((t) => t.id),
+    ["t"],
+  );
+  assert.deepEqual(
+    C.dispatchTasks(tasks, "v3", now).map((t) => t.id),
+    ["f"],
+  );
+  assert.deepEqual(
+    C.dispatchTasks(tasks, "p3", now).map((t) => t.id),
+    ["g"],
+  );
+  assert.equal(tasks[0].assignee, "p3");
+});
+test("手動任務支援多地號、段代碼與獨立識別碼", () => {
+  const input = {
+    type: "雜草垃圾",
+    resultDate: "2026-10-29",
+    due: "2026-10-30T17:00",
+    parcels: [
+      {
+        district: "屏東市",
+        section: "示範段",
+        sectionCode: "582",
+        lots: "1198、1198-1",
+      },
+      { district: "東港鎮", section: "關帝段", sectionCode: "0582", lots: "2" },
+    ],
+    items: [{ name: "除草", quantity: "12.5", unit: "㎡", note: "入口" }],
+    latitude: "22.6",
+    longitude: "120.5",
+  };
+  const task = C.createManualTask(
+    input,
+    "manual:demo",
+    new Date("2026-10-29T00:00:00Z"),
+  );
+  assert.equal(task.parcels.length, 3);
+  assert.equal(task.parcels[0].sectionCode, "0582");
+  assert.equal(task.assignee, "p1");
+  assert.equal(task.source, "manual");
+  assert.deepEqual(task.navigation.point, [120.5, 22.6]);
+  assert.equal(task.items[0].quantity, "12.5");
+  assert.equal(
+    C.createManualTask(
+      { ...input, assignee: "p3" },
+      "manual:other",
+      new Date("2026-10-29T00:00:00Z"),
+    ).assignee,
+    "p3",
+  );
+});
+test("手動輸入拒絕重複地號、錯誤日期與無效入口", () => {
+  const input = {
+      type: "砍樹",
+      resultDate: "2026-10-29",
+      parcels: [
+        { district: "東港鎮", section: "關帝段", lots: "1" },
+        { district: "東港鎮", section: "關帝段", lots: "1" },
+      ],
+    },
+    now = new Date("2026-10-29T00:00:00Z");
+  assert.throws(() => C.createManualTask(input, "manual:demo", now));
+  const clean = {
+    ...input,
+    parcels: [{ district: "東港鎮", section: "關帝段", lots: "1" }],
+  };
+  for (const patch of [
+    { resultDate: "2026-02-30" },
+    { longitude: "999", latitude: "22" },
+    { latitude: "22" },
+    { due: "2026-10-30T25:00" },
+    { assignee: "v1" },
+    { items: [{ name: "除草", quantity: "-1" }] },
+  ])
+    assert.throws(() =>
+      C.createManualTask({ ...clean, ...patch }, "manual:demo", now),
+    );
+  assert.equal(C.createManualTask(clean, "manual:demo", now).assignee, "p2");
+});
 console.log("FINAL TOTAL", passed, "tests passed");

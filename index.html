@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>地籍任務｜管理頁</title>
     <link rel="stylesheet" href="vendor/leaflet.css" />
-    <link rel="stylesheet" href="style.css?v=20261027-6" />
+    <link rel="stylesheet" href="style.css?v=20261029-1" />
   </head>
   <body data-tab="list">
     <header>
@@ -20,16 +20,44 @@
       <section class="panel" id="admin-tools">
         <div class="toolbar">
           <button class="primary" id="import-excel">匯入 Excel</button
+          ><button id="manual-task">手動新增任務</button
           ><button id="import-geo">匯入 KML／XML／ZIP</button
           ><button id="auto-assign">依鄉鎮自動分派</button
           ><button id="people">三人設定</button
           ><button id="backup">下載本機備份</button
           ><button id="restore">還原備份</button
-          ><button id="publish" class="primary">選擇人員發布</button>
+          ><button id="publish" class="primary">選擇人員／廠商發布</button>
         </div>
         <p class="muted">
           資料保存在此瀏覽器；請定期備份。發布檔將放在公開網站，分開網址不構成權限隔離。
         </p>
+        <details class="vendor-entrances">
+          <summary>廠商入口（依工作類型）</summary>
+          <div class="toolbar">
+            <a
+              class="button"
+              href="vendor-1.html"
+              target="_blank"
+              rel="noopener"
+              >雜草垃圾廠商</a
+            ><a
+              class="button"
+              href="vendor-2.html"
+              target="_blank"
+              rel="noopener"
+              >砍樹廠商</a
+            ><a
+              class="button"
+              href="vendor-3.html"
+              target="_blank"
+              rel="noopener"
+              >圍籬廠商</a
+            >
+          </div>
+          <p class="muted">
+            需先產生並上傳對應 vendor-N.json，廠商只顯示該標籤的任務。
+          </p>
+        </details>
         <div id="geo-summary" class="status-bar">尚未匯入地籍資料</div>
         <div id="progress" hidden></div>
         <button id="cancel-geo" hidden>取消地籍匯入</button>
@@ -135,12 +163,13 @@
     <script src="vendor/rbush.js"></script>
     <script src="vendor/exifr.js"></script>
     <script src="vendor/jspdf.js"></script>
-    <script src="core.js?v=20261027-6"></script>
-    <script src="excel.js?v=20261027-6"></script>
+    <script src="core.js?v=20261029-1"></script>
+    <script src="excel.js?v=20261029-1"></script>
     <script src="db.js"></script>
-    <script src="whiteboard.js?v=20261027-6"></script>
-    <script src="documents.js?v=20261027-6"></script>
-    <script src="camera.js?v=20261027-6"></script>
-    <script src="app.js?v=20261027-6"></script>
+    <script src="whiteboard.js?v=20261029-1"></script>
+    <script src="documents.js?v=20261029-1"></script>
+    <script src="camera.js?v=20261029-1"></script>
+    <script src="manual-tasks.js?v=20261029-1"></script>
+    <script src="app.js?v=20261029-1"></script>
   </body>
 </html>

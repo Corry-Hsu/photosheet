@@ -693,3 +693,18 @@ body[data-worker] .map-panel .toolbar > .button {
 .field-location-status[data-state="stale"] {
   color: #68737d;
 }
+
+.manual-row {
+  margin: 10px 0;
+  padding: 12px;
+}
+.manual-row .form-grid {
+  margin-bottom: 8px;
+}
+.manual-row input {
+  min-width: 0;
+  width: 100%;
+}
+#manual-error:empty {
+  display: none;
+}
