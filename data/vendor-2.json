@@ -1,13 +1,66 @@
 {
   "schemaVersion": 1,
-  "batch": "尚未發布",
-  "generatedAt": "",
+  "batch": "2026-10-29-99d3ad40",
+  "generatedAt": "2026-10-29T13:39:04.057Z",
   "person": {
     "id": "v2",
     "name": "砍樹廠商"
   },
   "vendorType": "砍樹",
-  "settings": {},
-  "tasks": [],
+  "settings": {
+    "guide": "全威測量工程有限公司",
+    "contact": "許書桓",
+    "agency": "財政部國有財產署南區分署屏東辦事處",
+    "project": "國有土地作業",
+    "tender": "",
+    "phone": "08-7364773",
+    "fax": "08-7363187",
+    "contract_deadline": "依契約規定",
+    "fence_terms": "依契約規定辦理。"
+  },
+  "tasks": [
+    {
+      "id": "砍樹:147",
+      "type": "砍樹",
+      "row": 148,
+      "serial": "147",
+      "caseNo": "1029-147",
+      "district": "萬丹鄉",
+      "section": "田厝段",
+      "sectionCode": "0114",
+      "parcels": [
+        {
+          "county": "屏東縣",
+          "district": "萬丹鄉",
+          "section": "田厝段",
+          "lot": "677",
+          "sectionCode": "0114"
+        },
+        {
+          "county": "屏東縣",
+          "district": "萬丹鄉",
+          "section": "田厝段",
+          "lot": "678",
+          "sectionCode": "0114"
+        },
+        {
+          "county": "屏東縣",
+          "district": "萬丹鄉",
+          "section": "田厝段",
+          "lot": "679-1",
+          "sectionCode": "0114"
+        }
+      ],
+      "notice": "2026-10-30",
+      "resultDate": "2026-10-30",
+      "due": "2026-11-02T17:00",
+      "vendor": "加菲貓工程行",
+      "sourcePerson": "鍾志強",
+      "area": "",
+      "items": [],
+      "assignee": "p2",
+      "navigation": null
+    }
+  ],
   "features": []
 }

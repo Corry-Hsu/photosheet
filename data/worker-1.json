@@ -1,17 +1,114 @@
 {
   "schemaVersion": 1,
-  "batch": "尚未發布",
-  "generatedAt": null,
+  "batch": "2026-10-29-99d3ad40",
+  "generatedAt": "2026-10-29T13:39:04.057Z",
   "person": {
     "id": "p1",
-    "name": "人員 1"
+    "name": "我自己"
   },
-  "tasks": [],
-  "features": [],
   "settings": {
     "guide": "全威測量工程有限公司",
     "contact": "許書桓",
-    "agency": "財政部國有財產署",
-    "project": ""
-  }
+    "agency": "財政部國有財產署南區分署屏東辦事處",
+    "project": "國有土地作業",
+    "tender": "",
+    "phone": "08-7364773",
+    "fax": "08-7363187",
+    "contract_deadline": "依契約規定",
+    "fence_terms": "依契約規定辦理。"
+  },
+  "tasks": [
+    {
+      "id": "雜草垃圾:662",
+      "type": "雜草垃圾",
+      "row": 664,
+      "serial": "662",
+      "caseNo": "1029-659",
+      "district": "屏東市",
+      "section": "和平段",
+      "sectionCode": "0014",
+      "parcels": [
+        {
+          "county": "屏東縣",
+          "district": "屏東市",
+          "section": "和平段",
+          "lot": "247",
+          "sectionCode": "0014"
+        }
+      ],
+      "notice": "2026-10-30",
+      "resultDate": "2026-10-30",
+      "due": "",
+      "vendor": "迎騰工程行",
+      "sourcePerson": "范文彬",
+      "area": "895",
+      "items": [],
+      "assignee": "p1",
+      "navigation": null
+    },
+    {
+      "id": "雜草垃圾:663",
+      "type": "雜草垃圾",
+      "row": 665,
+      "serial": "663",
+      "caseNo": "1029-660",
+      "district": "屏東市",
+      "section": "長春段",
+      "sectionCode": "0063",
+      "parcels": [
+        {
+          "county": "屏東縣",
+          "district": "屏東市",
+          "section": "長春段",
+          "lot": "611",
+          "sectionCode": "0063"
+        },
+        {
+          "county": "屏東縣",
+          "district": "屏東市",
+          "section": "長春段",
+          "lot": "611-1",
+          "sectionCode": "0063"
+        }
+      ],
+      "notice": "2026-10-30",
+      "resultDate": "2026-10-30",
+      "due": "",
+      "vendor": "迎騰工程行",
+      "sourcePerson": "范文彬",
+      "area": "239",
+      "items": [],
+      "assignee": "p1",
+      "navigation": null
+    },
+    {
+      "id": "雜草垃圾:664",
+      "type": "雜草垃圾",
+      "row": 666,
+      "serial": "664",
+      "caseNo": "1029-661",
+      "district": "內埔鄉",
+      "section": "上黎明段",
+      "sectionCode": "1562",
+      "parcels": [
+        {
+          "county": "屏東縣",
+          "district": "內埔鄉",
+          "section": "上黎明段",
+          "lot": "264",
+          "sectionCode": "1562"
+        }
+      ],
+      "notice": "2026-10-30",
+      "resultDate": "2026-10-30",
+      "due": "",
+      "vendor": "迎騰工程行",
+      "sourcePerson": "范文彬",
+      "area": "5236.84",
+      "items": [],
+      "assignee": "p1",
+      "navigation": null
+    }
+  ],
+  "features": []
 }
