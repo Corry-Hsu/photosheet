@@ -108,8 +108,7 @@
     }
     return row;
   };
-  localStore.put = async (store, value) => {
-    if (store !== "photos") return originalPut(store, value);
+  async function photoBytes(value) {
     const row = { ...value };
     if (row.blob instanceof Blob) {
       row._photoBytes = await row.blob.arrayBuffer();
@@ -121,7 +120,25 @@
       row._originalType = row.original.type;
       delete row.original;
     }
-    return originalPut(store, row);
+    return row;
+  }
+  localStore.put = async (store, value) =>
+    originalPut(store, store === "photos" ? await photoBytes(value) : value);
+  // Keep upload acknowledgements from recreating locally deleted photos.
+  localStore.updatePhotoIfPresent = async (record) => {
+    const row = await photoBytes(record),
+      db = await localStore.open();
+    return new Promise((resolve, reject) => {
+      const tx = db.transaction("photos", "readwrite"),
+        photos = tx.objectStore("photos");
+      const request = photos.get(row.id);
+      request.onsuccess = () => {
+        if (request.result) photos.put(row);
+      };
+      tx.oncomplete = resolve;
+      tx.onerror = () => reject(tx.error);
+      tx.onabort = () => reject(tx.error || Error("照片更新取消"));
+    });
   };
   localStore.get = async (store, id) => {
     const row = await originalGet(store, id);
@@ -537,6 +554,35 @@
       { once: true },
     );
   }
+  async function photoZip(task, rows) {
+    const files = Object.create(null);
+    for (const [index, photo] of rows.entries()) {
+      const name =
+        String(index + 1).padStart(3, "0") + "_" + fileName(task, photo.id);
+      files[name] = new Uint8Array(await photo.blob.arrayBuffer());
+    }
+    // JPEGs are already compressed. Store them losslessly in a standard ZIP.
+    return new File(
+      [fflate.zipSync(files, { level: 0 })],
+      fileName(task, "照片").replace(/\.jpg$/, ".zip"),
+      { type: "application/zip" },
+    );
+  }
+  async function deleteLocalPhotos(rows) {
+    const db = await localStore.open();
+    await new Promise((resolve, reject) => {
+      const tx = db.transaction("photos", "readwrite");
+      tx.oncomplete = resolve;
+      tx.onerror = () => reject(tx.error || Error("照片刪除失敗"));
+      tx.onabort = () => reject(tx.error || Error("照片刪除取消，未變更照片"));
+      try {
+        for (const photo of rows) tx.objectStore("photos").delete(photo.id);
+      } catch (e) {
+        tx.abort();
+        reject(e);
+      }
+    });
+  }
   async function gallery(task, person, el) {
     galleryURLs.forEach((url) => URL.revokeObjectURL(url));
     galleryURLs = [];
@@ -544,15 +590,65 @@
       a.savedAt.localeCompare(b.savedAt),
     );
     if (!el.isConnected) return;
-    el.innerHTML = `<h3>任務照片${isVendor(person) ? "" : " " + rows.length + " 張"}</h3><p>${backend() ? "照片先保存在手機，再回傳主機。" : "照片保存在此裝置；請儲存到手機或分享備份。"}</p><div class="photos">${
+    el.innerHTML = `<h3>任務照片${isVendor(person) ? "" : " " + rows.length + " 張"}</h3><p>${backend() ? "照片先保存在手機，再回傳主機。刪除此裝置照片不會刪除主機回傳紀錄。" : "照片保存在此裝置；可勾選含浮水印照片打包 ZIP 儲存或分享。"}</p><div class="field-photo-toolbar" ${rows.length ? "" : "hidden"}><label class="field-photo-select-all"><input type="checkbox" data-photos-all>全選</label><span data-photos-count aria-live="polite">已選 0 張</span><button data-photos-export disabled>打包勾選照片 ZIP</button><button data-photos-delete disabled>刪除勾選照片</button></div><div class="field-photo-zip" data-photos-zip hidden><a class="button" data-photos-download download>下載 ZIP</a><button data-photos-share hidden>分享 ZIP</button></div><p class="field-photo-status" data-photos-status role="status" aria-live="polite"></p><div class="photos">${
       rows
-        .map((p) => {
+        .map((p, index) => {
           const url = URL.createObjectURL(p.blob);
           galleryURLs.push(url);
-          return `<article class="photo"><button class="field-photo-thumb" data-photo-view="${p.id}" aria-label="查看照片"><img src="${url}" alt="含日期時間與座標的照片"></button><p>${E(new Date(p.capturedAt).toLocaleString("zh-TW", { timeZone: "Asia/Taipei" }))}${backend() ? " · " + (p.uploaded ? "已回傳" : "待回傳") : ""}</p><button data-photo-save="${p.id}">儲存照片</button><button data-photo-delete="${p.id}">刪除此裝置照片</button></article>`;
+          return `<article class="photo"><label class="field-photo-pick"><input type="checkbox" data-photo-select="${E(p.id)}">選取照片 ${index + 1}</label><button class="field-photo-thumb" data-photo-view="${E(p.id)}" aria-label="查看照片 ${index + 1}"><img src="${url}" alt="含日期時間與座標的照片"></button><p>${E(new Date(p.capturedAt).toLocaleString("zh-TW", { timeZone: "Asia/Taipei" }))}${backend() ? " · " + (p.uploaded ? "已回傳" : "待回傳") : ""}</p></article>`;
         })
         .join("") || "<p>尚未拍攝照片</p>"
     }</div>`;
+    const checks = [...el.querySelectorAll("[data-photo-select]")],
+      all = el.querySelector("[data-photos-all]"),
+      count = el.querySelector("[data-photos-count]"),
+      exportButton = el.querySelector("[data-photos-export]"),
+      deleteButton = el.querySelector("[data-photos-delete]"),
+      ready = el.querySelector("[data-photos-zip]"),
+      download = el.querySelector("[data-photos-download]"),
+      share = el.querySelector("[data-photos-share]"),
+      status = el.querySelector("[data-photos-status]");
+    let busy = false,
+      archive = null,
+      archiveURL = null;
+    const selected = () => {
+      const ids = new Set(
+        checks.filter((c) => c.checked).map((c) => c.dataset.photoSelect),
+      );
+      return rows.filter((p) => ids.has(p.id));
+    };
+    function update() {
+      const size = selected().length;
+      count.textContent = `已選 ${size} 張`;
+      all.checked = size > 0 && size === checks.length;
+      all.indeterminate = size > 0 && size < checks.length;
+      all.disabled = busy;
+      checks.forEach((c) => {
+        c.disabled = busy;
+        c.closest(".photo").classList.toggle("field-photo-selected", c.checked);
+      });
+      exportButton.disabled = deleteButton.disabled = busy || size === 0;
+      share.disabled = busy;
+    }
+    function clearArchive() {
+      if (archiveURL) URL.revokeObjectURL(archiveURL);
+      archiveURL = archive = null;
+      download.removeAttribute("href");
+      ready.hidden = true;
+      status.textContent = "";
+    }
+    all.onchange = () => {
+      checks.forEach((c) => (c.checked = all.checked));
+      clearArchive();
+      update();
+    };
+    checks.forEach(
+      (c) =>
+        (c.onchange = () => {
+          clearArchive();
+          update();
+        }),
+    );
     el.querySelectorAll("[data-photo-view]").forEach(
       (b) =>
         (b.onclick = () => {
@@ -560,25 +656,88 @@
           viewImage(p.blob, fileName(task, p.id));
         }),
     );
-    el.querySelectorAll("[data-photo-save]").forEach(
-      (b) =>
-        (b.onclick = async () => {
-          const p = rows.find((p) => p.id === b.dataset.photoSave);
-          try {
-            await saveImage(p.blob, fileName(task, p.id));
-          } catch (e) {
-            alert(e.message);
-          }
-        }),
-    );
-    el.querySelectorAll("[data-photo-delete]").forEach(
-      (b) =>
-        (b.onclick = async () => {
-          if (!confirm("刪除此裝置的照片？請先確認已儲存或回傳。")) return;
-          await Store.del("photos", b.dataset.photoDelete);
-          await gallery(task, person, el);
-        }),
-    );
+    // This function calls share before its first await, so the ready button also
+    // works on browsers that require a fresh user gesture after ZIP creation.
+    async function shareArchive() {
+      if (!archive || busy) return;
+      busy = true;
+      update();
+      try {
+        await navigator.share({ files: [archive], title: "任務照片 ZIP" });
+        status.textContent = "ZIP 已交給分享面板；也可再次下載。";
+      } catch (e) {
+        status.textContent =
+          e.name === "AbortError"
+            ? "已取消分享；ZIP 仍可下載或再次分享。"
+            : "ZIP 已備妥，請按「分享 ZIP」或「下載 ZIP」。";
+      } finally {
+        busy = false;
+        update();
+      }
+    }
+    share.onclick = shareArchive;
+    exportButton.onclick = async () => {
+      const chosen = selected();
+      if (busy || !chosen.length) return;
+      clearArchive();
+      busy = true;
+      update();
+      status.textContent = `正在打包 ${chosen.length} 張照片…`;
+      try {
+        const file = await photoZip(task, chosen);
+        if (!el.isConnected) return;
+        archive = file;
+        archiveURL = URL.createObjectURL(file);
+        galleryURLs.push(archiveURL);
+        download.href = archiveURL;
+        download.download = file.name;
+        let canShare = false;
+        try {
+          canShare =
+            !!navigator.share && !!navigator.canShare?.({ files: [file] });
+        } catch (_) {}
+        ready.hidden = false;
+        share.hidden = !canShare;
+        status.textContent = `已打包 ${chosen.length} 張含浮水印照片。`;
+        busy = false;
+        update();
+        if (canShare) await shareArchive();
+        else download.click();
+      } catch (e) {
+        status.textContent = "打包失敗，照片仍保留：" + (e.message || e);
+      } finally {
+        busy = false;
+        update();
+      }
+    };
+    deleteButton.onclick = async () => {
+      const chosen = selected();
+      if (busy || !chosen.length) return;
+      const pending = backend() ? chosen.filter((p) => !p.uploaded).length : 0;
+      if (
+        !confirm(
+          `刪除勾選的 ${chosen.length} 張此裝置照片？${pending ? `其中 ${pending} 張尚未回傳，刪除後無法再從此裝置回傳。` : ""}請先確認已儲存或備份。${backend() ? "主機已收到的照片不受影響。" : ""}`,
+        )
+      )
+        return;
+      busy = true;
+      update();
+      status.textContent = "正在刪除勾選照片…";
+      try {
+        await deleteLocalPhotos(chosen);
+        if (!el.isConnected) return;
+        await gallery(task, person, el);
+        el.querySelector("[data-photos-status]").textContent =
+          `已刪除 ${chosen.length} 張此裝置照片。`;
+        if (window.HubSync) HubSync.pending().catch(() => {});
+      } catch (e) {
+        status.textContent = "刪除失敗，請重試：" + (e.message || e);
+      } finally {
+        busy = false;
+        update();
+      }
+    };
+    update();
   }
   dialog.addEventListener("cancel", (e) => {
     if (active?.pending) {

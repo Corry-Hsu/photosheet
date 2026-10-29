@@ -35,7 +35,7 @@ with tempfile.TemporaryDirectory() as tmp,sync_playwright() as p:
  pg.evaluate("()=>{window.originalPut=Store.put;Store.put=async(store,value)=>{if(store==='photos')throw Error('測試儲存失敗');return originalPut.call(Store,store,value)}}")
  pg.click('#shutter');pg.wait_for_function('document.querySelector("#capture-status").textContent.includes("儲存失敗")');assert pg.locator('#capture-save').is_hidden();assert pg.evaluate('(async()=>{return (await Store.photosFor("p1",PSApp.state.tasks[0].id)).length})()')==1
  pg.evaluate('()=>{Store.put=originalPut}');pg.click('#capture-retry-save');pg.wait_for_function('!document.querySelector("#capture-save").hidden');assert pg.evaluate('(async()=>{return (await Store.photosFor("p1",PSApp.state.tasks[0].id)).length})()')==2
- pg.click('#camera-back');pg.wait_for_selector('[data-photo-save]');assert pg.locator('[data-photo-original]').count()==0;assert '下載浮水印' not in pg.locator('#local-photos').inner_text();assert pg.locator('[data-photo-save]').count()==2
+ pg.click('#camera-back');pg.wait_for_selector('[data-photo-select]');assert pg.locator('[data-photo-original]').count()==0;assert '下載浮水印' not in pg.locator('#local-photos').inner_text();assert pg.locator('[data-photo-select]').count()==2
  pg.locator('[data-photo-view]').first.click();pg.wait_for_selector('.field-image-dialog');assert pg.locator('.field-image-dialog img').is_visible();pg.click('.field-image-close')
  pg.click('#detail-camera');pg.wait_for_function('!document.querySelector("#shutter").disabled');pg.click('#camera-back');pg.wait_for_selector('#detail-board');pg.click('#close-dialog')
  # Stored bytes roundtrip, and legacy Blob records remain readable.
