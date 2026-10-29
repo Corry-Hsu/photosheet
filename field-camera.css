@@ -71,7 +71,7 @@ body[data-worker] .field-camera-media img {
   width: 100%;
   height: 100%;
   max-height: none;
-  object-fit: cover;
+  object-fit: contain;
 }
 body[data-worker] .field-camera-media img {
   object-fit: contain;
