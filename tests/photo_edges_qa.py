@@ -1,16 +1,8 @@
-from test_config import ROOT, BASE, ZIP, EXCEL, CHROMIUM, QA_NOW
+"""Compatibility entry point: field capture failure tests moved to the new photo flow.
+Native EXIF selection was intentionally removed from field pages; the admin camera
+is unchanged. GPS/storage failure, pending-image retry and stamped output are now
+covered by field_photo_flow_qa.py.
+"""
 from pathlib import Path
-from playwright.sync_api import sync_playwright
-from PIL import Image
-import json,zipfile
-root=ROOT;img=Image.new('RGB',(400,200),(80,150,90));exif=Image.Exif();exif[274]=6;exif[34665]={36867:'2026:10:25 13:04:05'};img.save('/tmp/photo-with-exif.jpg',exif=exif);img.save('/tmp/photo-no-exif.jpg')
-data=json.loads((ROOT/'tests/fixtures/worker-1.json').read_text())
-with sync_playwright() as p:
- b=p.chromium.launch(executable_path=CHROMIUM,args=['--no-sandbox','--use-fake-device-for-media-stream','--use-fake-ui-for-media-stream']);c=b.new_context(permissions=['camera','geolocation'],geolocation={'latitude':22.628,'longitude':120.291,'accuracy':8},timezone_id='Asia/Taipei');pg=c.new_page();pg.clock.set_fixed_time(QA_NOW);errors=[];pg.on('pageerror',lambda e:errors.append(str(e)));pg.route('https://tile.openstreetmap.org/**',lambda r:r.abort());pg.route('**/data/worker-1.json',lambda r:r.fulfill(json=data));pg.goto(BASE+'worker-1.html');pg.wait_for_function('PSApp.state.tasks.length===1');pg.locator('[data-detail]').first.click();pg.click('#detail-camera');pg.wait_for_selector('#native-file',state='attached');pg.evaluate('''()=>{window.watermarkTexts=[];const original=CanvasRenderingContext2D.prototype.fillText;CanvasRenderingContext2D.prototype.fillText=function(text,...args){window.watermarkTexts.push(text);return original.call(this,text,...args)}}''');pg.locator('#native-file').set_input_files('/tmp/photo-with-exif.jpg');pg.wait_for_function('document.querySelector("#capture-count").textContent.includes("1 張")',timeout=30000)
- text=pg.evaluate('watermarkTexts');assert text[0]=='115年10月26日 13:04:05',text;assert text[1]=='GPS 22.628000, 120.291000  ±8m',text
- stored=pg.evaluate('''async()=>{const p=(await Store.photosFor('p1',PSApp.state.tasks[0].id))[0];const im=await createImageBitmap(p.blob);return {width:im.width,height:im.height,capturedAt:p.capturedAt}}''');assert stored['width']==200 and stored['height']==150,stored;assert stored['capturedAt']=='2026-10-25T05:04:05.000Z'
- pg.locator('#native-file').set_input_files('/tmp/photo-no-exif.jpg');pg.wait_for_function('document.querySelector("#capture-status").textContent.includes("EXIF")');assert pg.evaluate('Store.photosFor("p1",PSApp.state.tasks[0].id).then(x=>x.length)')==1
- # Simulate quota error without changing real browser storage settings.
- pg.evaluate('''()=>{window.originalStorePut=Store.put;Store.put=async function(n,v){if(n==='photos')throw Error('測試儲存空間不足');return originalStorePut.call(this,n,v)}}''');pg.locator('#native-file').set_input_files('/tmp/photo-with-exif.jpg');pg.wait_for_function('document.querySelector("#capture-status").textContent.includes("儲存空間不足")');assert pg.evaluate('Store.photosFor("p1",PSApp.state.tasks[0].id).then(x=>x.length)')==1
- pg.evaluate('()=>{Store.put=originalStorePut}');c.clear_permissions();c.grant_permissions(['camera']);pg.click('#shutter');pg.wait_for_function('document.querySelector("#capture-status").textContent.includes("定位")');assert pg.evaluate('Store.photosFor("p1",PSApp.state.tasks[0].id).then(x=>x.length)')==1
- result={'native_exif_time':stored['capturedAt'],'specified_date_watermark':text[0],'gps_watermark':text[1],'orientation_applied':stored,'missing_exif_rejected':True,'quota_failure_no_false_save':True,'gps_denied_no_false_save':True,'page_errors':errors};assert not errors; (root/'evidence/photo-edge-results.json').write_text(json.dumps(result,ensure_ascii=False,indent=2));print(json.dumps(result,ensure_ascii=False,indent=2));b.close()
+import runpy
+runpy.run_path(str(Path(__file__).with_name("field_photo_flow_qa.py")),run_name="__main__")

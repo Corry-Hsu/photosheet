@@ -334,6 +334,8 @@
       $("#field-map-title").textContent =
         location(t) + " " + t.parcels.map((p) => p.lot).join("、");
       $("#worker-open-task").disabled = false;
+      for (const id of ["#worker-board", "#worker-camera"])
+        if ($(id)) $(id).disabled = false;
       const route = nav(t),
         a = $("#worker-navigate");
       a.setAttribute("aria-disabled", String(!route));
@@ -587,12 +589,13 @@
         await detail(id);
         tell("本機入口已保存；不會同步到其他裝置");
       });
-      if (!vendorType) bind("#field-nav-map", () => {
-        $("#dialog").close();
-        pinMode = true;
-        scrollFieldMap();
-        tell("點地圖設定本機入口");
-      });
+      if (!vendorType)
+        bind("#field-nav-map", () => {
+          $("#dialog").close();
+          pinMode = true;
+          scrollFieldMap();
+          tell("點地圖設定本機入口");
+        });
     }
     bind("#detail-board", () => documentDialog([t], "board"));
     bind("#detail-camera", () =>
@@ -861,6 +864,8 @@
       landLayer = pin = null;
       focused = "";
       if ($("#field-map-title")) $("#field-map-title").textContent = "任務地圖";
+      for (const id of ["#worker-open-task", "#worker-board", "#worker-camera"])
+        if ($(id)) $(id).disabled = true;
       selected.clear();
       rebuild();
       setupFilters();
@@ -1021,12 +1026,22 @@
       $("#orders").hidden = true;
       $("#person-filter").hidden = true;
       $("#date-filters").hidden = true;
+      if (worker.startsWith("v")) $("#worker-filter-toggle")?.remove();
       if ($("#pin-mode")) {
         $("#pin-mode").hidden = false;
         $("#pin-mode").textContent = "點地圖設定本機入口";
       }
       $("#show-context").hidden = true;
-      bind("#worker-map-jump", scrollFieldMap);
+      const selectedTask = () => {
+        const task = state.tasks.find((t) => t.id === focused);
+        if (!task) throw Error("請先點選任務");
+        return task;
+      };
+      bind("#worker-board", () => documentDialog([selectedTask()], "board"));
+      bind("#worker-camera", () => {
+        const task = selectedTask();
+        return FieldCamera.open(task, worker, () => detail(task.id));
+      });
       bind("#worker-open-task", () => {
         const t = state.tasks.find((t) => t.id === focused) || filtered()[0];
         if (t) return detail(t.id);
@@ -1038,10 +1053,14 @@
           throw Error("此任務尚無導航位置，請由管理者核對");
         }
       });
-      bind("#worker-filter-toggle", () => {
-        const open = document.body.classList.toggle("worker-filters-open");
-        $("#worker-filter-toggle").setAttribute("aria-expanded", String(open));
-      });
+      if (!worker.startsWith("v"))
+        bind("#worker-filter-toggle", () => {
+          const open = document.body.classList.toggle("worker-filters-open");
+          $("#worker-filter-toggle").setAttribute(
+            "aria-expanded",
+            String(open),
+          );
+        });
       bind("#worker-select-toggle", () => {
         const open = document.body.classList.toggle("worker-selecting");
         $("#worker-select-toggle").setAttribute("aria-pressed", String(open));
@@ -1123,12 +1142,13 @@
       if (!contextOn && contextLayer) map.removeLayer(contextLayer);
       else context();
     });
-    if ($("#pin-mode")) bind("#pin-mode", () => {
-      if (!focused) throw Error("請先選取任務");
-      pinMode = !pinMode;
-      $("#pin-mode").classList.toggle("active", pinMode);
-      tell(pinMode ? "點地圖設定已核對入口" : "已取消入口設定");
-    });
+    if ($("#pin-mode"))
+      bind("#pin-mode", () => {
+        if (!focused) throw Error("請先選取任務");
+        pinMode = !pinMode;
+        $("#pin-mode").classList.toggle("active", pinMode);
+        tell(pinMode ? "點地圖設定已核對入口" : "已取消入口設定");
+      });
     const chosen = () => state.tasks.filter((t) => selected.has(t.id));
     bind("#batch-assign", () => assignDialog(chosen()));
     if ($("#batch-complete"))
