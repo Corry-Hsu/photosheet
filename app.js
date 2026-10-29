@@ -369,7 +369,7 @@
           layer.bindTooltip(E(text));
           layer.on("click", async (e) => {
             L.DomEvent.stopPropagation(e);
-            if (pinMode) {
+            if (pinMode && !vendorType) {
               const task = state.tasks.find((t) => t.id === focused);
               if (task) {
                 try {
@@ -404,7 +404,7 @@
     const n = nav(t);
     if (n) {
       pin = L.marker([n.point[1], n.point[0]], {
-        draggable: true,
+        draggable: !vendorType,
         icon: L.divIcon({
           className: "",
           html: '<div class="pin"></div>',
@@ -575,7 +575,7 @@
     if (worker) {
       $("#local-photos").insertAdjacentHTML(
         "beforebegin",
-        `<section class="panel"><h3>本機導航入口</h3><p class="muted">只保存在此裝置，不會改動管理端；新發布批次採管理端入口。</p><div class="nav-fields"><input id="field-nav-lat" type="number" step="any" aria-label="本機入口緯度" placeholder="緯度" value="${n?.point[1] ?? ""}"><input id="field-nav-lng" type="number" step="any" aria-label="本機入口經度" placeholder="經度" value="${n?.point[0] ?? ""}"><button id="field-nav-save">保存本機入口</button><button id="field-nav-map">改在地圖設定</button></div></section>`,
+        `<section class="panel"><h3>本機導航入口</h3><p class="muted">只保存在此裝置，不會改動管理端；新發布批次採管理端入口。</p><div class="nav-fields"><input id="field-nav-lat" type="number" step="any" aria-label="本機入口緯度" placeholder="緯度" value="${n?.point[1] ?? ""}"><input id="field-nav-lng" type="number" step="any" aria-label="本機入口經度" placeholder="經度" value="${n?.point[0] ?? ""}"><button id="field-nav-save">保存本機入口</button>${vendorType ? "" : '<button id="field-nav-map">改在地圖設定</button>'}</div></section>`,
       );
       bind("#field-nav-save", async () => {
         if (!$("#field-nav-lat").value || !$("#field-nav-lng").value)
@@ -587,7 +587,7 @@
         await detail(id);
         tell("本機入口已保存；不會同步到其他裝置");
       });
-      bind("#field-nav-map", () => {
+      if (!vendorType) bind("#field-nav-map", () => {
         $("#dialog").close();
         pinMode = true;
         scrollFieldMap();
@@ -974,6 +974,7 @@
     }
   }
   async function start() {
+    if (vendorType) $("#pin-mode")?.remove();
     map = L.map("map", { preferCanvas: true, renderer: L.canvas() }).setView(
       [22.55, 120.58],
       10,
@@ -993,7 +994,7 @@
       mapTimer = setTimeout(context, 150);
     });
     map.on("click", async (e) => {
-      if (!pinMode) return;
+      if (!pinMode || vendorType) return;
       const t = listSource().find((t) => t.id === focused);
       if (!t) {
         tell("請先選取一筆任務", true);
@@ -1020,8 +1021,10 @@
       $("#orders").hidden = true;
       $("#person-filter").hidden = true;
       $("#date-filters").hidden = true;
-      $("#pin-mode").hidden = false;
-      $("#pin-mode").textContent = "點地圖設定本機入口";
+      if ($("#pin-mode")) {
+        $("#pin-mode").hidden = false;
+        $("#pin-mode").textContent = "點地圖設定本機入口";
+      }
       $("#show-context").hidden = true;
       bind("#worker-map-jump", scrollFieldMap);
       bind("#worker-open-task", () => {
@@ -1120,7 +1123,7 @@
       if (!contextOn && contextLayer) map.removeLayer(contextLayer);
       else context();
     });
-    bind("#pin-mode", () => {
+    if ($("#pin-mode")) bind("#pin-mode", () => {
       if (!focused) throw Error("請先選取任務");
       pinMode = !pinMode;
       $("#pin-mode").classList.toggle("active", pinMode);
