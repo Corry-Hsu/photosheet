@@ -360,7 +360,16 @@
         geometry: { type: "MultiPolygon", coordinates: f.polygons },
       })),
       {
-        style,
+        style: worker
+          ? {
+              color: "#ff0000",
+              weight: 1.5,
+              opacity: 1,
+              fill: true,
+              fillColor: "#ff9800",
+              fillOpacity: 0.25,
+            }
+          : style,
         renderer: map.options.renderer,
         onEachFeature: (f, layer) => {
           const land = featureMap.get(f.properties.id),

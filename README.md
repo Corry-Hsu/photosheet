@@ -130,3 +130,7 @@ Leaflet + OpenStreetMap 標準底圖，保留來源標示，不批次預抓或�
 官方圖層列表（PHOTO2、JPEG、最大層級19）：https://maps.nlsc.gov.tw/S09SOA/pro/Wmts_ajax_list.jsp
 
 能力描述：https://wmts.nlsc.gov.tw/wmts?SERVICE=WMTS&REQUEST=GetCapabilities&VERSION=1.0.0
+
+## 現場地籍配色（2026-10-31）
+
+人員及廠商頁的KML地籍範圍統一使用1.5px細紅框（#ff0000）及25%透明度橙色填色（#ff9800）。一般地圖與正射影像皆採相同樣式；地籍座標、點選與導航不變。管理頁保留原本綠框綠色填色，GPS與任務入口不變。
