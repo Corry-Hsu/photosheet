@@ -9,7 +9,10 @@
     stream = null,
     previewURL = null,
     galleryURLs = [],
-    session = 0;
+    session = 0,
+    liveTimer = null,
+    liveWatch = null,
+    liveResize = null;
   const isVendor = (person) =>
     /^v[123]$/.test(person) || window.HubUser?.role === "vendor";
   const backend = () => !!window.HubAPI;
@@ -17,12 +20,20 @@
     if ($("#capture-status")) $("#capture-status").textContent = text;
   };
   function stopStream() {
+    clearInterval(liveTimer);
+    liveTimer = null;
+    if (liveWatch !== null) navigator.geolocation?.clearWatch?.(liveWatch);
+    liveWatch = null;
+    liveResize?.disconnect();
+    liveResize = null;
+    if ($("#live-watermark")) $("#live-watermark").hidden = true;
     if (stream) stream.getTracks().forEach((t) => t.stop());
     stream = null;
   }
   function cleanup() {
     session++;
     stopStream();
+    active?.pending?.frame?.close?.();
     active = null;
     dialog.classList.remove("camera-mode");
     if (previewURL) URL.revokeObjectURL(previewURL);
@@ -151,31 +162,7 @@
   localStore.photosFor = async (...args) =>
     (await originalPhotos(...args)).map(revive);
 
-  async function jpeg(image, task, gps, capturedAt) {
-    const canvas = document.createElement("canvas"),
-      width = image.videoWidth || image.naturalWidth || image.width,
-      height = image.videoHeight || image.naturalHeight || image.height;
-    if (!width || !height) throw Error("無法讀取照片尺寸");
-    // Landscape photos keep every edge and their native aspect ratio.
-    // Portrait capture retains the previous horizontal 4:3 center-frame behavior.
-    const landscape = width >= height;
-    const cropWidth = width,
-      cropHeight = landscape ? height : (width * 3) / 4;
-    const scale = Math.min(1, 4096 / Math.max(cropWidth, cropHeight));
-    canvas.width = Math.round(cropWidth * scale);
-    canvas.height = Math.round(cropHeight * scale);
-    const x = canvas.getContext("2d");
-    x.drawImage(
-      image,
-      0,
-      (height - cropHeight) / 2,
-      cropWidth,
-      cropHeight,
-      0,
-      0,
-      canvas.width,
-      canvas.height,
-    );
+  function paintStamp(x, width, height, task, gps, capturedAt) {
     const time = new Intl.DateTimeFormat("en-GB", {
       timeZone: "Asia/Taipei",
       hour: "2-digit",
@@ -185,28 +172,39 @@
     }).format(new Date(capturedAt));
     const lines = [
       C.roc(task.resultDate) + " " + time,
-      `GPS ${gps.latitude.toFixed(6)}, ${gps.longitude.toFixed(6)}  ±${Math.round(gps.accuracy)}m`,
+      gps
+        ? `GPS ${gps.latitude.toFixed(6)}, ${gps.longitude.toFixed(6)}  ±${Math.round(gps.accuracy)}m`
+        : "GPS 尚未取得定位",
     ];
-    let font = Math.max(10, Math.round(canvas.width * 0.035));
+    let font = Math.max(10, Math.round(width * 0.035));
     x.font = `bold ${font}px Arial`;
-    while (
-      lines.some((t) => x.measureText(t).width > canvas.width * 0.92) &&
-      font > 5
-    )
+    while (lines.some((t) => x.measureText(t).width > width * 0.92) && font > 5)
       x.font = `bold ${--font}px Arial`;
     let line = font * 1.4,
-      pad = Math.max(4, canvas.width * 0.025),
+      pad = Math.max(4, width * 0.025),
       box = line * 2 + pad * 2;
+    const effectScale = x.getTransform().a;
     x.shadowColor = "rgba(0,0,0,.9)";
-    x.shadowBlur = Math.max(2, font * 0.16);
-    x.shadowOffsetX = Math.max(1, font * 0.06);
-    x.shadowOffsetY = Math.max(1, font * 0.08);
+    x.shadowBlur = Math.max(2, font * 0.16) * effectScale;
+    x.shadowOffsetX = Math.max(1, font * 0.06) * effectScale;
+    x.shadowOffsetY = Math.max(1, font * 0.08) * effectScale;
     x.fillStyle = "white";
     x.textBaseline = "top";
     x.textAlign = "center";
     lines.forEach((t, i) =>
-      x.fillText(t, canvas.width / 2, canvas.height - box + pad + i * line),
+      x.fillText(t, width / 2, height - box + pad + i * line),
     );
+  }
+  async function jpeg(image, task, gps, capturedAt) {
+    const canvas = document.createElement("canvas"),
+      width = image.videoWidth || image.naturalWidth || image.width,
+      height = image.videoHeight || image.naturalHeight || image.height;
+    if (!width || !height) throw Error("無法讀取照片尺寸");
+    canvas.width = width;
+    canvas.height = height;
+    const x = canvas.getContext("2d");
+    x.drawImage(image, 0, 0);
+    paintStamp(x, width, height, task, gps, capturedAt);
     const blob = await new Promise((yes, no) =>
       canvas.toBlob(
         (b) => (b ? yes(b) : no(Error("照片處理失敗"))),
@@ -217,6 +215,128 @@
     return blob;
   }
 
+  function startLivePreview(token) {
+    const current = active,
+      video = $("#video"),
+      canvas = $("#live-watermark"),
+      media = $("#camera-media");
+    canvas.hidden = false;
+    function draw() {
+      if (!active || token !== session || video.hidden || !video.videoWidth)
+        return;
+      const width = video.videoWidth,
+        height = video.videoHeight,
+        rect = media.getBoundingClientRect(),
+        scale = Math.min(rect.width / width, rect.height / height),
+        dpr = window.devicePixelRatio || 1;
+      if (!scale) return;
+      const w = width * scale,
+        h = height * scale;
+      canvas.style.width = w + "px";
+      canvas.style.height = h + "px";
+      canvas.width = Math.max(1, Math.round(w * dpr));
+      canvas.height = Math.max(1, Math.round(h * dpr));
+      const x = canvas.getContext("2d");
+      x.scale(canvas.width / width, canvas.height / height);
+      const location =
+        current.liveGPS && Date.now() - current.liveGPS.timestamp <= 60000
+          ? current.liveGPS
+          : null;
+      paintStamp(
+        x,
+        width,
+        height,
+        current.task,
+        location,
+        new Date().toISOString(),
+      );
+    }
+    const onLocation = (p) => {
+      if (!active || token !== session) return;
+      const c = p.coords;
+      if (
+        ![c.latitude, c.longitude, c.accuracy].every(Number.isFinite) ||
+        Math.abs(c.latitude) > 90 ||
+        Math.abs(c.longitude) > 180 ||
+        c.accuracy < 0
+      )
+        return;
+      current.liveGPS = {
+        latitude: c.latitude,
+        longitude: c.longitude,
+        accuracy: c.accuracy,
+        timestamp: p.timestamp || Date.now(),
+      };
+      draw();
+    };
+    const onError = () => {
+      if (active && token === session) {
+        current.liveGPS = null;
+        draw();
+      }
+    };
+    try {
+      if (navigator.geolocation?.watchPosition)
+        liveWatch = navigator.geolocation.watchPosition(onLocation, onError, {
+          enableHighAccuracy: true,
+          maximumAge: 0,
+          timeout: 20000,
+        });
+      else
+        navigator.geolocation?.getCurrentPosition(onLocation, onError, {
+          enableHighAccuracy: true,
+          maximumAge: 0,
+          timeout: 20000,
+        });
+    } catch (_) {
+      onError();
+    }
+    liveResize = new ResizeObserver(draw);
+    liveResize.observe(media);
+    video.onresize = draw;
+    liveTimer = setInterval(draw, 250);
+    draw();
+  }
+  async function decodePhoto(blob) {
+    if (window.createImageBitmap) {
+      try {
+        return await createImageBitmap(blob, {
+          imageOrientation: "from-image",
+        });
+      } catch (_) {}
+    }
+    return new Promise((resolve, reject) => {
+      const image = new Image(),
+        url = URL.createObjectURL(blob);
+      image.onload = () => {
+        URL.revokeObjectURL(url);
+        resolve(image);
+      };
+      image.onerror = () => {
+        URL.revokeObjectURL(url);
+        reject(Error("無法讀取相機照片"));
+      };
+      image.src = url;
+    });
+  }
+  async function fullFrame(video) {
+    const track = stream?.getVideoTracks?.()[0];
+    if (track && window.ImageCapture) {
+      let frame;
+      try {
+        const original = await new ImageCapture(track).takePhoto();
+        frame = await decodePhoto(original);
+        if (frame.width || frame.naturalWidth) return { original, frame };
+      } catch (_) {
+        frame?.close?.();
+      }
+    }
+    const frame = document.createElement("canvas");
+    frame.width = video.videoWidth;
+    frame.height = video.videoHeight;
+    frame.getContext("2d").drawImage(video, 0, 0);
+    return { original: await blobOf(frame, 0.98), frame };
+  }
   // Use only camera capabilities exposed by the browser; never simulate a wide lens by cropping.
   async function cameraTools(token) {
     const currentStream = stream,
@@ -332,7 +452,8 @@
           ...(deviceId
             ? { deviceId: { exact: deviceId } }
             : { facingMode: { ideal: "environment" } }),
-          width: { ideal: 1920 },
+          width: { ideal: 10000 },
+          height: { ideal: 10000 },
           resizeMode: { ideal: "none" },
         },
         audio: false,
@@ -352,7 +473,8 @@
       if (!active || token !== session) return;
       $("#shutter").disabled = false;
       $("#camera-restart").hidden = true;
-      message("橫拍保留完整畫面；直拍輸出中央橫式範圍。");
+      message("直拍、橫拍均保留完整尺寸，不裁切。浮水印會置於畫面下方。");
+      startLivePreview(token);
     } catch (e) {
       if (token === session && active) {
         message("無法開啟相機。請允許瀏覽器使用相機後重試：" + e.message);
@@ -417,6 +539,7 @@
       else await Store.put("photos", record);
       if (!active || session !== token) return;
       current.record = record;
+      current.pending.frame.close?.();
       current.pending = null;
       showReview(blob, true);
       message(
@@ -445,23 +568,23 @@
     if (!current || current.busy || !video.videoWidth) return;
     $("#shutter").disabled = true;
     try {
+      $("#camera-optics").hidden = true;
       const capturedAt = new Date().toISOString(),
-        raw = document.createElement("canvas");
-      raw.width = video.videoWidth;
-      raw.height = video.videoHeight;
-      raw.getContext("2d").drawImage(video, 0, 0);
-      const frame = raw;
-      const original = await blobOf(raw, 0.98),
-        frozen = original;
-      if (!active || session !== token) return;
+        { original, frame } = await fullFrame(video);
+      if (!active || session !== token) {
+        frame.close?.();
+        return;
+      }
       current.pending = { original, frame, capturedAt };
       current.record = null;
       stopStream();
-      showReview(frozen, false);
+      showReview(original, false);
       await savePending();
     } catch (e) {
+      if (!active || session !== token) return;
       message(e?.message || "照片尚未儲存，請確認裝置空間後重試");
       if ($("#shutter")) $("#shutter").disabled = false;
+      if ($("#camera-optics")) $("#camera-optics").hidden = false;
     }
   }
   function leave() {
@@ -486,7 +609,7 @@
     dialog.classList.add("camera-mode");
     $("#dialog-title").textContent = "現場拍照";
     $("#dialog-body").innerHTML =
-      `<section class="field-camera-shell"><header class="field-camera-header"><button id="camera-back">返回任務</button><div><strong id="capture-mode">現場拍照</strong><small>${E(task.parcels.map((p) => p.section + " " + p.lot).join("、"))}</small></div></header><div id="camera-media" class="field-camera-media"><video id="video" autoplay playsinline muted></video><img id="capture-preview" alt="本次拍攝的照片" hidden></div><footer class="field-camera-controls"><div id="camera-optics" hidden><label id="camera-lens-row" hidden>鏡頭<select id="camera-lens" aria-label="選擇相機鏡頭"></select></label><label id="camera-zoom-row" hidden>縮放 <output id="camera-zoom-value" for="camera-zoom"></output><input id="camera-zoom" type="range" aria-label="相機縮放"></label><p id="camera-optics-note" role="status"></p></div><p id="capture-status" role="status" aria-live="polite">請允許相機及定位。</p><div class="field-camera-buttons"><button id="shutter" disabled>拍照</button><button id="camera-restart" hidden>重新開啟相機</button><button id="capture-save" hidden>儲存照片</button><button id="capture-again" hidden>繼續拍下一張</button><button id="capture-retry-save" hidden>重試儲存</button>${backend() ? '<button id="capture-retry">重試回傳</button>' : ""}</div></footer></section>`;
+      `<section class="field-camera-shell"><header class="field-camera-header"><button id="camera-back">返回任務</button><div><strong id="capture-mode">現場拍照</strong><small>${E(task.parcels.map((p) => p.section + " " + p.lot).join("、"))}</small></div></header><div id="camera-media" class="field-camera-media"><video id="video" autoplay playsinline muted></video><canvas id="live-watermark" aria-label="浮水印即時預覽" hidden></canvas><img id="capture-preview" alt="本次拍攝的照片" hidden></div><footer class="field-camera-controls"><div id="camera-optics" hidden><label id="camera-lens-row" hidden>鏡頭<select id="camera-lens" aria-label="選擇相機鏡頭"></select></label><label id="camera-zoom-row" hidden>縮放 <output id="camera-zoom-value" for="camera-zoom"></output><input id="camera-zoom" type="range" aria-label="相機縮放"></label><p id="camera-optics-note" role="status"></p></div><p id="capture-status" role="status" aria-live="polite">請允許相機及定位。</p><div class="field-camera-buttons"><button id="shutter" disabled>拍照</button><button id="camera-restart" hidden>重新開啟相機</button><button id="capture-save" hidden>儲存照片</button><button id="capture-again" hidden>繼續拍下一張</button><button id="capture-retry-save" hidden>重試儲存</button>${backend() ? '<button id="capture-retry">重試回傳</button>' : ""}</div></footer></section>`;
     if (!dialog.open) dialog.showModal();
     $("#camera-back").onclick = leave;
     $("#shutter").onclick = capture;
@@ -501,6 +624,7 @@
     $("#capture-again").onclick = () => {
       if (active?.pending && !confirm("目前照片尚未儲存，確定重新拍攝？"))
         return;
+      active.pending?.frame?.close?.();
       active.pending = null;
       active.record = null;
       $("#capture-preview").hidden = true;
