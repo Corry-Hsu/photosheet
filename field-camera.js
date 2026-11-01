@@ -163,6 +163,17 @@
     (await originalPhotos(...args)).map(revive);
 
   function paintStamp(x, width, height, task, gps, capturedAt) {
+    x.save();
+    if (height > width) {
+      // Portrait: put the virtual landscape bottom along the photo's left long edge.
+      x.translate(width, 0);
+      x.rotate(Math.PI / 2);
+      [width, height] = [height, width];
+    }
+    paintLongEdgeStamp(x, width, height, task, gps, capturedAt);
+    x.restore();
+  }
+  function paintLongEdgeStamp(x, width, height, task, gps, capturedAt) {
     const time = new Intl.DateTimeFormat("en-GB", {
       timeZone: "Asia/Taipei",
       hour: "2-digit",
@@ -183,7 +194,8 @@
     let line = font * 1.4,
       pad = Math.max(4, width * 0.025),
       box = line * 2 + pad * 2;
-    const effectScale = x.getTransform().a;
+    const matrix = x.getTransform(),
+      effectScale = Math.hypot(matrix.a, matrix.b);
     x.shadowColor = "rgba(0,0,0,.9)";
     x.shadowBlur = Math.max(2, font * 0.16) * effectScale;
     x.shadowOffsetX = Math.max(1, font * 0.06) * effectScale;
@@ -473,7 +485,7 @@
       if (!active || token !== session) return;
       $("#shutter").disabled = false;
       $("#camera-restart").hidden = true;
-      message("直拍、橫拍均保留完整尺寸，不裁切。浮水印會置於畫面下方。");
+      message("照片保留完整尺寸，不裁切。浮水印固定在長邊：直式靠左，橫式靠下。");
       startLivePreview(token);
     } catch (e) {
       if (token === session && active) {

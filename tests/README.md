@@ -54,3 +54,5 @@ GPS測試包含Chromium／WebKit的定位回呼與原生watchPosition API（以�
 `field_basemap_qa.py` 在Chromium／WebKit驗證正射影像延遲載入、z/y/x路徑、來源標示、反覆切換保留地籍／GPS／入口／導航／視野、偏好記憶、無重複介面、圖資失敗回復一般地圖、無localStorage降級、廠商及管理頁不變、手機版面。圖磚在測試內合成；另實測官方PHOTO2之屏東位置圖磚回傳HTTP200、JPEG256×256，服務未來可用性仍依供應端。
 
 `full_frame_live_qa.py` 驗證即時日期時間GPS、浮水印相對影像的位置／陰影與成品一致、contain留白定位、直拍／橫拍及大於4096px照片的完整尺寸與四角色標、原生照片API及EXIF方向、API失敗時完整影格降級、定位未取得與重試、拍照／離開清理定位監聽。Chromium與WebKit均使用合成硬體畫面及真實JPEG／IndexedDB，仍需實機確認裝置實際提供的解析度。
+
+長邊浮水印另以畫布轉換與JPEG白字像素邊界驗證：直式在左側長邊旋轉90°、橫式在下方，預覽／成品位置及陰影一致，照片方向、尺寸及四角不變。
