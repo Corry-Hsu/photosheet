@@ -260,3 +260,13 @@ body[data-worker] #local-photos .field-photo-selected {
 body[data-worker] .field-photo-status {
   overflow-wrap: anywhere;
 }
+
+body[data-worker] #live-watermark {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  border: 0;
+  background: transparent;
+}
