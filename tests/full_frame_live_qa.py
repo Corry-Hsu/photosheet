@@ -1,7 +1,7 @@
 """Full-resolution portrait/landscape captures, native still fallback, and aligned live watermark."""
 from test_config import ROOT,BASE,CHROMIUM,QA_NOW
 from playwright.sync_api import sync_playwright
-from PIL import Image,ImageOps
+from PIL import Image,ImageOps,ImageChops
 from pathlib import Path
 import io,json,os,tempfile,base64
 fixture=json.loads((ROOT/'tests/fixtures/worker-1.json').read_text());engine=os.getenv('PS_TEST_ENGINE','chromium')
@@ -11,7 +11,7 @@ function edgeCanvas(w,h){const c=document.createElement('canvas');c.width=w;c.he
 const draw=CanvasRenderingContext2D.prototype.drawImage;
 CanvasRenderingContext2D.prototype.drawImage=function(img,...args){if(img instanceof HTMLVideoElement)img=edgeCanvas(cameraSize.width,cameraSize.height);return draw.call(this,img,...args)};
 const fill=CanvasRenderingContext2D.prototype.fillText;
-CanvasRenderingContext2D.prototype.fillText=function(text,x,y){if(this.shadowBlur>0)stamps.push({canvas:this.canvas.id,text,x,y,w:this.canvas.width,h:this.canvas.height,scale:this.getTransform().a,shadow:this.shadowBlur,align:this.textAlign});return fill.apply(this,arguments)};
+CanvasRenderingContext2D.prototype.fillText=function(text,x,y){if(this.shadowBlur>0)stamps.push({canvas:this.canvas.id,text,x,y,w:this.canvas.width,h:this.canvas.height,scale:Math.hypot(this.getTransform().a,this.getTransform().b),a:this.getTransform().a,b:this.getTransform().b,px:this.getTransform().a*x+this.getTransform().c*y+this.getTransform().e,py:this.getTransform().b*x+this.getTransform().d*y+this.getTransform().f,shadow:this.shadowBlur,align:this.textAlign});return fill.apply(this,arguments)};
 Object.defineProperty(HTMLVideoElement.prototype,'videoWidth',{get:()=>cameraSize.width});Object.defineProperty(HTMLVideoElement.prototype,'videoHeight',{get:()=>cameraSize.height});Object.defineProperty(HTMLVideoElement.prototype,'srcObject',{configurable:true,get(){return this._fake},set(v){this._fake=v}});HTMLVideoElement.prototype.play=async()=>{};
 Object.defineProperty(navigator,'mediaDevices',{configurable:true,value:{getUserMedia:async c=>{calls.push(c);const t={stop(){},getSettings:()=>({deviceId:'main'})};return {getTracks:()=>[t],getVideoTracks:()=>[t]}}}});
 window.ImageCapture=class {async takePhoto(){if(stillMode==='none'||stillMode==='fail')throw Error('no still API');if(stillMode==='exif')return new Blob([Uint8Array.from(atob(exifPhoto),c=>c.charCodeAt(0))],{type:'image/jpeg'});return await new Promise(r=>edgeCanvas(2000,3000).toBlob(r,'image/jpeg',.98))}};
@@ -46,13 +46,20 @@ with tempfile.TemporaryDirectory() as tmp,sync_playwright() as p:
   for point,color in [((8,8),(255,0,0)),((ew-9,8),(0,255,0)),((8,eh-9),(0,0,255)),((ew-9,eh-9),(255,255,0))]:
    if mode=='exif':color=rotated.getpixel(point)
    assert max(abs(a-b) for a,b in zip(im.getpixel(point),color))<20,(mode,point,im.getpixel(point),color)
-  saved=pg.evaluate('stamps.filter(s=>s.canvas!=="live-watermark").slice(-2)');assert len(saved)==2 and all(s['x']==ew/2 and s['h']==eh for s in saved)
+  saved=pg.evaluate('stamps.filter(s=>s.canvas!=="live-watermark").slice(-2)');assert len(saved)==2
+  white=ImageChops.darker(ImageChops.darker(im.getchannel('R'),im.getchannel('G')),im.getchannel('B')).point(lambda v:255 if v>220 else 0).getbbox();assert white
+  if eh>ew:
+   assert all(0<s['px']<ew*.35 and abs(s['py']-eh/2)<1e-6 and s['b']>.99 for s in saved),saved
+   assert white[2]<ew*.35,white
+  else:
+   assert all(s['x']==ew/2 and abs(s['b'])<1e-6 and s['py']>eh*.65 for s in saved),saved
+   assert white[1]>eh*.65,white
   if mode not in ['native','exif']:
-   for a,b in zip(live,saved):assert abs(a['x']/w-b['x']/ew)<1e-6 and abs(a['y']/h-b['y']/eh)<1e-6 and abs(a['shadow']/a['scale']-b['shadow'])<1e-4,(a,b,a['shadow']/a['scale']-b['shadow'])
+   for a,b in zip(live,saved):assert abs(a['px']/a['w']-b['px']/ew)<1e-6 and abs(a['py']/a['h']-b['py']/eh)<1e-6 and abs(a['shadow']/a['scale']-b['shadow'])<1e-4,(a,b,a['shadow']/a['scale']-b['shadow'])
   results.append({'source':[w,h],'mode':mode,'output':list(im.size)});pg.click('#camera-back');pg.wait_for_selector('#detail-board');pg.click('#close-dialog');assert pg.evaluate('watches.size')==0
  # No coordinates are invented if location is unavailable; saving still requires real GPS.
  pg.evaluate("gpsOK=false;stillMode='none'");pg.click('#worker-camera');pg.wait_for_function('!document.querySelector("#shutter").disabled');pg.wait_for_function('stamps.filter(s=>s.canvas==="live-watermark").some(s=>s.text.includes("尚未取得定位"))');pg.click('#shutter');pg.wait_for_function('document.querySelector("#capture-status").textContent.includes("no GPS")');assert pg.locator('#capture-save').is_hidden();pg.evaluate('gpsOK=true');pg.click('#capture-retry-save');pg.wait_for_function('!document.querySelector("#capture-save").hidden');pg.click('#camera-back');pg.wait_for_selector('#detail-board');pg.click('#close-dialog')
  # Leaving directly from the live camera also releases its location watch.
  pg.click('#worker-camera');pg.wait_for_function('!document.querySelector("#shutter").disabled');assert pg.evaluate('watches.size')==1;pg.click('#camera-back');pg.wait_for_selector('#detail-board');assert pg.evaluate('watches.size')==0
  assert not errors,errors
- result={'engine':engine,'frames':results,'live_date_time_gps_and_position':True,'live_stamp_matches_saved_position':True,'contain_fit_both_orientations':True,'no_crop_no_4096_resize':True,'native_still_and_exif':True,'fallback_when_still_unavailable':True,'gps_failure_retry':True,'watch_cleanup':True,'errors':errors};out=ROOT/'evidence/full-frame';out.mkdir(exist_ok=True,parents=True);(out/f'{engine}.json').write_text(json.dumps(result,ensure_ascii=False,indent=2));print(json.dumps(result,ensure_ascii=False,indent=2));browser.close()
+ result={'engine':engine,'frames':results,'live_date_time_gps_and_position':True,'live_stamp_matches_saved_position':True,'portrait_left_long_edge_landscape_bottom':True,'saved_pixel_stamp_bounds':True,'contain_fit_both_orientations':True,'no_crop_no_4096_resize':True,'native_still_and_exif':True,'fallback_when_still_unavailable':True,'gps_failure_retry':True,'watch_cleanup':True,'errors':errors};out=ROOT/'evidence/full-frame';out.mkdir(exist_ok=True,parents=True);(out/f'{engine}.json').write_text(json.dumps(result,ensure_ascii=False,indent=2));print(json.dumps(result,ensure_ascii=False,indent=2));browser.close()
