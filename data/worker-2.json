@@ -360,6 +360,34 @@
         "source": "manual",
         "confirmed": true
       }
+    },
+    {
+      "id": "雜草垃圾:678",
+      "type": "雜草垃圾",
+      "row": 680,
+      "serial": "678",
+      "caseNo": "1104-675",
+      "district": "東港鎮",
+      "section": "船頭段",
+      "sectionCode": "0584",
+      "parcels": [
+        {
+          "county": "屏東縣",
+          "district": "東港鎮",
+          "section": "船頭段",
+          "lot": "129",
+          "sectionCode": "0584"
+        }
+      ],
+      "notice": "2026-11-04",
+      "resultDate": "2026-11-04",
+      "due": "",
+      "vendor": "迎騰工程行",
+      "sourcePerson": "范文彬",
+      "area": "",
+      "items": [],
+      "assignee": "p2",
+      "navigation": null
     }
   ],
   "features": [
