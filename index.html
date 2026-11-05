@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>地籍任務｜管理頁</title>
     <link rel="stylesheet" href="vendor/leaflet.css" />
+    <link rel="stylesheet" href="admin-history.css?v=20261105-history1" />
     <link rel="stylesheet" href="style.css?v=20261029-1" />
   </head>
   <body data-tab="list">
@@ -76,7 +77,8 @@
           id="search"
           placeholder="搜尋地段、地號、鄉鎮、案件編號"
           aria-label="搜尋任務"
-        /><select id="type-filter" aria-label="工作類型">
+        /><button id="find-last-month">搜尋上個月任務</button
+        ><select id="type-filter" aria-label="工作類型">
           <option value="">全部類型</option>
           <option>雜草垃圾</option>
           <option>砍樹</option>
@@ -163,13 +165,14 @@
     <script src="vendor/rbush.js"></script>
     <script src="vendor/exifr.js"></script>
     <script src="vendor/jspdf.js"></script>
-    <script src="core.js?v=20261029-1"></script>
+    <script src="core.js?v=20261105-history1"></script>
     <script src="excel.js?v=20261029-1"></script>
     <script src="db.js"></script>
     <script src="whiteboard.js?v=20261029-1"></script>
     <script src="documents.js?v=20261029-1"></script>
     <script src="camera.js?v=20261029-1"></script>
     <script src="manual-tasks.js?v=20261029-1"></script>
-    <script src="app.js?v=20261029-1"></script>
+    <script src="admin-history.js?v=20261105-history1"></script>
+    <script src="app.js?v=20261105-history1"></script>
   </body>
 </html>

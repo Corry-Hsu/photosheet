@@ -129,8 +129,9 @@
     const today = typeof now === "string" ? now : C.today(now);
     return (
       !!C.date(task.resultDate) &&
-      task.resultDate >= today.slice(0, 7) + "-01" &&
-      task.resultDate <= today.slice(0, 4) + "-12-31"
+      (task.reopenedForDispatch === true ||
+        (task.resultDate >= today.slice(0, 7) + "-01" &&
+          task.resultDate <= today.slice(0, 4) + "-12-31"))
     );
   };
   C.xmlLot = (v) =>
@@ -175,7 +176,9 @@
       day: "2-digit",
     }).format(now);
   C.locked = (t, now) =>
-    !!t.resultDate && t.resultDate < C.today(now).slice(0, 7) + "-01";
+    t.reopenedForDispatch !== true &&
+    !!t.resultDate &&
+    t.resultDate < C.today(now).slice(0, 7) + "-01";
   C.monthPolicy = (t, now) => {
     if (C.locked(t, now)) {
       if (!t.assignee) t.assignmentClosed = true;
@@ -197,6 +200,17 @@
       t.assignmentClosed = true;
     return { ...t, assignee: person };
   };
+  C.reopenForDispatch = (task, now = new Date()) => ({
+    ...task,
+    reopenedForDispatch: true,
+    reopenedAt: now.toISOString(),
+    completed: false,
+    completedAt: "",
+    assignmentClosed: false,
+    assignmentLockedTo: "",
+    needsReshoot: false,
+    workflowNote: "",
+  });
   C.selfDistricts = Object.freeze([
     "屏東市",
     "九如鄉",

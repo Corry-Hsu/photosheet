@@ -161,7 +161,13 @@
   const location = (t) =>
     [...new Set(t.parcels.map((p) => p.district + p.section))].join("；");
   function listSource() {
-    return worker ? state.tasks : state.tasks.filter((t) => C.adminVisible(t));
+    return worker
+      ? state.tasks
+      : state.tasks.filter((t) =>
+          window.AdminHistory
+            ? AdminHistory.visible(state, t)
+            : C.adminVisible(t),
+        );
   }
   function filtered() {
     let q = C.norm($("#search").value).toLowerCase(),
@@ -213,7 +219,7 @@
       }
       if ($("#task-date-scope")) {
         $("#task-date-scope").textContent =
-          `清單只顯示 ${C.today().slice(0, 7)}-01 至 ${C.today().slice(0, 4)}-12-31 的成果指定日期；${state.tasks.length - visible.length} 筆其他年度、舊月份或未填日期資料未列入。`;
+          `清單顯示 ${C.today().slice(0, 7)}-01 至 ${C.today().slice(0, 4)}-12-31 及手動加回的任務；另有 ${state.tasks.length - visible.length} 筆隱藏資料，可用「搜尋上個月任務」找回符合日期的案件。`;
       }
     }
     sectionCatalog = C.sectionCatalog(
@@ -1169,6 +1175,31 @@
     bind("#orders", () => documentDialog(chosen(), "order"));
     bind("#reload-worker", loadWorker);
     if (worker) return;
+    if ($("#find-last-month"))
+      bind("#find-last-month", () => {
+        if (!window.AdminHistory) throw Error("搜尋功能未載入，請重新整理頁面");
+        AdminHistory.open({
+          getState: () => state,
+          save: persist,
+          query: $("#search").value,
+          onRestored: (task) => {
+            for (const selector of [
+              "#search",
+              "#type-filter",
+              "#person-filter",
+              "#geo-filter",
+              "#date-from",
+              "#date-to",
+              "#complete-filter",
+            ])
+              if ($(selector)) $(selector).value = "";
+            page =
+              Math.floor(filtered().findIndex((t) => t.id === task.id) / PAGE) +
+              1;
+            focus(task.id);
+          },
+        });
+      });
     bind("#auto-assign", () => {
       const next = state.tasks.map((t) => C.autoAssign(t));
       const changed = next.filter((t, i) => t !== state.tasks[i]);
