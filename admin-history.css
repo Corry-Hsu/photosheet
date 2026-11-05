@@ -1,0 +1,44 @@
+.history-search {
+  min-width: 0;
+}
+.history-search input {
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 44px;
+}
+.history-task {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 1px solid var(--border);
+  padding: 12px 0;
+}
+.history-task > div {
+  flex: 1;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.history-task h3 {
+  margin: 0 0 6px;
+  font-size: 17px;
+}
+.history-task p {
+  margin: 4px 0;
+}
+.history-task button,
+.history-pages button,
+#history-back {
+  min-height: 44px;
+}
+.history-task button {
+  flex-shrink: 0;
+}
+#history-status {
+  overflow-wrap: anywhere;
+}
+@media (max-width: 420px) {
+  .history-task {
+    align-items: stretch;
+    flex-direction: column;
+  }
+}
