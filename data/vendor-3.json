@@ -1,13 +1,111 @@
 {
   "schemaVersion": 1,
-  "batch": "尚未發布",
-  "generatedAt": "",
+  "batch": "2026-11-05-175f1ed3",
+  "generatedAt": "2026-11-05T10:24:18.589Z",
   "person": {
     "id": "v3",
     "name": "圍籬廠商"
   },
   "vendorType": "圍籬",
-  "settings": {},
-  "tasks": [],
-  "features": []
+  "settings": {
+    "guide": "全威測量工程有限公司",
+    "contact": "許書桓",
+    "agency": "財政部國有財產署南區分署屏東辦事處",
+    "project": "國有土地作業",
+    "tender": "",
+    "phone": "08-7364773",
+    "fax": "08-7363187",
+    "contract_deadline": "依契約規定",
+    "fence_terms": "依契約規定辦理。"
+  },
+  "tasks": [
+    {
+      "id": "圍籬:67",
+      "type": "圍籬",
+      "row": 68,
+      "serial": "67",
+      "caseNo": "1106-67",
+      "district": "恆春鎮",
+      "section": "城南段",
+      "sectionCode": "0730",
+      "parcels": [
+        {
+          "county": "屏東縣",
+          "district": "恆春鎮",
+          "section": "城南段",
+          "lot": "239",
+          "sectionCode": "0730"
+        },
+        {
+          "county": "屏東縣",
+          "district": "恆春鎮",
+          "section": "城南段",
+          "lot": "249",
+          "sectionCode": "0730"
+        }
+      ],
+      "notice": "2026-11-06",
+      "resultDate": "2026-11-06",
+      "due": "",
+      "vendor": "全威測量工程有限公司",
+      "sourcePerson": "陳釧嘉",
+      "area": "",
+      "items": [],
+      "assignee": "p2",
+      "navigation": {
+        "point": [
+          120.74846744332298,
+          22.0041845
+        ],
+        "source": "auto",
+        "confirmed": false
+      },
+      "completed": false,
+      "completedAt": ""
+    }
+  ],
+  "features": [
+    {
+      "id": "0730:239",
+      "code": "0730",
+      "lot": "239",
+      "lands": [],
+      "polygons": [
+        [
+          [
+            [
+              120.748558,
+              22.004143
+            ],
+            [
+              120.748531,
+              22.004185
+            ],
+            [
+              120.748384,
+              22.004207
+            ],
+            [
+              120.748404,
+              22.004184
+            ],
+            [
+              120.748423,
+              22.00416
+            ],
+            [
+              120.748558,
+              22.004143
+            ]
+          ]
+        ]
+      ],
+      "bbox": [
+        120.748384,
+        22.004143,
+        120.748558,
+        22.004207
+      ]
+    }
+  ]
 }
