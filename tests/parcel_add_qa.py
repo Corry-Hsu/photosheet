@@ -12,6 +12,7 @@ with tempfile.TemporaryDirectory() as temp,sync_playwright() as p:
  b=p.chromium.launch(executable_path=shutil.which('chromium'),args=['--no-sandbox']);c=b.new_context(viewport=dict(width=390,height=844),is_mobile=True,accept_downloads=True)
  for host in ['tile.openstreetmap.org','wmts.nlsc.gov.tw']:c.route('https://'+host+'/**',lambda r:r.abort())
  pg=c.new_page();errors=[];pg.on('pageerror',lambda e:errors.append(str(e)));pg.clock.set_fixed_time(datetime(2026,11,11,tzinfo=timezone.utc));pg.goto(BASE);pg.wait_for_function('window.PSApp&&PSApp.map')
+ original['parcelChoices']=pg.evaluate('t=>({[PSCore.key(t.parcels[0])]:"0582/326"})',original)
  pg.evaluate('async o=>{await Store.put("state",o.state);await Store.saveGeo(o.geo)}',dict(state=state,geo=geo));pg.reload();pg.wait_for_selector('[data-detail]');pg.locator('[data-detail]').click();pg.click('#edit-parcels');assert pg.locator('[data-parcel-edit]').count()==1
  pg.click('#add-parcel');last=pg.locator('[data-parcel-edit]').last
  assert last.locator('[data-field=district]').input_value()=='萬丹鄉';assert last.locator('[data-field=section]').input_value()=='萬全段';assert last.locator('[data-field=lot]').input_value()==''
@@ -21,7 +22,7 @@ with tempfile.TemporaryDirectory() as temp,sync_playwright() as p:
  # Storage failure must restore every property, keeping unsaved form rows for retry.
  pg.evaluate('()=>{window.realPut=Store.put;Store.put=async()=>{throw Error("test storage failure")}}');pg.click('#save-parcels');pg.wait_for_function('document.querySelector("#message").textContent.includes("test storage failure")');assert pg.evaluate('PSApp.state.tasks[0]')==original
  pg.evaluate('()=>{Store.put=window.realPut}');pg.click('#save-parcels');pg.wait_for_selector('#edit-parcels');assert pg.locator('.parcel-row').count()==2;assert pg.locator('[data-parcel-nav]').count()==2
- first=pg.evaluate('structuredClone(PSApp.state.tasks[0])');assert first['originalParcels']==original['parcels'];assert first['parcels'][0]==original['parcels'][0];assert first['parcels'][1]['sectionCode']=='0582';assert first['navigation']==original['navigation'];assert first['id']==original['id'];assert pg.locator('.task').count()==1;assert '341-3' in pg.locator('.task').inner_text()
+ first=pg.evaluate('structuredClone(PSApp.state.tasks[0])');assert first['originalParcels']==original['parcels'];assert first['parcels'][0]==original['parcels'][0];assert first['parcels'][1]['sectionCode']=='0582';assert first['navigation']==original['navigation'];assert first['parcelChoices']==original['parcelChoices'];assert first['id']==original['id'];assert pg.locator('.task').count()==1;assert '341-3' in pg.locator('.task').inner_text()
  # Cross-section addition uses reference code instead of the task's old main code.
  pg.click('#edit-parcels');pg.click('#add-parcel');last=pg.locator('[data-parcel-edit]').last;last.locator('[data-field=section]').fill('另一段');last.locator('[data-field=lot]').fill('100');pg.click('#save-parcels');pg.wait_for_selector('#edit-parcels');assert pg.locator('[data-parcel-nav]').count()==3
  updated=pg.evaluate('structuredClone(PSApp.state.tasks[0])');assert updated['parcels'][2]['sectionCode']=='0583';assert updated['originalParcels']==original['parcels'];assert len(pg.evaluate('PSApp.state.tasks'))==1

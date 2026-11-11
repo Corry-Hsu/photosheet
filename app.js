@@ -591,7 +591,12 @@
           t.district = ps[0].district;
           t.section = ps[0].section;
           t.sectionCode = ps[0].sectionCode || "";
-          t.parcelChoices = {};
+          const parcelKeys = new Set(ps.map((p) => C.key(p)));
+          t.parcelChoices = Object.fromEntries(
+            Object.entries(t.parcelChoices || {}).filter(([key]) =>
+              parcelKeys.has(key),
+            ),
+          );
           try {
             await persist();
           } catch (e) {
