@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "unit": "㎡",
+  "county": "屏東縣",
+  "district": "屏東市",
+  "section": "復興段",
+  "code": "0047",
+  "parcels": [
+    {
+      "lot": "79-4",
+      "area": "390",
+      "issues": []
+    }
+  ]
+}

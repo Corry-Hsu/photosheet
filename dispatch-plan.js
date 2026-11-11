@@ -394,6 +394,10 @@
       if (removed.length && !result.tasks.length) return false;
       return !droppedRefs.has(f.id);
     });
+    const areaCore =
+      root.LandAreaCore ||
+      (typeof require === "function" ? require("./land-area-core.js") : null);
+    if (areaCore) result.tasks = result.tasks.map((t) => areaCore.cleanTask(t));
     validate(result);
     if (
       new Set(result.tasks.map((t) => t.id)).size !== result.tasks.length ||

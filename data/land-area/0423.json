@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "unit": "㎡",
+  "county": "屏東縣",
+  "district": "竹田鄉",
+  "section": "溝子墘段一小段",
+  "code": "0423",
+  "parcels": [
+    {
+      "lot": "5",
+      "area": "699.65",
+      "issues": []
+    },
+    {
+      "lot": "10",
+      "area": "870.91",
+      "issues": []
+    }
+  ]
+}

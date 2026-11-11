@@ -1,0 +1,70 @@
+{
+  "schemaVersion": 1,
+  "unit": "㎡",
+  "county": "屏東縣",
+  "district": "屏東市",
+  "section": "舊街段一小段",
+  "code": "0015",
+  "parcels": [
+    {
+      "lot": "92-2",
+      "area": "16",
+      "issues": []
+    },
+    {
+      "lot": "110",
+      "area": "1213",
+      "issues": []
+    },
+    {
+      "lot": "208",
+      "area": "2084",
+      "issues": []
+    },
+    {
+      "lot": "210",
+      "area": "556",
+      "issues": []
+    },
+    {
+      "lot": "315-1",
+      "area": "5",
+      "issues": []
+    },
+    {
+      "lot": "330-1",
+      "area": "1",
+      "issues": []
+    },
+    {
+      "lot": "333-1",
+      "area": "1",
+      "issues": []
+    },
+    {
+      "lot": "392",
+      "area": "3",
+      "issues": []
+    },
+    {
+      "lot": "424",
+      "area": "43",
+      "issues": []
+    },
+    {
+      "lot": "445",
+      "area": "3569",
+      "issues": []
+    },
+    {
+      "lot": "446",
+      "area": "264",
+      "issues": []
+    },
+    {
+      "lot": "461",
+      "area": "162",
+      "issues": []
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "unit": "㎡",
+  "county": "屏東縣",
+  "district": "潮州鎮",
+  "section": "八老爺段",
+  "code": "0302",
+  "parcels": [
+    {
+      "lot": "1037-1",
+      "area": "5",
+      "issues": []
+    }
+  ]
+}

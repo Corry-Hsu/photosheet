@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "unit": "㎡",
+  "county": "屏東縣",
+  "district": "屏東市",
+  "section": "大慶段",
+  "code": "0134",
+  "parcels": [
+    {
+      "lot": "1-1",
+      "area": "4322.09",
+      "issues": []
+    }
+  ]
+}

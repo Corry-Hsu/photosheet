@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "unit": "㎡",
+  "county": "屏東縣",
+  "district": "萬丹鄉",
+  "section": "頂林子段",
+  "code": "0075",
+  "parcels": [
+    {
+      "lot": "497-265",
+      "area": "165",
+      "issues": []
+    },
+    {
+      "lot": "497-271",
+      "area": "58",
+      "issues": []
+    },
+    {
+      "lot": "497-327",
+      "area": "820",
+      "issues": []
+    },
+    {
+      "lot": "523-4",
+      "area": "371",
+      "issues": []
+    }
+  ]
+}

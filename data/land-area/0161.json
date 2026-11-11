@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "unit": "㎡",
+  "county": "屏東縣",
+  "district": "九如鄉",
+  "section": "下冷水坑段二小段",
+  "code": "0161",
+  "parcels": [
+    {
+      "lot": "73",
+      "area": "3174.41",
+      "issues": []
+    },
+    {
+      "lot": "75",
+      "area": "7.67",
+      "issues": []
+    }
+  ]
+}

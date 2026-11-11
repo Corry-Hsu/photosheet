@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "unit": "㎡",
+  "county": "屏東縣",
+  "district": "麟洛鄉",
+  "section": "麟洛段",
+  "code": "0092",
+  "parcels": [
+    {
+      "lot": "1530-5",
+      "area": "1773",
+      "issues": []
+    }
+  ]
+}

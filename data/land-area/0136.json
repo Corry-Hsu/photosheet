@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "unit": "㎡",
+  "county": "屏東縣",
+  "district": "萬丹鄉",
+  "section": "社北段",
+  "code": "0136",
+  "parcels": [
+    {
+      "lot": "11",
+      "area": "458.81",
+      "issues": []
+    },
+    {
+      "lot": "12",
+      "area": "710.71",
+      "issues": []
+    },
+    {
+      "lot": "13",
+      "area": "349.57",
+      "issues": []
+    },
+    {
+      "lot": "18",
+      "area": "407.37",
+      "issues": []
+    },
+    {
+      "lot": "23",
+      "area": "533.5",
+      "issues": []
+    }
+  ]
+}

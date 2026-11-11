@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "unit": "㎡",
+  "county": "屏東縣",
+  "district": "滿州鄉",
+  "section": "滿州段",
+  "code": "0622",
+  "parcels": [
+    {
+      "lot": "1051",
+      "area": "1426",
+      "issues": []
+    }
+  ]
+}

@@ -1,0 +1,180 @@
+{
+  "schemaVersion": 1,
+  "unit": "㎡",
+  "county": "屏東縣",
+  "district": "獅子鄉",
+  "section": "古道段",
+  "code": "0646",
+  "parcels": [
+    {
+      "lot": "1-18",
+      "area": "2937",
+      "issues": []
+    },
+    {
+      "lot": "1-19",
+      "area": "1259",
+      "issues": []
+    },
+    {
+      "lot": "1-20",
+      "area": "920",
+      "issues": []
+    },
+    {
+      "lot": "1-21",
+      "area": "387",
+      "issues": []
+    },
+    {
+      "lot": "1-22",
+      "area": "54",
+      "issues": []
+    },
+    {
+      "lot": "1-23",
+      "area": "700",
+      "issues": []
+    },
+    {
+      "lot": "1-29",
+      "area": "21",
+      "issues": []
+    },
+    {
+      "lot": "4",
+      "area": "18798",
+      "issues": []
+    },
+    {
+      "lot": "5",
+      "area": "1456",
+      "issues": []
+    },
+    {
+      "lot": "8",
+      "area": "34233",
+      "issues": []
+    },
+    {
+      "lot": "9",
+      "area": "6744",
+      "issues": []
+    },
+    {
+      "lot": "10",
+      "area": "5778",
+      "issues": []
+    },
+    {
+      "lot": "12",
+      "area": "74257",
+      "issues": []
+    },
+    {
+      "lot": "13",
+      "area": "780",
+      "issues": []
+    },
+    {
+      "lot": "14",
+      "area": "1587",
+      "issues": []
+    },
+    {
+      "lot": "15",
+      "area": "560",
+      "issues": []
+    },
+    {
+      "lot": "16",
+      "area": "7516",
+      "issues": []
+    },
+    {
+      "lot": "17",
+      "area": "7574",
+      "issues": []
+    },
+    {
+      "lot": "18",
+      "area": "18163",
+      "issues": []
+    },
+    {
+      "lot": "19",
+      "area": "2478",
+      "issues": []
+    },
+    {
+      "lot": "20",
+      "area": "6197",
+      "issues": []
+    },
+    {
+      "lot": "21",
+      "area": "1384",
+      "issues": []
+    },
+    {
+      "lot": "22",
+      "area": "7895",
+      "issues": []
+    },
+    {
+      "lot": "23",
+      "area": "14335",
+      "issues": []
+    },
+    {
+      "lot": "24",
+      "area": "106",
+      "issues": []
+    },
+    {
+      "lot": "25",
+      "area": "27",
+      "issues": []
+    },
+    {
+      "lot": "26",
+      "area": "50",
+      "issues": []
+    },
+    {
+      "lot": "27",
+      "area": "69",
+      "issues": []
+    },
+    {
+      "lot": "28",
+      "area": "46",
+      "issues": []
+    },
+    {
+      "lot": "29",
+      "area": "81",
+      "issues": []
+    },
+    {
+      "lot": "30",
+      "area": "80",
+      "issues": []
+    },
+    {
+      "lot": "31",
+      "area": "66944",
+      "issues": []
+    },
+    {
+      "lot": "32",
+      "area": "3656",
+      "issues": []
+    },
+    {
+      "lot": "33",
+      "area": "22183",
+      "issues": []
+    }
+  ]
+}

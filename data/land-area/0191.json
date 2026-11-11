@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "unit": "㎡",
+  "county": "屏東縣",
+  "district": "屏東市",
+  "section": "香揚段一小段",
+  "code": "0191",
+  "parcels": [
+    {
+      "lot": "25",
+      "area": "3857.72",
+      "issues": []
+    }
+  ]
+}

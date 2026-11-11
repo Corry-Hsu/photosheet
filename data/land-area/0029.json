@@ -1,0 +1,225 @@
+{
+  "schemaVersion": 1,
+  "unit": "㎡",
+  "county": "屏東縣",
+  "district": "屏東市",
+  "section": "街頭段六小段",
+  "code": "0029",
+  "parcels": [
+    {
+      "lot": "88",
+      "area": "5",
+      "issues": []
+    },
+    {
+      "lot": "88-1",
+      "area": "3",
+      "issues": []
+    },
+    {
+      "lot": "90",
+      "area": "733",
+      "issues": []
+    },
+    {
+      "lot": "91",
+      "area": "88",
+      "issues": []
+    },
+    {
+      "lot": "96-1",
+      "area": "18",
+      "issues": []
+    },
+    {
+      "lot": "97-1",
+      "area": "71",
+      "issues": []
+    },
+    {
+      "lot": "97-3",
+      "area": "13",
+      "issues": []
+    },
+    {
+      "lot": "97-6",
+      "area": "3",
+      "issues": []
+    },
+    {
+      "lot": "115-1",
+      "area": "3",
+      "issues": []
+    },
+    {
+      "lot": "118-4",
+      "area": "2133",
+      "issues": []
+    },
+    {
+      "lot": "119",
+      "area": "122",
+      "issues": []
+    },
+    {
+      "lot": "130",
+      "area": "40",
+      "issues": []
+    },
+    {
+      "lot": "131",
+      "area": "300",
+      "issues": []
+    },
+    {
+      "lot": "155-2",
+      "area": "6",
+      "issues": []
+    },
+    {
+      "lot": "155-3",
+      "area": "1",
+      "issues": []
+    },
+    {
+      "lot": "159-2",
+      "area": "4",
+      "issues": []
+    },
+    {
+      "lot": "166",
+      "area": "40",
+      "issues": []
+    },
+    {
+      "lot": "167",
+      "area": "262",
+      "issues": []
+    },
+    {
+      "lot": "182",
+      "area": "24",
+      "issues": []
+    },
+    {
+      "lot": "217",
+      "area": "10",
+      "issues": []
+    },
+    {
+      "lot": "226",
+      "area": "94",
+      "issues": []
+    },
+    {
+      "lot": "228-1",
+      "area": "222",
+      "issues": []
+    },
+    {
+      "lot": "228-2",
+      "area": "1",
+      "issues": []
+    },
+    {
+      "lot": "228-3",
+      "area": "25",
+      "issues": []
+    },
+    {
+      "lot": "228-7",
+      "area": "47",
+      "issues": []
+    },
+    {
+      "lot": "228-8",
+      "area": "1",
+      "issues": []
+    },
+    {
+      "lot": "228-13",
+      "area": "1",
+      "issues": []
+    },
+    {
+      "lot": "228-14",
+      "area": "2",
+      "issues": []
+    },
+    {
+      "lot": "228-15",
+      "area": "8",
+      "issues": []
+    },
+    {
+      "lot": "230",
+      "area": "1688",
+      "issues": []
+    },
+    {
+      "lot": "230-1",
+      "area": "2",
+      "issues": []
+    },
+    {
+      "lot": "236",
+      "area": "121",
+      "issues": []
+    },
+    {
+      "lot": "236-1",
+      "area": "4",
+      "issues": []
+    },
+    {
+      "lot": "237-1",
+      "area": "5.24",
+      "issues": []
+    },
+    {
+      "lot": "237-3",
+      "area": "13",
+      "issues": []
+    },
+    {
+      "lot": "237-4",
+      "area": "0.04",
+      "issues": []
+    },
+    {
+      "lot": "237-6",
+      "area": "3.2",
+      "issues": []
+    },
+    {
+      "lot": "238",
+      "area": "60",
+      "issues": []
+    },
+    {
+      "lot": "245",
+      "area": "94",
+      "issues": []
+    },
+    {
+      "lot": "246",
+      "area": "113",
+      "issues": []
+    },
+    {
+      "lot": "271",
+      "area": "20",
+      "issues": []
+    },
+    {
+      "lot": "300",
+      "area": "6",
+      "issues": []
+    },
+    {
+      "lot": "301",
+      "area": "4",
+      "issues": []
+    }
+  ]
+}

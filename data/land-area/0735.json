@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "unit": "㎡",
+  "county": "屏東縣",
+  "district": "恆春鎮",
+  "section": "新僑勇段",
+  "code": "0735",
+  "parcels": [
+    {
+      "lot": "27",
+      "area": "118.05",
+      "issues": []
+    }
+  ]
+}

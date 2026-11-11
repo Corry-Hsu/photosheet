@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "unit": "㎡",
+  "county": "屏東縣",
+  "district": "屏東市",
+  "section": "水源段",
+  "code": "0043",
+  "parcels": [
+    {
+      "lot": "259-1",
+      "area": "3590",
+      "issues": []
+    },
+    {
+      "lot": "263-3",
+      "area": "11",
+      "issues": []
+    },
+    {
+      "lot": "263-10",
+      "area": "69",
+      "issues": []
+    },
+    {
+      "lot": "264-2",
+      "area": "190",
+      "issues": []
+    },
+    {
+      "lot": "264-27",
+      "area": "16",
+      "issues": []
+    },
+    {
+      "lot": "264-29",
+      "area": "19",
+      "issues": []
+    },
+    {
+      "lot": "265",
+      "area": "57",
+      "issues": []
+    }
+  ]
+}

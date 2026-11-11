@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 1,
+  "unit": "㎡",
+  "county": "屏東縣",
+  "district": "車城鄉",
+  "section": "尖山段",
+  "code": "0691",
+  "parcels": [
+    {
+      "lot": "1",
+      "area": "129997.76",
+      "issues": []
+    },
+    {
+      "lot": "2",
+      "area": "1242.96",
+      "issues": []
+    },
+    {
+      "lot": "3",
+      "area": "24924.37",
+      "issues": []
+    },
+    {
+      "lot": "4",
+      "area": "120328.96",
+      "issues": []
+    },
+    {
+      "lot": "5",
+      "area": "23826.87",
+      "issues": []
+    },
+    {
+      "lot": "6",
+      "area": "43673.05",
+      "issues": []
+    },
+    {
+      "lot": "7",
+      "area": "2180.2",
+      "issues": []
+    },
+    {
+      "lot": "8",
+      "area": "176520.69",
+      "issues": []
+    },
+    {
+      "lot": "9",
+      "area": "86822.77",
+      "issues": []
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "unit": "㎡",
+  "county": "屏東縣",
+  "district": "萬丹鄉",
+  "section": "甘棠門段一小段",
+  "code": "0084",
+  "parcels": [
+    {
+      "lot": "10-1",
+      "area": "9",
+      "issues": []
+    },
+    {
+      "lot": "78",
+      "area": "233",
+      "issues": []
+    },
+    {
+      "lot": "85-1",
+      "area": "1",
+      "issues": []
+    },
+    {
+      "lot": "86-1",
+      "area": "2723",
+      "issues": []
+    },
+    {
+      "lot": "87-1",
+      "area": "1318",
+      "issues": []
+    },
+    {
+      "lot": "88-1",
+      "area": "2902",
+      "issues": []
+    },
+    {
+      "lot": "131",
+      "area": "2",
+      "issues": []
+    }
+  ]
+}

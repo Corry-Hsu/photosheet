@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "unit": "㎡",
+  "county": "屏東縣",
+  "district": "三地門鄉",
+  "section": "度嗎尼蘭段",
+  "code": "0283",
+  "parcels": [
+    {
+      "lot": "1",
+      "area": "1340825",
+      "issues": []
+    },
+    {
+      "lot": "2",
+      "area": "1208132.39",
+      "issues": []
+    },
+    {
+      "lot": "2-1",
+      "area": "10000",
+      "issues": []
+    }
+  ]
+}

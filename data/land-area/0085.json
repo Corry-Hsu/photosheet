@@ -1,0 +1,335 @@
+{
+  "schemaVersion": 1,
+  "unit": "㎡",
+  "county": "屏東縣",
+  "district": "萬丹鄉",
+  "section": "磚寮段",
+  "code": "0085",
+  "parcels": [
+    {
+      "lot": "1",
+      "area": "756",
+      "issues": []
+    },
+    {
+      "lot": "2",
+      "area": "579",
+      "issues": []
+    },
+    {
+      "lot": "13",
+      "area": "935",
+      "issues": []
+    },
+    {
+      "lot": "14",
+      "area": "1333",
+      "issues": []
+    },
+    {
+      "lot": "15",
+      "area": "931",
+      "issues": []
+    },
+    {
+      "lot": "16",
+      "area": "663",
+      "issues": []
+    },
+    {
+      "lot": "34",
+      "area": "507",
+      "issues": []
+    },
+    {
+      "lot": "35",
+      "area": "744",
+      "issues": []
+    },
+    {
+      "lot": "36",
+      "area": "769",
+      "issues": []
+    },
+    {
+      "lot": "48",
+      "area": "135",
+      "issues": []
+    },
+    {
+      "lot": "49",
+      "area": "531",
+      "issues": []
+    },
+    {
+      "lot": "50",
+      "area": "759",
+      "issues": []
+    },
+    {
+      "lot": "51",
+      "area": "1013",
+      "issues": []
+    },
+    {
+      "lot": "52",
+      "area": "136",
+      "issues": []
+    },
+    {
+      "lot": "60",
+      "area": "597",
+      "issues": []
+    },
+    {
+      "lot": "61",
+      "area": "178",
+      "issues": []
+    },
+    {
+      "lot": "76",
+      "area": "70",
+      "issues": []
+    },
+    {
+      "lot": "83",
+      "area": "95",
+      "issues": []
+    },
+    {
+      "lot": "89",
+      "area": "146",
+      "issues": []
+    },
+    {
+      "lot": "91",
+      "area": "1231",
+      "issues": []
+    },
+    {
+      "lot": "92",
+      "area": "1212",
+      "issues": []
+    },
+    {
+      "lot": "93",
+      "area": "351",
+      "issues": []
+    },
+    {
+      "lot": "95",
+      "area": "100",
+      "issues": []
+    },
+    {
+      "lot": "110",
+      "area": "1170",
+      "issues": []
+    },
+    {
+      "lot": "111",
+      "area": "1246",
+      "issues": []
+    },
+    {
+      "lot": "114",
+      "area": "39",
+      "issues": []
+    },
+    {
+      "lot": "124",
+      "area": "162",
+      "issues": []
+    },
+    {
+      "lot": "126",
+      "area": "143",
+      "issues": []
+    },
+    {
+      "lot": "128",
+      "area": "705",
+      "issues": []
+    },
+    {
+      "lot": "135",
+      "area": "422",
+      "issues": []
+    },
+    {
+      "lot": "136",
+      "area": "643",
+      "issues": []
+    },
+    {
+      "lot": "137",
+      "area": "964",
+      "issues": []
+    },
+    {
+      "lot": "138",
+      "area": "1572",
+      "issues": []
+    },
+    {
+      "lot": "141",
+      "area": "107",
+      "issues": []
+    },
+    {
+      "lot": "145",
+      "area": "116",
+      "issues": []
+    },
+    {
+      "lot": "161",
+      "area": "250",
+      "issues": []
+    },
+    {
+      "lot": "162",
+      "area": "1416",
+      "issues": []
+    },
+    {
+      "lot": "163",
+      "area": "727",
+      "issues": []
+    },
+    {
+      "lot": "165",
+      "area": "157",
+      "issues": []
+    },
+    {
+      "lot": "178",
+      "area": "1364",
+      "issues": []
+    },
+    {
+      "lot": "182",
+      "area": "779",
+      "issues": []
+    },
+    {
+      "lot": "183",
+      "area": "1136",
+      "issues": []
+    },
+    {
+      "lot": "184",
+      "area": "1197",
+      "issues": []
+    },
+    {
+      "lot": "185",
+      "area": "659",
+      "issues": []
+    },
+    {
+      "lot": "187",
+      "area": "51",
+      "issues": []
+    },
+    {
+      "lot": "205",
+      "area": "309",
+      "issues": []
+    },
+    {
+      "lot": "206",
+      "area": "793",
+      "issues": []
+    },
+    {
+      "lot": "207",
+      "area": "989",
+      "issues": []
+    },
+    {
+      "lot": "209",
+      "area": "54",
+      "issues": []
+    },
+    {
+      "lot": "221",
+      "area": "263",
+      "issues": []
+    },
+    {
+      "lot": "222",
+      "area": "540",
+      "issues": []
+    },
+    {
+      "lot": "223",
+      "area": "729",
+      "issues": []
+    },
+    {
+      "lot": "224",
+      "area": "746",
+      "issues": []
+    },
+    {
+      "lot": "225",
+      "area": "31",
+      "issues": []
+    },
+    {
+      "lot": "229",
+      "area": "248",
+      "issues": []
+    },
+    {
+      "lot": "230",
+      "area": "2229",
+      "issues": []
+    },
+    {
+      "lot": "232",
+      "area": "70",
+      "issues": []
+    },
+    {
+      "lot": "234",
+      "area": "80",
+      "issues": []
+    },
+    {
+      "lot": "239",
+      "area": "248",
+      "issues": []
+    },
+    {
+      "lot": "243",
+      "area": "943",
+      "issues": []
+    },
+    {
+      "lot": "246",
+      "area": "414",
+      "issues": []
+    },
+    {
+      "lot": "251",
+      "area": "487",
+      "issues": []
+    },
+    {
+      "lot": "253",
+      "area": "8746",
+      "issues": []
+    },
+    {
+      "lot": "254",
+      "area": "160",
+      "issues": []
+    },
+    {
+      "lot": "256",
+      "area": "194",
+      "issues": []
+    }
+  ]
+}

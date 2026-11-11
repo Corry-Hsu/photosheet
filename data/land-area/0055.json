@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "unit": "㎡",
+  "county": "屏東縣",
+  "district": "屏東市",
+  "section": "民生段",
+  "code": "0055",
+  "parcels": [
+    {
+      "lot": "438",
+      "area": "16",
+      "issues": []
+    },
+    {
+      "lot": "449-2",
+      "area": "194",
+      "issues": []
+    },
+    {
+      "lot": "653-1",
+      "area": "32",
+      "issues": []
+    },
+    {
+      "lot": "653-2",
+      "area": "5040",
+      "issues": []
+    },
+    {
+      "lot": "686-2",
+      "area": "590",
+      "issues": []
+    },
+    {
+      "lot": "686-5",
+      "area": "94",
+      "issues": []
+    },
+    {
+      "lot": "775-1",
+      "area": "187",
+      "issues": []
+    },
+    {
+      "lot": "801",
+      "area": "19",
+      "issues": []
+    },
+    {
+      "lot": "801-3",
+      "area": "47",
+      "issues": []
+    },
+    {
+      "lot": "801-5",
+      "area": "68",
+      "issues": []
+    },
+    {
+      "lot": "840",
+      "area": "72",
+      "issues": []
+    },
+    {
+      "lot": "844-1",
+      "area": "545",
+      "issues": []
+    },
+    {
+      "lot": "847",
+      "area": "80",
+      "issues": []
+    },
+    {
+      "lot": "847-2",
+      "area": "1",
+      "issues": []
+    },
+    {
+      "lot": "848",
+      "area": "68",
+      "issues": []
+    },
+    {
+      "lot": "849",
+      "area": "16",
+      "issues": []
+    },
+    {
+      "lot": "850-2",
+      "area": "12",
+      "issues": []
+    },
+    {
+      "lot": "855-4",
+      "area": "65.9",
+      "issues": []
+    },
+    {
+      "lot": "856-1",
+      "area": "11",
+      "issues": []
+    },
+    {
+      "lot": "864",
+      "area": "64",
+      "issues": []
+    },
+    {
+      "lot": "867",
+      "area": "4",
+      "issues": []
+    },
+    {
+      "lot": "869",
+      "area": "17",
+      "issues": []
+    },
+    {
+      "lot": "881-7",
+      "area": "5",
+      "issues": []
+    },
+    {
+      "lot": "884-7",
+      "area": "284",
+      "issues": []
+    }
+  ]
+}

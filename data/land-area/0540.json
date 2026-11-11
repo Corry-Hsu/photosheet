@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "unit": "㎡",
+  "county": "屏東縣",
+  "district": "佳冬鄉",
+  "section": "武丁潭段",
+  "code": "0540",
+  "parcels": [
+    {
+      "lot": "39-6",
+      "area": "3",
+      "issues": []
+    }
+  ]
+}

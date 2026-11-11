@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "unit": "㎡",
+  "county": "屏東縣",
+  "district": "東港鎮",
+  "section": "新信段一小段",
+  "code": "1044",
+  "parcels": [
+    {
+      "lot": "6",
+      "area": "562.59",
+      "issues": []
+    },
+    {
+      "lot": "27",
+      "area": "560.01",
+      "issues": []
+    }
+  ]
+}

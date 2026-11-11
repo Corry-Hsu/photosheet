@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "unit": "㎡",
+  "county": "屏東縣",
+  "district": "獅子鄉",
+  "section": "沙烏古段",
+  "code": "0860",
+  "parcels": [
+    {
+      "lot": "1",
+      "area": "80933.65",
+      "issues": []
+    },
+    {
+      "lot": "2",
+      "area": "225663.43",
+      "issues": []
+    },
+    {
+      "lot": "3",
+      "area": "32863.3",
+      "issues": []
+    },
+    {
+      "lot": "4",
+      "area": "564814.98",
+      "issues": []
+    },
+    {
+      "lot": "5",
+      "area": "274539.38",
+      "issues": []
+    },
+    {
+      "lot": "6",
+      "area": "140124.99",
+      "issues": []
+    },
+    {
+      "lot": "7",
+      "area": "43343.6",
+      "issues": []
+    }
+  ]
+}

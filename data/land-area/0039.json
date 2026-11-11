@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "unit": "㎡",
+  "county": "屏東縣",
+  "district": "屏東市",
+  "section": "海豐段",
+  "code": "0039",
+  "parcels": [
+    {
+      "lot": "704-13",
+      "area": "415",
+      "issues": []
+    },
+    {
+      "lot": "704-44",
+      "area": "100",
+      "issues": []
+    },
+    {
+      "lot": "704-45",
+      "area": "151",
+      "issues": []
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "unit": "㎡",
+  "county": "屏東縣",
+  "district": "潮州鎮",
+  "section": "崙子頂段",
+  "code": "0303",
+  "parcels": [
+    {
+      "lot": "200-1",
+      "area": "4315",
+      "issues": []
+    }
+  ]
+}

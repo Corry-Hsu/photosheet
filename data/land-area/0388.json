@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "unit": "㎡",
+  "county": "屏東縣",
+  "district": "內埔鄉",
+  "section": "新豐段",
+  "code": "0388",
+  "parcels": [
+    {
+      "lot": "25-5",
+      "area": "7814",
+      "issues": []
+    },
+    {
+      "lot": "25-6",
+      "area": "988",
+      "issues": []
+    },
+    {
+      "lot": "341",
+      "area": "683.56",
+      "issues": []
+    },
+    {
+      "lot": "341-1",
+      "area": "6.94",
+      "issues": []
+    },
+    {
+      "lot": "341-2",
+      "area": "1.03",
+      "issues": []
+    },
+    {
+      "lot": "341-3",
+      "area": "1.47",
+      "issues": []
+    },
+    {
+      "lot": "352",
+      "area": "5880.09",
+      "issues": []
+    }
+  ]
+}

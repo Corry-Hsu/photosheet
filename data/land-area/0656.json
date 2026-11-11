@@ -1,0 +1,110 @@
+{
+  "schemaVersion": 1,
+  "unit": "㎡",
+  "county": "屏東縣",
+  "district": "牡丹鄉",
+  "section": "高士佛段",
+  "code": "0656",
+  "parcels": [
+    {
+      "lot": "2",
+      "area": "5199",
+      "issues": []
+    },
+    {
+      "lot": "3",
+      "area": "1668",
+      "issues": []
+    },
+    {
+      "lot": "5",
+      "area": "436",
+      "issues": []
+    },
+    {
+      "lot": "8",
+      "area": "2444",
+      "issues": []
+    },
+    {
+      "lot": "9",
+      "area": "1535",
+      "issues": []
+    },
+    {
+      "lot": "12",
+      "area": "1074",
+      "issues": []
+    },
+    {
+      "lot": "13",
+      "area": "373",
+      "issues": []
+    },
+    {
+      "lot": "14",
+      "area": "611",
+      "issues": []
+    },
+    {
+      "lot": "15",
+      "area": "812",
+      "issues": []
+    },
+    {
+      "lot": "17",
+      "area": "301",
+      "issues": []
+    },
+    {
+      "lot": "18",
+      "area": "194",
+      "issues": []
+    },
+    {
+      "lot": "23",
+      "area": "398",
+      "issues": []
+    },
+    {
+      "lot": "24",
+      "area": "473",
+      "issues": []
+    },
+    {
+      "lot": "28",
+      "area": "1025",
+      "issues": []
+    },
+    {
+      "lot": "29",
+      "area": "626",
+      "issues": []
+    },
+    {
+      "lot": "31",
+      "area": "2541",
+      "issues": []
+    },
+    {
+      "lot": "33",
+      "area": "1309",
+      "issues": []
+    },
+    {
+      "lot": "34",
+      "area": "344",
+      "issues": []
+    },
+    {
+      "lot": "35",
+      "area": "238",
+      "issues": []
+    },
+    {
+      "lot": "36",
+      "area": "1052",
+      "issues": []
+    }
+  ]
+}

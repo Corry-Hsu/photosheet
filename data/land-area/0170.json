@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "unit": "㎡",
+  "county": "屏東縣",
+  "district": "屏東市",
+  "section": "北勢段一小段",
+  "code": "0170",
+  "parcels": [
+    {
+      "lot": "14",
+      "area": "3265.65",
+      "issues": []
+    },
+    {
+      "lot": "22",
+      "area": "6726.4",
+      "issues": []
+    }
+  ]
+}

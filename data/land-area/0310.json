@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "unit": "㎡",
+  "county": "屏東縣",
+  "district": "萬巒鄉",
+  "section": "五溝水段",
+  "code": "0310",
+  "parcels": [
+    {
+      "lot": "477-1",
+      "area": "1290",
+      "issues": []
+    },
+    {
+      "lot": "477-4",
+      "area": "665",
+      "issues": []
+    },
+    {
+      "lot": "477-30",
+      "area": "384",
+      "issues": []
+    },
+    {
+      "lot": "477-32",
+      "area": "85",
+      "issues": []
+    },
+    {
+      "lot": "477-35",
+      "area": "365",
+      "issues": []
+    }
+  ]
+}

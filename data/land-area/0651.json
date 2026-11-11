@@ -1,0 +1,105 @@
+{
+  "schemaVersion": 1,
+  "unit": "㎡",
+  "county": "屏東縣",
+  "district": "牡丹鄉",
+  "section": "旭海段",
+  "code": "0651",
+  "parcels": [
+    {
+      "lot": "1",
+      "area": "3",
+      "issues": []
+    },
+    {
+      "lot": "2",
+      "area": "156230",
+      "issues": []
+    },
+    {
+      "lot": "3-1",
+      "area": "1475",
+      "issues": []
+    },
+    {
+      "lot": "3-9",
+      "area": "790",
+      "issues": []
+    },
+    {
+      "lot": "15",
+      "area": "176170",
+      "issues": []
+    },
+    {
+      "lot": "42",
+      "area": "2640",
+      "issues": []
+    },
+    {
+      "lot": "43",
+      "area": "3140",
+      "issues": []
+    },
+    {
+      "lot": "68",
+      "area": "3200",
+      "issues": []
+    },
+    {
+      "lot": "124",
+      "area": "2980",
+      "issues": []
+    },
+    {
+      "lot": "126",
+      "area": "7620",
+      "issues": []
+    },
+    {
+      "lot": "132",
+      "area": "990",
+      "issues": []
+    },
+    {
+      "lot": "146",
+      "area": "8786",
+      "issues": []
+    },
+    {
+      "lot": "153",
+      "area": "9260",
+      "issues": []
+    },
+    {
+      "lot": "154",
+      "area": "1260",
+      "issues": []
+    },
+    {
+      "lot": "168",
+      "area": "4470",
+      "issues": []
+    },
+    {
+      "lot": "185",
+      "area": "1720",
+      "issues": []
+    },
+    {
+      "lot": "194",
+      "area": "3400",
+      "issues": []
+    },
+    {
+      "lot": "196",
+      "area": "1990",
+      "issues": []
+    },
+    {
+      "lot": "197",
+      "area": "10930",
+      "issues": []
+    }
+  ]
+}

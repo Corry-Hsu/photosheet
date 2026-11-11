@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "unit": "㎡",
+  "county": "屏東縣",
+  "district": "長治鄉",
+  "section": "德協段",
+  "code": "0089",
+  "parcels": [
+    {
+      "lot": "413-6",
+      "area": "126",
+      "issues": []
+    }
+  ]
+}

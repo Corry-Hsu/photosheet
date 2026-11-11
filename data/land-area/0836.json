@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "unit": "㎡",
+  "county": "屏東縣",
+  "district": "獅子鄉",
+  "section": "麻优高段",
+  "code": "0836",
+  "parcels": [
+    {
+      "lot": "1",
+      "area": "39282.98",
+      "issues": []
+    },
+    {
+      "lot": "2",
+      "area": "16128.1",
+      "issues": []
+    },
+    {
+      "lot": "3",
+      "area": "7471.53",
+      "issues": []
+    },
+    {
+      "lot": "4",
+      "area": "2597916.19",
+      "issues": []
+    },
+    {
+      "lot": "5",
+      "area": "13883.53",
+      "issues": []
+    },
+    {
+      "lot": "6",
+      "area": "8310.21",
+      "issues": []
+    }
+  ]
+}

@@ -1,0 +1,120 @@
+{
+  "schemaVersion": 1,
+  "unit": "㎡",
+  "county": "屏東縣",
+  "district": "新園鄉",
+  "section": "新洋段一小段",
+  "code": "0544",
+  "parcels": [
+    {
+      "lot": "7",
+      "area": "731",
+      "issues": []
+    },
+    {
+      "lot": "8",
+      "area": "153",
+      "issues": []
+    },
+    {
+      "lot": "9",
+      "area": "463",
+      "issues": []
+    },
+    {
+      "lot": "10",
+      "area": "156",
+      "issues": []
+    },
+    {
+      "lot": "21",
+      "area": "580",
+      "issues": []
+    },
+    {
+      "lot": "22",
+      "area": "376",
+      "issues": []
+    },
+    {
+      "lot": "23",
+      "area": "473",
+      "issues": []
+    },
+    {
+      "lot": "33",
+      "area": "1139",
+      "issues": []
+    },
+    {
+      "lot": "34",
+      "area": "347",
+      "issues": []
+    },
+    {
+      "lot": "35",
+      "area": "739",
+      "issues": []
+    },
+    {
+      "lot": "36",
+      "area": "139",
+      "issues": []
+    },
+    {
+      "lot": "37",
+      "area": "697",
+      "issues": []
+    },
+    {
+      "lot": "38",
+      "area": "869",
+      "issues": []
+    },
+    {
+      "lot": "39",
+      "area": "2017",
+      "issues": []
+    },
+    {
+      "lot": "51",
+      "area": "2796",
+      "issues": []
+    },
+    {
+      "lot": "52",
+      "area": "2254",
+      "issues": []
+    },
+    {
+      "lot": "56",
+      "area": "2",
+      "issues": []
+    },
+    {
+      "lot": "59",
+      "area": "834",
+      "issues": []
+    },
+    {
+      "lot": "60",
+      "area": "593",
+      "issues": []
+    },
+    {
+      "lot": "61",
+      "area": "756",
+      "issues": []
+    },
+    {
+      "lot": "62",
+      "area": "1224",
+      "issues": []
+    },
+    {
+      "lot": "66",
+      "area": "2810",
+      "issues": []
+    }
+  ]
+}

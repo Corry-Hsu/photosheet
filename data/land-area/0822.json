@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "unit": "㎡",
+  "county": "屏東縣",
+  "district": "佳冬鄉",
+  "section": "武新段",
+  "code": "0822",
+  "parcels": [
+    {
+      "lot": "18",
+      "area": "406.29",
+      "issues": []
+    },
+    {
+      "lot": "27",
+      "area": "6546.26",
+      "issues": []
+    },
+    {
+      "lot": "28",
+      "area": "1107.4",
+      "issues": []
+    }
+  ]
+}

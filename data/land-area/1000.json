@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "unit": "㎡",
+  "county": "屏東縣",
+  "district": "東港鎮",
+  "section": "新義段",
+  "code": "1000",
+  "parcels": [
+    {
+      "lot": "83",
+      "area": "669.02",
+      "issues": []
+    }
+  ]
+}

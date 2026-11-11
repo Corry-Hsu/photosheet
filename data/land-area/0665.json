@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "unit": "㎡",
+  "county": "屏東縣",
+  "district": "牡丹鄉",
+  "section": "汝乃段",
+  "code": "0665",
+  "parcels": [
+    {
+      "lot": "1",
+      "area": "208379.29",
+      "issues": []
+    },
+    {
+      "lot": "2",
+      "area": "639992.52",
+      "issues": []
+    },
+    {
+      "lot": "3",
+      "area": "50165.95",
+      "issues": []
+    },
+    {
+      "lot": "4",
+      "area": "272055.63",
+      "issues": []
+    },
+    {
+      "lot": "5",
+      "area": "1239493.3",
+      "issues": []
+    },
+    {
+      "lot": "6",
+      "area": "55563.93",
+      "issues": []
+    },
+    {
+      "lot": "7",
+      "area": "190667.64",
+      "issues": []
+    }
+  ]
+}

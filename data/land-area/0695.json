@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "unit": "㎡",
+  "county": "屏東縣",
+  "district": "車城鄉",
+  "section": "南勢湖山段",
+  "code": "0695",
+  "parcels": [
+    {
+      "lot": "1",
+      "area": "195296.95",
+      "issues": []
+    },
+    {
+      "lot": "2",
+      "area": "20683.07",
+      "issues": []
+    },
+    {
+      "lot": "3",
+      "area": "30792.93",
+      "issues": []
+    },
+    {
+      "lot": "4",
+      "area": "999.99",
+      "issues": []
+    },
+    {
+      "lot": "5",
+      "area": "78789.8",
+      "issues": []
+    },
+    {
+      "lot": "6",
+      "area": "14592.66",
+      "issues": []
+    },
+    {
+      "lot": "7",
+      "area": "246.43",
+      "issues": []
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "unit": "㎡",
+  "county": "屏東縣",
+  "district": "牡丹鄉",
+  "section": "奇發發烏段",
+  "code": "0713",
+  "parcels": [
+    {
+      "lot": "1",
+      "area": "43273.32",
+      "issues": []
+    },
+    {
+      "lot": "2",
+      "area": "870.06",
+      "issues": []
+    },
+    {
+      "lot": "3",
+      "area": "675934.08",
+      "issues": []
+    },
+    {
+      "lot": "4",
+      "area": "23081.39",
+      "issues": []
+    },
+    {
+      "lot": "5",
+      "area": "8211.1",
+      "issues": []
+    },
+    {
+      "lot": "6",
+      "area": "23605.93",
+      "issues": []
+    },
+    {
+      "lot": "7",
+      "area": "199099.29",
+      "issues": []
+    },
+    {
+      "lot": "8",
+      "area": "6327.11",
+      "issues": []
+    }
+  ]
+}

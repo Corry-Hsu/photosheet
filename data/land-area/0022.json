@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "unit": "㎡",
+  "county": "屏東縣",
+  "district": "屏東市",
+  "section": "公館段",
+  "code": "0022",
+  "parcels": [
+    {
+      "lot": "602-9",
+      "area": "5",
+      "issues": []
+    },
+    {
+      "lot": "605-11",
+      "area": "176",
+      "issues": []
+    },
+    {
+      "lot": "605-12",
+      "area": "194",
+      "issues": []
+    }
+  ]
+}

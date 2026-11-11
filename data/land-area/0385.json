@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "unit": "㎡",
+  "county": "屏東縣",
+  "district": "春日鄉",
+  "section": "士文段",
+  "code": "0385",
+  "parcels": [
+    {
+      "lot": "8-6",
+      "area": "3712",
+      "issues": []
+    },
+    {
+      "lot": "21",
+      "area": "849",
+      "issues": []
+    },
+    {
+      "lot": "33",
+      "area": "131",
+      "issues": []
+    },
+    {
+      "lot": "34",
+      "area": "786",
+      "issues": []
+    },
+    {
+      "lot": "61",
+      "area": "1870",
+      "issues": []
+    },
+    {
+      "lot": "62",
+      "area": "1100",
+      "issues": []
+    },
+    {
+      "lot": "63",
+      "area": "1050",
+      "issues": []
+    }
+  ]
+}

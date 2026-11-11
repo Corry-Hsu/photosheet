@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "unit": "㎡",
+  "county": "屏東縣",
+  "district": "枋寮鄉",
+  "section": "東海段",
+  "code": "0389",
+  "parcels": [
+    {
+      "lot": "428",
+      "area": "14815",
+      "issues": []
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "unit": "㎡",
+  "county": "屏東縣",
+  "district": "萬丹鄉",
+  "section": "竹圍段",
+  "code": "0169",
+  "parcels": [
+    {
+      "lot": "7",
+      "area": "2639",
+      "issues": []
+    },
+    {
+      "lot": "10",
+      "area": "2369.14",
+      "issues": []
+    },
+    {
+      "lot": "11",
+      "area": "983.95",
+      "issues": []
+    }
+  ]
+}

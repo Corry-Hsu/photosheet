@@ -1,0 +1,65 @@
+{
+  "schemaVersion": 1,
+  "unit": "㎡",
+  "county": "屏東縣",
+  "district": "屏東市",
+  "section": "萬年段",
+  "code": "0069",
+  "parcels": [
+    {
+      "lot": "1-46",
+      "area": "7926.65",
+      "issues": []
+    },
+    {
+      "lot": "330",
+      "area": "639",
+      "issues": []
+    },
+    {
+      "lot": "511-5",
+      "area": "124",
+      "issues": []
+    },
+    {
+      "lot": "576",
+      "area": "46",
+      "issues": []
+    },
+    {
+      "lot": "742",
+      "area": "1339",
+      "issues": []
+    },
+    {
+      "lot": "743",
+      "area": "708",
+      "issues": []
+    },
+    {
+      "lot": "744",
+      "area": "161",
+      "issues": []
+    },
+    {
+      "lot": "778",
+      "area": "54",
+      "issues": []
+    },
+    {
+      "lot": "879-4",
+      "area": "54",
+      "issues": []
+    },
+    {
+      "lot": "1267",
+      "area": "1708",
+      "issues": []
+    },
+    {
+      "lot": "1469",
+      "area": "4149",
+      "issues": []
+    }
+  ]
+}

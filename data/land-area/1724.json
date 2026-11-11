@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "unit": "㎡",
+  "county": "屏東縣",
+  "district": "九如鄉",
+  "section": "九智段一小段",
+  "code": "1724",
+  "parcels": [
+    {
+      "lot": "3",
+      "area": "184.29",
+      "issues": []
+    },
+    {
+      "lot": "16",
+      "area": "330.5",
+      "issues": []
+    },
+    {
+      "lot": "26",
+      "area": "102.37",
+      "issues": []
+    }
+  ]
+}

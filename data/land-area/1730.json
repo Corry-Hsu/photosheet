@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "unit": "㎡",
+  "county": "屏東縣",
+  "district": "屏東市",
+  "section": "新和生段",
+  "code": "1730",
+  "parcels": [
+    {
+      "lot": "1",
+      "area": "1296.51",
+      "issues": []
+    },
+    {
+      "lot": "7",
+      "area": "2276.22",
+      "issues": []
+    },
+    {
+      "lot": "32",
+      "area": "688.91",
+      "issues": []
+    },
+    {
+      "lot": "54",
+      "area": "99.45",
+      "issues": []
+    }
+  ]
+}

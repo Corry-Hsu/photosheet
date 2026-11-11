@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "unit": "㎡",
+  "county": "屏東縣",
+  "district": "萬丹鄉",
+  "section": "興化廍段",
+  "code": "0077",
+  "parcels": [
+    {
+      "lot": "436",
+      "area": "446",
+      "issues": []
+    }
+  ]
+}

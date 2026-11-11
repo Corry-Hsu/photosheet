@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "unit": "㎡",
+  "county": "屏東縣",
+  "district": "九如鄉",
+  "section": "九和段一小段",
+  "code": "1725",
+  "parcels": [
+    {
+      "lot": "31",
+      "area": "350.37",
+      "issues": []
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "unit": "㎡",
+  "county": "屏東縣",
+  "district": "枋寮鄉",
+  "section": "大響營段",
+  "code": "0350",
+  "parcels": [
+    {
+      "lot": "1026",
+      "area": "3",
+      "issues": []
+    },
+    {
+      "lot": "1028",
+      "area": "3",
+      "issues": []
+    }
+  ]
+}

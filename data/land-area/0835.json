@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "unit": "㎡",
+  "county": "屏東縣",
+  "district": "春日鄉",
+  "section": "佳烏力拿瑪段",
+  "code": "0835",
+  "parcels": [
+    {
+      "lot": "1",
+      "area": "24251.93",
+      "issues": []
+    },
+    {
+      "lot": "2",
+      "area": "1233088.83",
+      "issues": []
+    },
+    {
+      "lot": "3",
+      "area": "725783.62",
+      "issues": []
+    },
+    {
+      "lot": "4",
+      "area": "482532.28",
+      "issues": []
+    }
+  ]
+}

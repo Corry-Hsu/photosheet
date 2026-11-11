@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "unit": "㎡",
+  "county": "屏東縣",
+  "district": "屏東市",
+  "section": "六塊厝段",
+  "code": "0021",
+  "parcels": [
+    {
+      "lot": "224-9",
+      "area": "2",
+      "issues": []
+    }
+  ]
+}

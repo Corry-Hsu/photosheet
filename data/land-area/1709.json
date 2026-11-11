@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "unit": "㎡",
+  "county": "屏東縣",
+  "district": "屏東市",
+  "section": "北興段",
+  "code": "1709",
+  "parcels": [
+    {
+      "lot": "1",
+      "area": "1459.17",
+      "issues": []
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "unit": "㎡",
+  "county": "屏東縣",
+  "district": "屏東市",
+  "section": "大武營段",
+  "code": "1721",
+  "parcels": [
+    {
+      "lot": "3",
+      "area": "53381.04",
+      "issues": []
+    },
+    {
+      "lot": "13",
+      "area": "375.05",
+      "issues": []
+    }
+  ]
+}

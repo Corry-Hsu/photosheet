@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "unit": "㎡",
+  "county": "屏東縣",
+  "district": "新埤鄉",
+  "section": "糞箕湖段",
+  "code": "0345",
+  "parcels": [
+    {
+      "lot": "1-904",
+      "area": "4865",
+      "issues": []
+    },
+    {
+      "lot": "1-1161",
+      "area": "2733",
+      "issues": []
+    }
+  ]
+}

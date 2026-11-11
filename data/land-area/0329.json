@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "unit": "㎡",
+  "county": "屏東縣",
+  "district": "竹田鄉",
+  "section": "竹田段",
+  "code": "0329",
+  "parcels": [
+    {
+      "lot": "769-1",
+      "area": "40",
+      "issues": []
+    },
+    {
+      "lot": "770-1",
+      "area": "116",
+      "issues": []
+    },
+    {
+      "lot": "771-1",
+      "area": "121",
+      "issues": []
+    },
+    {
+      "lot": "832-1",
+      "area": "124",
+      "issues": []
+    },
+    {
+      "lot": "835-2",
+      "area": "73",
+      "issues": []
+    },
+    {
+      "lot": "836-1",
+      "area": "58",
+      "issues": []
+    }
+  ]
+}
