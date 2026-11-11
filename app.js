@@ -509,7 +509,7 @@
       n = nav(t);
     open(
       "任務詳情",
-      `<h2>${E(location(t))}</h2><p>${E(t.type)} · ${t.source === "manual" ? "手動新增" : "原表第" + t.row + "列"} · ${E(t.serial)}</p><p>成果指定日期：${E(t.resultDate || "待補")}<br>完成期限：${E(t.due.replace("T", " ") || "未設定")}</p><h3>全部地號</h3>${worker ? "" : '<button id="edit-parcels">修正地段地號</button>'}${t.parcels
+      `<h2>${E(location(t))}</h2><p>${E(t.type)} · ${t.source === "manual" ? "手動新增" : "原表第" + t.row + "列"} · ${E(t.serial)}</p><p>成果指定日期：${E(t.resultDate || "待補")}<br>完成期限：${E(t.due.replace("T", " ") || "未設定")}</p><h3>全部地號</h3>${worker ? "" : '<button id="edit-parcels">修正／新增地段地號</button>'}${t.parcels
         .map((p, i) => {
           const xs = m.groups[i];
           return `<div class="parcel-row"><strong>${E(p.district + p.section + " " + p.lot)}</strong>${xs.length === 1 ? `<button data-parcel-nav="${i}">導航此地號參考位置</button>` : ""}</div>`;
@@ -528,19 +528,58 @@
     if (!worker) {
       bind("#edit-parcels", () => {
         open(
-          "修正原案地籍欄位",
-          `<p>任務仍是一整筆，不拆分地號。請依原案資料核對後修改；原始地號會留存供追溯。</p><div id="parcel-edit">${t.parcels.map((p, i) => `<div class="form-grid" data-parcel-edit="${i}"><label>鄉鎮<input data-field="district" value="${E(p.district)}"></label><label>地段<input data-field="section" value="${E(p.section)}"></label><label>地號<input data-field="lot" value="${E(p.lot)}"></label></div>`).join("")}</div><button id="save-parcels" class="primary">保存修改</button>`,
+          "修正／新增地段地號",
+          `<p>任務仍是一整筆，不拆分地號。可修正原有地號，或新增地號列；原始地號會留存供追溯。</p><div id="parcel-edit"></div><button id="add-parcel">＋ 新增地號</button><button id="save-parcels" class="primary">保存修改</button>`,
         );
+        let nextRow = 0;
+        const addParcel = (parcel, added = false) => {
+          const row = document.createElement("div");
+          row.className = "form-grid";
+          row.dataset.parcelEdit = nextRow++;
+          row.originalParcel = structuredClone(parcel);
+          row.innerHTML = `<label>鄉鎮<input data-field="district" value="${E(parcel.district)}"></label><label>地段<input data-field="section" value="${E(parcel.section)}"></label><label>地號<input data-field="lot" value="${E(parcel.lot)}" placeholder="例如：341-3"></label>${added ? '<button type="button" data-cancel-parcel>取消新增</button>' : ""}`;
+          $("#parcel-edit").append(row);
+          if (added) {
+            row.querySelector("[data-cancel-parcel]").onclick = () =>
+              row.remove();
+            row.querySelector('[data-field="lot"]').focus();
+          }
+        };
+        t.parcels.forEach((p) => addParcel(p));
+        bind("#add-parcel", () => {
+          const last = $$("[data-parcel-edit]").at(-1);
+          const get = (k) =>
+            C.norm(last.querySelector('[data-field="' + k + '"]').value);
+          addParcel(
+            {
+              county: last.originalParcel.county || "屏東縣",
+              district: get("district"),
+              section: get("section"),
+              lot: "",
+            },
+            true,
+          );
+        });
         bind("#save-parcels", async () => {
           const ps = $$("[data-parcel-edit]").map((el) => {
             const value = (k) =>
               C.norm(el.querySelector('[data-field="' + k + '"]').value);
-            return {
-              county: "屏東縣",
+            const original = el.originalParcel;
+            const parcel = {
+              ...original,
+              county: original.county || "屏東縣",
               district: value("district"),
               section: value("section"),
               lot: C.lot(value("lot")),
             };
+            if (
+              parcel.district !== C.norm(original.district) ||
+              parcel.section !== C.norm(original.section)
+            )
+              delete parcel.sectionCode;
+            const code = C.parcelCode(t, parcel, sectionCatalog);
+            if (code) parcel.sectionCode = code;
+            return parcel;
           });
           if (ps.some((p) => !p.district || !p.section || !p.lot))
             throw Error("請填寫完整且有效的地籍欄位");
@@ -549,13 +588,23 @@
           const old = structuredClone(t);
           t.originalParcels ??= structuredClone(t.parcels);
           t.parcels = ps;
-          t.parcelChoices = {};
+          t.district = ps[0].district;
+          t.section = ps[0].section;
+          t.sectionCode = ps[0].sectionCode || "";
+          const parcelKeys = new Set(ps.map((p) => C.key(p)));
+          t.parcelChoices = Object.fromEntries(
+            Object.entries(t.parcelChoices || {}).filter(([key]) =>
+              parcelKeys.has(key),
+            ),
+          );
           try {
             await persist();
           } catch (e) {
+            for (const key of Object.keys(t)) if (!(key in old)) delete t[key];
             Object.assign(t, old);
             throw e;
           }
+          render();
           await detail(id);
         });
       });
