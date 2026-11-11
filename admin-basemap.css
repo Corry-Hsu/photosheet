@@ -1,0 +1,33 @@
+.admin-basemap-controls {
+  margin: 12px 0;
+  padding: 12px;
+  border: 1px solid #d5e2da;
+  border-radius: 10px;
+  background: #f4f8f5;
+  min-width: 0;
+}
+.admin-basemap-controls > label {
+  display: block;
+  margin: 0 0 8px;
+}
+.admin-basemap-controls select {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.admin-basemap-controls p {
+  margin: 8px 0;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #426657;
+  overflow-wrap: anywhere;
+}
+.admin-basemap-controls button {
+  min-height: 44px;
+}
+.admin-basemap-controls [hidden] {
+  display: none !important;
+}
