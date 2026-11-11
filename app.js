@@ -507,12 +507,38 @@
     const t = state.tasks.find((t) => t.id === id),
       m = matching(t),
       n = nav(t);
+    const xmlParcels =
+      !worker &&
+      t.landArea &&
+      !window.LandAreaCore?.stale(t) &&
+      Array.isArray(t.landArea.parcels)
+        ? t.landArea.parcels
+        : [];
+    const xmlCodes = [
+      ...new Set(
+        xmlParcels.map((p) => C.sectionCode(p.sectionCode)).filter(Boolean),
+      ),
+    ];
     open(
       "任務詳情",
-      `<h2>${E(location(t))}</h2><p>${E(t.type)} · ${t.source === "manual" ? "手動新增" : "原表第" + t.row + "列"} · ${E(t.serial)}</p><p>成果指定日期：${E(t.resultDate || "待補")}<br>完成期限：${E(t.due.replace("T", " ") || "未設定")}</p>${!worker ? `<p id="task-land-area">土地登記總面積：${E(window.LandAreaCore?.stale(t) ? "地號已變更，請重新配對" : t.area === undefined || t.area === "" ? "未填" : t.area + " ㎡")}${t.landArea && !window.LandAreaCore?.stale(t) ? "（XML 配對）" : ""}</p><button id="detail-area">線上配對面積</button>` : ""}<h3>全部地號</h3>${worker ? "" : '<button id="edit-parcels">修正／新增地段地號</button>'}${t.parcels
+      `<h2>${E(location(t))}</h2><p>${E(t.type)} · ${t.source === "manual" ? "手動新增" : "原表第" + t.row + "列"} · ${E(t.serial)}</p><p>成果指定日期：${E(t.resultDate || "待補")}<br>完成期限：${E(t.due.replace("T", " ") || "未設定")}</p>${!worker ? `<p id="task-land-area">土地登記總面積：${E(window.LandAreaCore?.stale(t) ? "地號已變更，請重新配對" : t.area === undefined || t.area === "" ? "未填" : t.area + " ㎡")}${t.landArea && !window.LandAreaCore?.stale(t) ? `（XML 配對；地段代號：${E(xmlCodes.join("、") || "未記錄，請重新配對")}）` : ""}</p><button id="detail-area">線上配對面積</button>` : ""}<h3>全部地號</h3>${worker ? "" : '<button id="edit-parcels">修正／新增地段地號</button>'}${t.parcels
         .map((p, i) => {
           const xs = m.groups[i];
-          return `<div class="parcel-row"><strong>${E(p.district + p.section + " " + p.lot)}</strong>${xs.length === 1 ? `<button data-parcel-nav="${i}">導航此地號參考位置</button>` : ""}</div>`;
+          const matchedCodes = [
+            ...new Set(
+              xmlParcels
+                .filter(
+                  (x) =>
+                    C.key(x) === C.key(p) &&
+                    (!C.sectionCode(p.sectionCode) ||
+                      C.sectionCode(x.sectionCode) ===
+                        C.sectionCode(p.sectionCode)),
+                )
+                .map((x) => C.sectionCode(x.sectionCode))
+                .filter(Boolean),
+            ),
+          ];
+          return `<div class="parcel-row"><strong>${E(p.district + p.section + " " + p.lot)}</strong>${matchedCodes.length ? `<small class="muted" data-xml-section-code>（XML 段代號：${E(matchedCodes.join("、"))}）</small>` : ""}${xs.length === 1 ? `<button data-parcel-nav="${i}">導航此地號參考位置</button>` : ""}</div>`;
         })
         .join(
           "",

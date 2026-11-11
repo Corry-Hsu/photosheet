@@ -57,6 +57,7 @@
             p.parcel.district,
             p.parcel.section,
             p.parcel.lot,
+            p.sectionCode,
             p.status,
           ]),
         ]
@@ -77,7 +78,16 @@
         .slice((page - 1) * 20, page * 20)
         .map((r) => {
           const t = snapshots.find((t) => t.id === r.taskId);
-          return `<article class="area-result"><label class="area-choice"><input type="checkbox" data-area-task="${E(r.taskId)}" ${checked.has(r.taskId) ? "checked" : ""} ${!r.complete || loading || applying ? "disabled" : ""}><span><b>${E(t?.type)} · ${E(t?.caseNo || r.taskId)}</b><br>${E([...new Set(r.parcels.map((p) => p.parcel.district + p.parcel.section))].join("、"))}</span></label><p>目前面積：${E(t?.area ?? "") || "未填"} ㎡ → ${r.complete ? `<b>${E(r.total)} ㎡</b>` : `<strong class="warning">未完整配對</strong>（已配對小計 ${E(r.subtotal)} ㎡）`}</p><details ${!r.complete ? "open" : ""}><summary>地號面積明細 · ${r.matched}/${r.parcels.length} 筆</summary>${r.parcels.map((p) => `<div class="area-parcel"><span>${E(p.parcel.district + p.parcel.section)} ${E(p.parcel.lot)}</span><span>${p.status === "已配對" ? E(p.area) + " ㎡" : `<span class="warning">${E(p.status)}</span>`}</span></div>`).join("")}</details></article>`;
+          return `<article class="area-result"><label class="area-choice"><input type="checkbox" data-area-task="${E(r.taskId)}" ${checked.has(r.taskId) ? "checked" : ""} ${!r.complete || loading || applying ? "disabled" : ""}><span><b>${E(t?.type)} · ${E(t?.caseNo || r.taskId)}</b><br>${E([...new Set(r.parcels.map((p) => p.parcel.district + p.parcel.section))].join("、"))}</span></label><p>目前面積：${E(t?.area ?? "") || "未填"} ㎡ → ${r.complete ? `<b>${E(r.total)} ㎡</b>` : `<strong class="warning">未完整配對</strong>（已配對小計 ${E(r.subtotal)} ㎡）`}</p><p class="muted" data-area-xml-codes>已配對 XML 段代號：${E(
+            [
+              ...new Set(
+                r.parcels
+                  .filter((p) => p.status === "已配對")
+                  .map((p) => PSCore.sectionCode(p.sectionCode))
+                  .filter(Boolean),
+              ),
+            ].join("、") || "無",
+          )}</p><details ${!r.complete ? "open" : ""}><summary>地號面積明細 · ${r.matched}/${r.parcels.length} 筆</summary>${r.parcels.map((p) => `<div class="area-parcel"><span>${E(p.parcel.district + p.parcel.section)} ${E(p.parcel.lot)}${p.status === "已配對" && PSCore.sectionCode(p.sectionCode) ? `<small data-area-xml-code>（XML 段代號：${E(PSCore.sectionCode(p.sectionCode))}）</small>` : ""}</span><span>${p.status === "已配對" ? E(p.area) + " ㎡" : `<span class="warning">${E(p.status)}</span>`}</span></div>`).join("")}</details></article>`;
         })
         .join("") || "<p>沒有符合條件的任務。</p>";
     $("#area-page").textContent = `${page} / ${pages}`;
