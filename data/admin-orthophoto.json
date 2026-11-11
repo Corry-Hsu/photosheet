@@ -1,0 +1,2264 @@
+{
+  "schemaVersion": 1,
+  "source": "農業部農村發展及水土保持署 BigGIS",
+  "sourceUrl": "https://gis.ardswc.gov.tw/api/ardswc/wmts/Ortho?CountyName=%E5%B1%8F%E6%9D%B1%E7%B8%A3",
+  "snapshotDate": "2026-11-11",
+  "images": [
+    {
+      "id": "20260916_120814221_022075081_16_000_RSImage_UAV_Ortho",
+      "title": "20260916_UAV正射影像_屏東縣牡丹鄉四林村",
+      "date": "2026-09-16",
+      "bounds": [
+        120.81029739,
+        22.07138697,
+        120.81814411,
+        22.07877525
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20260916_120814221_022075081_16_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20260916_120631553_022612943_16_000_RSImage_UAV_Ortho",
+      "title": "20260916_UAV正射影像_屏東縣萬巒鄉萬金村",
+      "date": "2026-09-16",
+      "bounds": [
+        120.62869137,
+        22.60959787,
+        120.63441357,
+        22.61628854
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20260916_120631553_022612943_16_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20260624_120705816_022784559_15_000_RSImage_UAV_Ortho",
+      "title": "20260624_UAV正射影像_屏東縣三地門鄉德文村",
+      "date": "2026-06-24",
+      "bounds": [
+        120.69858465,
+        22.77729713,
+        120.71304633,
+        22.79182137
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20260624_120705816_022784559_15_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20260624_120689095_022819322_14_000_RSImage_UAV_Ortho",
+      "title": "20260624_UAV正射影像_屏東縣三地門鄉大社村",
+      "date": "2026-06-24",
+      "bounds": [
+        120.67857148,
+        22.8050984,
+        120.69961573,
+        22.83354627
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20260624_120689095_022819322_14_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20251224_120749651_022748550_14_000_RSImage_UAV_Ortho",
+      "title": "20251224_UAV正射影像_屏東縣霧臺鄉吉露村",
+      "date": "2025-12-24",
+      "bounds": [
+        120.74218281,
+        22.73811493,
+        120.75711813,
+        22.75898596
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20251224_120749651_022748550_14_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20251104_120749659_022753062_16_000_RSImage_UAV_Ortho",
+      "title": "20251104_UAV正射影像_屏東縣霧臺鄉吉露村",
+      "date": "2025-11-04",
+      "bounds": [
+        120.74456805,
+        22.74885582,
+        120.75474953,
+        22.75726876
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20251104_120749659_022753062_16_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20251031_120672972_022544370_13_001_RSImage_UAV_Ortho",
+      "title": "20251031_UAV正射影像_屏東縣來義鄉義林村",
+      "date": "2025-10-31",
+      "bounds": [
+        120.64695912,
+        22.51824582,
+        120.69897505,
+        22.57049493
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20251031_120672972_022544370_13_001_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20251031_120672972_022544370_13_000_RSImage_UAV_Ortho",
+      "title": "20251031_UAV正射影像_屏東縣來義鄉義林村",
+      "date": "2025-10-31",
+      "bounds": [
+        120.64695912,
+        22.51824582,
+        120.69897505,
+        22.57049493
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20251031_120672972_022544370_13_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20251029_120749563_022754054_15_000_RSImage_UAV_Ortho",
+      "title": "20251029_UAV正射影像_屏東縣霧臺鄉吉露村",
+      "date": "2025-10-29",
+      "bounds": [
+        120.74462096,
+        22.74844428,
+        120.75450418,
+        22.75966432
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20251029_120749563_022754054_15_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20251021_120664972_022376954_15_000_RSImage_UAV_Ortho",
+      "title": "20251021_UAV正射影像_屏東縣春日鄉士文村",
+      "date": "2025-10-21",
+      "bounds": [
+        120.65500441,
+        22.37074774,
+        120.67493915,
+        22.3831609
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20251021_120664972_022376954_15_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20251017_120749617_022754139_15_000_RSImage_UAV_Ortho",
+      "title": "20251017_UAV正射影像_屏東縣霧臺鄉吉露村",
+      "date": "2025-10-17",
+      "bounds": [
+        120.74464226,
+        22.74846889,
+        120.75459172,
+        22.75980835
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20251017_120749617_022754139_15_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20251017_120680322_022530800_15_000_RSImage_UAV_Ortho",
+      "title": "20251017_UAV正射影像_屏東縣來義鄉來義村",
+      "date": "2025-10-17",
+      "bounds": [
+        120.67466687,
+        22.52588038,
+        120.68597759,
+        22.53572054
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20251017_120680322_022530800_15_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20251015_120668086_022375272_15_000_RSImage_UAV_Ortho",
+      "title": "20251015_UAV正射影像_屏東縣春日鄉士文村",
+      "date": "2025-10-15",
+      "bounds": [
+        120.66117552,
+        22.36784729,
+        120.67499541,
+        22.38269613
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20251015_120668086_022375272_15_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20251009_120669680_022373786_16_000_RSImage_UAV_Ortho",
+      "title": "20251009_UAV正射影像_屏東縣春日鄉士文村",
+      "date": "2025-10-09",
+      "bounds": [
+        120.66428354,
+        22.37039026,
+        120.67507615,
+        22.37718259
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20251009_120669680_022373786_16_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20251007_120646441_022428990_16_000_RSImage_UAV_Ortho",
+      "title": "20251007_UAV正射影像_屏東縣春日鄉歸崇村",
+      "date": "2025-10-07",
+      "bounds": [
+        120.64409891,
+        22.42618771,
+        120.64878243,
+        22.43179153
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20251007_120646441_022428990_16_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20250921_120704090_022157485_17_000_RSImage_UAV_Ortho",
+      "title": "20250921_UAV正射影像_屏東縣獅子鄉竹坑村",
+      "date": "2025-09-21",
+      "bounds": [
+        120.70181,
+        22.15600031,
+        120.7063707,
+        22.1589696
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20250921_120704090_022157485_17_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20250912_120674443_022542882_13_002_RSImage_UAV_Ortho",
+      "title": "20250912_UAV正射影像_屏東縣來義鄉義林村",
+      "date": "2025-09-12",
+      "bounds": [
+        120.64986944,
+        22.51847245,
+        120.69900758,
+        22.56729121
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20250912_120674443_022542882_13_002_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20250912_120674443_022542882_13_001_RSImage_UAV_Ortho",
+      "title": "20250912_UAV正射影像_屏東縣來義鄉義林村",
+      "date": "2025-09-12",
+      "bounds": [
+        120.64986944,
+        22.51847245,
+        120.69900758,
+        22.56729121
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20250912_120674443_022542882_13_001_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20250912_120674443_022542882_13_000_RSImage_UAV_Ortho",
+      "title": "20250912_UAV正射影像_屏東縣來義鄉義林村",
+      "date": "2025-09-12",
+      "bounds": [
+        120.64986944,
+        22.51847245,
+        120.69900758,
+        22.56729121
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20250912_120674443_022542882_13_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20250902_120749577_022754288_15_000_RSImage_UAV_Ortho",
+      "title": "20250902_UAV正射影像_屏東縣霧臺鄉吉露村",
+      "date": "2025-09-02",
+      "bounds": [
+        120.74453875,
+        22.74848161,
+        120.75461511,
+        22.76009511
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20250902_120749577_022754288_15_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20250820_120631330_022611687_17_000_RSImage_UAV_Ortho",
+      "title": "20250820_UAV正射影像_屏東縣萬巒鄉萬金村",
+      "date": "2025-08-20",
+      "bounds": [
+        120.62957699,
+        22.60994046,
+        120.63308286,
+        22.6134339
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20250820_120631330_022611687_17_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20250819_120701887_022142685_17_000_RSImage_UAV_Ortho",
+      "title": "20250819_UAV正射影像_屏東縣獅子鄉竹坑村",
+      "date": "2025-08-19",
+      "bounds": [
+        120.6998481,
+        22.14184047,
+        120.7039267,
+        22.14353053
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20250819_120701887_022142685_17_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20250819_120699704_022142384_18_000_RSImage_UAV_Ortho",
+      "title": "20250819_UAV正射影像_屏東縣枋山鄉善餘村",
+      "date": "2025-08-19",
+      "bounds": [
+        120.6987554,
+        22.1417178,
+        120.7006536,
+        22.14304975
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20250819_120699704_022142384_18_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20250812_120750961_022754003_15_000_RSImage_UAV_Ortho",
+      "title": "20250812_UAV正射影像_屏東縣霧臺鄉吉露村",
+      "date": "2025-08-12",
+      "bounds": [
+        120.74467735,
+        22.74878207,
+        120.75724446,
+        22.75922416
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20250812_120750961_022754003_15_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20250807_120749565_022748950_14_001_RSImage_UAV_Ortho",
+      "title": "20250807_UAV正射影像_屏東縣霧臺鄉吉露村",
+      "date": "2025-08-07",
+      "bounds": [
+        120.74227042,
+        22.73847818,
+        120.75685796,
+        22.75942114
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20250807_120749565_022748950_14_001_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20250731_120646507_022428934_16_000_RSImage_UAV_Ortho",
+      "title": "20250731_UAV正射影像_屏東縣春日鄉歸崇村",
+      "date": "2025-07-31",
+      "bounds": [
+        120.64438634,
+        22.42614041,
+        120.64862661,
+        22.43172803
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20250731_120646507_022428934_16_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20250714_120693030_022265147_18_000_RSImage_UAV_Ortho",
+      "title": "20250714_UAV正射影像_屏東縣獅子鄉獅子村",
+      "date": "2025-07-14",
+      "bounds": [
+        120.69231628,
+        22.26436968,
+        120.69374395,
+        22.26592468
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20250714_120693030_022265147_18_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20250703_120720238_022764902_16_000_RSImage_UAV_Ortho",
+      "title": "20250703_UAV正射影像_屏東縣霧臺鄉佳暮村",
+      "date": "2025-07-03",
+      "bounds": [
+        120.71738609,
+        22.76158822,
+        120.7230895,
+        22.76821648
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20250703_120720238_022764902_16_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20250701_120749125_022751640_15_000_RSImage_UAV_Ortho",
+      "title": "20250701_UAV正射影像_屏東縣霧臺鄉吉露村",
+      "date": "2025-07-01",
+      "bounds": [
+        120.74230704,
+        22.74407909,
+        120.75594207,
+        22.75920074
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20250701_120749125_022751640_15_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20250626_120760706_022725977_15_000_RSImage_UAV_Ortho",
+      "title": "20250626_UAV正射影像_屏東縣霧臺鄉阿禮村",
+      "date": "2025-06-26",
+      "bounds": [
+        120.75348217,
+        22.72264551,
+        120.76792874,
+        22.72930804
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20250626_120760706_022725977_15_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20250626_120753266_022760725_16_000_RSImage_UAV_Ortho",
+      "title": "20250626_UAV正射影像_屏東縣霧臺鄉大武村",
+      "date": "2025-06-26",
+      "bounds": [
+        120.75155893,
+        22.75798434,
+        120.75497358,
+        22.7634664
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20250626_120753266_022760725_16_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20250617_120674201_022544063_13_000_RSImage_UAV_Ortho",
+      "title": "20250617_UAV正射影像_屏東縣來義鄉義林村",
+      "date": "2025-06-17",
+      "bounds": [
+        120.65007827,
+        22.52036497,
+        120.69831563,
+        22.56776175
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20250617_120674201_022544063_13_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20250527_120676570_022526901_14_000_RSImage_UAV_Ortho",
+      "title": "20250527_UAV正射影像_屏東縣來義鄉來義村",
+      "date": "2025-05-27",
+      "bounds": [
+        120.65721879,
+        22.52030678,
+        120.6959193,
+        22.53349535
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20250527_120676570_022526901_14_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20250522_120689202_022526869_15_000_RSImage_UAV_Ortho",
+      "title": "20250522_UAV正射影像_屏東縣來義鄉來義村",
+      "date": "2025-05-22",
+      "bounds": [
+        120.68271058,
+        22.52044894,
+        120.69569306,
+        22.53328952
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20250522_120689202_022526869_15_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20250407_120681606_022527526_14_000_RSImage_UAV_Ortho",
+      "title": "20250407_UAV正射影像_屏東縣來義鄉來義村",
+      "date": "2025-04-07",
+      "bounds": [
+        120.6684278,
+        22.52083895,
+        120.6947828,
+        22.53421249
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20250407_120681606_022527526_14_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20250225_120750780_022748737_15_000_RSImage_UAV_Ortho",
+      "title": "20250225_UAV正射影像_屏東縣霧臺鄉吉露村",
+      "date": "2025-02-25",
+      "bounds": [
+        120.74362573,
+        22.740223,
+        120.75793404,
+        22.75725084
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20250225_120750780_022748737_15_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20250116_120751518_022753928_14_000_RSImage_UAV_Ortho",
+      "title": "20250116_UAV正射影像_屏東縣霧臺鄉吉露村",
+      "date": "2025-01-16",
+      "bounds": [
+        120.73940743,
+        22.74797655,
+        120.76362818,
+        22.75988025
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20250116_120751518_022753928_14_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20250114_120683221_022527907_14_000_RSImage_UAV_Ortho",
+      "title": "20250114_UAV正射影像_屏東縣來義鄉來義村",
+      "date": "2025-01-14",
+      "bounds": [
+        120.67172293,
+        22.52085571,
+        120.69471783,
+        22.53495882
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20250114_120683221_022527907_14_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20241122_120832830_022197272_17_000_RSImage_UAV_Ortho",
+      "title": "20241122_UAV正射影像_屏東縣牡丹鄉牡丹村",
+      "date": "2024-11-22",
+      "bounds": [
+        120.83126941,
+        22.19557364,
+        120.83438958,
+        22.19897018
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20241122_120832830_022197272_17_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20241122_120720607_022763918_18_000_RSImage_UAV_Ortho",
+      "title": "20241122_UAV正射影像_屏東縣霧臺鄉佳暮村",
+      "date": "2024-11-22",
+      "bounds": [
+        120.71965482,
+        22.7630624,
+        120.72155934,
+        22.76477292
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20241122_120720607_022763918_18_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20241104_120610157_022652468_18_000_RSImage_UAV_Ortho",
+      "title": "20241104_UAV正射影像_屏東縣內埔鄉中林村",
+      "date": "2024-11-04",
+      "bounds": [
+        120.60928966,
+        22.65161462,
+        120.61102441,
+        22.65332158
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20241104_120610157_022652468_18_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20241104_120604821_022644229_19_000_RSImage_UAV_Ortho",
+      "title": "20241104_UAV正射影像_屏東縣內埔鄉中林村",
+      "date": "2024-11-04",
+      "bounds": [
+        120.60458307,
+        22.64384203,
+        120.60505895,
+        22.64461689
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20241104_120604821_022644229_19_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20241019_120666297_022378600_14_000_RSImage_UAV_Ortho",
+      "title": "20241019_UAV正射影像_屏東縣春日鄉士文村",
+      "date": "2024-10-19",
+      "bounds": [
+        120.65526857,
+        22.36496396,
+        120.67732397,
+        22.39223543
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20241019_120666297_022378600_14_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20241012_120661239_022449297_14_000_RSImage_UAV_Ortho",
+      "title": "20241012_UAV正射影像_屏東縣來義鄉南和村",
+      "date": "2024-10-12",
+      "bounds": [
+        120.65476865,
+        22.43804073,
+        120.66770748,
+        22.46055355
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20241012_120661239_022449297_14_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20241006_120661343_022538792_17_000_RSImage_UAV_Ortho",
+      "title": "20241006_UAV正射影像_屏東縣來義鄉義林村",
+      "date": "2024-10-06",
+      "bounds": [
+        120.66059651,
+        22.53743516,
+        120.66209013,
+        22.54014922
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20241006_120661343_022538792_17_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20240924_120704765_022157342_15_000_RSImage_UAV_Ortho",
+      "title": "20240924_UAV正射影像_屏東縣獅子鄉竹坑村",
+      "date": "2024-09-24",
+      "bounds": [
+        120.69722208,
+        22.15441448,
+        120.71230778,
+        22.16026933
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20240924_120704765_022157342_15_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20240924_120657239_022687533_17_000_RSImage_UAV_Ortho",
+      "title": "20240924_UAV正射影像_屏東縣瑪家鄉涼山村",
+      "date": "2024-09-24",
+      "bounds": [
+        120.6550357,
+        22.68609107,
+        120.65944262,
+        22.68897557
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20240924_120657239_022687533_17_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20240924_120633271_022663330_17_000_RSImage_UAV_Ortho",
+      "title": "20240924_UAV正射影像_屏東縣瑪家鄉涼山村",
+      "date": "2024-09-24",
+      "bounds": [
+        120.63169333,
+        22.66194144,
+        120.63484826,
+        22.66471835
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20240924_120633271_022663330_17_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20240902_120631755_022655650_17_000_RSImage_UAV_Ortho",
+      "title": "20240902_UAV正射影像_屏東縣瑪家鄉佳義村",
+      "date": "2024-09-02",
+      "bounds": [
+        120.62967179,
+        22.65456285,
+        120.63383816,
+        22.6567371
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20240902_120631755_022655650_17_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20240902_120630495_022652488_17_000_RSImage_UAV_Ortho",
+      "title": "20240902_UAV正射影像_屏東縣瑪家鄉佳義村",
+      "date": "2024-09-02",
+      "bounds": [
+        120.62799487,
+        22.65124144,
+        120.63299437,
+        22.65373461
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20240902_120630495_022652488_17_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20240815_120746182_021946800_16_000_RSImage_UAV_Ortho",
+      "title": "20240815_UAV正射影像_屏東縣恆春鎮大光里",
+      "date": "2024-08-15",
+      "bounds": [
+        120.74422437,
+        21.94413903,
+        120.7481397,
+        21.94946017
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20240815_120746182_021946800_16_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20240808_120648652_022425346_17_000_RSImage_UAV_Ortho",
+      "title": "20240808_UAV正射影像_屏東縣春日鄉歸崇村",
+      "date": "2024-08-08",
+      "bounds": [
+        120.64711213,
+        22.423374,
+        120.65019277,
+        22.42731739
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20240808_120648652_022425346_17_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20240801_120674258_022542604_13_001_RSImage_UAV_Ortho",
+      "title": "20240801_UAV正射影像_屏東縣來義鄉義林村",
+      "date": "2024-08-01",
+      "bounds": [
+        120.65208084,
+        22.5186417,
+        120.69642683,
+        22.5665668
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20240801_120674258_022542604_13_001_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20240731_120747268_022753520_14_000_RSImage_UAV_Ortho",
+      "title": "20240731_UAV正射影像_屏東縣霧臺鄉吉露村",
+      "date": "2024-07-31",
+      "bounds": [
+        120.73250124,
+        22.73970388,
+        120.76203144,
+        22.76733593
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20240731_120747268_022753520_14_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20240714_120604833_022644212_19_000_RSImage_UAV_Ortho",
+      "title": "20240714_UAV正射影像_屏東縣內埔鄉中林村",
+      "date": "2024-07-14",
+      "bounds": [
+        120.60464442,
+        22.64389363,
+        120.60502234,
+        22.64453101
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20240714_120604833_022644212_19_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20240709_120892515_022175295_18_000_RSImage_UAV_Ortho",
+      "title": "20240709_UAV正射影像_屏東縣牡丹鄉旭海村",
+      "date": "2024-07-09",
+      "bounds": [
+        120.89195455,
+        22.1743379,
+        120.89307575,
+        22.1762528
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20240709_120892515_022175295_18_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20240617_120682341_022742235_17_000_RSImage_UAV_Ortho",
+      "title": "20240617_UAV正射影像_屏東縣三地門鄉三地村",
+      "date": "2024-06-17",
+      "bounds": [
+        120.68102129,
+        22.73978778,
+        120.68366036,
+        22.74468309
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20240617_120682341_022742235_17_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20240411_120604836_022644305_19_000_RSImage_UAV_Ortho",
+      "title": "20240411_UAV正射影像_屏東縣內埔鄉中林村",
+      "date": "2024-04-11",
+      "bounds": [
+        120.60454663,
+        22.6439636,
+        120.6051254,
+        22.64464643
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20240411_120604836_022644305_19_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20240409_120746758_022749756_14_000_RSImage_UAV_Ortho",
+      "title": "20240409_UAV正射影像_屏東縣霧臺鄉吉露村",
+      "date": "2024-04-09",
+      "bounds": [
+        120.73401198,
+        22.73643008,
+        120.75950153,
+        22.76308286
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20240409_120746758_022749756_14_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20240408_120892487_022175331_18_000_RSImage_UAV_Ortho",
+      "title": "20240408_UAV正射影像_屏東縣牡丹鄉旭海村",
+      "date": "2024-04-08",
+      "bounds": [
+        120.89172676,
+        22.17424545,
+        120.89324681,
+        22.17641555
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20240408_120892487_022175331_18_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20240330_120610128_022652558_17_000_RSImage_UAV_Ortho",
+      "title": "20240330_UAV正射影像_屏東縣內埔鄉中林村",
+      "date": "2024-03-30",
+      "bounds": [
+        120.60853087,
+        22.6511862,
+        120.61172442,
+        22.65393071
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20240330_120610128_022652558_17_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20240311_120746030_021946272_19_000_RSImage_UAV_Ortho",
+      "title": "20240311_UAV正射影像_屏東縣恆春鎮大光里",
+      "date": "2024-03-11",
+      "bounds": [
+        120.74550886,
+        21.94579287,
+        120.7465511,
+        21.9467504
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20240311_120746030_021946272_19_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20231125_120676997_022561560_17_000_RSImage_UAV_Ortho",
+      "title": "20231125_UAV正射影像_屏東縣來義鄉義林村",
+      "date": "2023-11-25",
+      "bounds": [
+        120.67457731,
+        22.55943074,
+        120.67941693,
+        22.56368833
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20231125_120676997_022561560_17_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20231021_120749626_022749775_15_000_RSImage_UAV_Ortho",
+      "title": "20231021_UAV正射影像_屏東縣霧臺鄉吉露村",
+      "date": "2023-10-21",
+      "bounds": [
+        120.74280762,
+        22.74055783,
+        120.75644411,
+        22.75899162
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20231021_120749626_022749775_15_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20231020_120798122_022226483_15_000_RSImage_UAV_Ortho",
+      "title": "20231020_UAV正射影像_屏東縣獅子鄉草埔村",
+      "date": "2023-10-20",
+      "bounds": [
+        120.79184621,
+        22.2170191,
+        120.80439665,
+        22.23594608
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20231020_120798122_022226483_15_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20230928_120718309_022739610_16_000_RSImage_UAV_Ortho",
+      "title": "20230928_UAV正射影像_屏東縣霧臺鄉霧台村",
+      "date": "2023-09-28",
+      "bounds": [
+        120.71631373,
+        22.73530898,
+        120.7203051,
+        22.74391153
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20230928_120718309_022739610_16_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20230923_120748504_022748133_15_000_RSImage_UAV_Ortho",
+      "title": "20230923_UAV正射影像_屏東縣霧臺鄉吉露村",
+      "date": "2023-09-23",
+      "bounds": [
+        120.74287013,
+        22.73869147,
+        120.75413614,
+        22.75757482
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20230923_120748504_022748133_15_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20230829_120747811_022748610_14_000_RSImage_UAV_Ortho",
+      "title": "20230829_UAV正射影像_屏東縣霧臺鄉吉露村",
+      "date": "2023-08-29",
+      "bounds": [
+        120.73769321,
+        22.73401084,
+        120.75792744,
+        22.76320923
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20230829_120747811_022748610_14_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20230815_120746047_021946883_17_000_RSImage_UAV_Ortho",
+      "title": "20230815_UAV正射影像_屏東縣恆春鎮大光里",
+      "date": "2023-08-15",
+      "bounds": [
+        120.74488173,
+        21.94441347,
+        120.74721228,
+        21.94935259
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20230815_120746047_021946883_17_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20230801_120749652_022749331_14_000_RSImage_UAV_Ortho",
+      "title": "20230801_UAV正射影像_屏東縣霧臺鄉吉露村",
+      "date": "2023-08-01",
+      "bounds": [
+        120.73810013,
+        22.73513359,
+        120.76120124,
+        22.76352823
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20230801_120749652_022749331_14_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20230717_120797911_022226788_15_000_RSImage_UAV_Ortho",
+      "title": "20230717_UAV正射影像_屏東縣獅子鄉草埔村",
+      "date": "2023-07-17",
+      "bounds": [
+        120.79176175,
+        22.21737698,
+        120.8040592,
+        22.23619866
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20230717_120797911_022226788_15_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20230524_120747712_022749148_14_000_RSImage_UAV_Ortho",
+      "title": "20230524_UAV正射影像_屏東縣霧臺鄉吉露村",
+      "date": "2023-05-24",
+      "bounds": [
+        120.73970505,
+        22.73731815,
+        120.75571743,
+        22.76097755
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20230524_120747712_022749148_14_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20230503_120674299_022542599_13_000_RSImage_UAV_Ortho",
+      "title": "20230503_UAV正射影像_屏東縣來義鄉義林村",
+      "date": "2023-05-03",
+      "bounds": [
+        120.65214364,
+        22.51864021,
+        120.69644706,
+        22.56655714
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20230503_120674299_022542599_13_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20221028_120683726_022524325_15_000_RSImage_UAV_Ortho",
+      "title": "20221028_UAV正射影像_屏東縣來義鄉來義村",
+      "date": "2022-10-28",
+      "bounds": [
+        120.6734772,
+        22.51767767,
+        120.6939732,
+        22.530973
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20221028_120683726_022524325_15_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20221013_120744190_022746820_14_000_RSImage_UAV_Ortho",
+      "title": "20221013_UAV正射影像_屏東縣霧臺鄉吉露村",
+      "date": "2022-10-13",
+      "bounds": [
+        120.7294393,
+        22.73324505,
+        120.758938,
+        22.76039539
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20221013_120744190_022746820_14_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20221012_120671144_022713610_13_000_RSImage_UAV_Ortho",
+      "title": "20221012_UAV正射影像_屏東縣三地門鄉三地村",
+      "date": "2022-10-12",
+      "bounds": [
+        120.6364789,
+        22.68761438,
+        120.7057967,
+        22.73960521
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20221012_120671144_022713610_13_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20220830_120731499_021980242_17_000_RSImage_UAV_Ortho",
+      "title": "20220830_UAV正射影像_屏東縣恆春鎮龍水里",
+      "date": "2022-08-30",
+      "bounds": [
+        120.7301289,
+        21.97887688,
+        120.7328693,
+        21.98160742
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20220830_120731499_021980242_17_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20220609_120745354_022748114_14_000_RSImage_UAV_Ortho",
+      "title": "20220609_UAV正射影像_屏東縣霧臺鄉吉露村",
+      "date": "2022-06-09",
+      "bounds": [
+        120.7323541,
+        22.73631975,
+        120.758352,
+        22.75990911
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20220609_120745354_022748114_14_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20220302_120756218_022012641_16_000_RSImage_UAV_Ortho",
+      "title": "20220302_UAV正射影像_屏東縣恆春鎮網紗里",
+      "date": "2022-03-02",
+      "bounds": [
+        120.75426956,
+        22.00973505,
+        120.75816583,
+        22.01554663
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20220302_120756218_022012641_16_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20211029_120520552_022610720_14_000_RSImage_UAV_Ortho",
+      "title": "20211029_UAV正射影像_屏東縣竹田鄉六巷村",
+      "date": "2021-10-29",
+      "bounds": [
+        120.50609631,
+        22.59643881,
+        120.53500514,
+        22.62500188
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20211029_120520552_022610720_14_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20211029_120470548_022610721_14_000_RSImage_UAV_Ortho",
+      "title": "20211029_UAV正射影像_屏東縣萬丹鄉加興村",
+      "date": "2021-10-29",
+      "bounds": [
+        120.45608144,
+        22.59643074,
+        120.48501108,
+        22.62501163
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20211029_120470548_022610721_14_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20211029_120449391_022610784_14_000_RSImage_UAV_Ortho",
+      "title": "20211029_UAV正射影像_屏東縣萬丹鄉社口村",
+      "date": "2021-10-29",
+      "bounds": [
+        120.43876392,
+        22.59654803,
+        120.46001525,
+        22.62502048
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20211029_120449391_022610784_14_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20211028_120495551_022610721_14_000_RSImage_UAV_Ortho",
+      "title": "20211028_UAV正射影像_屏東縣萬丹鄉廣安村",
+      "date": "2021-10-28",
+      "bounds": [
+        120.48108913,
+        22.59643297,
+        120.51000984,
+        22.62500947
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20211028_120495551_022610721_14_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20211028_120495548_022585722_14_000_RSImage_UAV_Ortho",
+      "title": "20211028_UAV正射影像_屏東縣萬丹鄉萬安村",
+      "date": "2021-10-28",
+      "bounds": [
+        120.48108777,
+        22.57143412,
+        120.51000607,
+        22.60001062
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20211028_120495548_022585722_14_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20211028_120495547_022560720_14_000_RSImage_UAV_Ortho",
+      "title": "20211028_UAV正射影像_屏東縣萬丹鄉水仙村",
+      "date": "2021-10-28",
+      "bounds": [
+        120.48108683,
+        22.54642698,
+        120.5100047,
+        22.57501253
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20211028_120495547_022560720_14_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20211028_120495546_022535717_14_000_RSImage_UAV_Ortho",
+      "title": "20211028_UAV正射影像_屏東縣崁頂鄉洲子村",
+      "date": "2021-10-28",
+      "bounds": [
+        120.48108657,
+        22.52143017,
+        120.510002,
+        22.55000488
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20211028_120495546_022535717_14_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20211028_120470547_022585723_14_000_RSImage_UAV_Ortho",
+      "title": "20211028_UAV正射影像_屏東縣萬丹鄉田厝村",
+      "date": "2021-10-28",
+      "bounds": [
+        120.45608145,
+        22.57143235,
+        120.48500965,
+        22.60001414
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20211028_120470547_022585723_14_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20211028_120470544_022560721_14_000_RSImage_UAV_Ortho",
+      "title": "20211028_UAV正射影像_屏東縣萬丹鄉香社村",
+      "date": "2021-10-28",
+      "bounds": [
+        120.45608001,
+        22.54642638,
+        120.48500582,
+        22.5750154
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20211028_120470544_022560721_14_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20211028_120470544_022535723_14_000_RSImage_UAV_Ortho",
+      "title": "20211028_UAV正射影像_屏東縣新園鄉港墘村",
+      "date": "2021-10-28",
+      "bounds": [
+        120.45608049,
+        22.52142861,
+        120.48500389,
+        22.55001672
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20211028_120470544_022535723_14_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20211028_120445546_022535720_14_001_RSImage_UAV_Ortho",
+      "title": "20211028_UAV正射影像_屏東縣新園鄉新東村",
+      "date": "2021-10-28",
+      "bounds": [
+        120.43108098,
+        22.52142353,
+        120.46000744,
+        22.55001599
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20211028_120445546_022535720_14_001_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20211027_120520551_022585718_14_000_RSImage_UAV_Ortho",
+      "title": "20211027_UAV正射影像_屏東縣竹田鄉大湖村",
+      "date": "2021-10-27",
+      "bounds": [
+        120.50609476,
+        22.57143195,
+        120.53500414,
+        22.60000407
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20211027_120520551_022585718_14_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20211027_120520549_022560720_14_000_RSImage_UAV_Ortho",
+      "title": "20211027_UAV正射影像_屏東縣竹田鄉泗洲村",
+      "date": "2021-10-27",
+      "bounds": [
+        120.50609497,
+        22.54643397,
+        120.535,
+        22.57500518
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20211027_120520549_022560720_14_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20211027_120517047_022535707_14_000_RSImage_UAV_Ortho",
+      "title": "20211027_UAV正射影像_屏東縣崁頂鄉力社村",
+      "date": "2021-10-27",
+      "bounds": [
+        120.50299513,
+        22.52177504,
+        120.53109592,
+        22.54963825
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20211027_120517047_022535707_14_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20211027_120517045_022510718_14_000_RSImage_UAV_Ortho",
+      "title": "20211027_UAV正射影像_屏東縣崁頂鄉園寮村",
+      "date": "2021-10-27",
+      "bounds": [
+        120.50299314,
+        22.49679513,
+        120.53109455,
+        22.52464029
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20211027_120517045_022510718_14_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20211027_120495551_022460140_14_000_RSImage_UAV_Ortho",
+      "title": "20211027_UAV正射影像_屏東縣東港鎮大潭里",
+      "date": "2021-10-27",
+      "bounds": [
+        120.481105,
+        22.44643574,
+        120.50999436,
+        22.47384451
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20211027_120495551_022460140_14_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20211027_120495544_022510719_14_000_RSImage_UAV_Ortho",
+      "title": "20211027_UAV正射影像_屏東縣崁頂鄉北勢村",
+      "date": "2021-10-27",
+      "bounds": [
+        120.48108618,
+        22.49643121,
+        120.50999922,
+        22.52500592
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20211027_120495544_022510719_14_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20211027_120470542_022510728_14_000_RSImage_UAV_Ortho",
+      "title": "20211027_UAV正射影像_屏東縣崁頂鄉港東村",
+      "date": "2021-10-27",
+      "bounds": [
+        120.45607966,
+        22.49644799,
+        120.48500153,
+        22.52500902
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20211027_120470542_022510728_14_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20211027_120470481_022463888_14_000_RSImage_UAV_Ortho",
+      "title": "20211027_UAV正射影像_屏東縣東港鎮船頭里",
+      "date": "2021-10-27",
+      "bounds": [
+        120.45607803,
+        22.45276534,
+        120.48488241,
+        22.47501163
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20211027_120470481_022463888_14_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20211027_120449402_022585786_14_000_RSImage_UAV_Ortho",
+      "title": "20211027_UAV正射影像_屏東縣萬丹鄉崙頂村",
+      "date": "2021-10-27",
+      "bounds": [
+        120.43878967,
+        22.57155115,
+        120.46001175,
+        22.60002171
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20211027_120449402_022585786_14_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20211027_120449094_022560783_14_000_RSImage_UAV_Ortho",
+      "title": "20211027_UAV正射影像_屏東縣萬丹鄉灣內村",
+      "date": "2021-10-27",
+      "bounds": [
+        120.43817604,
+        22.54654313,
+        120.46000878,
+        22.57502308
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20211027_120449094_022560783_14_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20211027_120445545_022510740_14_000_RSImage_UAV_Ortho",
+      "title": "20211027_UAV正射影像_屏東縣新園鄉新園村",
+      "date": "2021-10-27",
+      "bounds": [
+        120.43108113,
+        22.4964616,
+        120.46000505,
+        22.52501793
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20211027_120445545_022510740_14_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20211026_120492043_022485719_14_000_RSImage_UAV_Ortho",
+      "title": "20211026_UAV正射影像_屏東縣南州鄉七塊村",
+      "date": "2021-10-26",
+      "bounds": [
+        120.47798617,
+        22.47177145,
+        120.50609719,
+        22.49966603
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20211026_120492043_022485719_14_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20211026_120470540_022485740_14_000_RSImage_UAV_Ortho",
+      "title": "20211026_UAV正射影像_屏東縣東港鎮興農里",
+      "date": "2021-10-26",
+      "bounds": [
+        120.456078,
+        22.47143277,
+        120.48499962,
+        22.50004708
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20211026_120470540_022485740_14_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20211026_120445542_022485741_14_000_RSImage_UAV_Ortho",
+      "title": "20211026_UAV正射影像_屏東縣新園鄉鹽埔村",
+      "date": "2021-10-26",
+      "bounds": [
+        120.43107858,
+        22.47142686,
+        120.46000233,
+        22.50005544
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20211026_120445542_022485741_14_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20211017_120684593_022526918_16_000_RSImage_UAV_Ortho",
+      "title": "20211017_UAV正射影像_屏東縣來義鄉來義村",
+      "date": "2021-10-17",
+      "bounds": [
+        120.68019207,
+        22.52348066,
+        120.68899376,
+        22.53035504
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20211017_120684593_022526918_16_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20211015_120683624_022524545_15_000_RSImage_UAV_Ortho",
+      "title": "20211015_UAV正射影像_屏東縣來義鄉來義村",
+      "date": "2021-10-15",
+      "bounds": [
+        120.67312616,
+        22.51761173,
+        120.69412101,
+        22.5314781
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20211015_120683624_022524545_15_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20210928_120798707_022229168_14_000_RSImage_UAV_Ortho",
+      "title": "20210928_UAV正射影像_屏東縣獅子鄉草埔村",
+      "date": "2021-09-28",
+      "bounds": [
+        120.78843796,
+        22.21654281,
+        120.80897414,
+        22.24179281
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20210928_120798707_022229168_14_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20210823_120757395_022012605_16_000_RSImage_UAV_Ortho",
+      "title": "20210823_UAV正射影像_屏東縣恆春鎮網紗里",
+      "date": "2021-08-23",
+      "bounds": [
+        120.75535384,
+        22.01002335,
+        120.75943512,
+        22.0151867
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20210823_120757395_022012605_16_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20210819_120701598_022779981_15_000_RSImage_UAV_Ortho",
+      "title": "20210819_UAV正射影像_屏東縣三地門鄉德文村",
+      "date": "2021-08-19",
+      "bounds": [
+        120.69105517,
+        22.7710802,
+        120.71213995,
+        22.78888101
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20210819_120701598_022779981_15_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20210818_120760714_022727885_14_000_RSImage_UAV_Ortho",
+      "title": "20210818_UAV正射影像_屏東縣霧臺鄉阿禮村",
+      "date": "2021-08-18",
+      "bounds": [
+        120.75035594,
+        22.71715844,
+        120.77107127,
+        22.73861084
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20210818_120760714_022727885_14_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20210818_120747407_022752501_14_000_RSImage_UAV_Ortho",
+      "title": "20210818_UAV正射影像_屏東縣霧臺鄉吉露村",
+      "date": "2021-08-18",
+      "bounds": [
+        120.73003646,
+        22.73608601,
+        120.76477322,
+        22.76891635
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20210818_120747407_022752501_14_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20210817_120719265_022764042_15_000_RSImage_UAV_Ortho",
+      "title": "20210817_UAV正射影像_屏東縣霧臺鄉佳暮村",
+      "date": "2021-08-17",
+      "bounds": [
+        120.71106791,
+        22.75510584,
+        120.72746174,
+        22.77297739
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20210817_120719265_022764042_15_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20210817_120683981_022524928_15_000_RSImage_UAV_Ortho",
+      "title": "20210817_UAV正射影像_屏東縣來義鄉來義村",
+      "date": "2021-08-17",
+      "bounds": [
+        120.67310455,
+        22.51679832,
+        120.69485614,
+        22.53305766
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20210817_120683981_022524928_15_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20210817_120667646_022719742_13_000_RSImage_UAV_Ortho",
+      "title": "20210817_UAV正射影像_屏東縣三地門鄉三地村",
+      "date": "2021-08-17",
+      "bounds": [
+        120.63626532,
+        22.69119948,
+        120.69901456,
+        22.74828525
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20210817_120667646_022719742_13_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20210816_120721204_022762857_15_000_RSImage_UAV_Ortho",
+      "title": "20210816_UAV正射影像_屏東縣霧臺鄉佳暮村",
+      "date": "2021-08-16",
+      "bounds": [
+        120.71437884,
+        22.75668117,
+        120.72802889,
+        22.76903359
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20210816_120721204_022762857_15_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20210618_120709199_022133190_16_000_RSImage_UAV_Ortho",
+      "title": "20210618_UAV正射影像_屏東縣獅子鄉竹坑村",
+      "date": "2021-06-18",
+      "bounds": [
+        120.70588858,
+        22.1315423,
+        120.71251023,
+        22.13483686
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20210618_120709199_022133190_16_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20210614_120703972_022143219_16_000_RSImage_UAV_Ortho",
+      "title": "20210614_UAV正射影像_屏東縣獅子鄉竹坑村",
+      "date": "2021-06-14",
+      "bounds": [
+        120.69851557,
+        22.1412738,
+        120.70942834,
+        22.14516357
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20210614_120703972_022143219_16_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20210613_120701044_022156192_17_001_RSImage_UAV_Ortho",
+      "title": "20210613_UAV正射影像_屏東縣獅子鄉竹坑村",
+      "date": "2021-06-13",
+      "bounds": [
+        120.69853948,
+        22.15497926,
+        120.70354838,
+        22.15740451
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20210613_120701044_022156192_17_001_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20210528_120714475_022752308_12_000_RSImage_UAV_Ortho",
+      "title": "20210528_UAV正射影像_屏東縣三地門鄉德文村",
+      "date": "2021-05-28",
+      "bounds": [
+        120.668214,
+        22.73633092,
+        120.76072438,
+        22.76828494
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20210528_120714475_022752308_12_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20210527_120762060_022728502_15_000_RSImage_UAV_Ortho",
+      "title": "20210527_UAV正射影像_屏東縣霧臺鄉阿禮村",
+      "date": "2021-05-27",
+      "bounds": [
+        120.75171998,
+        22.72052685,
+        120.7723989,
+        22.73647693
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20210527_120762060_022728502_15_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20210527_120719891_022763621_15_000_RSImage_UAV_Ortho",
+      "title": "20210527_UAV正射影像_屏東縣霧臺鄉佳暮村",
+      "date": "2021-05-27",
+      "bounds": [
+        120.71401428,
+        22.75740047,
+        120.72576652,
+        22.76984078
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20210527_120719891_022763621_15_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20210525_120700206_022779204_14_000_RSImage_UAV_Ortho",
+      "title": "20210525_UAV正射影像_屏東縣三地門鄉德文村",
+      "date": "2021-05-25",
+      "bounds": [
+        120.68872321,
+        22.76896245,
+        120.71168623,
+        22.78944461
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20210525_120700206_022779204_14_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20210525_120667980_022719418_13_000_RSImage_UAV_Ortho",
+      "title": "20210525_UAV正射影像_屏東縣三地門鄉三地村",
+      "date": "2021-05-25",
+      "bounds": [
+        120.63766396,
+        22.69224345,
+        120.69828415,
+        22.74659284
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20210525_120667980_022719418_13_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20210507_120822892_021935273_18_000_RSImage_UAV_Ortho",
+      "title": "20210507_UAV正射影像_屏東縣恆春鎮鵝鑾里",
+      "date": "2021-05-07",
+      "bounds": [
+        120.82204802,
+        21.93424981,
+        120.82373539,
+        21.9362953
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20210507_120822892_021935273_18_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20210425_120702140_022148141_17_001_RSImage_UAV_Ortho",
+      "title": "20210425_UAV正射影像_屏東縣獅子鄉竹坑村",
+      "date": "2021-04-25",
+      "bounds": [
+        120.69973066,
+        22.14654768,
+        120.70454988,
+        22.14973363
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20210425_120702140_022148141_17_001_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20210425_120702140_022148141_17_000_RSImage_UAV_Ortho",
+      "title": "20210425_UAV正射影像_屏東縣獅子鄉竹坑村",
+      "date": "2021-04-25",
+      "bounds": [
+        120.69973066,
+        22.14654768,
+        120.70454988,
+        22.14973363
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20210425_120702140_022148141_17_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20210330_120683723_022524524_14_000_RSImage_UAV_Ortho",
+      "title": "20210330_UAV正射影像_屏東縣來義鄉來義村",
+      "date": "2021-03-30",
+      "bounds": [
+        120.67273265,
+        22.5168417,
+        120.69471185,
+        22.53220614
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20210330_120683723_022524524_14_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20210324_120750426_022140223_12_000_RSImage_UAV_Ortho",
+      "title": "20210324_UAV正射影像_屏東縣牡丹鄉石門村",
+      "date": "2021-03-24",
+      "bounds": [
+        120.69194932,
+        22.096499,
+        120.80886699,
+        22.18394752
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20210324_120750426_022140223_12_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20201005_120760404_022727967_15_000_RSImage_UAV_Ortho",
+      "title": "20201005_UAV正射影像_屏東縣霧臺鄉阿禮村",
+      "date": "2020-10-05",
+      "bounds": [
+        120.75133232,
+        22.72074239,
+        120.76947448,
+        22.73519181
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20201005_120760404_022727967_15_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20201005_120751472_022757683_15_000_RSImage_UAV_Ortho",
+      "title": "20201005_UAV正射影像_屏東縣霧臺鄉大武村",
+      "date": "2020-10-05",
+      "bounds": [
+        120.74427176,
+        22.75290852,
+        120.75867096,
+        22.76245835
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20201005_120751472_022757683_15_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20201004_120720227_022763145_16_000_RSImage_UAV_Ortho",
+      "title": "20201004_UAV正射影像_屏東縣霧臺鄉佳暮村",
+      "date": "2020-10-04",
+      "bounds": [
+        120.7151248,
+        22.75844015,
+        120.72532951,
+        22.76785011
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20201004_120720227_022763145_16_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20200901_120756839_022012417_17_000_RSImage_UAV_Ortho",
+      "title": "20200901_UAV正射影像_屏東縣恆春鎮網紗里",
+      "date": "2020-09-01",
+      "bounds": [
+        120.7554306,
+        22.01019112,
+        120.75824746,
+        22.01464216
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20200901_120756839_022012417_17_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20200722_120756549_022012414_16_000_RSImage_UAV_Ortho",
+      "title": "20200722_UAV正射影像_屏東縣恆春鎮網紗里",
+      "date": "2020-07-22",
+      "bounds": [
+        120.75505399,
+        22.00984195,
+        120.75804435,
+        22.01498554
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20200722_120756549_022012414_16_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20200628_120646407_022525305_12_000_RSImage_UAV_Ortho",
+      "title": "20200628_UAV正射影像_屏東縣來義鄉丹林村",
+      "date": "2020-06-28",
+      "bounds": [
+        120.5750084,
+        22.50315362,
+        120.71778286,
+        22.54745724
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20200628_120646407_022525305_12_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20191008_120654578_022311657_14_000_RSImage_UAV_Ortho",
+      "title": "20191008_UAV正射影像_屏東縣獅子鄉南世村",
+      "date": "2019-10-08",
+      "bounds": [
+        120.63676172,
+        22.30598283,
+        120.67239289,
+        22.31733113
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20191008_120654578_022311657_14_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20190928_120751368_022757702_15_000_RSImage_UAV_Ortho",
+      "title": "20190928_UAV正射影像_屏東縣霧臺鄉大武村",
+      "date": "2019-09-28",
+      "bounds": [
+        120.74408488,
+        22.75291782,
+        120.75864966,
+        22.76248539
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20190928_120751368_022757702_15_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20190427_120704893_022148553_15_000_RSImage_UAV_Ortho",
+      "title": "20190427_UAV正射影像_屏東縣獅子鄉竹坑村",
+      "date": "2019-04-27",
+      "bounds": [
+        120.6982267,
+        22.14325413,
+        120.71155848,
+        22.15385133
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20190427_120704893_022148553_15_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20190321_120742967_022760572_13_000_RSImage_UAV_Ortho",
+      "title": "20190321_UAV正射影像_屏東縣霧臺鄉吉露村",
+      "date": "2019-03-21",
+      "bounds": [
+        120.71472043,
+        22.74490501,
+        120.77120716,
+        22.77623919
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20190321_120742967_022760572_13_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20181030_120604339_022634542_16_000_RSImage_UAV_Ortho",
+      "title": "20181030_UAV正射影像_屏東縣內埔鄉老埤村",
+      "date": "2018-10-30",
+      "bounds": [
+        120.60080435,
+        22.63297458,
+        120.60787377,
+        22.63610843
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20181030_120604339_022634542_16_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20180831_120705758_022145123_15_000_RSImage_UAV_Ortho",
+      "title": "20180831_UAV正射影像_屏東縣獅子鄉竹坑村",
+      "date": "2018-08-31",
+      "bounds": [
+        120.6963194,
+        22.13506414,
+        120.71519476,
+        22.15518194
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20180831_120705758_022145123_15_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20180831_120705535_022156284_15_001_RSImage_UAV_Ortho",
+      "title": "20180831_UAV正射影像_屏東縣獅子鄉竹坑村",
+      "date": "2018-08-31",
+      "bounds": [
+        120.69557846,
+        22.14794144,
+        120.71549019,
+        22.16462647
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20180831_120705535_022156284_15_001_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20180615_120684384_022528550_13_000_RSImage_UAV_Ortho",
+      "title": "20180615_UAV正射影像_屏東縣來義鄉來義村",
+      "date": "2018-06-15",
+      "bounds": [
+        120.64828841,
+        22.51559903,
+        120.72047205,
+        22.54150175
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20180615_120684384_022528550_13_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20180412_120695529_022180888_16_000_RSImage_UAV_Ortho",
+      "title": "20180412_UAV正射影像_屏東縣獅子鄉竹坑村",
+      "date": "2018-04-12",
+      "bounds": [
+        120.69172595,
+        22.17782691,
+        120.69933287,
+        22.18395004
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20180412_120695529_022180888_16_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20180319_120762125_022728045_15_000_RSImage_UAV_Ortho",
+      "title": "20180319_UAV正射影像_屏東縣霧臺鄉阿禮村",
+      "date": "2018-03-19",
+      "bounds": [
+        120.75326859,
+        22.72163287,
+        120.77097984,
+        22.73445788
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20180319_120762125_022728045_15_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20180319_120720098_022763479_15_000_RSImage_UAV_Ortho",
+      "title": "20180319_UAV正射影像_屏東縣霧臺鄉佳暮村",
+      "date": "2018-03-19",
+      "bounds": [
+        120.71500973,
+        22.75838502,
+        120.72518564,
+        22.76857374
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20180319_120720098_022763479_15_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20170626_120720412_022762722_15_000_RSImage_UAV_Ortho",
+      "title": "20170626_UAV正射影像_屏東縣霧臺鄉佳暮村",
+      "date": "2017-06-26",
+      "bounds": [
+        120.71377216,
+        22.75701579,
+        120.72705205,
+        22.76842916
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20170626_120720412_022762722_15_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20170223_120679352_022522647_14_000_RSImage_UAV_Ortho",
+      "title": "20170223_UAV正射影像_屏東縣來義鄉來義村",
+      "date": "2017-02-23",
+      "bounds": [
+        120.6662998,
+        22.51225548,
+        120.6924017,
+        22.5330387
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20170223_120679352_022522647_14_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20161121_120753425_022757473_16_000_RSImage_UAV_Ortho",
+      "title": "20161121_UAV正射影像_屏東縣霧臺鄉大武村",
+      "date": "2016-11-21",
+      "bounds": [
+        120.7488147,
+        22.75416111,
+        120.7580342,
+        22.76078542
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20161121_120753425_022757473_16_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20161029_120679352_022522647_14_000_RSImage_UAV_Ortho",
+      "title": "20161029_UAV正射影像_屏東縣來義鄉來義村",
+      "date": "2016-10-29",
+      "bounds": [
+        120.66629979,
+        22.51225548,
+        120.69240166,
+        22.5330387
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20161029_120679352_022522647_14_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20161015_120757480_022744619_14_000_RSImage_UAV_Ortho",
+      "title": "20161015_UAV正射影像_屏東縣霧臺鄉吉露村",
+      "date": "2016-10-15",
+      "bounds": [
+        120.7428347,
+        22.73046647,
+        120.7721232,
+        22.7587722
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20161015_120757480_022744619_14_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20161007_120683376_022528708_16_000_RSImage_UAV_Ortho",
+      "title": "20161007_UAV正射影像_屏東縣來義鄉來義村",
+      "date": "2016-10-07",
+      "bounds": [
+        120.6789434,
+        22.52555251,
+        120.6878086,
+        22.5318642
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20161007_120683376_022528708_16_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20161007_120683362_022528724_16_000_RSImage_UAV_Ortho",
+      "title": "20161007_UAV正射影像_屏東縣來義鄉來義村",
+      "date": "2016-10-07",
+      "bounds": [
+        120.67897201,
+        22.52563564,
+        120.68775272,
+        22.53181144
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20161007_120683362_022528724_16_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20161007_120665683_022563657_16_000_RSImage_UAV_Ortho",
+      "title": "20161007_UAV正射影像_屏東縣來義鄉義林村",
+      "date": "2016-10-07",
+      "bounds": [
+        120.66105514,
+        22.56171733,
+        120.67031041,
+        22.56559583
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20161007_120665683_022563657_16_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20161007_120665679_022563664_16_000_RSImage_UAV_Ortho",
+      "title": "20161007_UAV正射影像_屏東縣來義鄉義林村",
+      "date": "2016-10-07",
+      "bounds": [
+        120.6610133,
+        22.56171363,
+        120.6703445,
+        22.56561464
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20161007_120665679_022563664_16_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20160913_120704184_022776361_15_000_RSImage_UAV_Ortho",
+      "title": "20160913_UAV正射影像_屏東縣三地門鄉德文村",
+      "date": "2016-09-13",
+      "bounds": [
+        120.6970486,
+        22.77111594,
+        120.71131917,
+        22.78160678
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20160913_120704184_022776361_15_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20160701_120676014_022523024_15_000_RSImage_UAV_Ortho",
+      "title": "20160701_UAV正射影像_屏東縣來義鄉來義村",
+      "date": "2016-07-01",
+      "bounds": [
+        120.6706302,
+        22.51627333,
+        120.681398,
+        22.52977383
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20160701_120676014_022523024_15_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20160509_120675684_022726942_15_000_RSImage_UAV_Ortho",
+      "title": "20160509_UAV正射影像_屏東縣三地門鄉達來村",
+      "date": "2016-05-09",
+      "bounds": [
+        120.66703838,
+        22.71753533,
+        120.68432893,
+        22.73634931
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20160509_120675684_022726942_15_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20160508_120682616_022527408_16_000_RSImage_UAV_Ortho",
+      "title": "20160508_UAV正射影像_屏東縣來義鄉來義村",
+      "date": "2016-05-08",
+      "bounds": [
+        120.67845678,
+        22.52510149,
+        120.68677547,
+        22.5297143
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20160508_120682616_022527408_16_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20160508_120676250_022526115_16_000_RSImage_UAV_Ortho",
+      "title": "20160508_UAV正射影像_屏東縣來義鄉來義村",
+      "date": "2016-05-08",
+      "bounds": [
+        120.67329079,
+        22.52370064,
+        120.67920856,
+        22.52852984
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20160508_120676250_022526115_16_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20150701_120675850_022523647_15_000_RSImage_UAV_Ortho",
+      "title": "20150701_UAV正射影像_屏東縣來義鄉來義村",
+      "date": "2015-07-01",
+      "bounds": [
+        120.67007731,
+        22.51604329,
+        120.68162298,
+        22.53125089
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20150701_120675850_022523647_15_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20111113_120812357_022239936_15_000_RSImage_UAV_Ortho",
+      "title": "20111113_UAV正射影像_屏東縣獅子鄉草埔村",
+      "date": "2011-11-13",
+      "bounds": [
+        120.8076552,
+        22.23442356,
+        120.8170584,
+        22.24544836
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20111113_120812357_022239936_15_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20111113_120783048_022156947_15_000_RSImage_UAV_Ortho",
+      "title": "20111113_UAV正射影像_屏東縣牡丹鄉石門村",
+      "date": "2011-11-13",
+      "bounds": [
+        120.7726703,
+        22.14961016,
+        120.7934246,
+        22.16428476
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20111113_120783048_022156947_15_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20111113_120779787_022155760_15_000_RSImage_UAV_Ortho",
+      "title": "20111113_UAV正射影像_屏東縣牡丹鄉石門村",
+      "date": "2011-11-13",
+      "bounds": [
+        120.7739297,
+        22.14806976,
+        120.7856441,
+        22.16345058
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20111113_120779787_022155760_15_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20111104_120685752_022525835_16_000_RSImage_UAV_Ortho",
+      "title": "20111104_UAV正射影像_屏東縣來義鄉來義村",
+      "date": "2011-11-04",
+      "bounds": [
+        120.6822397,
+        22.52299942,
+        120.6892639,
+        22.52867111
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20111104_120685752_022525835_16_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20111104_120681817_022527218_16_000_RSImage_UAV_Ortho",
+      "title": "20111104_UAV正射影像_屏東縣來義鄉來義村",
+      "date": "2011-11-04",
+      "bounds": [
+        120.6776241,
+        22.52421848,
+        120.6860102,
+        22.53021816
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20111104_120681817_022527218_16_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20111104_120679675_022525357_16_000_RSImage_UAV_Ortho",
+      "title": "20111104_UAV正射影像_屏東縣來義鄉來義村",
+      "date": "2011-11-04",
+      "bounds": [
+        120.675528,
+        22.52243874,
+        120.6838213,
+        22.52827578
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20111104_120679675_022525357_16_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20111104_120661913_022528250_16_000_RSImage_UAV_Ortho",
+      "title": "20111104_UAV正射影像_屏東縣來義鄉義林村",
+      "date": "2011-11-04",
+      "bounds": [
+        120.6570003,
+        22.52444229,
+        120.6668251,
+        22.53205806
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20111104_120661913_022528250_16_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20110902_120816861_022040018_16_000_RSImage_UAV_Ortho",
+      "title": "20110902_UAV正射影像_屏東縣滿州鄉滿州村",
+      "date": "2011-09-02",
+      "bounds": [
+        120.812235,
+        22.03607079,
+        120.8214872,
+        22.04396586
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20110902_120816861_022040018_16_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20101120_120662833_022568658_15_000_RSImage_UAV_Ortho",
+      "title": "20101120_UAV正射影像_屏東縣泰武鄉佳興村",
+      "date": "2010-11-20",
+      "bounds": [
+        120.6519769,
+        22.5588357,
+        120.6736875,
+        22.57848081
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20101120_120662833_022568658_15_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20101023_120700314_022805674_14_000_RSImage_UAV_Ortho",
+      "title": "20101023_UAV正射影像_屏東縣三地門鄉大社村",
+      "date": "2010-10-23",
+      "bounds": [
+        120.6885385,
+        22.79646002,
+        120.7120884,
+        22.81488872
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20101023_120700314_022805674_14_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20101016_120684687_022674699_15_000_RSImage_UAV_Ortho",
+      "title": "20101016_UAV正射影像_屏東縣瑪家鄉瑪家村",
+      "date": "2010-10-16",
+      "bounds": [
+        120.6759523,
+        22.66710115,
+        120.6934202,
+        22.68229683
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20101016_120684687_022674699_15_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20101015_120756212_022725044_14_000_RSImage_UAV_Ortho",
+      "title": "20101015_UAV正射影像_屏東縣霧臺鄉阿禮村",
+      "date": "2010-10-15",
+      "bounds": [
+        120.7439609,
+        22.7171443,
+        120.768461,
+        22.73294337
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20101015_120756212_022725044_14_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20101015_120749009_022743660_15_000_RSImage_UAV_Ortho",
+      "title": "20101015_UAV正射影像_屏東縣霧臺鄉吉露村",
+      "date": "2010-10-15",
+      "bounds": [
+        120.741729,
+        22.73783357,
+        120.7562893,
+        22.749486
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20101015_120749009_022743660_15_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20101015_120723100_022760754_14_000_RSImage_UAV_Ortho",
+      "title": "20101015_UAV正射影像_屏東縣霧臺鄉佳暮村",
+      "date": "2010-10-15",
+      "bounds": [
+        120.7123769,
+        22.74993688,
+        120.7338216,
+        22.77157139
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20101015_120723100_022760754_14_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20101015_120720118_022762277_14_000_RSImage_UAV_Ortho",
+      "title": "20101015_UAV正射影像_屏東縣霧臺鄉佳暮村",
+      "date": "2010-10-15",
+      "bounds": [
+        120.7088595,
+        22.75095552,
+        120.7313756,
+        22.77359925
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20101015_120720118_022762277_14_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20100922_120682693_022528569_15_000_RSImage_UAV_Ortho",
+      "title": "20100922_UAV正射影像_屏東縣來義鄉來義村",
+      "date": "2010-09-22",
+      "bounds": [
+        120.6724323,
+        22.5194667,
+        120.6929518,
+        22.53767092
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20100922_120682693_022528569_15_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20100922_120679780_022526883_15_000_RSImage_UAV_Ortho",
+      "title": "20100922_UAV正射影像_屏東縣來義鄉來義村",
+      "date": "2010-09-22",
+      "bounds": [
+        120.6731792,
+        22.51952464,
+        120.6863805,
+        22.53424222
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20100922_120679780_022526883_15_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20100922_120677897_022528247_15_000_RSImage_UAV_Ortho",
+      "title": "20100922_UAV正射影像_屏東縣來義鄉來義村",
+      "date": "2010-09-22",
+      "bounds": [
+        120.6689677,
+        22.51836007,
+        120.6868254,
+        22.53813324
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20100922_120677897_022528247_15_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20090910_120657330_022542579_15_000_RSImage_UAV_Ortho",
+      "title": "20090910_UAV正射影像_屏東縣來義鄉義林村",
+      "date": "2009-09-10",
+      "bounds": [
+        120.6524812,
+        22.53718686,
+        120.662179,
+        22.54797026
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20090910_120657330_022542579_15_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20090910_120656488_022547727_15_000_RSImage_UAV_Ortho",
+      "title": "20090910_UAV正射影像_屏東縣來義鄉古樓村",
+      "date": "2009-09-10",
+      "bounds": [
+        120.650825,
+        22.54131052,
+        120.6621495,
+        22.55414297
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20090910_120656488_022547727_15_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20090910_120655093_022525456_16_000_RSImage_UAV_Ortho",
+      "title": "20090910_UAV正射影像_屏東縣來義鄉古樓村",
+      "date": "2009-09-10",
+      "bounds": [
+        120.6509248,
+        22.52101095,
+        120.6592608,
+        22.52990183
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20090910_120655093_022525456_16_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20090910_120650677_022527734_15_000_RSImage_UAV_Ortho",
+      "title": "20090910_UAV正射影像_屏東縣來義鄉古樓村",
+      "date": "2009-09-10",
+      "bounds": [
+        120.6448587,
+        22.52368897,
+        120.6564959,
+        22.53177895
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20090910_120650677_022527734_15_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20090910_120636587_022523212_15_000_RSImage_UAV_Ortho",
+      "title": "20090910_UAV正射影像_屏東縣來義鄉丹林村",
+      "date": "2009-09-10",
+      "bounds": [
+        120.6284276,
+        22.51676115,
+        120.6447463,
+        22.5296627
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20090910_120636587_022523212_15_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20090910_120631035_022519849_15_000_RSImage_UAV_Ortho",
+      "title": "20090910_UAV正射影像_屏東縣來義鄉丹林村",
+      "date": "2009-09-10",
+      "bounds": [
+        120.624607,
+        22.51359365,
+        120.6374617,
+        22.526104
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20090910_120631035_022519849_15_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20090908_120641411_022776610_14_000_RSImage_UAV_Ortho",
+      "title": "20090908_UAV正射影像_屏東縣三地門鄉口社村",
+      "date": "2009-09-08",
+      "bounds": [
+        120.6296677,
+        22.76445083,
+        120.6531529,
+        22.78876925
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20090908_120641411_022776610_14_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20090901_120704938_022809729_13_000_RSImage_UAV_Ortho",
+      "title": "20090901_UAV正射影像_屏東縣三地門鄉大社村",
+      "date": "2009-09-01",
+      "bounds": [
+        120.6872067,
+        22.78445326,
+        120.7226638,
+        22.83500555
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20090901_120704938_022809729_13_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20090901_120701756_022808001_14_000_RSImage_UAV_Ortho",
+      "title": "20090901_UAV正射影像_屏東縣三地門鄉大社村",
+      "date": "2009-09-01",
+      "bounds": [
+        120.6831734,
+        22.78954543,
+        120.720333,
+        22.82645607
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20090901_120701756_022808001_14_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    },
+    {
+      "id": "20090831_120683624_022515605_14_000_RSImage_UAV_Ortho",
+      "title": "20090831_UAV正射影像_屏東縣來義鄉來義村",
+      "date": "2009-08-31",
+      "bounds": [
+        120.671044,
+        22.49948018,
+        120.6962009,
+        22.53173001
+      ],
+      "url": "https://storage.geodac.tw/Tile/v2/RSImage/UAV/Ortho/20090831_120683624_022515605_14_000_RSImage_UAV_Ortho/{z}/{y}/{x}.jpg"
+    }
+  ]
+}

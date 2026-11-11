@@ -1162,6 +1162,7 @@
         $("#map-status").textContent =
           "底圖暫時無法載入，仍可查看已匯入地籍與導航位置";
       });
+    if (!worker && window.AdminBasemap) AdminBasemap.attach(map);
     map.on("moveend", () => {
       clearTimeout(mapTimer);
       mapTimer = setTimeout(context, 150);
