@@ -993,6 +993,45 @@
       $("#cancel-geo").hidden = true;
     }
   }
+  function makeDispatchPackage(person, batch, generatedAt) {
+    const tasks = C.dispatchTasks(state.tasks, person.id).map((t) => ({
+      ...t,
+      navigation: nav(t),
+      parcels: t.parcels.map((p) => ({
+        ...p,
+        sectionCode: C.parcelCode(t, p, sectionCatalog),
+      })),
+    }));
+    if (tasks.some((t) => !C.date(t.resultDate)))
+      throw Error("所選入口的任務有成果日期缺漏，請先補齊");
+    const fs = [
+      ...new Map(
+        tasks.flatMap((t) => matching(t).features).map((f) => [f.id, f]),
+      ).values(),
+    ].map((f) => ({
+      id: f.id,
+      code: f.code,
+      lot: f.lot,
+      lands: f.lands.map((l) => ({
+        county: l.county,
+        district: l.district,
+        section: l.section,
+        lot: l.lot,
+      })),
+      polygons: f.polygons,
+      bbox: f.bbox,
+    }));
+    return {
+      schemaVersion: 1,
+      batch,
+      generatedAt,
+      person: { id: person.id, name: person.name },
+      ...(person.type ? { vendorType: person.type } : {}),
+      settings: state.settings,
+      tasks,
+      features: fs,
+    };
+  }
   async function start() {
     if (worker) $("#pin-mode")?.remove();
     map = L.map("map", { preferCanvas: true, renderer: L.canvas() }).setView(
@@ -1175,6 +1214,22 @@
     bind("#orders", () => documentDialog(chosen(), "order"));
     bind("#reload-worker", loadWorker);
     if (worker) return;
+    bind("#dispatch-tools", () =>
+      DispatchTools.open({
+        getCandidates: (ids) => {
+          const batch = C.today() + "-" + crypto.randomUUID().slice(0, 8);
+          const generatedAt = new Date().toISOString();
+          return ids.map((id) => {
+            const p = state.people.find((p) => p.id === id) || {
+              id,
+              name: C.vendorTypes[id] + "廠商",
+              type: C.vendorTypes[id],
+            };
+            return makeDispatchPackage(p, batch, generatedAt);
+          });
+        },
+      }),
+    );
     if ($("#find-last-month"))
       bind("#find-last-month", () => {
         if (!window.AdminHistory) throw Error("搜尋功能未載入，請重新整理頁面");
@@ -1472,50 +1527,13 @@
           generatedAt = new Date().toISOString(),
           files = [];
         for (const p of people) {
-          const i = state.people.findIndex((person) => person.id === p.id),
-            tasks = forRecipient(p).map((t) => ({
-              ...t,
-              navigation: nav(t),
-              parcels: t.parcels.map((p) => ({
-                ...p,
-                sectionCode: C.parcelCode(t, p, sectionCatalog),
-              })),
-            })),
-            fs = [
-              ...new Map(
-                tasks
-                  .flatMap((t) => matching(t).features)
-                  .map((f) => [f.id, f]),
-              ).values(),
-            ].map((f) => ({
-              id: f.id,
-              code: f.code,
-              lot: f.lot,
-              lands: f.lands.map((l) => ({
-                county: l.county,
-                district: l.district,
-                section: l.section,
-                lot: l.lot,
-              })),
-              polygons: f.polygons,
-              bbox: f.bbox,
-            }));
           files.push({
             name: `${p.type ? "vendor" : "worker"}-${p.id.slice(1)}.json`,
             person: p.name,
             blob: new Blob(
               [
                 JSON.stringify(
-                  {
-                    schemaVersion: 1,
-                    batch,
-                    generatedAt,
-                    person: { id: p.id, name: p.name },
-                    ...(p.type ? { vendorType: p.type } : {}),
-                    settings: state.settings,
-                    tasks,
-                    features: fs,
-                  },
+                  makeDispatchPackage(p, batch, generatedAt),
                   null,
                   2,
                 ),
