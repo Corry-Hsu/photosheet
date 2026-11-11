@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "unit": "㎡",
+  "county": "屏東縣",
+  "district": "屏東市",
+  "section": "新勝興段",
+  "code": "0199",
+  "parcels": [
+    {
+      "lot": "46",
+      "area": "165.81",
+      "issues": []
+    },
+    {
+      "lot": "46-1",
+      "area": "166.06",
+      "issues": []
+    },
+    {
+      "lot": "46-2",
+      "area": "108.68",
+      "issues": []
+    },
+    {
+      "lot": "46-3",
+      "area": "109.06",
+      "issues": []
+    },
+    {
+      "lot": "50",
+      "area": "695.65",
+      "issues": []
+    },
+    {
+      "lot": "51",
+      "area": "1340.45",
+      "issues": []
+    },
+    {
+      "lot": "52",
+      "area": "185.12",
+      "issues": []
+    }
+  ]
+}

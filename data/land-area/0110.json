@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "unit": "㎡",
+  "county": "屏東縣",
+  "district": "屏東市",
+  "section": "豐田段",
+  "code": "0110",
+  "parcels": [
+    {
+      "lot": "127-18",
+      "area": "205",
+      "issues": []
+    },
+    {
+      "lot": "193",
+      "area": "43",
+      "issues": []
+    },
+    {
+      "lot": "524-3",
+      "area": "87",
+      "issues": []
+    },
+    {
+      "lot": "869",
+      "area": "116",
+      "issues": []
+    }
+  ]
+}

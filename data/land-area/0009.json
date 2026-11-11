@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "unit": "㎡",
+  "county": "屏東縣",
+  "district": "屏東市",
+  "section": "崇蘭段",
+  "code": "0009",
+  "parcels": [
+    {
+      "lot": "725-33",
+      "area": "46",
+      "issues": []
+    }
+  ]
+}

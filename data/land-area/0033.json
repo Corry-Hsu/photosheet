@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "unit": "㎡",
+  "county": "屏東縣",
+  "district": "屏東市",
+  "section": "歸來段",
+  "code": "0033",
+  "parcels": [
+    {
+      "lot": "469-37",
+      "area": "342",
+      "issues": []
+    }
+  ]
+}

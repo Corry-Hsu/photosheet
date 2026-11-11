@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "unit": "㎡",
+  "county": "屏東縣",
+  "district": "長治鄉",
+  "section": "農科段",
+  "code": "0177",
+  "parcels": [
+    {
+      "lot": "101",
+      "area": "42852",
+      "issues": []
+    },
+    {
+      "lot": "359",
+      "area": "3.58",
+      "issues": []
+    },
+    {
+      "lot": "361",
+      "area": "1290.88",
+      "issues": []
+    }
+  ]
+}

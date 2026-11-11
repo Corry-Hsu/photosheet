@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "unit": "㎡",
+  "county": "屏東縣",
+  "district": "佳冬鄉",
+  "section": "石光見段",
+  "code": "0537",
+  "parcels": [
+    {
+      "lot": "570-11",
+      "area": "5",
+      "issues": []
+    },
+    {
+      "lot": "627-5",
+      "area": "9",
+      "issues": []
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "unit": "㎡",
+  "county": "屏東縣",
+  "district": "新埤鄉",
+  "section": "南岸段",
+  "code": "0343",
+  "parcels": [
+    {
+      "lot": "33-5",
+      "area": "6621",
+      "issues": []
+    },
+    {
+      "lot": "33-9",
+      "area": "951",
+      "issues": []
+    },
+    {
+      "lot": "33-12",
+      "area": "353",
+      "issues": []
+    },
+    {
+      "lot": "335-1",
+      "area": "145",
+      "issues": []
+    }
+  ]
+}

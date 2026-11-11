@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "unit": "㎡",
+  "county": "屏東縣",
+  "district": "泰武鄉",
+  "section": "平和段",
+  "code": "0367",
+  "parcels": [
+    {
+      "lot": "1",
+      "area": "3",
+      "issues": []
+    },
+    {
+      "lot": "2",
+      "area": "514580",
+      "issues": []
+    },
+    {
+      "lot": "4",
+      "area": "24310",
+      "issues": []
+    },
+    {
+      "lot": "5",
+      "area": "5320",
+      "issues": []
+    },
+    {
+      "lot": "7",
+      "area": "3380",
+      "issues": []
+    },
+    {
+      "lot": "8",
+      "area": "6390",
+      "issues": []
+    },
+    {
+      "lot": "13",
+      "area": "9210",
+      "issues": []
+    },
+    {
+      "lot": "17",
+      "area": "7000",
+      "issues": []
+    },
+    {
+      "lot": "20",
+      "area": "2950",
+      "issues": []
+    },
+    {
+      "lot": "28",
+      "area": "2890",
+      "issues": []
+    }
+  ]
+}

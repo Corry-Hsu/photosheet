@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "unit": "㎡",
+  "county": "屏東縣",
+  "district": "牡丹鄉",
+  "section": "卡勒的布段",
+  "code": "0710",
+  "parcels": [
+    {
+      "lot": "1",
+      "area": "1029454.61",
+      "issues": []
+    },
+    {
+      "lot": "2",
+      "area": "388857.56",
+      "issues": []
+    },
+    {
+      "lot": "3",
+      "area": "34430.54",
+      "issues": []
+    },
+    {
+      "lot": "4",
+      "area": "8556.54",
+      "issues": []
+    },
+    {
+      "lot": "5",
+      "area": "19032.45",
+      "issues": []
+    },
+    {
+      "lot": "6",
+      "area": "158315.84",
+      "issues": []
+    },
+    {
+      "lot": "7",
+      "area": "1323.08",
+      "issues": []
+    }
+  ]
+}

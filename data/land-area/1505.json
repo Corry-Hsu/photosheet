@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "unit": "㎡",
+  "county": "屏東縣",
+  "district": "來義鄉",
+  "section": "阿福隆灣段",
+  "code": "1505",
+  "parcels": [
+    {
+      "lot": "1",
+      "area": "18798.63",
+      "issues": []
+    },
+    {
+      "lot": "2",
+      "area": "335.96",
+      "issues": []
+    },
+    {
+      "lot": "3",
+      "area": "11127.6",
+      "issues": []
+    },
+    {
+      "lot": "4",
+      "area": "16054.58",
+      "issues": []
+    },
+    {
+      "lot": "5",
+      "area": "83377.22",
+      "issues": []
+    },
+    {
+      "lot": "6",
+      "area": "26549.84",
+      "issues": []
+    },
+    {
+      "lot": "7",
+      "area": "21296.5",
+      "issues": []
+    },
+    {
+      "lot": "8",
+      "area": "5173271.82",
+      "issues": []
+    }
+  ]
+}

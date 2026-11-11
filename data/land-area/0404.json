@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "unit": "㎡",
+  "county": "屏東縣",
+  "district": "春日鄉",
+  "section": "春日段二小段",
+  "code": "0404",
+  "parcels": [
+    {
+      "lot": "31-1",
+      "area": "43",
+      "issues": []
+    },
+    {
+      "lot": "185",
+      "area": "353",
+      "issues": []
+    },
+    {
+      "lot": "186",
+      "area": "31",
+      "issues": []
+    }
+  ]
+}

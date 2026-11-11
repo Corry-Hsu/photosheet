@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "unit": "㎡",
+  "county": "屏東縣",
+  "district": "三地門鄉",
+  "section": "馬發利段",
+  "code": "0273",
+  "parcels": [
+    {
+      "lot": "1",
+      "area": "1192259.43",
+      "issues": []
+    },
+    {
+      "lot": "2",
+      "area": "1509062.67",
+      "issues": []
+    },
+    {
+      "lot": "3",
+      "area": "1006027.24",
+      "issues": []
+    },
+    {
+      "lot": "4",
+      "area": "188188.15",
+      "issues": []
+    }
+  ]
+}

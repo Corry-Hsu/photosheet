@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "unit": "㎡",
+  "county": "屏東縣",
+  "district": "枋寮鄉",
+  "section": "飛地段",
+  "code": "0870",
+  "parcels": [
+    {
+      "lot": "2",
+      "area": "490.42",
+      "issues": []
+    },
+    {
+      "lot": "4",
+      "area": "783.46",
+      "issues": []
+    },
+    {
+      "lot": "5",
+      "area": "488.66",
+      "issues": []
+    },
+    {
+      "lot": "7",
+      "area": "1015.23",
+      "issues": []
+    }
+  ]
+}

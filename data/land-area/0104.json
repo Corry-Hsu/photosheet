@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "unit": "㎡",
+  "county": "屏東縣",
+  "district": "九如鄉",
+  "section": "下冷水坑段",
+  "code": "0104",
+  "parcels": [
+    {
+      "lot": "380",
+      "area": "4688",
+      "issues": []
+    },
+    {
+      "lot": "380-2",
+      "area": "1757",
+      "issues": []
+    },
+    {
+      "lot": "380-3",
+      "area": "515",
+      "issues": []
+    }
+  ]
+}

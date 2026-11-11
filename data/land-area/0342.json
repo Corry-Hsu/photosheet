@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "unit": "㎡",
+  "county": "屏東縣",
+  "district": "新埤鄉",
+  "section": "建功段",
+  "code": "0342",
+  "parcels": [
+    {
+      "lot": "811-1",
+      "area": "4000",
+      "issues": []
+    },
+    {
+      "lot": "826",
+      "area": "143",
+      "issues": []
+    }
+  ]
+}

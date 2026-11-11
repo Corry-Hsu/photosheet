@@ -1,0 +1,7262 @@
+{
+  "schemaVersion": 1,
+  "unit": "㎡",
+  "sections": [
+    {
+      "county": "屏東縣",
+      "district": "屏東市",
+      "section": "大埔段一小段",
+      "code": "0004",
+      "file": "0004.json",
+      "records": 17
+    },
+    {
+      "county": "屏東縣",
+      "district": "屏東市",
+      "section": "大埔段二小段",
+      "code": "0005",
+      "file": "0005.json",
+      "records": 190
+    },
+    {
+      "county": "屏東縣",
+      "district": "屏東市",
+      "section": "大埔段三小段",
+      "code": "0006",
+      "file": "0006.json",
+      "records": 87
+    },
+    {
+      "county": "屏東縣",
+      "district": "屏東市",
+      "section": "楠樹腳段一小段",
+      "code": "0007",
+      "file": "0007.json",
+      "records": 243
+    },
+    {
+      "county": "屏東縣",
+      "district": "屏東市",
+      "section": "楠樹腳段二小段",
+      "code": "0008",
+      "file": "0008.json",
+      "records": 53
+    },
+    {
+      "county": "屏東縣",
+      "district": "屏東市",
+      "section": "崇蘭段",
+      "code": "0009",
+      "file": "0009.json",
+      "records": 1
+    },
+    {
+      "county": "屏東縣",
+      "district": "屏東市",
+      "section": "新街段一小段",
+      "code": "0011",
+      "file": "0011.json",
+      "records": 35
+    },
+    {
+      "county": "屏東縣",
+      "district": "屏東市",
+      "section": "新街段二小段",
+      "code": "0012",
+      "file": "0012.json",
+      "records": 84
+    },
+    {
+      "county": "屏東縣",
+      "district": "屏東市",
+      "section": "新街段三小段",
+      "code": "0013",
+      "file": "0013.json",
+      "records": 70
+    },
+    {
+      "county": "屏東縣",
+      "district": "屏東市",
+      "section": "和平段",
+      "code": "0014",
+      "file": "0014.json",
+      "records": 605
+    },
+    {
+      "county": "屏東縣",
+      "district": "屏東市",
+      "section": "舊街段一小段",
+      "code": "0015",
+      "file": "0015.json",
+      "records": 12
+    },
+    {
+      "county": "屏東縣",
+      "district": "屏東市",
+      "section": "舊街段二小段",
+      "code": "0016",
+      "file": "0016.json",
+      "records": 3
+    },
+    {
+      "county": "屏東縣",
+      "district": "屏東市",
+      "section": "舊街段三小段",
+      "code": "0017",
+      "file": "0017.json",
+      "records": 49
+    },
+    {
+      "county": "屏東縣",
+      "district": "屏東市",
+      "section": "公園段一小段",
+      "code": "0018",
+      "file": "0018.json",
+      "records": 32
+    },
+    {
+      "county": "屏東縣",
+      "district": "屏東市",
+      "section": "公園段二小段",
+      "code": "0019",
+      "file": "0019.json",
+      "records": 31
+    },
+    {
+      "county": "屏東縣",
+      "district": "屏東市",
+      "section": "公園段三小段",
+      "code": "0020",
+      "file": "0020.json",
+      "records": 222
+    },
+    {
+      "county": "屏東縣",
+      "district": "屏東市",
+      "section": "六塊厝段",
+      "code": "0021",
+      "file": "0021.json",
+      "records": 1
+    },
+    {
+      "county": "屏東縣",
+      "district": "屏東市",
+      "section": "公館段",
+      "code": "0022",
+      "file": "0022.json",
+      "records": 3
+    },
+    {
+      "county": "屏東縣",
+      "district": "屏東市",
+      "section": "溝美段",
+      "code": "0023",
+      "file": "0023.json",
+      "records": 218
+    },
+    {
+      "county": "屏東縣",
+      "district": "屏東市",
+      "section": "街頭段二小段",
+      "code": "0025",
+      "file": "0025.json",
+      "records": 3
+    },
+    {
+      "county": "屏東縣",
+      "district": "屏東市",
+      "section": "街頭段三小段",
+      "code": "0026",
+      "file": "0026.json",
+      "records": 69
+    },
+    {
+      "county": "屏東縣",
+      "district": "屏東市",
+      "section": "街頭段四小段",
+      "code": "0027",
+      "file": "0027.json",
+      "records": 94
+    },
+    {
+      "county": "屏東縣",
+      "district": "屏東市",
+      "section": "街頭段六小段",
+      "code": "0029",
+      "file": "0029.json",
+      "records": 43
+    },
+    {
+      "county": "屏東縣",
+      "district": "屏東市",
+      "section": "勝興段",
+      "code": "0030",
+      "file": "0030.json",
+      "records": 185
+    },
+    {
+      "county": "屏東縣",
+      "district": "屏東市",
+      "section": "福光段",
+      "code": "0031",
+      "file": "0031.json",
+      "records": 94
+    },
+    {
+      "county": "屏東縣",
+      "district": "屏東市",
+      "section": "歸來段",
+      "code": "0033",
+      "file": "0033.json",
+      "records": 1
+    },
+    {
+      "county": "屏東縣",
+      "district": "屏東市",
+      "section": "頭前溪段",
+      "code": "0034",
+      "file": "0034.json",
+      "records": 98
+    },
+    {
+      "county": "屏東縣",
+      "district": "屏東市",
+      "section": "檳榔腳段一小段",
+      "code": "0035",
+      "file": "0035.json",
+      "records": 136
+    },
+    {
+      "county": "屏東縣",
+      "district": "屏東市",
+      "section": "檳榔腳段二小段",
+      "code": "0036",
+      "file": "0036.json",
+      "records": 143
+    },
+    {
+      "county": "屏東縣",
+      "district": "屏東市",
+      "section": "林子內段",
+      "code": "0037",
+      "file": "0037.json",
+      "records": 1
+    },
+    {
+      "county": "屏東縣",
+      "district": "屏東市",
+      "section": "海豐段",
+      "code": "0039",
+      "file": "0039.json",
+      "records": 3
+    },
+    {
+      "county": "屏東縣",
+      "district": "屏東市",
+      "section": "斯文段",
+      "code": "0041",
+      "file": "0041.json",
+      "records": 202
+    },
+    {
+      "county": "屏東縣",
+      "district": "屏東市",
+      "section": "北勢段",
+      "code": "0042",
+      "file": "0042.json",
+      "records": 221
+    },
+    {
+      "county": "屏東縣",
+      "district": "屏東市",
+      "section": "水源段",
+      "code": "0043",
+      "file": "0043.json",
+      "records": 7
+    },
+    {
+      "county": "屏東縣",
+      "district": "屏東市",
+      "section": "水源段一小段",
+      "code": "0044",
+      "file": "0044.json",
+      "records": 12
+    },
+    {
+      "county": "屏東縣",
+      "district": "屏東市",
+      "section": "水源段二小段",
+      "code": "0045",
+      "file": "0045.json",
+      "records": 316
+    },
+    {
+      "county": "屏東縣",
+      "district": "屏東市",
+      "section": "大連段",
+      "code": "0046",
+      "file": "0046.json",
+      "records": 99
+    },
+    {
+      "county": "屏東縣",
+      "district": "屏東市",
+      "section": "復興段",
+      "code": "0047",
+      "file": "0047.json",
+      "records": 1
+    },
+    {
+      "county": "屏東縣",
+      "district": "屏東市",
+      "section": "明正段",
+      "code": "0048",
+      "file": "0048.json",
+      "records": 171
+    },
+    {
+      "county": "屏東縣",
+      "district": "屏東市",
+      "section": "灰磘段",
+      "code": "0049",
+      "file": "0049.json",
+      "records": 240
+    },
+    {
+      "county": "屏東縣",
+      "district": "屏東市",
+      "section": "民和段",
+      "code": "0051",
+      "file": "0051.json",
+      "records": 166
+    },
+    {
+      "county": "屏東縣",
+      "district": "屏東市",
+      "section": "大同段",
+      "code": "0052",
+      "file": "0052.json",
+      "records": 239
+    },
+    {
+      "county": "屏東縣",
+      "district": "屏東市",
+      "section": "新生段",
+      "code": "0053",
+      "file": "0053.json",
+      "records": 158
+    },
+    {
+      "county": "屏東縣",
+      "district": "屏東市",
+      "section": "歸仁段",
+      "code": "0054",
+      "file": "0054.json",
+      "records": 97
+    },
+    {
+      "county": "屏東縣",
+      "district": "屏東市",
+      "section": "民生段",
+      "code": "0055",
+      "file": "0055.json",
+      "records": 24
+    },
+    {
+      "county": "屏東縣",
+      "district": "屏東市",
+      "section": "清溪段",
+      "code": "0056",
+      "file": "0056.json",
+      "records": 289
+    },
+    {
+      "county": "屏東縣",
+      "district": "屏東市",
+      "section": "瑞光段",
+      "code": "0057",
+      "file": "0057.json",
+      "records": 142
+    },
+    {
+      "county": "屏東縣",
+      "district": "屏東市",
+      "section": "香揚段",
+      "code": "0058",
+      "file": "0058.json",
+      "records": 110
+    },
+    {
+      "county": "屏東縣",
+      "district": "屏東市",
+      "section": "花園段",
+      "code": "0059",
+      "file": "0059.json",
+      "records": 189
+    },
+    {
+      "county": "屏東縣",
+      "district": "屏東市",
+      "section": "林內段",
+      "code": "0060",
+      "file": "0060.json",
+      "records": 155
+    },
+    {
+      "county": "屏東縣",
+      "district": "屏東市",
+      "section": "洛陽段",
+      "code": "0061",
+      "file": "0061.json",
+      "records": 85
+    },
+    {
+      "county": "屏東縣",
+      "district": "屏東市",
+      "section": "新興段",
+      "code": "0062",
+      "file": "0062.json",
+      "records": 228
+    },
+    {
+      "county": "屏東縣",
+      "district": "屏東市",
+      "section": "長春段",
+      "code": "0063",
+      "file": "0063.json",
+      "records": 235
+    },
+    {
+      "county": "屏東縣",
+      "district": "屏東市",
+      "section": "建國段",
+      "code": "0064",
+      "file": "0064.json",
+      "records": 452
+    },
+    {
+      "county": "屏東縣",
+      "district": "屏東市",
+      "section": "新屏段",
+      "code": "0065",
+      "file": "0065.json",
+      "records": 19
+    },
+    {
+      "county": "屏東縣",
+      "district": "屏東市",
+      "section": "萬年段",
+      "code": "0069",
+      "file": "0069.json",
+      "records": 11
+    },
+    {
+      "county": "屏東縣",
+      "district": "萬丹鄉",
+      "section": "頂林子段",
+      "code": "0075",
+      "file": "0075.json",
+      "records": 4
+    },
+    {
+      "county": "屏東縣",
+      "district": "萬丹鄉",
+      "section": "興化廍段",
+      "code": "0077",
+      "file": "0077.json",
+      "records": 1
+    },
+    {
+      "county": "屏東縣",
+      "district": "萬丹鄉",
+      "section": "甘棠門段一小段",
+      "code": "0084",
+      "file": "0084.json",
+      "records": 7
+    },
+    {
+      "county": "屏東縣",
+      "district": "萬丹鄉",
+      "section": "磚寮段",
+      "code": "0085",
+      "file": "0085.json",
+      "records": 65
+    },
+    {
+      "county": "屏東縣",
+      "district": "長治鄉",
+      "section": "長治段",
+      "code": "0086",
+      "file": "0086.json",
+      "records": 316
+    },
+    {
+      "county": "屏東縣",
+      "district": "長治鄉",
+      "section": "長興段",
+      "code": "0087",
+      "file": "0087.json",
+      "records": 1
+    },
+    {
+      "county": "屏東縣",
+      "district": "長治鄉",
+      "section": "德協段",
+      "code": "0089",
+      "file": "0089.json",
+      "records": 1
+    },
+    {
+      "county": "屏東縣",
+      "district": "長治鄉",
+      "section": "番子寮段",
+      "code": "0090",
+      "file": "0090.json",
+      "records": 236
+    },
+    {
+      "county": "屏東縣",
+      "district": "長治鄉",
+      "section": "華榮段",
+      "code": "0091",
+      "file": "0091.json",
+      "records": 271
+    },
+    {
+      "county": "屏東縣",
+      "district": "麟洛鄉",
+      "section": "麟洛段",
+      "code": "0092",
+      "file": "0092.json",
+      "records": 1
+    },
+    {
+      "county": "屏東縣",
+      "district": "九如鄉",
+      "section": "玉水段",
+      "code": "0094",
+      "file": "0094.json",
+      "records": 442
+    },
+    {
+      "county": "屏東縣",
+      "district": "九如鄉",
+      "section": "九如段",
+      "code": "0095",
+      "file": "0095.json",
+      "records": 578
+    },
+    {
+      "county": "屏東縣",
+      "district": "九如鄉",
+      "section": "九清段",
+      "code": "0096",
+      "file": "0096.json",
+      "records": 217
+    },
+    {
+      "county": "屏東縣",
+      "district": "九如鄉",
+      "section": "耆老段",
+      "code": "0100",
+      "file": "0100.json",
+      "records": 189
+    },
+    {
+      "county": "屏東縣",
+      "district": "九如鄉",
+      "section": "下冷水坑段",
+      "code": "0104",
+      "file": "0104.json",
+      "records": 3
+    },
+    {
+      "county": "屏東縣",
+      "district": "九如鄉",
+      "section": "下冷水坑段一小段",
+      "code": "0105",
+      "file": "0105.json",
+      "records": 37
+    },
+    {
+      "county": "屏東縣",
+      "district": "萬丹鄉",
+      "section": "新鐘段",
+      "code": "0106",
+      "file": "0106.json",
+      "records": 462
+    },
+    {
+      "county": "屏東縣",
+      "district": "萬丹鄉",
+      "section": "新林段",
+      "code": "0107",
+      "file": "0107.json",
+      "records": 329
+    },
+    {
+      "county": "屏東縣",
+      "district": "萬丹鄉",
+      "section": "新安段",
+      "code": "0108",
+      "file": "0108.json",
+      "records": 319
+    },
+    {
+      "county": "屏東縣",
+      "district": "萬丹鄉",
+      "section": "新全段",
+      "code": "0109",
+      "file": "0109.json",
+      "records": 278
+    },
+    {
+      "county": "屏東縣",
+      "district": "屏東市",
+      "section": "豐田段",
+      "code": "0110",
+      "file": "0110.json",
+      "records": 4
+    },
+    {
+      "county": "屏東縣",
+      "district": "萬丹鄉",
+      "section": "萬興段",
+      "code": "0112",
+      "file": "0112.json",
+      "records": 360
+    },
+    {
+      "county": "屏東縣",
+      "district": "萬丹鄉",
+      "section": "崙頂段",
+      "code": "0113",
+      "file": "0113.json",
+      "records": 1740
+    },
+    {
+      "county": "屏東縣",
+      "district": "萬丹鄉",
+      "section": "田厝段",
+      "code": "0114",
+      "file": "0114.json",
+      "records": 989
+    },
+    {
+      "county": "屏東縣",
+      "district": "萬丹鄉",
+      "section": "社安段",
+      "code": "0115",
+      "file": "0115.json",
+      "records": 298
+    },
+    {
+      "county": "屏東縣",
+      "district": "萬丹鄉",
+      "section": "香社段",
+      "code": "0116",
+      "file": "0116.json",
+      "records": 789
+    },
+    {
+      "county": "屏東縣",
+      "district": "萬丹鄉",
+      "section": "灣內段",
+      "code": "0117",
+      "file": "0117.json",
+      "records": 727
+    },
+    {
+      "county": "屏東縣",
+      "district": "萬丹鄉",
+      "section": "萬後段",
+      "code": "0118",
+      "file": "0118.json",
+      "records": 82
+    },
+    {
+      "county": "屏東縣",
+      "district": "萬丹鄉",
+      "section": "萬全段",
+      "code": "0119",
+      "file": "0119.json",
+      "records": 98
+    },
+    {
+      "county": "屏東縣",
+      "district": "萬丹鄉",
+      "section": "萬安段",
+      "code": "0120",
+      "file": "0120.json",
+      "records": 37
+    },
+    {
+      "county": "屏東縣",
+      "district": "萬丹鄉",
+      "section": "萬生段",
+      "code": "0121",
+      "file": "0121.json",
+      "records": 66
+    },
+    {
+      "county": "屏東縣",
+      "district": "萬丹鄉",
+      "section": "萬惠段",
+      "code": "0122",
+      "file": "0122.json",
+      "records": 61
+    },
+    {
+      "county": "屏東縣",
+      "district": "萬丹鄉",
+      "section": "寶厝段",
+      "code": "0123",
+      "file": "0123.json",
+      "records": 87
+    },
+    {
+      "county": "屏東縣",
+      "district": "萬丹鄉",
+      "section": "水泉段",
+      "code": "0124",
+      "file": "0124.json",
+      "records": 70
+    },
+    {
+      "county": "屏東縣",
+      "district": "萬丹鄉",
+      "section": "新福段",
+      "code": "0125",
+      "file": "0125.json",
+      "records": 69
+    },
+    {
+      "county": "屏東縣",
+      "district": "九如鄉",
+      "section": "九智段",
+      "code": "0126",
+      "file": "0126.json",
+      "records": 319
+    },
+    {
+      "county": "屏東縣",
+      "district": "九如鄉",
+      "section": "九仁段",
+      "code": "0127",
+      "file": "0127.json",
+      "records": 117
+    },
+    {
+      "county": "屏東縣",
+      "district": "九如鄉",
+      "section": "九勇段",
+      "code": "0128",
+      "file": "0128.json",
+      "records": 138
+    },
+    {
+      "county": "屏東縣",
+      "district": "九如鄉",
+      "section": "九和段",
+      "code": "0129",
+      "file": "0129.json",
+      "records": 236
+    },
+    {
+      "county": "屏東縣",
+      "district": "九如鄉",
+      "section": "九平段",
+      "code": "0130",
+      "file": "0130.json",
+      "records": 300
+    },
+    {
+      "county": "屏東縣",
+      "district": "屏東市",
+      "section": "大湖段一小段",
+      "code": "0131",
+      "file": "0131.json",
+      "records": 41
+    },
+    {
+      "county": "屏東縣",
+      "district": "萬丹鄉",
+      "section": "社上段",
+      "code": "0132",
+      "file": "0132.json",
+      "records": 192
+    },
+    {
+      "county": "屏東縣",
+      "district": "萬丹鄉",
+      "section": "廣安段",
+      "code": "0133",
+      "file": "0133.json",
+      "records": 110
+    },
+    {
+      "county": "屏東縣",
+      "district": "屏東市",
+      "section": "大慶段",
+      "code": "0134",
+      "file": "0134.json",
+      "records": 1
+    },
+    {
+      "county": "屏東縣",
+      "district": "屏東市",
+      "section": "玉成段",
+      "code": "0135",
+      "file": "0135.json",
+      "records": 156
+    },
+    {
+      "county": "屏東縣",
+      "district": "萬丹鄉",
+      "section": "社北段",
+      "code": "0136",
+      "file": "0136.json",
+      "records": 5
+    },
+    {
+      "county": "屏東縣",
+      "district": "萬丹鄉",
+      "section": "社西段",
+      "code": "0137",
+      "file": "0137.json",
+      "records": 16
+    },
+    {
+      "county": "屏東縣",
+      "district": "麟洛鄉",
+      "section": "麟忠段",
+      "code": "0138",
+      "file": "0138.json",
+      "records": 237
+    },
+    {
+      "county": "屏東縣",
+      "district": "麟洛鄉",
+      "section": "麟孝段",
+      "code": "0139",
+      "file": "0139.json",
+      "records": 111
+    },
+    {
+      "county": "屏東縣",
+      "district": "麟洛鄉",
+      "section": "麟仁段",
+      "code": "0140",
+      "file": "0140.json",
+      "records": 317
+    },
+    {
+      "county": "屏東縣",
+      "district": "麟洛鄉",
+      "section": "麟愛段",
+      "code": "0141",
+      "file": "0141.json",
+      "records": 284
+    },
+    {
+      "county": "屏東縣",
+      "district": "麟洛鄉",
+      "section": "麟信段",
+      "code": "0142",
+      "file": "0142.json",
+      "records": 104
+    },
+    {
+      "county": "屏東縣",
+      "district": "麟洛鄉",
+      "section": "麟義段",
+      "code": "0143",
+      "file": "0143.json",
+      "records": 259
+    },
+    {
+      "county": "屏東縣",
+      "district": "麟洛鄉",
+      "section": "麟和段",
+      "code": "0144",
+      "file": "0144.json",
+      "records": 262
+    },
+    {
+      "county": "屏東縣",
+      "district": "麟洛鄉",
+      "section": "麟平段",
+      "code": "0145",
+      "file": "0145.json",
+      "records": 166
+    },
+    {
+      "county": "屏東縣",
+      "district": "屏東市",
+      "section": "豐年段",
+      "code": "0146",
+      "file": "0146.json",
+      "records": 131
+    },
+    {
+      "county": "屏東縣",
+      "district": "屏東市",
+      "section": "忠孝段",
+      "code": "0147",
+      "file": "0147.json",
+      "records": 32
+    },
+    {
+      "county": "屏東縣",
+      "district": "屏東市",
+      "section": "和生段",
+      "code": "0148",
+      "file": "0148.json",
+      "records": 44
+    },
+    {
+      "county": "屏東縣",
+      "district": "萬丹鄉",
+      "section": "頂新段",
+      "code": "0149",
+      "file": "0149.json",
+      "records": 38
+    },
+    {
+      "county": "屏東縣",
+      "district": "萬丹鄉",
+      "section": "竹林段",
+      "code": "0150",
+      "file": "0150.json",
+      "records": 46
+    },
+    {
+      "county": "屏東縣",
+      "district": "長治鄉",
+      "section": "長豐段",
+      "code": "0151",
+      "file": "0151.json",
+      "records": 392
+    },
+    {
+      "county": "屏東縣",
+      "district": "長治鄉",
+      "section": "新潭段",
+      "code": "0152",
+      "file": "0152.json",
+      "records": 244
+    },
+    {
+      "county": "屏東縣",
+      "district": "長治鄉",
+      "section": "永興段",
+      "code": "0153",
+      "file": "0153.json",
+      "records": 338
+    },
+    {
+      "county": "屏東縣",
+      "district": "長治鄉",
+      "section": "潭頭段",
+      "code": "0154",
+      "file": "0154.json",
+      "records": 410
+    },
+    {
+      "county": "屏東縣",
+      "district": "長治鄉",
+      "section": "崑崙段",
+      "code": "0155",
+      "file": "0155.json",
+      "records": 302
+    },
+    {
+      "county": "屏東縣",
+      "district": "長治鄉",
+      "section": "香潭段",
+      "code": "0156",
+      "file": "0156.json",
+      "records": 330
+    },
+    {
+      "county": "屏東縣",
+      "district": "長治鄉",
+      "section": "進興段",
+      "code": "0157",
+      "file": "0157.json",
+      "records": 185
+    },
+    {
+      "county": "屏東縣",
+      "district": "萬丹鄉",
+      "section": "水仙段",
+      "code": "0158",
+      "file": "0158.json",
+      "records": 15
+    },
+    {
+      "county": "屏東縣",
+      "district": "屏東市",
+      "section": "廣興段",
+      "code": "0160",
+      "file": "0160.json",
+      "records": 18
+    },
+    {
+      "county": "屏東縣",
+      "district": "九如鄉",
+      "section": "下冷水坑段二小段",
+      "code": "0161",
+      "file": "0161.json",
+      "records": 2
+    },
+    {
+      "county": "屏東縣",
+      "district": "屏東市",
+      "section": "豐田段一小段",
+      "code": "0162",
+      "file": "0162.json",
+      "records": 34
+    },
+    {
+      "county": "屏東縣",
+      "district": "屏東市",
+      "section": "正安段",
+      "code": "0163",
+      "file": "0163.json",
+      "records": 134
+    },
+    {
+      "county": "屏東縣",
+      "district": "屏東市",
+      "section": "古松段",
+      "code": "0164",
+      "file": "0164.json",
+      "records": 73
+    },
+    {
+      "county": "屏東縣",
+      "district": "屏東市",
+      "section": "大鵬段",
+      "code": "0165",
+      "file": "0165.json",
+      "records": 20
+    },
+    {
+      "county": "屏東縣",
+      "district": "屏東市",
+      "section": "雲鵬段",
+      "code": "0166",
+      "file": "0166.json",
+      "records": 52
+    },
+    {
+      "county": "屏東縣",
+      "district": "長治鄉",
+      "section": "榮興段",
+      "code": "0168",
+      "file": "0168.json",
+      "records": 170
+    },
+    {
+      "county": "屏東縣",
+      "district": "萬丹鄉",
+      "section": "竹圍段",
+      "code": "0169",
+      "file": "0169.json",
+      "records": 3
+    },
+    {
+      "county": "屏東縣",
+      "district": "屏東市",
+      "section": "北勢段一小段",
+      "code": "0170",
+      "file": "0170.json",
+      "records": 2
+    },
+    {
+      "county": "屏東縣",
+      "district": "長治鄉",
+      "section": "榮華段",
+      "code": "0171",
+      "file": "0171.json",
+      "records": 70
+    },
+    {
+      "county": "屏東縣",
+      "district": "麟洛鄉",
+      "section": "玄聖段",
+      "code": "0172",
+      "file": "0172.json",
+      "records": 110
+    },
+    {
+      "county": "屏東縣",
+      "district": "麟洛鄉",
+      "section": "農場段",
+      "code": "0173",
+      "file": "0173.json",
+      "records": 274
+    },
+    {
+      "county": "屏東縣",
+      "district": "麟洛鄉",
+      "section": "徑仔段",
+      "code": "0174",
+      "file": "0174.json",
+      "records": 81
+    },
+    {
+      "county": "屏東縣",
+      "district": "屏東市",
+      "section": "福正段",
+      "code": "0175",
+      "file": "0175.json",
+      "records": 23
+    },
+    {
+      "county": "屏東縣",
+      "district": "屏東市",
+      "section": "歸義段",
+      "code": "0176",
+      "file": "0176.json",
+      "records": 151
+    },
+    {
+      "county": "屏東縣",
+      "district": "長治鄉",
+      "section": "農科段",
+      "code": "0177",
+      "file": "0177.json",
+      "records": 3
+    },
+    {
+      "county": "屏東縣",
+      "district": "屏東市",
+      "section": "大春段",
+      "code": "0178",
+      "file": "0178.json",
+      "records": 69
+    },
+    {
+      "county": "屏東縣",
+      "district": "屏東市",
+      "section": "頂柳段",
+      "code": "0179",
+      "file": "0179.json",
+      "records": 100
+    },
+    {
+      "county": "屏東縣",
+      "district": "屏東市",
+      "section": "中柳段",
+      "code": "0180",
+      "file": "0180.json",
+      "records": 168
+    },
+    {
+      "county": "屏東縣",
+      "district": "萬丹鄉",
+      "section": "頂竹段",
+      "code": "0181",
+      "file": "0181.json",
+      "records": 41
+    },
+    {
+      "county": "屏東縣",
+      "district": "屏東市",
+      "section": "龍華段",
+      "code": "0182",
+      "file": "0182.json",
+      "records": 283
+    },
+    {
+      "county": "屏東縣",
+      "district": "萬丹鄉",
+      "section": "新社皮段",
+      "code": "0183",
+      "file": "0183.json",
+      "records": 23
+    },
+    {
+      "county": "屏東縣",
+      "district": "屏東市",
+      "section": "公興段",
+      "code": "0184",
+      "file": "0184.json",
+      "records": 229
+    },
+    {
+      "county": "屏東縣",
+      "district": "屏東市",
+      "section": "新歸來段",
+      "code": "0185",
+      "file": "0185.json",
+      "records": 294
+    },
+    {
+      "county": "屏東縣",
+      "district": "萬丹鄉",
+      "section": "上磚寮段",
+      "code": "0186",
+      "file": "0186.json",
+      "records": 150
+    },
+    {
+      "county": "屏東縣",
+      "district": "屏東市",
+      "section": "和興段",
+      "code": "0187",
+      "file": "0187.json",
+      "records": 196
+    },
+    {
+      "county": "屏東縣",
+      "district": "屏東市",
+      "section": "金城段",
+      "code": "0188",
+      "file": "0188.json",
+      "records": 152
+    },
+    {
+      "county": "屏東縣",
+      "district": "屏東市",
+      "section": "信興段",
+      "code": "0189",
+      "file": "0189.json",
+      "records": 325
+    },
+    {
+      "county": "屏東縣",
+      "district": "九如鄉",
+      "section": "九彭段",
+      "code": "0190",
+      "file": "0190.json",
+      "records": 13
+    },
+    {
+      "county": "屏東縣",
+      "district": "屏東市",
+      "section": "香揚段一小段",
+      "code": "0191",
+      "file": "0191.json",
+      "records": 1
+    },
+    {
+      "county": "屏東縣",
+      "district": "屏東市",
+      "section": "新海豐段",
+      "code": "0192",
+      "file": "0192.json",
+      "records": 161
+    },
+    {
+      "county": "屏東縣",
+      "district": "屏東市",
+      "section": "三山段",
+      "code": "0193",
+      "file": "0193.json",
+      "records": 333
+    },
+    {
+      "county": "屏東縣",
+      "district": "屏東市",
+      "section": "信和段",
+      "code": "0194",
+      "file": "0194.json",
+      "records": 180
+    },
+    {
+      "county": "屏東縣",
+      "district": "長治鄉",
+      "section": "德華段",
+      "code": "0195",
+      "file": "0195.json",
+      "records": 194
+    },
+    {
+      "county": "屏東縣",
+      "district": "長治鄉",
+      "section": "德榮段",
+      "code": "0196",
+      "file": "0196.json",
+      "records": 375
+    },
+    {
+      "county": "屏東縣",
+      "district": "長治鄉",
+      "section": "竹葉林段",
+      "code": "0197",
+      "file": "0197.json",
+      "records": 509
+    },
+    {
+      "county": "屏東縣",
+      "district": "長治鄉",
+      "section": "復興段",
+      "code": "0198",
+      "file": "0198.json",
+      "records": 239
+    },
+    {
+      "county": "屏東縣",
+      "district": "屏東市",
+      "section": "新勝興段",
+      "code": "0199",
+      "file": "0199.json",
+      "records": 7
+    },
+    {
+      "county": "屏東縣",
+      "district": "里港鄉",
+      "section": "土庫段",
+      "code": "0201",
+      "file": "0201.json",
+      "records": 722
+    },
+    {
+      "county": "屏東縣",
+      "district": "里港鄉",
+      "section": "大港洋段",
+      "code": "0202",
+      "file": "0202.json",
+      "records": 468
+    },
+    {
+      "county": "屏東縣",
+      "district": "里港鄉",
+      "section": "瀰力肚段",
+      "code": "0205",
+      "file": "0205.json",
+      "records": 714
+    },
+    {
+      "county": "屏東縣",
+      "district": "里港鄉",
+      "section": "三張廍段",
+      "code": "0206",
+      "file": "0206.json",
+      "records": 531
+    },
+    {
+      "county": "屏東縣",
+      "district": "里港鄉",
+      "section": "中崙段",
+      "code": "0207",
+      "file": "0207.json",
+      "records": 131
+    },
+    {
+      "county": "屏東縣",
+      "district": "高樹鄉",
+      "section": "高樹段",
+      "code": "0211",
+      "file": "0211.json",
+      "records": 100
+    },
+    {
+      "county": "屏東縣",
+      "district": "高樹鄉",
+      "section": "東振新段",
+      "code": "0213",
+      "file": "0213.json",
+      "records": 691
+    },
+    {
+      "county": "屏東縣",
+      "district": "高樹鄉",
+      "section": "阿拔泉段",
+      "code": "0216",
+      "file": "0216.json",
+      "records": 19
+    },
+    {
+      "county": "屏東縣",
+      "district": "高樹鄉",
+      "section": "加蚋埔段",
+      "code": "0217",
+      "file": "0217.json",
+      "records": 470
+    },
+    {
+      "county": "屏東縣",
+      "district": "三地門鄉",
+      "section": "三地段",
+      "code": "0220",
+      "file": "0220.json",
+      "records": 887
+    },
+    {
+      "county": "屏東縣",
+      "district": "三地門鄉",
+      "section": "安坡段",
+      "code": "0221",
+      "file": "0221.json",
+      "records": 171
+    },
+    {
+      "county": "屏東縣",
+      "district": "三地門鄉",
+      "section": "阿烏段",
+      "code": "0222",
+      "file": "0222.json",
+      "records": 568
+    },
+    {
+      "county": "屏東縣",
+      "district": "三地門鄉",
+      "section": "賽嘉段",
+      "code": "0223",
+      "file": "0223.json",
+      "records": 573
+    },
+    {
+      "county": "屏東縣",
+      "district": "三地門鄉",
+      "section": "大社段",
+      "code": "0224",
+      "file": "0224.json",
+      "records": 434
+    },
+    {
+      "county": "屏東縣",
+      "district": "三地門鄉",
+      "section": "達來段",
+      "code": "0225",
+      "file": "0225.json",
+      "records": 152
+    },
+    {
+      "county": "屏東縣",
+      "district": "三地門鄉",
+      "section": "馬兒段",
+      "code": "0226",
+      "file": "0226.json",
+      "records": 517
+    },
+    {
+      "county": "屏東縣",
+      "district": "三地門鄉",
+      "section": "口社段",
+      "code": "0227",
+      "file": "0227.json",
+      "records": 456
+    },
+    {
+      "county": "屏東縣",
+      "district": "三地門鄉",
+      "section": "沙溪段",
+      "code": "0228",
+      "file": "0228.json",
+      "records": 264
+    },
+    {
+      "county": "屏東縣",
+      "district": "三地門鄉",
+      "section": "德文段",
+      "code": "0229",
+      "file": "0229.json",
+      "records": 472
+    },
+    {
+      "county": "屏東縣",
+      "district": "霧台鄉",
+      "section": "霧台段",
+      "code": "0230",
+      "file": "0230.json",
+      "records": 694
+    },
+    {
+      "county": "屏東縣",
+      "district": "霧台鄉",
+      "section": "佳暮段",
+      "code": "0231",
+      "file": "0231.json",
+      "records": 222
+    },
+    {
+      "county": "屏東縣",
+      "district": "霧台鄉",
+      "section": "阿禮段",
+      "code": "0232",
+      "file": "0232.json",
+      "records": 175
+    },
+    {
+      "county": "屏東縣",
+      "district": "霧台鄉",
+      "section": "去怒段",
+      "code": "0233",
+      "file": "0233.json",
+      "records": 354
+    },
+    {
+      "county": "屏東縣",
+      "district": "霧台鄉",
+      "section": "好茶段",
+      "code": "0234",
+      "file": "0234.json",
+      "records": 248
+    },
+    {
+      "county": "屏東縣",
+      "district": "霧台鄉",
+      "section": "大武段",
+      "code": "0235",
+      "file": "0235.json",
+      "records": 247
+    },
+    {
+      "county": "屏東縣",
+      "district": "里港鄉",
+      "section": "鐵店段",
+      "code": "0236",
+      "file": "0236.json",
+      "records": 299
+    },
+    {
+      "county": "屏東縣",
+      "district": "里港鄉",
+      "section": "春林段",
+      "code": "0237",
+      "file": "0237.json",
+      "records": 193
+    },
+    {
+      "county": "屏東縣",
+      "district": "里港鄉",
+      "section": "永春段",
+      "code": "0238",
+      "file": "0238.json",
+      "records": 63
+    },
+    {
+      "county": "屏東縣",
+      "district": "里港鄉",
+      "section": "過江段",
+      "code": "0239",
+      "file": "0239.json",
+      "records": 88
+    },
+    {
+      "county": "屏東縣",
+      "district": "里港鄉",
+      "section": "里平段",
+      "code": "0240",
+      "file": "0240.json",
+      "records": 91
+    },
+    {
+      "county": "屏東縣",
+      "district": "里港鄉",
+      "section": "玉田段",
+      "code": "0241",
+      "file": "0241.json",
+      "records": 108
+    },
+    {
+      "county": "屏東縣",
+      "district": "里港鄉",
+      "section": "潮北段",
+      "code": "0242",
+      "file": "0242.json",
+      "records": 58
+    },
+    {
+      "county": "屏東縣",
+      "district": "高樹鄉",
+      "section": "豐源段",
+      "code": "0243",
+      "file": "0243.json",
+      "records": 244
+    },
+    {
+      "county": "屏東縣",
+      "district": "高樹鄉",
+      "section": "南興段",
+      "code": "0244",
+      "file": "0244.json",
+      "records": 203
+    },
+    {
+      "county": "屏東縣",
+      "district": "高樹鄉",
+      "section": "興中段",
+      "code": "0245",
+      "file": "0245.json",
+      "records": 239
+    },
+    {
+      "county": "屏東縣",
+      "district": "高樹鄉",
+      "section": "長榮段",
+      "code": "0246",
+      "file": "0246.json",
+      "records": 226
+    },
+    {
+      "county": "屏東縣",
+      "district": "三地門鄉",
+      "section": "新馬兒段",
+      "code": "0247",
+      "file": "0247.json",
+      "records": 160
+    },
+    {
+      "county": "屏東縣",
+      "district": "里港鄉",
+      "section": "定國段",
+      "code": "0248",
+      "file": "0248.json",
+      "records": 163
+    },
+    {
+      "county": "屏東縣",
+      "district": "鹽埔鄉",
+      "section": "新二段",
+      "code": "0249",
+      "file": "0249.json",
+      "records": 196
+    },
+    {
+      "county": "屏東縣",
+      "district": "鹽埔鄉",
+      "section": "新德段",
+      "code": "0250",
+      "file": "0250.json",
+      "records": 21
+    },
+    {
+      "county": "屏東縣",
+      "district": "鹽埔鄉",
+      "section": "新高段",
+      "code": "0251",
+      "file": "0251.json",
+      "records": 67
+    },
+    {
+      "county": "屏東縣",
+      "district": "鹽埔鄉",
+      "section": "維新段",
+      "code": "0252",
+      "file": "0252.json",
+      "records": 226
+    },
+    {
+      "county": "屏東縣",
+      "district": "鹽埔鄉",
+      "section": "塩南段",
+      "code": "0253",
+      "file": "0253.json",
+      "records": 57
+    },
+    {
+      "county": "屏東縣",
+      "district": "鹽埔鄉",
+      "section": "塩中段",
+      "code": "0254",
+      "file": "0254.json",
+      "records": 148
+    },
+    {
+      "county": "屏東縣",
+      "district": "鹽埔鄉",
+      "section": "塩北段",
+      "code": "0255",
+      "file": "0255.json",
+      "records": 138
+    },
+    {
+      "county": "屏東縣",
+      "district": "高樹鄉",
+      "section": "新南段",
+      "code": "0256",
+      "file": "0256.json",
+      "records": 118
+    },
+    {
+      "county": "屏東縣",
+      "district": "霧台鄉",
+      "section": "賀山段",
+      "code": "0257",
+      "file": "0257.json",
+      "records": 40
+    },
+    {
+      "county": "屏東縣",
+      "district": "霧台鄉",
+      "section": "倫原段",
+      "code": "0258",
+      "file": "0258.json",
+      "records": 47
+    },
+    {
+      "county": "屏東縣",
+      "district": "霧台鄉",
+      "section": "一場段",
+      "code": "0259",
+      "file": "0259.json",
+      "records": 44
+    },
+    {
+      "county": "屏東縣",
+      "district": "霧台鄉",
+      "section": "歡喜段",
+      "code": "0260",
+      "file": "0260.json",
+      "records": 28
+    },
+    {
+      "county": "屏東縣",
+      "district": "霧台鄉",
+      "section": "邊捕段",
+      "code": "0261",
+      "file": "0261.json",
+      "records": 23
+    },
+    {
+      "county": "屏東縣",
+      "district": "霧台鄉",
+      "section": "大捕段",
+      "code": "0262",
+      "file": "0262.json",
+      "records": 15
+    },
+    {
+      "county": "屏東縣",
+      "district": "霧台鄉",
+      "section": "魯南段",
+      "code": "0263",
+      "file": "0263.json",
+      "records": 97
+    },
+    {
+      "county": "屏東縣",
+      "district": "霧台鄉",
+      "section": "拉夏段",
+      "code": "0264",
+      "file": "0264.json",
+      "records": 25
+    },
+    {
+      "county": "屏東縣",
+      "district": "霧台鄉",
+      "section": "知山段",
+      "code": "0265",
+      "file": "0265.json",
+      "records": 50
+    },
+    {
+      "county": "屏東縣",
+      "district": "霧台鄉",
+      "section": "境界段",
+      "code": "0266",
+      "file": "0266.json",
+      "records": 63
+    },
+    {
+      "county": "屏東縣",
+      "district": "霧台鄉",
+      "section": "喬國段",
+      "code": "0267",
+      "file": "0267.json",
+      "records": 60
+    },
+    {
+      "county": "屏東縣",
+      "district": "霧台鄉",
+      "section": "拉次段",
+      "code": "0268",
+      "file": "0268.json",
+      "records": 32
+    },
+    {
+      "county": "屏東縣",
+      "district": "三地門鄉",
+      "section": "巴都都龍段",
+      "code": "0270",
+      "file": "0270.json",
+      "records": 22
+    },
+    {
+      "county": "屏東縣",
+      "district": "三地門鄉",
+      "section": "都魯夫魯父段",
+      "code": "0271",
+      "file": "0271.json",
+      "records": 9
+    },
+    {
+      "county": "屏東縣",
+      "district": "三地門鄉",
+      "section": "都風段",
+      "code": "0272",
+      "file": "0272.json",
+      "records": 8
+    },
+    {
+      "county": "屏東縣",
+      "district": "三地門鄉",
+      "section": "馬發利段",
+      "code": "0273",
+      "file": "0273.json",
+      "records": 4
+    },
+    {
+      "county": "屏東縣",
+      "district": "鹽埔鄉",
+      "section": "高朗段",
+      "code": "0274",
+      "file": "0274.json",
+      "records": 110
+    },
+    {
+      "county": "屏東縣",
+      "district": "鹽埔鄉",
+      "section": "新莊段",
+      "code": "0275",
+      "file": "0275.json",
+      "records": 71
+    },
+    {
+      "county": "屏東縣",
+      "district": "里港鄉",
+      "section": "新土庫段",
+      "code": "0276",
+      "file": "0276.json",
+      "records": 199
+    },
+    {
+      "county": "屏東縣",
+      "district": "里港鄉",
+      "section": "中萬甲段",
+      "code": "0277",
+      "file": "0277.json",
+      "records": 271
+    },
+    {
+      "county": "屏東縣",
+      "district": "里港鄉",
+      "section": "中和段",
+      "code": "0278",
+      "file": "0278.json",
+      "records": 367
+    },
+    {
+      "county": "屏東縣",
+      "district": "鹽埔鄉",
+      "section": "彭新段",
+      "code": "0279",
+      "file": "0279.json",
+      "records": 101
+    },
+    {
+      "county": "屏東縣",
+      "district": "鹽埔鄉",
+      "section": "彭北段",
+      "code": "0280",
+      "file": "0280.json",
+      "records": 64
+    },
+    {
+      "county": "屏東縣",
+      "district": "三地門鄉",
+      "section": "拉路啊路嵅段",
+      "code": "0281",
+      "file": "0281.json",
+      "records": 27
+    },
+    {
+      "county": "屏東縣",
+      "district": "三地門鄉",
+      "section": "祝立夫夫段",
+      "code": "0282",
+      "file": "0282.json",
+      "records": 4
+    },
+    {
+      "county": "屏東縣",
+      "district": "三地門鄉",
+      "section": "度嗎尼蘭段",
+      "code": "0283",
+      "file": "0283.json",
+      "records": 3
+    },
+    {
+      "county": "屏東縣",
+      "district": "三地門鄉",
+      "section": "拉利碧段",
+      "code": "0285",
+      "file": "0285.json",
+      "records": 6
+    },
+    {
+      "county": "屏東縣",
+      "district": "三地門鄉",
+      "section": "嘎拉谷籟段",
+      "code": "0286",
+      "file": "0286.json",
+      "records": 5
+    },
+    {
+      "county": "屏東縣",
+      "district": "三地門鄉",
+      "section": "古拉芙蘭段",
+      "code": "0287",
+      "file": "0287.json",
+      "records": 35
+    },
+    {
+      "county": "屏東縣",
+      "district": "三地門鄉",
+      "section": "大芙峨段",
+      "code": "0288",
+      "file": "0288.json",
+      "records": 61
+    },
+    {
+      "county": "屏東縣",
+      "district": "三地門鄉",
+      "section": "報霧谷段",
+      "code": "0289",
+      "file": "0289.json",
+      "records": 21
+    },
+    {
+      "county": "屏東縣",
+      "district": "三地門鄉",
+      "section": "德麻利瓦利瓦段",
+      "code": "0290",
+      "file": "0290.json",
+      "records": 47
+    },
+    {
+      "county": "屏東縣",
+      "district": "三地門鄉",
+      "section": "瓦拉告段",
+      "code": "0295",
+      "file": "0295.json",
+      "records": 10
+    },
+    {
+      "county": "屏東縣",
+      "district": "三地門鄉",
+      "section": "督阿哇鳴段",
+      "code": "0296",
+      "file": "0296.json",
+      "records": 27
+    },
+    {
+      "county": "屏東縣",
+      "district": "三地門鄉",
+      "section": "答呢地段",
+      "code": "0297",
+      "file": "0297.json",
+      "records": 37
+    },
+    {
+      "county": "屏東縣",
+      "district": "三地門鄉",
+      "section": "督嘎薩尼蘭段",
+      "code": "0299",
+      "file": "0299.json",
+      "records": 53
+    },
+    {
+      "county": "屏東縣",
+      "district": "潮州鎮",
+      "section": "八老爺段",
+      "code": "0302",
+      "file": "0302.json",
+      "records": 1
+    },
+    {
+      "county": "屏東縣",
+      "district": "潮州鎮",
+      "section": "崙子頂段",
+      "code": "0303",
+      "file": "0303.json",
+      "records": 1
+    },
+    {
+      "county": "屏東縣",
+      "district": "潮州鎮",
+      "section": "檨子腳段",
+      "code": "0304",
+      "file": "0304.json",
+      "records": 1
+    },
+    {
+      "county": "屏東縣",
+      "district": "潮州鎮",
+      "section": "興美段",
+      "code": "0307",
+      "file": "0307.json",
+      "records": 306
+    },
+    {
+      "county": "屏東縣",
+      "district": "萬巒鄉",
+      "section": "五溝水段",
+      "code": "0310",
+      "file": "0310.json",
+      "records": 5
+    },
+    {
+      "county": "屏東縣",
+      "district": "萬巒鄉",
+      "section": "赤山段",
+      "code": "0311",
+      "file": "0311.json",
+      "records": 6
+    },
+    {
+      "county": "屏東縣",
+      "district": "萬巒鄉",
+      "section": "赤山段一小段",
+      "code": "0312",
+      "file": "0312.json",
+      "records": 24
+    },
+    {
+      "county": "屏東縣",
+      "district": "萬巒鄉",
+      "section": "新厝段一小段",
+      "code": "0314",
+      "file": "0314.json",
+      "records": 62
+    },
+    {
+      "county": "屏東縣",
+      "district": "萬巒鄉",
+      "section": "佳佐段",
+      "code": "0315",
+      "file": "0315.json",
+      "records": 65
+    },
+    {
+      "county": "屏東縣",
+      "district": "萬巒鄉",
+      "section": "佳佐段一小段",
+      "code": "0316",
+      "file": "0316.json",
+      "records": 97
+    },
+    {
+      "county": "屏東縣",
+      "district": "內埔鄉",
+      "section": "犂頭鏢段",
+      "code": "0323",
+      "file": "0323.json",
+      "records": 134
+    },
+    {
+      "county": "屏東縣",
+      "district": "內埔鄉",
+      "section": "隘寮段",
+      "code": "0324",
+      "file": "0324.json",
+      "records": 42
+    },
+    {
+      "county": "屏東縣",
+      "district": "內埔鄉",
+      "section": "新埔段",
+      "code": "0327",
+      "file": "0327.json",
+      "records": 830
+    },
+    {
+      "county": "屏東縣",
+      "district": "內埔鄉",
+      "section": "美和段",
+      "code": "0328",
+      "file": "0328.json",
+      "records": 320
+    },
+    {
+      "county": "屏東縣",
+      "district": "竹田鄉",
+      "section": "竹田段",
+      "code": "0329",
+      "file": "0329.json",
+      "records": 6
+    },
+    {
+      "county": "屏東縣",
+      "district": "竹田鄉",
+      "section": "南勢段一小段",
+      "code": "0332",
+      "file": "0332.json",
+      "records": 21
+    },
+    {
+      "county": "屏東縣",
+      "district": "竹田鄉",
+      "section": "鳳山厝段",
+      "code": "0334",
+      "file": "0334.json",
+      "records": 2
+    },
+    {
+      "county": "屏東縣",
+      "district": "竹田鄉",
+      "section": "新田段",
+      "code": "0336",
+      "file": "0336.json",
+      "records": 653
+    },
+    {
+      "county": "屏東縣",
+      "district": "竹田鄉",
+      "section": "新勢段",
+      "code": "0337",
+      "file": "0337.json",
+      "records": 663
+    },
+    {
+      "county": "屏東縣",
+      "district": "竹田鄉",
+      "section": "竹南段",
+      "code": "0338",
+      "file": "0338.json",
+      "records": 149
+    },
+    {
+      "county": "屏東縣",
+      "district": "竹田鄉",
+      "section": "美崙段",
+      "code": "0339",
+      "file": "0339.json",
+      "records": 390
+    },
+    {
+      "county": "屏東縣",
+      "district": "新埤鄉",
+      "section": "新埤段",
+      "code": "0340",
+      "file": "0340.json",
+      "records": 134
+    },
+    {
+      "county": "屏東縣",
+      "district": "新埤鄉",
+      "section": "打鐵段",
+      "code": "0341",
+      "file": "0341.json",
+      "records": 16
+    },
+    {
+      "county": "屏東縣",
+      "district": "新埤鄉",
+      "section": "建功段",
+      "code": "0342",
+      "file": "0342.json",
+      "records": 2
+    },
+    {
+      "county": "屏東縣",
+      "district": "新埤鄉",
+      "section": "南岸段",
+      "code": "0343",
+      "file": "0343.json",
+      "records": 4
+    },
+    {
+      "county": "屏東縣",
+      "district": "新埤鄉",
+      "section": "餉潭段",
+      "code": "0344",
+      "file": "0344.json",
+      "records": 214
+    },
+    {
+      "county": "屏東縣",
+      "district": "新埤鄉",
+      "section": "糞箕湖段",
+      "code": "0345",
+      "file": "0345.json",
+      "records": 2
+    },
+    {
+      "county": "屏東縣",
+      "district": "新埤鄉",
+      "section": "新力段",
+      "code": "0346",
+      "file": "0346.json",
+      "records": 68
+    },
+    {
+      "county": "屏東縣",
+      "district": "枋寮鄉",
+      "section": "大響營段",
+      "code": "0350",
+      "file": "0350.json",
+      "records": 2
+    },
+    {
+      "county": "屏東縣",
+      "district": "枋寮鄉",
+      "section": "大響營段一小段",
+      "code": "0351",
+      "file": "0351.json",
+      "records": 43
+    },
+    {
+      "county": "屏東縣",
+      "district": "枋寮鄉",
+      "section": "大響營段二小段",
+      "code": "0352",
+      "file": "0352.json",
+      "records": 8
+    },
+    {
+      "county": "屏東縣",
+      "district": "枋寮鄉",
+      "section": "北旗尾段",
+      "code": "0353",
+      "file": "0353.json",
+      "records": 1
+    },
+    {
+      "county": "屏東縣",
+      "district": "瑪家鄉",
+      "section": "瑪家段",
+      "code": "0358",
+      "file": "0358.json",
+      "records": 311
+    },
+    {
+      "county": "屏東縣",
+      "district": "瑪家鄉",
+      "section": "北葉段",
+      "code": "0359",
+      "file": "0359.json",
+      "records": 240
+    },
+    {
+      "county": "屏東縣",
+      "district": "瑪家鄉",
+      "section": "涼山段",
+      "code": "0360",
+      "file": "0360.json",
+      "records": 265
+    },
+    {
+      "county": "屏東縣",
+      "district": "瑪家鄉",
+      "section": "筏灣段",
+      "code": "0361",
+      "file": "0361.json",
+      "records": 105
+    },
+    {
+      "county": "屏東縣",
+      "district": "瑪家鄉",
+      "section": "佳義段",
+      "code": "0362",
+      "file": "0362.json",
+      "records": 163
+    },
+    {
+      "county": "屏東縣",
+      "district": "瑪家鄉",
+      "section": "永樂段",
+      "code": "0363",
+      "file": "0363.json",
+      "records": 146
+    },
+    {
+      "county": "屏東縣",
+      "district": "泰武鄉",
+      "section": "泰武段",
+      "code": "0364",
+      "file": "0364.json",
+      "records": 264
+    },
+    {
+      "county": "屏東縣",
+      "district": "泰武鄉",
+      "section": "萬安段",
+      "code": "0365",
+      "file": "0365.json",
+      "records": 153
+    },
+    {
+      "county": "屏東縣",
+      "district": "泰武鄉",
+      "section": "佳平段",
+      "code": "0366",
+      "file": "0366.json",
+      "records": 270
+    },
+    {
+      "county": "屏東縣",
+      "district": "泰武鄉",
+      "section": "平和段",
+      "code": "0367",
+      "file": "0367.json",
+      "records": 10
+    },
+    {
+      "county": "屏東縣",
+      "district": "泰武鄉",
+      "section": "武潭段",
+      "code": "0368",
+      "file": "0368.json",
+      "records": 347
+    },
+    {
+      "county": "屏東縣",
+      "district": "泰武鄉",
+      "section": "佳興段",
+      "code": "0369",
+      "file": "0369.json",
+      "records": 119
+    },
+    {
+      "county": "屏東縣",
+      "district": "來義鄉",
+      "section": "來義段",
+      "code": "0370",
+      "file": "0370.json",
+      "records": 73
+    },
+    {
+      "county": "屏東縣",
+      "district": "來義鄉",
+      "section": "文樂段",
+      "code": "0371",
+      "file": "0371.json",
+      "records": 226
+    },
+    {
+      "county": "屏東縣",
+      "district": "來義鄉",
+      "section": "白鷺段",
+      "code": "0372",
+      "file": "0372.json",
+      "records": 214
+    },
+    {
+      "county": "屏東縣",
+      "district": "來義鄉",
+      "section": "丹林段",
+      "code": "0373",
+      "file": "0373.json",
+      "records": 762
+    },
+    {
+      "county": "屏東縣",
+      "district": "泰武鄉",
+      "section": "新平和段",
+      "code": "0374",
+      "file": "0374.json",
+      "records": 135
+    },
+    {
+      "county": "屏東縣",
+      "district": "來義鄉",
+      "section": "望嘉段",
+      "code": "0375",
+      "file": "0375.json",
+      "records": 325
+    },
+    {
+      "county": "屏東縣",
+      "district": "來義鄉",
+      "section": "南和段",
+      "code": "0376",
+      "file": "0376.json",
+      "records": 251
+    },
+    {
+      "county": "屏東縣",
+      "district": "來義鄉",
+      "section": "古樓段",
+      "code": "0377",
+      "file": "0377.json",
+      "records": 316
+    },
+    {
+      "county": "屏東縣",
+      "district": "來義鄉",
+      "section": "義林段",
+      "code": "0378",
+      "file": "0378.json",
+      "records": 704
+    },
+    {
+      "county": "屏東縣",
+      "district": "春日鄉",
+      "section": "春日段",
+      "code": "0379",
+      "file": "0379.json",
+      "records": 750
+    },
+    {
+      "county": "屏東縣",
+      "district": "春日鄉",
+      "section": "力里段",
+      "code": "0380",
+      "file": "0380.json",
+      "records": 878
+    },
+    {
+      "county": "屏東縣",
+      "district": "春日鄉",
+      "section": "力南段",
+      "code": "0381",
+      "file": "0381.json",
+      "records": 174
+    },
+    {
+      "county": "屏東縣",
+      "district": "春日鄉",
+      "section": "歸崇段",
+      "code": "0382",
+      "file": "0382.json",
+      "records": 286
+    },
+    {
+      "county": "屏東縣",
+      "district": "春日鄉",
+      "section": "古華段",
+      "code": "0383",
+      "file": "0383.json",
+      "records": 528
+    },
+    {
+      "county": "屏東縣",
+      "district": "春日鄉",
+      "section": "七佳段",
+      "code": "0384",
+      "file": "0384.json",
+      "records": 599
+    },
+    {
+      "county": "屏東縣",
+      "district": "春日鄉",
+      "section": "士文段",
+      "code": "0385",
+      "file": "0385.json",
+      "records": 7
+    },
+    {
+      "county": "屏東縣",
+      "district": "春日鄉",
+      "section": "士文段一小段",
+      "code": "0386",
+      "file": "0386.json",
+      "records": 443
+    },
+    {
+      "county": "屏東縣",
+      "district": "內埔鄉",
+      "section": "新豐段",
+      "code": "0388",
+      "file": "0388.json",
+      "records": 7
+    },
+    {
+      "county": "屏東縣",
+      "district": "枋寮鄉",
+      "section": "東海段",
+      "code": "0389",
+      "file": "0389.json",
+      "records": 1
+    },
+    {
+      "county": "屏東縣",
+      "district": "潮州鎮",
+      "section": "五魁寮段一小段",
+      "code": "0391",
+      "file": "0391.json",
+      "records": 72
+    },
+    {
+      "county": "屏東縣",
+      "district": "潮州鎮",
+      "section": "五魁寮段二小段",
+      "code": "0392",
+      "file": "0392.json",
+      "records": 28
+    },
+    {
+      "county": "屏東縣",
+      "district": "竹田鄉",
+      "section": "鳳明段",
+      "code": "0393",
+      "file": "0393.json",
+      "records": 360
+    },
+    {
+      "county": "屏東縣",
+      "district": "枋寮鄉",
+      "section": "建興段",
+      "code": "0394",
+      "file": "0394.json",
+      "records": 76
+    },
+    {
+      "county": "屏東縣",
+      "district": "枋寮鄉",
+      "section": "新龍段",
+      "code": "0395",
+      "file": "0395.json",
+      "records": 121
+    },
+    {
+      "county": "屏東縣",
+      "district": "枋寮鄉",
+      "section": "德興段",
+      "code": "0396",
+      "file": "0396.json",
+      "records": 302
+    },
+    {
+      "county": "屏東縣",
+      "district": "枋寮鄉",
+      "section": "中山段",
+      "code": "0397",
+      "file": "0397.json",
+      "records": 127
+    },
+    {
+      "county": "屏東縣",
+      "district": "枋寮鄉",
+      "section": "隆山段",
+      "code": "0398",
+      "file": "0398.json",
+      "records": 50
+    },
+    {
+      "county": "屏東縣",
+      "district": "枋寮鄉",
+      "section": "保生段",
+      "code": "0399",
+      "file": "0399.json",
+      "records": 240
+    },
+    {
+      "county": "屏東縣",
+      "district": "枋寮鄉",
+      "section": "高田段",
+      "code": "0400",
+      "file": "0400.json",
+      "records": 147
+    },
+    {
+      "county": "屏東縣",
+      "district": "枋寮鄉",
+      "section": "北勢段",
+      "code": "0401",
+      "file": "0401.json",
+      "records": 49
+    },
+    {
+      "county": "屏東縣",
+      "district": "枋寮鄉",
+      "section": "中寮段",
+      "code": "0402",
+      "file": "0402.json",
+      "records": 232
+    },
+    {
+      "county": "屏東縣",
+      "district": "春日鄉",
+      "section": "春日段一小段",
+      "code": "0403",
+      "file": "0403.json",
+      "records": 9
+    },
+    {
+      "county": "屏東縣",
+      "district": "春日鄉",
+      "section": "春日段二小段",
+      "code": "0404",
+      "file": "0404.json",
+      "records": 3
+    },
+    {
+      "county": "屏東縣",
+      "district": "枋寮鄉",
+      "section": "天時段",
+      "code": "0406",
+      "file": "0406.json",
+      "records": 176
+    },
+    {
+      "county": "屏東縣",
+      "district": "枋寮鄉",
+      "section": "地利段",
+      "code": "0407",
+      "file": "0407.json",
+      "records": 13
+    },
+    {
+      "county": "屏東縣",
+      "district": "枋寮鄉",
+      "section": "人和段",
+      "code": "0408",
+      "file": "0408.json",
+      "records": 91
+    },
+    {
+      "county": "屏東縣",
+      "district": "枋寮鄉",
+      "section": "中華段",
+      "code": "0409",
+      "file": "0409.json",
+      "records": 93
+    },
+    {
+      "county": "屏東縣",
+      "district": "枋寮鄉",
+      "section": "沿海段",
+      "code": "0410",
+      "file": "0410.json",
+      "records": 205
+    },
+    {
+      "county": "屏東縣",
+      "district": "新埤鄉",
+      "section": "新東段",
+      "code": "0411",
+      "file": "0411.json",
+      "records": 507
+    },
+    {
+      "county": "屏東縣",
+      "district": "新埤鄉",
+      "section": "新華段",
+      "code": "0412",
+      "file": "0412.json",
+      "records": 273
+    },
+    {
+      "county": "屏東縣",
+      "district": "新埤鄉",
+      "section": "新南段",
+      "code": "0413",
+      "file": "0413.json",
+      "records": 144
+    },
+    {
+      "county": "屏東縣",
+      "district": "竹田鄉",
+      "section": "竹鳳段",
+      "code": "0414",
+      "file": "0414.json",
+      "records": 9
+    },
+    {
+      "county": "屏東縣",
+      "district": "內埔鄉",
+      "section": "壽比段",
+      "code": "0415",
+      "file": "0415.json",
+      "records": 184
+    },
+    {
+      "county": "屏東縣",
+      "district": "內埔鄉",
+      "section": "興義段",
+      "code": "0416",
+      "file": "0416.json",
+      "records": 109
+    },
+    {
+      "county": "屏東縣",
+      "district": "內埔鄉",
+      "section": "文化段",
+      "code": "0417",
+      "file": "0417.json",
+      "records": 192
+    },
+    {
+      "county": "屏東縣",
+      "district": "內埔鄉",
+      "section": "光明段",
+      "code": "0418",
+      "file": "0418.json",
+      "records": 236
+    },
+    {
+      "county": "屏東縣",
+      "district": "內埔鄉",
+      "section": "廣濟段",
+      "code": "0419",
+      "file": "0419.json",
+      "records": 267
+    },
+    {
+      "county": "屏東縣",
+      "district": "內埔鄉",
+      "section": "學人段",
+      "code": "0420",
+      "file": "0420.json",
+      "records": 234
+    },
+    {
+      "county": "屏東縣",
+      "district": "內埔鄉",
+      "section": "和興段",
+      "code": "0421",
+      "file": "0421.json",
+      "records": 462
+    },
+    {
+      "county": "屏東縣",
+      "district": "內埔鄉",
+      "section": "富田段",
+      "code": "0422",
+      "file": "0422.json",
+      "records": 30
+    },
+    {
+      "county": "屏東縣",
+      "district": "竹田鄉",
+      "section": "溝子墘段一小段",
+      "code": "0423",
+      "file": "0423.json",
+      "records": 2
+    },
+    {
+      "county": "屏東縣",
+      "district": "竹田鄉",
+      "section": "竹鳳段一小段",
+      "code": "0424",
+      "file": "0424.json",
+      "records": 5
+    },
+    {
+      "county": "屏東縣",
+      "district": "內埔鄉",
+      "section": "早角段",
+      "code": "0425",
+      "file": "0425.json",
+      "records": 68
+    },
+    {
+      "county": "屏東縣",
+      "district": "內埔鄉",
+      "section": "龍頸段",
+      "code": "0426",
+      "file": "0426.json",
+      "records": 257
+    },
+    {
+      "county": "屏東縣",
+      "district": "內埔鄉",
+      "section": "北寧段",
+      "code": "0427",
+      "file": "0427.json",
+      "records": 281
+    },
+    {
+      "county": "屏東縣",
+      "district": "內埔鄉",
+      "section": "南寧段",
+      "code": "0428",
+      "file": "0428.json",
+      "records": 142
+    },
+    {
+      "county": "屏東縣",
+      "district": "內埔鄉",
+      "section": "東寧段",
+      "code": "0429",
+      "file": "0429.json",
+      "records": 308
+    },
+    {
+      "county": "屏東縣",
+      "district": "內埔鄉",
+      "section": "內田段",
+      "code": "0430",
+      "file": "0430.json",
+      "records": 383
+    },
+    {
+      "county": "屏東縣",
+      "district": "內埔鄉",
+      "section": "復興段",
+      "code": "0431",
+      "file": "0431.json",
+      "records": 331
+    },
+    {
+      "county": "屏東縣",
+      "district": "內埔鄉",
+      "section": "上龍泉段",
+      "code": "0432",
+      "file": "0432.json",
+      "records": 148
+    },
+    {
+      "county": "屏東縣",
+      "district": "內埔鄉",
+      "section": "龍潭段",
+      "code": "0433",
+      "file": "0433.json",
+      "records": 223
+    },
+    {
+      "county": "屏東縣",
+      "district": "內埔鄉",
+      "section": "昭勝段",
+      "code": "0434",
+      "file": "0434.json",
+      "records": 158
+    },
+    {
+      "county": "屏東縣",
+      "district": "內埔鄉",
+      "section": "中勝段",
+      "code": "0435",
+      "file": "0435.json",
+      "records": 107
+    },
+    {
+      "county": "屏東縣",
+      "district": "內埔鄉",
+      "section": "大新段",
+      "code": "0436",
+      "file": "0436.json",
+      "records": 66
+    },
+    {
+      "county": "屏東縣",
+      "district": "內埔鄉",
+      "section": "中林段",
+      "code": "0437",
+      "file": "0437.json",
+      "records": 169
+    },
+    {
+      "county": "屏東縣",
+      "district": "內埔鄉",
+      "section": "鴻德段",
+      "code": "0438",
+      "file": "0438.json",
+      "records": 96
+    },
+    {
+      "county": "屏東縣",
+      "district": "潮州鎮",
+      "section": "五福段",
+      "code": "0439",
+      "file": "0439.json",
+      "records": 253
+    },
+    {
+      "county": "屏東縣",
+      "district": "竹田鄉",
+      "section": "鳳新段",
+      "code": "0440",
+      "file": "0440.json",
+      "records": 153
+    },
+    {
+      "county": "屏東縣",
+      "district": "潮州鎮",
+      "section": "蓬萊段",
+      "code": "0441",
+      "file": "0441.json",
+      "records": 193
+    },
+    {
+      "county": "屏東縣",
+      "district": "潮州鎮",
+      "section": "榮田段",
+      "code": "0442",
+      "file": "0442.json",
+      "records": 289
+    },
+    {
+      "county": "屏東縣",
+      "district": "潮州鎮",
+      "section": "五魁段",
+      "code": "0443",
+      "file": "0443.json",
+      "records": 293
+    },
+    {
+      "county": "屏東縣",
+      "district": "潮州鎮",
+      "section": "三星段",
+      "code": "0444",
+      "file": "0444.json",
+      "records": 110
+    },
+    {
+      "county": "屏東縣",
+      "district": "潮州鎮",
+      "section": "中山段",
+      "code": "0445",
+      "file": "0445.json",
+      "records": 307
+    },
+    {
+      "county": "屏東縣",
+      "district": "潮州鎮",
+      "section": "光華段",
+      "code": "0446",
+      "file": "0446.json",
+      "records": 210
+    },
+    {
+      "county": "屏東縣",
+      "district": "來義鄉",
+      "section": "古社段",
+      "code": "0447",
+      "file": "0447.json",
+      "records": 37
+    },
+    {
+      "county": "屏東縣",
+      "district": "潮州鎮",
+      "section": "四春段",
+      "code": "0448",
+      "file": "0448.json",
+      "records": 137
+    },
+    {
+      "county": "屏東縣",
+      "district": "潮州鎮",
+      "section": "四塊厝段",
+      "code": "0449",
+      "file": "0449.json",
+      "records": 92
+    },
+    {
+      "county": "屏東縣",
+      "district": "潮州鎮",
+      "section": "林後段",
+      "code": "0450",
+      "file": "0450.json",
+      "records": 59
+    },
+    {
+      "county": "屏東縣",
+      "district": "潮州鎮",
+      "section": "明崙段",
+      "code": "0451",
+      "file": "0451.json",
+      "records": 82
+    },
+    {
+      "county": "屏東縣",
+      "district": "潮州鎮",
+      "section": "崙東段",
+      "code": "0452",
+      "file": "0452.json",
+      "records": 165
+    },
+    {
+      "county": "屏東縣",
+      "district": "潮州鎮",
+      "section": "崙潮段",
+      "code": "0453",
+      "file": "0453.json",
+      "records": 113
+    },
+    {
+      "county": "屏東縣",
+      "district": "潮州鎮",
+      "section": "崙新段",
+      "code": "0454",
+      "file": "0454.json",
+      "records": 136
+    },
+    {
+      "county": "屏東縣",
+      "district": "潮州鎮",
+      "section": "檨興段",
+      "code": "0455",
+      "file": "0455.json",
+      "records": 277
+    },
+    {
+      "county": "屏東縣",
+      "district": "潮州鎮",
+      "section": "富春段",
+      "code": "0456",
+      "file": "0456.json",
+      "records": 194
+    },
+    {
+      "county": "屏東縣",
+      "district": "內埔鄉",
+      "section": "圳頭段",
+      "code": "0460",
+      "file": "0460.json",
+      "records": 166
+    },
+    {
+      "county": "屏東縣",
+      "district": "內埔鄉",
+      "section": "大興段",
+      "code": "0461",
+      "file": "0461.json",
+      "records": 131
+    },
+    {
+      "county": "屏東縣",
+      "district": "內埔鄉",
+      "section": "建興段",
+      "code": "0462",
+      "file": "0462.json",
+      "records": 93
+    },
+    {
+      "county": "屏東縣",
+      "district": "內埔鄉",
+      "section": "豐田段",
+      "code": "0463",
+      "file": "0463.json",
+      "records": 257
+    },
+    {
+      "county": "屏東縣",
+      "district": "內埔鄉",
+      "section": "振豐段",
+      "code": "0464",
+      "file": "0464.json",
+      "records": 281
+    },
+    {
+      "county": "屏東縣",
+      "district": "內埔鄉",
+      "section": "佳山段",
+      "code": "0465",
+      "file": "0465.json",
+      "records": 119
+    },
+    {
+      "county": "屏東縣",
+      "district": "內埔鄉",
+      "section": "水門風景段",
+      "code": "0466",
+      "file": "0466.json",
+      "records": 304
+    },
+    {
+      "county": "屏東縣",
+      "district": "竹田鄉",
+      "section": "過溝段",
+      "code": "0467",
+      "file": "0467.json",
+      "records": 58
+    },
+    {
+      "county": "屏東縣",
+      "district": "竹田鄉",
+      "section": "六巷段",
+      "code": "0468",
+      "file": "0468.json",
+      "records": 20
+    },
+    {
+      "county": "屏東縣",
+      "district": "竹田鄉",
+      "section": "頓物段",
+      "code": "0469",
+      "file": "0469.json",
+      "records": 213
+    },
+    {
+      "county": "屏東縣",
+      "district": "竹田鄉",
+      "section": "神農段",
+      "code": "0470",
+      "file": "0470.json",
+      "records": 306
+    },
+    {
+      "county": "屏東縣",
+      "district": "竹田鄉",
+      "section": "水源段",
+      "code": "0471",
+      "file": "0471.json",
+      "records": 304
+    },
+    {
+      "county": "屏東縣",
+      "district": "萬巒鄉",
+      "section": "新置段",
+      "code": "0472",
+      "file": "0472.json",
+      "records": 161
+    },
+    {
+      "county": "屏東縣",
+      "district": "新埤鄉",
+      "section": "海豐段",
+      "code": "0473",
+      "file": "0473.json",
+      "records": 67
+    },
+    {
+      "county": "屏東縣",
+      "district": "新埤鄉",
+      "section": "萬隆段",
+      "code": "0474",
+      "file": "0474.json",
+      "records": 101
+    },
+    {
+      "county": "屏東縣",
+      "district": "新埤鄉",
+      "section": "上萬安段",
+      "code": "0475",
+      "file": "0475.json",
+      "records": 246
+    },
+    {
+      "county": "屏東縣",
+      "district": "萬巒鄉",
+      "section": "萬全段",
+      "code": "0476",
+      "file": "0476.json",
+      "records": 387
+    },
+    {
+      "county": "屏東縣",
+      "district": "萬巒鄉",
+      "section": "官倉段",
+      "code": "0477",
+      "file": "0477.json",
+      "records": 445
+    },
+    {
+      "county": "屏東縣",
+      "district": "萬巒鄉",
+      "section": "萬和段",
+      "code": "0478",
+      "file": "0478.json",
+      "records": 480
+    },
+    {
+      "county": "屏東縣",
+      "district": "潮州鎮",
+      "section": "愛國段",
+      "code": "0479",
+      "file": "0479.json",
+      "records": 267
+    },
+    {
+      "county": "屏東縣",
+      "district": "潮州鎮",
+      "section": "建基段",
+      "code": "0480",
+      "file": "0480.json",
+      "records": 170
+    },
+    {
+      "county": "屏東縣",
+      "district": "潮州鎮",
+      "section": "華興段",
+      "code": "0481",
+      "file": "0481.json",
+      "records": 401
+    },
+    {
+      "county": "屏東縣",
+      "district": "潮州鎮",
+      "section": "潮中段",
+      "code": "0482",
+      "file": "0482.json",
+      "records": 428
+    },
+    {
+      "county": "屏東縣",
+      "district": "瑪家鄉",
+      "section": "八大源段",
+      "code": "0483",
+      "file": "0483.json",
+      "records": 23
+    },
+    {
+      "county": "屏東縣",
+      "district": "瑪家鄉",
+      "section": "以馬翁段",
+      "code": "0484",
+      "file": "0484.json",
+      "records": 18
+    },
+    {
+      "county": "屏東縣",
+      "district": "瑪家鄉",
+      "section": "勒娃瞪段",
+      "code": "0485",
+      "file": "0485.json",
+      "records": 31
+    },
+    {
+      "county": "屏東縣",
+      "district": "瑪家鄉",
+      "section": "都達達樂段",
+      "code": "0486",
+      "file": "0486.json",
+      "records": 48
+    },
+    {
+      "county": "屏東縣",
+      "district": "泰武鄉",
+      "section": "代竹瓦竹瓦段",
+      "code": "0487",
+      "file": "0487.json",
+      "records": 11
+    },
+    {
+      "county": "屏東縣",
+      "district": "泰武鄉",
+      "section": "富給得段",
+      "code": "0488",
+      "file": "0488.json",
+      "records": 20
+    },
+    {
+      "county": "屏東縣",
+      "district": "泰武鄉",
+      "section": "比悠瑪段",
+      "code": "0489",
+      "file": "0489.json",
+      "records": 71
+    },
+    {
+      "county": "屏東縣",
+      "district": "潮州鎮",
+      "section": "三共段",
+      "code": "0490",
+      "file": "0490.json",
+      "records": 174
+    },
+    {
+      "county": "屏東縣",
+      "district": "潮州鎮",
+      "section": "國中段",
+      "code": "0491",
+      "file": "0491.json",
+      "records": 134
+    },
+    {
+      "county": "屏東縣",
+      "district": "潮州鎮",
+      "section": "延平段",
+      "code": "0492",
+      "file": "0492.json",
+      "records": 176
+    },
+    {
+      "county": "屏東縣",
+      "district": "潮州鎮",
+      "section": "新五魁段",
+      "code": "0493",
+      "file": "0493.json",
+      "records": 137
+    },
+    {
+      "county": "屏東縣",
+      "district": "泰武鄉",
+      "section": "達瓦力可遶段",
+      "code": "0494",
+      "file": "0494.json",
+      "records": 64
+    },
+    {
+      "county": "屏東縣",
+      "district": "泰武鄉",
+      "section": "立瓦登段",
+      "code": "0495",
+      "file": "0495.json",
+      "records": 24
+    },
+    {
+      "county": "屏東縣",
+      "district": "泰武鄉",
+      "section": "大拉瓦拉瓦段",
+      "code": "0496",
+      "file": "0496.json",
+      "records": 107
+    },
+    {
+      "county": "屏東縣",
+      "district": "泰武鄉",
+      "section": "西阿路段",
+      "code": "0497",
+      "file": "0497.json",
+      "records": 68
+    },
+    {
+      "county": "屏東縣",
+      "district": "泰武鄉",
+      "section": "代柱瓦段",
+      "code": "0498",
+      "file": "0498.json",
+      "records": 16
+    },
+    {
+      "county": "屏東縣",
+      "district": "泰武鄉",
+      "section": "得布克段",
+      "code": "0499",
+      "file": "0499.json",
+      "records": 74
+    },
+    {
+      "county": "屏東縣",
+      "district": "東港鎮",
+      "section": "東港段",
+      "code": "0500",
+      "file": "0500.json",
+      "records": 34
+    },
+    {
+      "county": "屏東縣",
+      "district": "新園鄉",
+      "section": "新吉段",
+      "code": "0512",
+      "file": "0512.json",
+      "records": 660
+    },
+    {
+      "county": "屏東縣",
+      "district": "新園鄉",
+      "section": "新洋段",
+      "code": "0513",
+      "file": "0513.json",
+      "records": 394
+    },
+    {
+      "county": "屏東縣",
+      "district": "新園鄉",
+      "section": "新利段",
+      "code": "0516",
+      "file": "0516.json",
+      "records": 493
+    },
+    {
+      "county": "屏東縣",
+      "district": "佳冬鄉",
+      "section": "佳和段",
+      "code": "0535",
+      "file": "0535.json",
+      "records": 774
+    },
+    {
+      "county": "屏東縣",
+      "district": "佳冬鄉",
+      "section": "塭豐段",
+      "code": "0536",
+      "file": "0536.json",
+      "records": 511
+    },
+    {
+      "county": "屏東縣",
+      "district": "佳冬鄉",
+      "section": "石光見段",
+      "code": "0537",
+      "file": "0537.json",
+      "records": 2
+    },
+    {
+      "county": "屏東縣",
+      "district": "佳冬鄉",
+      "section": "武丁潭段",
+      "code": "0540",
+      "file": "0540.json",
+      "records": 1
+    },
+    {
+      "county": "屏東縣",
+      "district": "新園鄉",
+      "section": "新洋段一小段",
+      "code": "0544",
+      "file": "0544.json",
+      "records": 22
+    },
+    {
+      "county": "屏東縣",
+      "district": "林邊鄉",
+      "section": "復興段",
+      "code": "0547",
+      "file": "0547.json",
+      "records": 51
+    },
+    {
+      "county": "屏東縣",
+      "district": "林邊鄉",
+      "section": "東林段",
+      "code": "0548",
+      "file": "0548.json",
+      "records": 80
+    },
+    {
+      "county": "屏東縣",
+      "district": "林邊鄉",
+      "section": "光林段",
+      "code": "0549",
+      "file": "0549.json",
+      "records": 95
+    },
+    {
+      "county": "屏東縣",
+      "district": "林邊鄉",
+      "section": "鎮林段",
+      "code": "0550",
+      "file": "0550.json",
+      "records": 121
+    },
+    {
+      "county": "屏東縣",
+      "district": "林邊鄉",
+      "section": "永樂段",
+      "code": "0551",
+      "file": "0551.json",
+      "records": 92
+    },
+    {
+      "county": "屏東縣",
+      "district": "林邊鄉",
+      "section": "中林段",
+      "code": "0552",
+      "file": "0552.json",
+      "records": 85
+    },
+    {
+      "county": "屏東縣",
+      "district": "林邊鄉",
+      "section": "仁和段",
+      "code": "0553",
+      "file": "0553.json",
+      "records": 106
+    },
+    {
+      "county": "屏東縣",
+      "district": "林邊鄉",
+      "section": "塭岸段",
+      "code": "0554",
+      "file": "0554.json",
+      "records": 28
+    },
+    {
+      "county": "屏東縣",
+      "district": "林邊鄉",
+      "section": "富田段",
+      "code": "0555",
+      "file": "0555.json",
+      "records": 30
+    },
+    {
+      "county": "屏東縣",
+      "district": "佳冬鄉",
+      "section": "復興段一小段",
+      "code": "0556",
+      "file": "0556.json",
+      "records": 66
+    },
+    {
+      "county": "屏東縣",
+      "district": "新園鄉",
+      "section": "南龍段",
+      "code": "0557",
+      "file": "0557.json",
+      "records": 358
+    },
+    {
+      "county": "屏東縣",
+      "district": "新園鄉",
+      "section": "興龍段",
+      "code": "0558",
+      "file": "0558.json",
+      "records": 139
+    },
+    {
+      "county": "屏東縣",
+      "district": "新園鄉",
+      "section": "新生段",
+      "code": "0559",
+      "file": "0559.json",
+      "records": 203
+    },
+    {
+      "county": "屏東縣",
+      "district": "新園鄉",
+      "section": "五族段",
+      "code": "0560",
+      "file": "0560.json",
+      "records": 295
+    },
+    {
+      "county": "屏東縣",
+      "district": "新園鄉",
+      "section": "鹽龍段",
+      "code": "0561",
+      "file": "0561.json",
+      "records": 255
+    },
+    {
+      "county": "屏東縣",
+      "district": "新園鄉",
+      "section": "鹽埔段",
+      "code": "0562",
+      "file": "0562.json",
+      "records": 131
+    },
+    {
+      "county": "屏東縣",
+      "district": "新園鄉",
+      "section": "鹽洲段",
+      "code": "0563",
+      "file": "0563.json",
+      "records": 180
+    },
+    {
+      "county": "屏東縣",
+      "district": "新園鄉",
+      "section": "共和段",
+      "code": "0564",
+      "file": "0564.json",
+      "records": 127
+    },
+    {
+      "county": "屏東縣",
+      "district": "新園鄉",
+      "section": "鹽新段",
+      "code": "0565",
+      "file": "0565.json",
+      "records": 549
+    },
+    {
+      "county": "屏東縣",
+      "district": "琉球鄉",
+      "section": "白沙段",
+      "code": "0567",
+      "file": "0567.json",
+      "records": 183
+    },
+    {
+      "county": "屏東縣",
+      "district": "琉球鄉",
+      "section": "本漁段",
+      "code": "0568",
+      "file": "0568.json",
+      "records": 131
+    },
+    {
+      "county": "屏東縣",
+      "district": "琉球鄉",
+      "section": "花矸段",
+      "code": "0569",
+      "file": "0569.json",
+      "records": 100
+    },
+    {
+      "county": "屏東縣",
+      "district": "琉球鄉",
+      "section": "相埔段",
+      "code": "0570",
+      "file": "0570.json",
+      "records": 119
+    },
+    {
+      "county": "屏東縣",
+      "district": "琉球鄉",
+      "section": "天台段",
+      "code": "0571",
+      "file": "0571.json",
+      "records": 127
+    },
+    {
+      "county": "屏東縣",
+      "district": "琉球鄉",
+      "section": "大寮段",
+      "code": "0572",
+      "file": "0572.json",
+      "records": 147
+    },
+    {
+      "county": "屏東縣",
+      "district": "琉球鄉",
+      "section": "大南段",
+      "code": "0573",
+      "file": "0573.json",
+      "records": 207
+    },
+    {
+      "county": "屏東縣",
+      "district": "東港鎮",
+      "section": "新忠段",
+      "code": "0575",
+      "file": "0575.json",
+      "records": 216
+    },
+    {
+      "county": "屏東縣",
+      "district": "東港鎮",
+      "section": "新孝段",
+      "code": "0576",
+      "file": "0576.json",
+      "records": 140
+    },
+    {
+      "county": "屏東縣",
+      "district": "東港鎮",
+      "section": "新仁段",
+      "code": "0577",
+      "file": "0577.json",
+      "records": 56
+    },
+    {
+      "county": "屏東縣",
+      "district": "東港鎮",
+      "section": "新愛段",
+      "code": "0578",
+      "file": "0578.json",
+      "records": 37
+    },
+    {
+      "county": "屏東縣",
+      "district": "東港鎮",
+      "section": "新信段",
+      "code": "0579",
+      "file": "0579.json",
+      "records": 66
+    },
+    {
+      "county": "屏東縣",
+      "district": "東港鎮",
+      "section": "龍帝段",
+      "code": "0580",
+      "file": "0580.json",
+      "records": 130
+    },
+    {
+      "county": "屏東縣",
+      "district": "東港鎮",
+      "section": "新帝段",
+      "code": "0581",
+      "file": "0581.json",
+      "records": 76
+    },
+    {
+      "county": "屏東縣",
+      "district": "東港鎮",
+      "section": "關帝段",
+      "code": "0582",
+      "file": "0582.json",
+      "records": 162
+    },
+    {
+      "county": "屏東縣",
+      "district": "東港鎮",
+      "section": "東新段",
+      "code": "0583",
+      "file": "0583.json",
+      "records": 254
+    },
+    {
+      "county": "屏東縣",
+      "district": "東港鎮",
+      "section": "船頭段",
+      "code": "0584",
+      "file": "0584.json",
+      "records": 155
+    },
+    {
+      "county": "屏東縣",
+      "district": "東港鎮",
+      "section": "大東段",
+      "code": "0585",
+      "file": "0585.json",
+      "records": 158
+    },
+    {
+      "county": "屏東縣",
+      "district": "東港鎮",
+      "section": "嘉南段",
+      "code": "0586",
+      "file": "0586.json",
+      "records": 434
+    },
+    {
+      "county": "屏東縣",
+      "district": "崁頂鄉",
+      "section": "頂忠段",
+      "code": "0587",
+      "file": "0587.json",
+      "records": 87
+    },
+    {
+      "county": "屏東縣",
+      "district": "崁頂鄉",
+      "section": "頂孝段",
+      "code": "0588",
+      "file": "0588.json",
+      "records": 123
+    },
+    {
+      "county": "屏東縣",
+      "district": "崁頂鄉",
+      "section": "頂仁段",
+      "code": "0589",
+      "file": "0589.json",
+      "records": 114
+    },
+    {
+      "county": "屏東縣",
+      "district": "崁頂鄉",
+      "section": "頂愛段",
+      "code": "0590",
+      "file": "0590.json",
+      "records": 112
+    },
+    {
+      "county": "屏東縣",
+      "district": "崁頂鄉",
+      "section": "頂信段",
+      "code": "0591",
+      "file": "0591.json",
+      "records": 105
+    },
+    {
+      "county": "屏東縣",
+      "district": "崁頂鄉",
+      "section": "頂義段",
+      "code": "0592",
+      "file": "0592.json",
+      "records": 62
+    },
+    {
+      "county": "屏東縣",
+      "district": "崁頂鄉",
+      "section": "頂和段",
+      "code": "0593",
+      "file": "0593.json",
+      "records": 52
+    },
+    {
+      "county": "屏東縣",
+      "district": "崁頂鄉",
+      "section": "頂安段",
+      "code": "0594",
+      "file": "0594.json",
+      "records": 65
+    },
+    {
+      "county": "屏東縣",
+      "district": "南州鄉",
+      "section": "七塊段",
+      "code": "0595",
+      "file": "0595.json",
+      "records": 224
+    },
+    {
+      "county": "屏東縣",
+      "district": "南州鄉",
+      "section": "萬華段",
+      "code": "0596",
+      "file": "0596.json",
+      "records": 173
+    },
+    {
+      "county": "屏東縣",
+      "district": "南州鄉",
+      "section": "南州段",
+      "code": "0597",
+      "file": "0597.json",
+      "records": 219
+    },
+    {
+      "county": "屏東縣",
+      "district": "南州鄉",
+      "section": "南糖段",
+      "code": "0598",
+      "file": "0598.json",
+      "records": 232
+    },
+    {
+      "county": "屏東縣",
+      "district": "南州鄉",
+      "section": "米崙段",
+      "code": "0599",
+      "file": "0599.json",
+      "records": 220
+    },
+    {
+      "county": "屏東縣",
+      "district": "恆春鎮",
+      "section": "山腳段",
+      "code": "0601",
+      "file": "0601.json",
+      "records": 2
+    },
+    {
+      "county": "屏東縣",
+      "district": "恆春鎮",
+      "section": "鼻子頭段",
+      "code": "0603",
+      "file": "0603.json",
+      "records": 85
+    },
+    {
+      "county": "屏東縣",
+      "district": "恆春鎮",
+      "section": "龍泉水段",
+      "code": "0604",
+      "file": "0604.json",
+      "records": 302
+    },
+    {
+      "county": "屏東縣",
+      "district": "恆春鎮",
+      "section": "鵝鑾鼻段",
+      "code": "0605",
+      "file": "0605.json",
+      "records": 1674
+    },
+    {
+      "county": "屏東縣",
+      "district": "恆春鎮",
+      "section": "大平頂段上大平頂小段",
+      "code": "0608",
+      "file": "0608.json",
+      "records": 978
+    },
+    {
+      "county": "屏東縣",
+      "district": "恆春鎮",
+      "section": "大平頂段下大平頂小段",
+      "code": "0609",
+      "file": "0609.json",
+      "records": 382
+    },
+    {
+      "county": "屏東縣",
+      "district": "車城鄉",
+      "section": "四重溪段",
+      "code": "0614",
+      "file": "0614.json",
+      "records": 961
+    },
+    {
+      "county": "屏東縣",
+      "district": "車城鄉",
+      "section": "保力段保力小段",
+      "code": "0615",
+      "file": "0615.json",
+      "records": 35
+    },
+    {
+      "county": "屏東縣",
+      "district": "車城鄉",
+      "section": "保力段山腳小段",
+      "code": "0616",
+      "file": "0616.json",
+      "records": 72
+    },
+    {
+      "county": "屏東縣",
+      "district": "車城鄉",
+      "section": "保力段竹社小段",
+      "code": "0617",
+      "file": "0617.json",
+      "records": 262
+    },
+    {
+      "county": "屏東縣",
+      "district": "車城鄉",
+      "section": "海口段",
+      "code": "0618",
+      "file": "0618.json",
+      "records": 1093
+    },
+    {
+      "county": "屏東縣",
+      "district": "車城鄉",
+      "section": "射寮段",
+      "code": "0620",
+      "file": "0620.json",
+      "records": 622
+    },
+    {
+      "county": "屏東縣",
+      "district": "滿州鄉",
+      "section": "滿州段",
+      "code": "0622",
+      "file": "0622.json",
+      "records": 1
+    },
+    {
+      "county": "屏東縣",
+      "district": "滿州鄉",
+      "section": "响林段",
+      "code": "0623",
+      "file": "0623.json",
+      "records": 1522
+    },
+    {
+      "county": "屏東縣",
+      "district": "滿州鄉",
+      "section": "港口段",
+      "code": "0624",
+      "file": "0624.json",
+      "records": 1036
+    },
+    {
+      "county": "屏東縣",
+      "district": "滿州鄉",
+      "section": "九棚段",
+      "code": "0625",
+      "file": "0625.json",
+      "records": 1067
+    },
+    {
+      "county": "屏東縣",
+      "district": "滿州鄉",
+      "section": "九個厝段",
+      "code": "0626",
+      "file": "0626.json",
+      "records": 794
+    },
+    {
+      "county": "屏東縣",
+      "district": "滿州鄉",
+      "section": "猪朥束段",
+      "code": "0627",
+      "file": "0627.json",
+      "records": 1051
+    },
+    {
+      "county": "屏東縣",
+      "district": "滿州鄉",
+      "section": "射麻裡段",
+      "code": "0628",
+      "file": "0628.json",
+      "records": 1740
+    },
+    {
+      "county": "屏東縣",
+      "district": "獅子鄉",
+      "section": "草埔段",
+      "code": "0635",
+      "file": "0635.json",
+      "records": 501
+    },
+    {
+      "county": "屏東縣",
+      "district": "獅子鄉",
+      "section": "外獅段",
+      "code": "0636",
+      "file": "0636.json",
+      "records": 551
+    },
+    {
+      "county": "屏東縣",
+      "district": "獅子鄉",
+      "section": "楓林段",
+      "code": "0637",
+      "file": "0637.json",
+      "records": 262
+    },
+    {
+      "county": "屏東縣",
+      "district": "獅子鄉",
+      "section": "竹坑段",
+      "code": "0638",
+      "file": "0638.json",
+      "records": 79
+    },
+    {
+      "county": "屏東縣",
+      "district": "獅子鄉",
+      "section": "丹路段",
+      "code": "0639",
+      "file": "0639.json",
+      "records": 211
+    },
+    {
+      "county": "屏東縣",
+      "district": "獅子鄉",
+      "section": "獅子段",
+      "code": "0640",
+      "file": "0640.json",
+      "records": 413
+    },
+    {
+      "county": "屏東縣",
+      "district": "獅子鄉",
+      "section": "新路段",
+      "code": "0641",
+      "file": "0641.json",
+      "records": 88
+    },
+    {
+      "county": "屏東縣",
+      "district": "獅子鄉",
+      "section": "內文段",
+      "code": "0642",
+      "file": "0642.json",
+      "records": 143
+    },
+    {
+      "county": "屏東縣",
+      "district": "獅子鄉",
+      "section": "南世段",
+      "code": "0643",
+      "file": "0643.json",
+      "records": 1162
+    },
+    {
+      "county": "屏東縣",
+      "district": "獅子鄉",
+      "section": "巴士墨段",
+      "code": "0644",
+      "file": "0644.json",
+      "records": 156
+    },
+    {
+      "county": "屏東縣",
+      "district": "獅子鄉",
+      "section": "內獅段",
+      "code": "0645",
+      "file": "0645.json",
+      "records": 239
+    },
+    {
+      "county": "屏東縣",
+      "district": "獅子鄉",
+      "section": "古道段",
+      "code": "0646",
+      "file": "0646.json",
+      "records": 34
+    },
+    {
+      "county": "屏東縣",
+      "district": "牡丹鄉",
+      "section": "四林段",
+      "code": "0648",
+      "file": "0648.json",
+      "records": 380
+    },
+    {
+      "county": "屏東縣",
+      "district": "牡丹鄉",
+      "section": "東源段",
+      "code": "0649",
+      "file": "0649.json",
+      "records": 437
+    },
+    {
+      "county": "屏東縣",
+      "district": "牡丹鄉",
+      "section": "牡丹段",
+      "code": "0650",
+      "file": "0650.json",
+      "records": 439
+    },
+    {
+      "county": "屏東縣",
+      "district": "牡丹鄉",
+      "section": "旭海段",
+      "code": "0651",
+      "file": "0651.json",
+      "records": 19
+    },
+    {
+      "county": "屏東縣",
+      "district": "牡丹鄉",
+      "section": "石門段",
+      "code": "0652",
+      "file": "0652.json",
+      "records": 877
+    },
+    {
+      "county": "屏東縣",
+      "district": "牡丹鄉",
+      "section": "高士段",
+      "code": "0653",
+      "file": "0653.json",
+      "records": 506
+    },
+    {
+      "county": "屏東縣",
+      "district": "牡丹鄉",
+      "section": "牡丹灣段",
+      "code": "0654",
+      "file": "0654.json",
+      "records": 269
+    },
+    {
+      "county": "屏東縣",
+      "district": "牡丹鄉",
+      "section": "高士佛段",
+      "code": "0656",
+      "file": "0656.json",
+      "records": 20
+    },
+    {
+      "county": "屏東縣",
+      "district": "牡丹鄉",
+      "section": "頂加芝來段",
+      "code": "0657",
+      "file": "0657.json",
+      "records": 66
+    },
+    {
+      "county": "屏東縣",
+      "district": "牡丹鄉",
+      "section": "八瑤段",
+      "code": "0658",
+      "file": "0658.json",
+      "records": 45
+    },
+    {
+      "county": "屏東縣",
+      "district": "恆春鎮",
+      "section": "鵝鑾鼻段二小段",
+      "code": "0661",
+      "file": "0661.json",
+      "records": 152
+    },
+    {
+      "county": "屏東縣",
+      "district": "牡丹鄉",
+      "section": "大梅段",
+      "code": "0664",
+      "file": "0664.json",
+      "records": 49
+    },
+    {
+      "county": "屏東縣",
+      "district": "牡丹鄉",
+      "section": "汝乃段",
+      "code": "0665",
+      "file": "0665.json",
+      "records": 7
+    },
+    {
+      "county": "屏東縣",
+      "district": "恆春鎮",
+      "section": "新厝段",
+      "code": "0667",
+      "file": "0667.json",
+      "records": 305
+    },
+    {
+      "county": "屏東縣",
+      "district": "恆春鎮",
+      "section": "機場段",
+      "code": "0668",
+      "file": "0668.json",
+      "records": 384
+    },
+    {
+      "county": "屏東縣",
+      "district": "恆春鎮",
+      "section": "五里亭段",
+      "code": "0669",
+      "file": "0669.json",
+      "records": 228
+    },
+    {
+      "county": "屏東縣",
+      "district": "恆春鎮",
+      "section": "宣化段",
+      "code": "0670",
+      "file": "0670.json",
+      "records": 278
+    },
+    {
+      "county": "屏東縣",
+      "district": "恆春鎮",
+      "section": "大埔段",
+      "code": "0671",
+      "file": "0671.json",
+      "records": 311
+    },
+    {
+      "county": "屏東縣",
+      "district": "恆春鎮",
+      "section": "草埔段",
+      "code": "0672",
+      "file": "0672.json",
+      "records": 250
+    },
+    {
+      "county": "屏東縣",
+      "district": "恆春鎮",
+      "section": "公順段",
+      "code": "0673",
+      "file": "0673.json",
+      "records": 107
+    },
+    {
+      "county": "屏東縣",
+      "district": "恆春鎮",
+      "section": "西門段",
+      "code": "0674",
+      "file": "0674.json",
+      "records": 56
+    },
+    {
+      "county": "屏東縣",
+      "district": "恆春鎮",
+      "section": "僑勇段",
+      "code": "0675",
+      "file": "0675.json",
+      "records": 97
+    },
+    {
+      "county": "屏東縣",
+      "district": "車城鄉",
+      "section": "興安段",
+      "code": "0676",
+      "file": "0676.json",
+      "records": 660
+    },
+    {
+      "county": "屏東縣",
+      "district": "車城鄉",
+      "section": "田中段",
+      "code": "0677",
+      "file": "0677.json",
+      "records": 343
+    },
+    {
+      "county": "屏東縣",
+      "district": "車城鄉",
+      "section": "新海口段",
+      "code": "0678",
+      "file": "0678.json",
+      "records": 431
+    },
+    {
+      "county": "屏東縣",
+      "district": "車城鄉",
+      "section": "興統段",
+      "code": "0679",
+      "file": "0679.json",
+      "records": 214
+    },
+    {
+      "county": "屏東縣",
+      "district": "車城鄉",
+      "section": "新車城段",
+      "code": "0680",
+      "file": "0680.json",
+      "records": 242
+    },
+    {
+      "county": "屏東縣",
+      "district": "恆春鎮",
+      "section": "恆東段",
+      "code": "0681",
+      "file": "0681.json",
+      "records": 72
+    },
+    {
+      "county": "屏東縣",
+      "district": "恆春鎮",
+      "section": "恆西段",
+      "code": "0682",
+      "file": "0682.json",
+      "records": 179
+    },
+    {
+      "county": "屏東縣",
+      "district": "恆春鎮",
+      "section": "恆南段",
+      "code": "0683",
+      "file": "0683.json",
+      "records": 80
+    },
+    {
+      "county": "屏東縣",
+      "district": "牡丹鄉",
+      "section": "阿可里央段",
+      "code": "0684",
+      "file": "0684.json",
+      "records": 214
+    },
+    {
+      "county": "屏東縣",
+      "district": "恆春鎮",
+      "section": "大潭段",
+      "code": "0685",
+      "file": "0685.json",
+      "records": 139
+    },
+    {
+      "county": "屏東縣",
+      "district": "牡丹鄉",
+      "section": "依卡烏蘇灣段",
+      "code": "0686",
+      "file": "0686.json",
+      "records": 12
+    },
+    {
+      "county": "屏東縣",
+      "district": "車城鄉",
+      "section": "保新段",
+      "code": "0687",
+      "file": "0687.json",
+      "records": 471
+    },
+    {
+      "county": "屏東縣",
+      "district": "恆春鎮",
+      "section": "白石坑段",
+      "code": "0688",
+      "file": "0688.json",
+      "records": 53
+    },
+    {
+      "county": "屏東縣",
+      "district": "恆春鎮",
+      "section": "三台山段",
+      "code": "0689",
+      "file": "0689.json",
+      "records": 63
+    },
+    {
+      "county": "屏東縣",
+      "district": "恆春鎮",
+      "section": "出火段",
+      "code": "0690",
+      "file": "0690.json",
+      "records": 25
+    },
+    {
+      "county": "屏東縣",
+      "district": "車城鄉",
+      "section": "尖山段",
+      "code": "0691",
+      "file": "0691.json",
+      "records": 9
+    },
+    {
+      "county": "屏東縣",
+      "district": "車城鄉",
+      "section": "水坑段",
+      "code": "0692",
+      "file": "0692.json",
+      "records": 27
+    },
+    {
+      "county": "屏東縣",
+      "district": "車城鄉",
+      "section": "海口山段",
+      "code": "0693",
+      "file": "0693.json",
+      "records": 31
+    },
+    {
+      "county": "屏東縣",
+      "district": "車城鄉",
+      "section": "石門埔段",
+      "code": "0694",
+      "file": "0694.json",
+      "records": 29
+    },
+    {
+      "county": "屏東縣",
+      "district": "車城鄉",
+      "section": "南勢湖山段",
+      "code": "0695",
+      "file": "0695.json",
+      "records": 7
+    },
+    {
+      "county": "屏東縣",
+      "district": "滿州鄉",
+      "section": "大崎頂段",
+      "code": "0696",
+      "file": "0696.json",
+      "records": 22
+    },
+    {
+      "county": "屏東縣",
+      "district": "滿州鄉",
+      "section": "加都魯段",
+      "code": "0697",
+      "file": "0697.json",
+      "records": 40
+    },
+    {
+      "county": "屏東縣",
+      "district": "滿州鄉",
+      "section": "老佛山段",
+      "code": "0698",
+      "file": "0698.json",
+      "records": 64
+    },
+    {
+      "county": "屏東縣",
+      "district": "滿州鄉",
+      "section": "九龍山段",
+      "code": "0699",
+      "file": "0699.json",
+      "records": 12
+    },
+    {
+      "county": "屏東縣",
+      "district": "滿州鄉",
+      "section": "大山母段",
+      "code": "0700",
+      "file": "0700.json",
+      "records": 45
+    },
+    {
+      "county": "屏東縣",
+      "district": "滿州鄉",
+      "section": "欖仁屋段",
+      "code": "0701",
+      "file": "0701.json",
+      "records": 29
+    },
+    {
+      "county": "屏東縣",
+      "district": "滿州鄉",
+      "section": "鼻頭段",
+      "code": "0702",
+      "file": "0702.json",
+      "records": 49
+    },
+    {
+      "county": "屏東縣",
+      "district": "滿州鄉",
+      "section": "水濁段",
+      "code": "0703",
+      "file": "0703.json",
+      "records": 87
+    },
+    {
+      "county": "屏東縣",
+      "district": "牡丹鄉",
+      "section": "發拉佳段",
+      "code": "0704",
+      "file": "0704.json",
+      "records": 52
+    },
+    {
+      "county": "屏東縣",
+      "district": "牡丹鄉",
+      "section": "奇黑呀段",
+      "code": "0705",
+      "file": "0705.json",
+      "records": 19
+    },
+    {
+      "county": "屏東縣",
+      "district": "牡丹鄉",
+      "section": "佳佛勒段",
+      "code": "0706",
+      "file": "0706.json",
+      "records": 80
+    },
+    {
+      "county": "屏東縣",
+      "district": "牡丹鄉",
+      "section": "佳路弓段",
+      "code": "0707",
+      "file": "0707.json",
+      "records": 28
+    },
+    {
+      "county": "屏東縣",
+      "district": "牡丹鄉",
+      "section": "佳拉烏忍段",
+      "code": "0708",
+      "file": "0708.json",
+      "records": 64
+    },
+    {
+      "county": "屏東縣",
+      "district": "牡丹鄉",
+      "section": "馬路里耐段",
+      "code": "0709",
+      "file": "0709.json",
+      "records": 39
+    },
+    {
+      "county": "屏東縣",
+      "district": "牡丹鄉",
+      "section": "卡勒的布段",
+      "code": "0710",
+      "file": "0710.json",
+      "records": 7
+    },
+    {
+      "county": "屏東縣",
+      "district": "牡丹鄉",
+      "section": "佳阿烏段",
+      "code": "0711",
+      "file": "0711.json",
+      "records": 75
+    },
+    {
+      "county": "屏東縣",
+      "district": "牡丹鄉",
+      "section": "卡茲達斯段",
+      "code": "0712",
+      "file": "0712.json",
+      "records": 52
+    },
+    {
+      "county": "屏東縣",
+      "district": "牡丹鄉",
+      "section": "奇發發烏段",
+      "code": "0713",
+      "file": "0713.json",
+      "records": 8
+    },
+    {
+      "county": "屏東縣",
+      "district": "牡丹鄉",
+      "section": "佳力普古段",
+      "code": "0714",
+      "file": "0714.json",
+      "records": 27
+    },
+    {
+      "county": "屏東縣",
+      "district": "牡丹鄉",
+      "section": "卡佳佳南段",
+      "code": "0715",
+      "file": "0715.json",
+      "records": 33
+    },
+    {
+      "county": "屏東縣",
+      "district": "牡丹鄉",
+      "section": "普力姆段",
+      "code": "0716",
+      "file": "0716.json",
+      "records": 86
+    },
+    {
+      "county": "屏東縣",
+      "district": "牡丹鄉",
+      "section": "馬查出可斯段",
+      "code": "0717",
+      "file": "0717.json",
+      "records": 43
+    },
+    {
+      "county": "屏東縣",
+      "district": "牡丹鄉",
+      "section": "奇卡佳段",
+      "code": "0718",
+      "file": "0718.json",
+      "records": 14
+    },
+    {
+      "county": "屏東縣",
+      "district": "牡丹鄉",
+      "section": "久路發尤段",
+      "code": "0719",
+      "file": "0719.json",
+      "records": 27
+    },
+    {
+      "county": "屏東縣",
+      "district": "牡丹鄉",
+      "section": "沙里央段",
+      "code": "0720",
+      "file": "0720.json",
+      "records": 122
+    },
+    {
+      "county": "屏東縣",
+      "district": "恆春鎮",
+      "section": "墾丁段",
+      "code": "0721",
+      "file": "0721.json",
+      "records": 898
+    },
+    {
+      "county": "屏東縣",
+      "district": "滿州鄉",
+      "section": "滿林段",
+      "code": "0722",
+      "file": "0722.json",
+      "records": 497
+    },
+    {
+      "county": "屏東縣",
+      "district": "滿州鄉",
+      "section": "花海段",
+      "code": "0723",
+      "file": "0723.json",
+      "records": 247
+    },
+    {
+      "county": "屏東縣",
+      "district": "滿州鄉",
+      "section": "新滿州段",
+      "code": "0724",
+      "file": "0724.json",
+      "records": 352
+    },
+    {
+      "county": "屏東縣",
+      "district": "車城鄉",
+      "section": "射埔段",
+      "code": "0725",
+      "file": "0725.json",
+      "records": 649
+    },
+    {
+      "county": "屏東縣",
+      "district": "恆春鎮",
+      "section": "鵝鑾段",
+      "code": "0726",
+      "file": "0726.json",
+      "records": 1210
+    },
+    {
+      "county": "屏東縣",
+      "district": "恆春鎮",
+      "section": "後壁湖段",
+      "code": "0727",
+      "file": "0727.json",
+      "records": 409
+    },
+    {
+      "county": "屏東縣",
+      "district": "恆春鎮",
+      "section": "大光段",
+      "code": "0728",
+      "file": "0728.json",
+      "records": 468
+    },
+    {
+      "county": "屏東縣",
+      "district": "恆春鎮",
+      "section": "城西段",
+      "code": "0729",
+      "file": "0729.json",
+      "records": 146
+    },
+    {
+      "county": "屏東縣",
+      "district": "恆春鎮",
+      "section": "城南段",
+      "code": "0730",
+      "file": "0730.json",
+      "records": 284
+    },
+    {
+      "county": "屏東縣",
+      "district": "恆春鎮",
+      "section": "城北段",
+      "code": "0731",
+      "file": "0731.json",
+      "records": 249
+    },
+    {
+      "county": "屏東縣",
+      "district": "恆春鎮",
+      "section": "湖內段",
+      "code": "0732",
+      "file": "0732.json",
+      "records": 227
+    },
+    {
+      "county": "屏東縣",
+      "district": "恆春鎮",
+      "section": "德和段",
+      "code": "0733",
+      "file": "0733.json",
+      "records": 136
+    },
+    {
+      "county": "屏東縣",
+      "district": "恆春鎮",
+      "section": "下水泉段",
+      "code": "0734",
+      "file": "0734.json",
+      "records": 340
+    },
+    {
+      "county": "屏東縣",
+      "district": "恆春鎮",
+      "section": "新僑勇段",
+      "code": "0735",
+      "file": "0735.json",
+      "records": 1
+    },
+    {
+      "county": "屏東縣",
+      "district": "恆春鎮",
+      "section": "頂水泉段",
+      "code": "0736",
+      "file": "0736.json",
+      "records": 419
+    },
+    {
+      "county": "屏東縣",
+      "district": "恆春鎮",
+      "section": "白砂段",
+      "code": "0737",
+      "file": "0737.json",
+      "records": 456
+    },
+    {
+      "county": "屏東縣",
+      "district": "恆春鎮",
+      "section": "一心段",
+      "code": "0738",
+      "file": "0738.json",
+      "records": 282
+    },
+    {
+      "county": "屏東縣",
+      "district": "恆春鎮",
+      "section": "四溝段",
+      "code": "0739",
+      "file": "0739.json",
+      "records": 208
+    },
+    {
+      "county": "屏東縣",
+      "district": "恆春鎮",
+      "section": "龍鑾段",
+      "code": "0740",
+      "file": "0740.json",
+      "records": 250
+    },
+    {
+      "county": "屏東縣",
+      "district": "車城鄉",
+      "section": "保安段",
+      "code": "0741",
+      "file": "0741.json",
+      "records": 120
+    },
+    {
+      "county": "屏東縣",
+      "district": "恆春鎮",
+      "section": "龍泉段",
+      "code": "0742",
+      "file": "0742.json",
+      "records": 571
+    },
+    {
+      "county": "屏東縣",
+      "district": "恆春鎮",
+      "section": "紅柴坑段",
+      "code": "0743",
+      "file": "0743.json",
+      "records": 522
+    },
+    {
+      "county": "屏東縣",
+      "district": "恆春鎮",
+      "section": "萬里桐段",
+      "code": "0744",
+      "file": "0744.json",
+      "records": 283
+    },
+    {
+      "county": "屏東縣",
+      "district": "恆春鎮",
+      "section": "山海段",
+      "code": "0745",
+      "file": "0745.json",
+      "records": 418
+    },
+    {
+      "county": "屏東縣",
+      "district": "恆春鎮",
+      "section": "龍水段",
+      "code": "0746",
+      "file": "0746.json",
+      "records": 138
+    },
+    {
+      "county": "屏東縣",
+      "district": "牡丹鄉",
+      "section": "牡林段",
+      "code": "0747",
+      "file": "0747.json",
+      "records": 162
+    },
+    {
+      "county": "屏東縣",
+      "district": "牡丹鄉",
+      "section": "瑪查蘭段",
+      "code": "0748",
+      "file": "0748.json",
+      "records": 155
+    },
+    {
+      "county": "屏東縣",
+      "district": "車城鄉",
+      "section": "下四庄段",
+      "code": "0749",
+      "file": "0749.json",
+      "records": 640
+    },
+    {
+      "county": "屏東縣",
+      "district": "恆春鎮",
+      "section": "東潭段",
+      "code": "0750",
+      "file": "0750.json",
+      "records": 305
+    },
+    {
+      "county": "屏東縣",
+      "district": "恆春鎮",
+      "section": "茄湖段",
+      "code": "0751",
+      "file": "0751.json",
+      "records": 579
+    },
+    {
+      "county": "屏東縣",
+      "district": "恆春鎮",
+      "section": "大平長壽段",
+      "code": "0752",
+      "file": "0752.json",
+      "records": 494
+    },
+    {
+      "county": "屏東縣",
+      "district": "恆春鎮",
+      "section": "新四溝段",
+      "code": "0753",
+      "file": "0753.json",
+      "records": 549
+    },
+    {
+      "county": "屏東縣",
+      "district": "恆春鎮",
+      "section": "城東段",
+      "code": "0754",
+      "file": "0754.json",
+      "records": 428
+    },
+    {
+      "county": "屏東縣",
+      "district": "車城鄉",
+      "section": "溫泉東段",
+      "code": "0755",
+      "file": "0755.json",
+      "records": 585
+    },
+    {
+      "county": "屏東縣",
+      "district": "車城鄉",
+      "section": "溫泉西段",
+      "code": "0756",
+      "file": "0756.json",
+      "records": 501
+    },
+    {
+      "county": "屏東縣",
+      "district": "滿州鄉",
+      "section": "新九棚段",
+      "code": "0757",
+      "file": "0757.json",
+      "records": 323
+    },
+    {
+      "county": "屏東縣",
+      "district": "佳冬鄉",
+      "section": "萬建段",
+      "code": "0801",
+      "file": "0801.json",
+      "records": 333
+    },
+    {
+      "county": "屏東縣",
+      "district": "佳冬鄉",
+      "section": "佳興段",
+      "code": "0802",
+      "file": "0802.json",
+      "records": 369
+    },
+    {
+      "county": "屏東縣",
+      "district": "佳冬鄉",
+      "section": "六根段",
+      "code": "0803",
+      "file": "0803.json",
+      "records": 480
+    },
+    {
+      "county": "屏東縣",
+      "district": "佳冬鄉",
+      "section": "佳農段",
+      "code": "0804",
+      "file": "0804.json",
+      "records": 341
+    },
+    {
+      "county": "屏東縣",
+      "district": "佳冬鄉",
+      "section": "昌北段",
+      "code": "0805",
+      "file": "0805.json",
+      "records": 343
+    },
+    {
+      "county": "屏東縣",
+      "district": "佳冬鄉",
+      "section": "昌東段",
+      "code": "0806",
+      "file": "0806.json",
+      "records": 151
+    },
+    {
+      "county": "屏東縣",
+      "district": "佳冬鄉",
+      "section": "昌南段",
+      "code": "0807",
+      "file": "0807.json",
+      "records": 94
+    },
+    {
+      "county": "屏東縣",
+      "district": "佳冬鄉",
+      "section": "玉光段",
+      "code": "0808",
+      "file": "0808.json",
+      "records": 279
+    },
+    {
+      "county": "屏東縣",
+      "district": "佳冬鄉",
+      "section": "石光段",
+      "code": "0809",
+      "file": "0809.json",
+      "records": 301
+    },
+    {
+      "county": "屏東縣",
+      "district": "獅子鄉",
+      "section": "南世段一小段",
+      "code": "0810",
+      "file": "0810.json",
+      "records": 72
+    },
+    {
+      "county": "屏東縣",
+      "district": "獅子鄉",
+      "section": "雙流段",
+      "code": "0811",
+      "file": "0811.json",
+      "records": 24
+    },
+    {
+      "county": "屏東縣",
+      "district": "春日鄉",
+      "section": "烏福勒段",
+      "code": "0812",
+      "file": "0812.json",
+      "records": 82
+    },
+    {
+      "county": "屏東縣",
+      "district": "獅子鄉",
+      "section": "拼得樂段",
+      "code": "0813",
+      "file": "0813.json",
+      "records": 41
+    },
+    {
+      "county": "屏東縣",
+      "district": "獅子鄉",
+      "section": "茶卡啦段",
+      "code": "0814",
+      "file": "0814.json",
+      "records": 37
+    },
+    {
+      "county": "屏東縣",
+      "district": "獅子鄉",
+      "section": "麻里巴段",
+      "code": "0815",
+      "file": "0815.json",
+      "records": 81
+    },
+    {
+      "county": "屏東縣",
+      "district": "獅子鄉",
+      "section": "阿拉非段",
+      "code": "0816",
+      "file": "0816.json",
+      "records": 159
+    },
+    {
+      "county": "屏東縣",
+      "district": "枋寮鄉",
+      "section": "南山段",
+      "code": "0819",
+      "file": "0819.json",
+      "records": 138
+    },
+    {
+      "county": "屏東縣",
+      "district": "枋寮鄉",
+      "section": "北玄段",
+      "code": "0820",
+      "file": "0820.json",
+      "records": 246
+    },
+    {
+      "county": "屏東縣",
+      "district": "佳冬鄉",
+      "section": "武丁段",
+      "code": "0821",
+      "file": "0821.json",
+      "records": 158
+    },
+    {
+      "county": "屏東縣",
+      "district": "佳冬鄉",
+      "section": "武新段",
+      "code": "0822",
+      "file": "0822.json",
+      "records": 3
+    },
+    {
+      "county": "屏東縣",
+      "district": "佳冬鄉",
+      "section": "新埔段",
+      "code": "0823",
+      "file": "0823.json",
+      "records": 274
+    },
+    {
+      "county": "屏東縣",
+      "district": "佳冬鄉",
+      "section": "賴家段",
+      "code": "0824",
+      "file": "0824.json",
+      "records": 122
+    },
+    {
+      "county": "屏東縣",
+      "district": "佳冬鄉",
+      "section": "內館段",
+      "code": "0825",
+      "file": "0825.json",
+      "records": 57
+    },
+    {
+      "county": "屏東縣",
+      "district": "枋山鄉",
+      "section": "七里段",
+      "code": "0826",
+      "file": "0826.json",
+      "records": 140
+    },
+    {
+      "county": "屏東縣",
+      "district": "枋山鄉",
+      "section": "新枋山段",
+      "code": "0827",
+      "file": "0827.json",
+      "records": 301
+    },
+    {
+      "county": "屏東縣",
+      "district": "枋山鄉",
+      "section": "平湖段",
+      "code": "0828",
+      "file": "0828.json",
+      "records": 23
+    },
+    {
+      "county": "屏東縣",
+      "district": "春日鄉",
+      "section": "久雅住段",
+      "code": "0829",
+      "file": "0829.json",
+      "records": 82
+    },
+    {
+      "county": "屏東縣",
+      "district": "春日鄉",
+      "section": "卡細优拉雅段",
+      "code": "0830",
+      "file": "0830.json",
+      "records": 83
+    },
+    {
+      "county": "屏東縣",
+      "district": "春日鄉",
+      "section": "補地滋段",
+      "code": "0831",
+      "file": "0831.json",
+      "records": 61
+    },
+    {
+      "county": "屏東縣",
+      "district": "春日鄉",
+      "section": "馬路法瑞段",
+      "code": "0832",
+      "file": "0832.json",
+      "records": 55
+    },
+    {
+      "county": "屏東縣",
+      "district": "春日鄉",
+      "section": "古哇巴樂段",
+      "code": "0833",
+      "file": "0833.json",
+      "records": 60
+    },
+    {
+      "county": "屏東縣",
+      "district": "春日鄉",
+      "section": "古拉拉奧段",
+      "code": "0834",
+      "file": "0834.json",
+      "records": 52
+    },
+    {
+      "county": "屏東縣",
+      "district": "春日鄉",
+      "section": "佳烏力拿瑪段",
+      "code": "0835",
+      "file": "0835.json",
+      "records": 4
+    },
+    {
+      "county": "屏東縣",
+      "district": "獅子鄉",
+      "section": "麻优高段",
+      "code": "0836",
+      "file": "0836.json",
+      "records": 6
+    },
+    {
+      "county": "屏東縣",
+      "district": "獅子鄉",
+      "section": "崩崁段",
+      "code": "0837",
+      "file": "0837.json",
+      "records": 10
+    },
+    {
+      "county": "屏東縣",
+      "district": "獅子鄉",
+      "section": "阿优豐段",
+      "code": "0838",
+      "file": "0838.json",
+      "records": 55
+    },
+    {
+      "county": "屏東縣",
+      "district": "獅子鄉",
+      "section": "霧里乙段",
+      "code": "0839",
+      "file": "0839.json",
+      "records": 31
+    },
+    {
+      "county": "屏東縣",
+      "district": "獅子鄉",
+      "section": "佳歐夫段",
+      "code": "0840",
+      "file": "0840.json",
+      "records": 26
+    },
+    {
+      "county": "屏東縣",
+      "district": "獅子鄉",
+      "section": "苦來油段",
+      "code": "0841",
+      "file": "0841.json",
+      "records": 63
+    },
+    {
+      "county": "屏東縣",
+      "district": "獅子鄉",
+      "section": "耶美須段",
+      "code": "0842",
+      "file": "0842.json",
+      "records": 42
+    },
+    {
+      "county": "屏東縣",
+      "district": "獅子鄉",
+      "section": "口坑段",
+      "code": "0843",
+      "file": "0843.json",
+      "records": 22
+    },
+    {
+      "county": "屏東縣",
+      "district": "獅子鄉",
+      "section": "大牛坑段",
+      "code": "0844",
+      "file": "0844.json",
+      "records": 16
+    },
+    {
+      "county": "屏東縣",
+      "district": "獅子鄉",
+      "section": "塔加寮段",
+      "code": "0845",
+      "file": "0845.json",
+      "records": 15
+    },
+    {
+      "county": "屏東縣",
+      "district": "獅子鄉",
+      "section": "獅子頂段",
+      "code": "0846",
+      "file": "0846.json",
+      "records": 15
+    },
+    {
+      "county": "屏東縣",
+      "district": "獅子鄉",
+      "section": "路知可段",
+      "code": "0847",
+      "file": "0847.json",
+      "records": 41
+    },
+    {
+      "county": "屏東縣",
+      "district": "獅子鄉",
+      "section": "家新路段",
+      "code": "0848",
+      "file": "0848.json",
+      "records": 21
+    },
+    {
+      "county": "屏東縣",
+      "district": "獅子鄉",
+      "section": "里龍段",
+      "code": "0849",
+      "file": "0849.json",
+      "records": 23
+    },
+    {
+      "county": "屏東縣",
+      "district": "獅子鄉",
+      "section": "枋野段",
+      "code": "0850",
+      "file": "0850.json",
+      "records": 27
+    },
+    {
+      "county": "屏東縣",
+      "district": "獅子鄉",
+      "section": "婆豬古段",
+      "code": "0851",
+      "file": "0851.json",
+      "records": 27
+    },
+    {
+      "county": "屏東縣",
+      "district": "獅子鄉",
+      "section": "壽卡段",
+      "code": "0852",
+      "file": "0852.json",
+      "records": 48
+    },
+    {
+      "county": "屏東縣",
+      "district": "獅子鄉",
+      "section": "內海段",
+      "code": "0853",
+      "file": "0853.json",
+      "records": 11
+    },
+    {
+      "county": "屏東縣",
+      "district": "枋山鄉",
+      "section": "加祿段",
+      "code": "0854",
+      "file": "0854.json",
+      "records": 485
+    },
+    {
+      "county": "屏東縣",
+      "district": "枋山鄉",
+      "section": "新加祿堂段",
+      "code": "0855",
+      "file": "0855.json",
+      "records": 143
+    },
+    {
+      "county": "屏東縣",
+      "district": "枋山鄉",
+      "section": "平埔厝段",
+      "code": "0856",
+      "file": "0856.json",
+      "records": 410
+    },
+    {
+      "county": "屏東縣",
+      "district": "枋寮鄉",
+      "section": "海鷗段",
+      "code": "0857",
+      "file": "0857.json",
+      "records": 347
+    },
+    {
+      "county": "屏東縣",
+      "district": "獅子鄉",
+      "section": "瀑麻漾段",
+      "code": "0858",
+      "file": "0858.json",
+      "records": 38
+    },
+    {
+      "county": "屏東縣",
+      "district": "獅子鄉",
+      "section": "依泥日安段",
+      "code": "0859",
+      "file": "0859.json",
+      "records": 7
+    },
+    {
+      "county": "屏東縣",
+      "district": "獅子鄉",
+      "section": "沙烏古段",
+      "code": "0860",
+      "file": "0860.json",
+      "records": 7
+    },
+    {
+      "county": "屏東縣",
+      "district": "獅子鄉",
+      "section": "郎萊段",
+      "code": "0861",
+      "file": "0861.json",
+      "records": 22
+    },
+    {
+      "county": "屏東縣",
+      "district": "枋寮鄉",
+      "section": "新地段",
+      "code": "0862",
+      "file": "0862.json",
+      "records": 364
+    },
+    {
+      "county": "屏東縣",
+      "district": "枋山鄉",
+      "section": "莿桐段",
+      "code": "0863",
+      "file": "0863.json",
+      "records": 300
+    },
+    {
+      "county": "屏東縣",
+      "district": "枋寮鄉",
+      "section": "太源段",
+      "code": "0864",
+      "file": "0864.json",
+      "records": 243
+    },
+    {
+      "county": "屏東縣",
+      "district": "佳冬鄉",
+      "section": "塭仔段",
+      "code": "0865",
+      "file": "0865.json",
+      "records": 290
+    },
+    {
+      "county": "屏東縣",
+      "district": "枋寮鄉",
+      "section": "內寮村段",
+      "code": "0866",
+      "file": "0866.json",
+      "records": 221
+    },
+    {
+      "county": "屏東縣",
+      "district": "枋寮鄉",
+      "section": "新開村段",
+      "code": "0867",
+      "file": "0867.json",
+      "records": 419
+    },
+    {
+      "county": "屏東縣",
+      "district": "枋寮鄉",
+      "section": "三民段",
+      "code": "0868",
+      "file": "0868.json",
+      "records": 271
+    },
+    {
+      "county": "屏東縣",
+      "district": "枋寮鄉",
+      "section": "隆山北段",
+      "code": "0869",
+      "file": "0869.json",
+      "records": 197
+    },
+    {
+      "county": "屏東縣",
+      "district": "枋寮鄉",
+      "section": "飛地段",
+      "code": "0870",
+      "file": "0870.json",
+      "records": 4
+    },
+    {
+      "county": "屏東縣",
+      "district": "佳冬鄉",
+      "section": "上埔頭段",
+      "code": "0871",
+      "file": "0871.json",
+      "records": 22
+    },
+    {
+      "county": "屏東縣",
+      "district": "枋寮鄉",
+      "section": "隆安段",
+      "code": "0872",
+      "file": "0872.json",
+      "records": 622
+    },
+    {
+      "county": "屏東縣",
+      "district": "枋寮鄉",
+      "section": "金榮段",
+      "code": "0873",
+      "file": "0873.json",
+      "records": 442
+    },
+    {
+      "county": "屏東縣",
+      "district": "枋寮鄉",
+      "section": "靶場段",
+      "code": "0874",
+      "file": "0874.json",
+      "records": 151
+    },
+    {
+      "county": "屏東縣",
+      "district": "枋山鄉",
+      "section": "舊庄段",
+      "code": "0875",
+      "file": "0875.json",
+      "records": 680
+    },
+    {
+      "county": "屏東縣",
+      "district": "枋山鄉",
+      "section": "楓港東段",
+      "code": "0876",
+      "file": "0876.json",
+      "records": 788
+    },
+    {
+      "county": "屏東縣",
+      "district": "枋山鄉",
+      "section": "新楓港段",
+      "code": "0877",
+      "file": "0877.json",
+      "records": 573
+    },
+    {
+      "county": "屏東縣",
+      "district": "枋山鄉",
+      "section": "楓港西段",
+      "code": "0878",
+      "file": "0878.json",
+      "records": 374
+    },
+    {
+      "county": "屏東縣",
+      "district": "獅子鄉",
+      "section": "竹林段",
+      "code": "0879",
+      "file": "0879.json",
+      "records": 55
+    },
+    {
+      "county": "屏東縣",
+      "district": "獅子鄉",
+      "section": "凱地段",
+      "code": "0880",
+      "file": "0880.json",
+      "records": 121
+    },
+    {
+      "county": "屏東縣",
+      "district": "枋寮鄉",
+      "section": "玉泉段",
+      "code": "0881",
+      "file": "0881.json",
+      "records": 115
+    },
+    {
+      "county": "屏東縣",
+      "district": "春日鄉",
+      "section": "佳樂喜段",
+      "code": "0882",
+      "file": "0882.json",
+      "records": 29
+    },
+    {
+      "county": "屏東縣",
+      "district": "枋寮鄉",
+      "section": "枋農段",
+      "code": "0883",
+      "file": "0883.json",
+      "records": 150
+    },
+    {
+      "county": "屏東縣",
+      "district": "春日鄉",
+      "section": "新七佳段",
+      "code": "0884",
+      "file": "0884.json",
+      "records": 107
+    },
+    {
+      "county": "屏東縣",
+      "district": "獅子鄉",
+      "section": "就愛發揚段",
+      "code": "0885",
+      "file": "0885.json",
+      "records": 554
+    },
+    {
+      "county": "屏東縣",
+      "district": "獅子鄉",
+      "section": "牡丹路段",
+      "code": "0886",
+      "file": "0886.json",
+      "records": 583
+    },
+    {
+      "county": "屏東縣",
+      "district": "春日鄉",
+      "section": "春古段",
+      "code": "0887",
+      "file": "0887.json",
+      "records": 338
+    },
+    {
+      "county": "屏東縣",
+      "district": "春日鄉",
+      "section": "卡舒卡段",
+      "code": "0888",
+      "file": "0888.json",
+      "records": 858
+    },
+    {
+      "county": "屏東縣",
+      "district": "獅子鄉",
+      "section": "阿茲達斯段",
+      "code": "0889",
+      "file": "0889.json",
+      "records": 409
+    },
+    {
+      "county": "屏東縣",
+      "district": "東港鎮",
+      "section": "新義段",
+      "code": "1000",
+      "file": "1000.json",
+      "records": 1
+    },
+    {
+      "county": "屏東縣",
+      "district": "東港鎮",
+      "section": "大鵬段",
+      "code": "1001",
+      "file": "1001.json",
+      "records": 312
+    },
+    {
+      "county": "屏東縣",
+      "district": "林邊鄉",
+      "section": "崎峰段",
+      "code": "1002",
+      "file": "1002.json",
+      "records": 83
+    },
+    {
+      "county": "屏東縣",
+      "district": "東港鎮",
+      "section": "新和段",
+      "code": "1003",
+      "file": "1003.json",
+      "records": 78
+    },
+    {
+      "county": "屏東縣",
+      "district": "新園鄉",
+      "section": "新南段",
+      "code": "1004",
+      "file": "1004.json",
+      "records": 159
+    },
+    {
+      "county": "屏東縣",
+      "district": "新園鄉",
+      "section": "港西段",
+      "code": "1005",
+      "file": "1005.json",
+      "records": 368
+    },
+    {
+      "county": "屏東縣",
+      "district": "新園鄉",
+      "section": "上烏龍段",
+      "code": "1006",
+      "file": "1006.json",
+      "records": 246
+    },
+    {
+      "county": "屏東縣",
+      "district": "新園鄉",
+      "section": "興厝段",
+      "code": "1007",
+      "file": "1007.json",
+      "records": 129
+    },
+    {
+      "county": "屏東縣",
+      "district": "新園鄉",
+      "section": "中興段",
+      "code": "1008",
+      "file": "1008.json",
+      "records": 186
+    },
+    {
+      "county": "屏東縣",
+      "district": "新園鄉",
+      "section": "中洲段",
+      "code": "1009",
+      "file": "1009.json",
+      "records": 348
+    },
+    {
+      "county": "屏東縣",
+      "district": "新園鄉",
+      "section": "仙吉段",
+      "code": "1010",
+      "file": "1010.json",
+      "records": 164
+    },
+    {
+      "county": "屏東縣",
+      "district": "新園鄉",
+      "section": "仙隆段",
+      "code": "1011",
+      "file": "1011.json",
+      "records": 285
+    },
+    {
+      "county": "屏東縣",
+      "district": "新園鄉",
+      "section": "新東段",
+      "code": "1012",
+      "file": "1012.json",
+      "records": 265
+    },
+    {
+      "county": "屏東縣",
+      "district": "東港鎮",
+      "section": "大潭新庄段",
+      "code": "1013",
+      "file": "1013.json",
+      "records": 203
+    },
+    {
+      "county": "屏東縣",
+      "district": "東港鎮",
+      "section": "大埔段",
+      "code": "1014",
+      "file": "1014.json",
+      "records": 174
+    },
+    {
+      "county": "屏東縣",
+      "district": "東港鎮",
+      "section": "三和段",
+      "code": "1015",
+      "file": "1015.json",
+      "records": 55
+    },
+    {
+      "county": "屏東縣",
+      "district": "南州鄉",
+      "section": "壽元段",
+      "code": "1016",
+      "file": "1016.json",
+      "records": 329
+    },
+    {
+      "county": "屏東縣",
+      "district": "南州鄉",
+      "section": "三千段",
+      "code": "1017",
+      "file": "1017.json",
+      "records": 151
+    },
+    {
+      "county": "屏東縣",
+      "district": "新園鄉",
+      "section": "新房段",
+      "code": "1018",
+      "file": "1018.json",
+      "records": 121
+    },
+    {
+      "county": "屏東縣",
+      "district": "新園鄉",
+      "section": "五龍段",
+      "code": "1019",
+      "file": "1019.json",
+      "records": 121
+    },
+    {
+      "county": "屏東縣",
+      "district": "新園鄉",
+      "section": "港墘段",
+      "code": "1020",
+      "file": "1020.json",
+      "records": 86
+    },
+    {
+      "county": "屏東縣",
+      "district": "新園鄉",
+      "section": "新堤段",
+      "code": "1021",
+      "file": "1021.json",
+      "records": 115
+    },
+    {
+      "county": "屏東縣",
+      "district": "新園鄉",
+      "section": "五房段",
+      "code": "1022",
+      "file": "1022.json",
+      "records": 52
+    },
+    {
+      "county": "屏東縣",
+      "district": "東港鎮",
+      "section": "建安段",
+      "code": "1023",
+      "file": "1023.json",
+      "records": 142
+    },
+    {
+      "county": "屏東縣",
+      "district": "林邊鄉",
+      "section": "銀放索段",
+      "code": "1024",
+      "file": "1024.json",
+      "records": 239
+    },
+    {
+      "county": "屏東縣",
+      "district": "林邊鄉",
+      "section": "成功段",
+      "code": "1025",
+      "file": "1025.json",
+      "records": 131
+    },
+    {
+      "county": "屏東縣",
+      "district": "林邊鄉",
+      "section": "鎮安段",
+      "code": "1026",
+      "file": "1026.json",
+      "records": 156
+    },
+    {
+      "county": "屏東縣",
+      "district": "林邊鄉",
+      "section": "內庄段",
+      "code": "1027",
+      "file": "1027.json",
+      "records": 90
+    },
+    {
+      "county": "屏東縣",
+      "district": "東港鎮",
+      "section": "超峰段",
+      "code": "1028",
+      "file": "1028.json",
+      "records": 152
+    },
+    {
+      "county": "屏東縣",
+      "district": "林邊鄉",
+      "section": "竹林段",
+      "code": "1029",
+      "file": "1029.json",
+      "records": 134
+    },
+    {
+      "county": "屏東縣",
+      "district": "林邊鄉",
+      "section": "下庄段",
+      "code": "1030",
+      "file": "1030.json",
+      "records": 40
+    },
+    {
+      "county": "屏東縣",
+      "district": "南州鄉",
+      "section": "同安段",
+      "code": "1031",
+      "file": "1031.json",
+      "records": 367
+    },
+    {
+      "county": "屏東縣",
+      "district": "崁頂鄉",
+      "section": "港東段",
+      "code": "1032",
+      "file": "1032.json",
+      "records": 202
+    },
+    {
+      "county": "屏東縣",
+      "district": "崁頂鄉",
+      "section": "越溪段",
+      "code": "1033",
+      "file": "1033.json",
+      "records": 95
+    },
+    {
+      "county": "屏東縣",
+      "district": "東港鎮",
+      "section": "三隆段",
+      "code": "1034",
+      "file": "1034.json",
+      "records": 183
+    },
+    {
+      "county": "屏東縣",
+      "district": "東港鎮",
+      "section": "嘉新段",
+      "code": "1035",
+      "file": "1035.json",
+      "records": 305
+    },
+    {
+      "county": "屏東縣",
+      "district": "東港鎮",
+      "section": "豐海段",
+      "code": "1036",
+      "file": "1036.json",
+      "records": 292
+    },
+    {
+      "county": "屏東縣",
+      "district": "東港鎮",
+      "section": "盛海段",
+      "code": "1037",
+      "file": "1037.json",
+      "records": 22
+    },
+    {
+      "county": "屏東縣",
+      "district": "東港鎮",
+      "section": "興盛段",
+      "code": "1038",
+      "file": "1038.json",
+      "records": 58
+    },
+    {
+      "county": "屏東縣",
+      "district": "東港鎮",
+      "section": "後寮溪段",
+      "code": "1040",
+      "file": "1040.json",
+      "records": 125
+    },
+    {
+      "county": "屏東縣",
+      "district": "東港鎮",
+      "section": "東隆段",
+      "code": "1041",
+      "file": "1041.json",
+      "records": 117
+    },
+    {
+      "county": "屏東縣",
+      "district": "東港鎮",
+      "section": "福德段",
+      "code": "1043",
+      "file": "1043.json",
+      "records": 80
+    },
+    {
+      "county": "屏東縣",
+      "district": "東港鎮",
+      "section": "新信段一小段",
+      "code": "1044",
+      "file": "1044.json",
+      "records": 2
+    },
+    {
+      "county": "屏東縣",
+      "district": "東港鎮",
+      "section": "朝安段",
+      "code": "1047",
+      "file": "1047.json",
+      "records": 159
+    },
+    {
+      "county": "屏東縣",
+      "district": "東港鎮",
+      "section": "頂中段",
+      "code": "1048",
+      "file": "1048.json",
+      "records": 98
+    },
+    {
+      "county": "屏東縣",
+      "district": "東港鎮",
+      "section": "新勝段",
+      "code": "1049",
+      "file": "1049.json",
+      "records": 17
+    },
+    {
+      "county": "屏東縣",
+      "district": "東港鎮",
+      "section": "新福段",
+      "code": "1050",
+      "file": "1050.json",
+      "records": 34
+    },
+    {
+      "county": "屏東縣",
+      "district": "三地門鄉",
+      "section": "督阿哇那斯段",
+      "code": "1300",
+      "file": "1300.json",
+      "records": 54
+    },
+    {
+      "county": "屏東縣",
+      "district": "三地門鄉",
+      "section": "撒個薩個段",
+      "code": "1301",
+      "file": "1301.json",
+      "records": 50
+    },
+    {
+      "county": "屏東縣",
+      "district": "霧台鄉",
+      "section": "巴拉茲段",
+      "code": "1307",
+      "file": "1307.json",
+      "records": 25
+    },
+    {
+      "county": "屏東縣",
+      "district": "霧台鄉",
+      "section": "烏朱魯段",
+      "code": "1308",
+      "file": "1308.json",
+      "records": 18
+    },
+    {
+      "county": "屏東縣",
+      "district": "霧台鄉",
+      "section": "阿巴斯段",
+      "code": "1314",
+      "file": "1314.json",
+      "records": 37
+    },
+    {
+      "county": "屏東縣",
+      "district": "霧台鄉",
+      "section": "阿魯啊呢段",
+      "code": "1316",
+      "file": "1316.json",
+      "records": 8
+    },
+    {
+      "county": "屏東縣",
+      "district": "霧台鄉",
+      "section": "巴拉鳴紮呢段",
+      "code": "1318",
+      "file": "1318.json",
+      "records": 13
+    },
+    {
+      "county": "屏東縣",
+      "district": "霧台鄉",
+      "section": "搭巴魯拉魯拉呢段",
+      "code": "1320",
+      "file": "1320.json",
+      "records": 21
+    },
+    {
+      "county": "屏東縣",
+      "district": "鹽埔鄉",
+      "section": "仕絨段",
+      "code": "1321",
+      "file": "1321.json",
+      "records": 115
+    },
+    {
+      "county": "屏東縣",
+      "district": "鹽埔鄉",
+      "section": "民意段",
+      "code": "1322",
+      "file": "1322.json",
+      "records": 233
+    },
+    {
+      "county": "屏東縣",
+      "district": "鹽埔鄉",
+      "section": "鹽東段",
+      "code": "1323",
+      "file": "1323.json",
+      "records": 119
+    },
+    {
+      "county": "屏東縣",
+      "district": "高樹鄉",
+      "section": "源泉段",
+      "code": "1324",
+      "file": "1324.json",
+      "records": 208
+    },
+    {
+      "county": "屏東縣",
+      "district": "高樹鄉",
+      "section": "田庄段",
+      "code": "1325",
+      "file": "1325.json",
+      "records": 147
+    },
+    {
+      "county": "屏東縣",
+      "district": "高樹鄉",
+      "section": "泰山段",
+      "code": "1326",
+      "file": "1326.json",
+      "records": 257
+    },
+    {
+      "county": "屏東縣",
+      "district": "高樹鄉",
+      "section": "泰和段",
+      "code": "1327",
+      "file": "1327.json",
+      "records": 189
+    },
+    {
+      "county": "屏東縣",
+      "district": "鹽埔鄉",
+      "section": "振興段",
+      "code": "1328",
+      "file": "1328.json",
+      "records": 516
+    },
+    {
+      "county": "屏東縣",
+      "district": "鹽埔鄉",
+      "section": "久愛段",
+      "code": "1329",
+      "file": "1329.json",
+      "records": 376
+    },
+    {
+      "county": "屏東縣",
+      "district": "鹽埔鄉",
+      "section": "高華段",
+      "code": "1330",
+      "file": "1330.json",
+      "records": 111
+    },
+    {
+      "county": "屏東縣",
+      "district": "鹽埔鄉",
+      "section": "大仁東段",
+      "code": "1331",
+      "file": "1331.json",
+      "records": 392
+    },
+    {
+      "county": "屏東縣",
+      "district": "鹽埔鄉",
+      "section": "大仁段",
+      "code": "1332",
+      "file": "1332.json",
+      "records": 393
+    },
+    {
+      "county": "屏東縣",
+      "district": "鹽埔鄉",
+      "section": "彭南段",
+      "code": "1333",
+      "file": "1333.json",
+      "records": 242
+    },
+    {
+      "county": "屏東縣",
+      "district": "鹽埔鄉",
+      "section": "洛陽段",
+      "code": "1334",
+      "file": "1334.json",
+      "records": 171
+    },
+    {
+      "county": "屏東縣",
+      "district": "鹽埔鄉",
+      "section": "上洛陽段",
+      "code": "1335",
+      "file": "1335.json",
+      "records": 88
+    },
+    {
+      "county": "屏東縣",
+      "district": "鹽埔鄉",
+      "section": "永隆段",
+      "code": "1336",
+      "file": "1336.json",
+      "records": 177
+    },
+    {
+      "county": "屏東縣",
+      "district": "鹽埔鄉",
+      "section": "振北段",
+      "code": "1337",
+      "file": "1337.json",
+      "records": 141
+    },
+    {
+      "county": "屏東縣",
+      "district": "鹽埔鄉",
+      "section": "興愛段",
+      "code": "1338",
+      "file": "1338.json",
+      "records": 274
+    },
+    {
+      "county": "屏東縣",
+      "district": "高樹鄉",
+      "section": "新田子段",
+      "code": "1339",
+      "file": "1339.json",
+      "records": 412
+    },
+    {
+      "county": "屏東縣",
+      "district": "高樹鄉",
+      "section": "新泰山段",
+      "code": "1340",
+      "file": "1340.json",
+      "records": 204
+    },
+    {
+      "county": "屏東縣",
+      "district": "高樹鄉",
+      "section": "南華段",
+      "code": "1341",
+      "file": "1341.json",
+      "records": 285
+    },
+    {
+      "county": "屏東縣",
+      "district": "高樹鄉",
+      "section": "石獅公段",
+      "code": "1342",
+      "file": "1342.json",
+      "records": 160
+    },
+    {
+      "county": "屏東縣",
+      "district": "高樹鄉",
+      "section": "廣興段",
+      "code": "1343",
+      "file": "1343.json",
+      "records": 504
+    },
+    {
+      "county": "屏東縣",
+      "district": "里港鄉",
+      "section": "磚仔地段",
+      "code": "1344",
+      "file": "1344.json",
+      "records": 173
+    },
+    {
+      "county": "屏東縣",
+      "district": "里港鄉",
+      "section": "茄苳腳段",
+      "code": "1345",
+      "file": "1345.json",
+      "records": 203
+    },
+    {
+      "county": "屏東縣",
+      "district": "高樹鄉",
+      "section": "新日段",
+      "code": "1346",
+      "file": "1346.json",
+      "records": 1115
+    },
+    {
+      "county": "屏東縣",
+      "district": "高樹鄉",
+      "section": "原田子段",
+      "code": "1347",
+      "file": "1347.json",
+      "records": 189
+    },
+    {
+      "county": "屏東縣",
+      "district": "高樹鄉",
+      "section": "埔田段",
+      "code": "1348",
+      "file": "1348.json",
+      "records": 43
+    },
+    {
+      "county": "屏東縣",
+      "district": "里港鄉",
+      "section": "載興段",
+      "code": "1349",
+      "file": "1349.json",
+      "records": 352
+    },
+    {
+      "county": "屏東縣",
+      "district": "里港鄉",
+      "section": "光明段",
+      "code": "1350",
+      "file": "1350.json",
+      "records": 148
+    },
+    {
+      "county": "屏東縣",
+      "district": "高樹鄉",
+      "section": "公平段",
+      "code": "1351",
+      "file": "1351.json",
+      "records": 441
+    },
+    {
+      "county": "屏東縣",
+      "district": "高樹鄉",
+      "section": "蕉場段",
+      "code": "1352",
+      "file": "1352.json",
+      "records": 551
+    },
+    {
+      "county": "屏東縣",
+      "district": "里港鄉",
+      "section": "潮厝段",
+      "code": "1353",
+      "file": "1353.json",
+      "records": 144
+    },
+    {
+      "county": "屏東縣",
+      "district": "高樹鄉",
+      "section": "泰福段",
+      "code": "1354",
+      "file": "1354.json",
+      "records": 179
+    },
+    {
+      "county": "屏東縣",
+      "district": "高樹鄉",
+      "section": "新豐段",
+      "code": "1355",
+      "file": "1355.json",
+      "records": 199
+    },
+    {
+      "county": "屏東縣",
+      "district": "高樹鄉",
+      "section": "大山段",
+      "code": "1356",
+      "file": "1356.json",
+      "records": 130
+    },
+    {
+      "county": "屏東縣",
+      "district": "高樹鄉",
+      "section": "大山寮段",
+      "code": "1357",
+      "file": "1357.json",
+      "records": 285
+    },
+    {
+      "county": "屏東縣",
+      "district": "高樹鄉",
+      "section": "公園段",
+      "code": "1358",
+      "file": "1358.json",
+      "records": 296
+    },
+    {
+      "county": "屏東縣",
+      "district": "高樹鄉",
+      "section": "萬興段",
+      "code": "1359",
+      "file": "1359.json",
+      "records": 94
+    },
+    {
+      "county": "屏東縣",
+      "district": "高樹鄉",
+      "section": "源興段",
+      "code": "1360",
+      "file": "1360.json",
+      "records": 252
+    },
+    {
+      "county": "屏東縣",
+      "district": "高樹鄉",
+      "section": "幸福段",
+      "code": "1361",
+      "file": "1361.json",
+      "records": 219
+    },
+    {
+      "county": "屏東縣",
+      "district": "高樹鄉",
+      "section": "富貴段",
+      "code": "1362",
+      "file": "1362.json",
+      "records": 250
+    },
+    {
+      "county": "屏東縣",
+      "district": "高樹鄉",
+      "section": "三王段",
+      "code": "1363",
+      "file": "1363.json",
+      "records": 318
+    },
+    {
+      "county": "屏東縣",
+      "district": "高樹鄉",
+      "section": "竹圍段",
+      "code": "1364",
+      "file": "1364.json",
+      "records": 482
+    },
+    {
+      "county": "屏東縣",
+      "district": "高樹鄉",
+      "section": "東振段",
+      "code": "1365",
+      "file": "1365.json",
+      "records": 586
+    },
+    {
+      "county": "屏東縣",
+      "district": "高樹鄉",
+      "section": "長興段",
+      "code": "1366",
+      "file": "1366.json",
+      "records": 473
+    },
+    {
+      "county": "屏東縣",
+      "district": "高樹鄉",
+      "section": "泰興段",
+      "code": "1367",
+      "file": "1367.json",
+      "records": 385
+    },
+    {
+      "county": "屏東縣",
+      "district": "高樹鄉",
+      "section": "新加蚋埔段",
+      "code": "1368",
+      "file": "1368.json",
+      "records": 254
+    },
+    {
+      "county": "屏東縣",
+      "district": "里港鄉",
+      "section": "江南段",
+      "code": "1369",
+      "file": "1369.json",
+      "records": 255
+    },
+    {
+      "county": "屏東縣",
+      "district": "里港鄉",
+      "section": "林仔頭段",
+      "code": "1370",
+      "file": "1370.json",
+      "records": 266
+    },
+    {
+      "county": "屏東縣",
+      "district": "里港鄉",
+      "section": "新中崙段",
+      "code": "1371",
+      "file": "1371.json",
+      "records": 170
+    },
+    {
+      "county": "屏東縣",
+      "district": "泰武鄉",
+      "section": "突阿拉印段",
+      "code": "1500",
+      "file": "1500.json",
+      "records": 14
+    },
+    {
+      "county": "屏東縣",
+      "district": "泰武鄉",
+      "section": "熱棟段",
+      "code": "1501",
+      "file": "1501.json",
+      "records": 49
+    },
+    {
+      "county": "屏東縣",
+      "district": "來義鄉",
+      "section": "武拉拉烏段",
+      "code": "1502",
+      "file": "1502.json",
+      "records": 106
+    },
+    {
+      "county": "屏東縣",
+      "district": "來義鄉",
+      "section": "巴楞蹦段",
+      "code": "1503",
+      "file": "1503.json",
+      "records": 52
+    },
+    {
+      "county": "屏東縣",
+      "district": "來義鄉",
+      "section": "拉佳段",
+      "code": "1504",
+      "file": "1504.json",
+      "records": 12
+    },
+    {
+      "county": "屏東縣",
+      "district": "來義鄉",
+      "section": "阿福隆灣段",
+      "code": "1505",
+      "file": "1505.json",
+      "records": 8
+    },
+    {
+      "county": "屏東縣",
+      "district": "來義鄉",
+      "section": "盧瑪盧麥段",
+      "code": "1506",
+      "file": "1506.json",
+      "records": 32
+    },
+    {
+      "county": "屏東縣",
+      "district": "來義鄉",
+      "section": "祈母土斯段",
+      "code": "1507",
+      "file": "1507.json",
+      "records": 131
+    },
+    {
+      "county": "屏東縣",
+      "district": "來義鄉",
+      "section": "吉沙巴帝亞段",
+      "code": "1508",
+      "file": "1508.json",
+      "records": 12
+    },
+    {
+      "county": "屏東縣",
+      "district": "來義鄉",
+      "section": "遮蔽亞蘭段",
+      "code": "1509",
+      "file": "1509.json",
+      "records": 102
+    },
+    {
+      "county": "屏東縣",
+      "district": "潮州鎮",
+      "section": "新生段",
+      "code": "1510",
+      "file": "1510.json",
+      "records": 227
+    },
+    {
+      "county": "屏東縣",
+      "district": "潮州鎮",
+      "section": "新榮段",
+      "code": "1511",
+      "file": "1511.json",
+      "records": 142
+    },
+    {
+      "county": "屏東縣",
+      "district": "潮州鎮",
+      "section": "永春段",
+      "code": "1512",
+      "file": "1512.json",
+      "records": 106
+    },
+    {
+      "county": "屏東縣",
+      "district": "潮州鎮",
+      "section": "明德段",
+      "code": "1513",
+      "file": "1513.json",
+      "records": 219
+    },
+    {
+      "county": "屏東縣",
+      "district": "潮州鎮",
+      "section": "新光華段",
+      "code": "1514",
+      "file": "1514.json",
+      "records": 168
+    },
+    {
+      "county": "屏東縣",
+      "district": "潮州鎮",
+      "section": "中洲段",
+      "code": "1515",
+      "file": "1515.json",
+      "records": 140
+    },
+    {
+      "county": "屏東縣",
+      "district": "潮州鎮",
+      "section": "大同段",
+      "code": "1516",
+      "file": "1516.json",
+      "records": 149
+    },
+    {
+      "county": "屏東縣",
+      "district": "潮州鎮",
+      "section": "光春段",
+      "code": "1517",
+      "file": "1517.json",
+      "records": 97
+    },
+    {
+      "county": "屏東縣",
+      "district": "內埔鄉",
+      "section": "上東勢段",
+      "code": "1518",
+      "file": "1518.json",
+      "records": 108
+    },
+    {
+      "county": "屏東縣",
+      "district": "萬巒鄉",
+      "section": "民生段",
+      "code": "1519",
+      "file": "1519.json",
+      "records": 389
+    },
+    {
+      "county": "屏東縣",
+      "district": "萬巒鄉",
+      "section": "佳和段",
+      "code": "1520",
+      "file": "1520.json",
+      "records": 202
+    },
+    {
+      "county": "屏東縣",
+      "district": "萬巒鄉",
+      "section": "頭溝水段",
+      "code": "1521",
+      "file": "1521.json",
+      "records": 457
+    },
+    {
+      "county": "屏東縣",
+      "district": "萬巒鄉",
+      "section": "鹿寮段",
+      "code": "1522",
+      "file": "1522.json",
+      "records": 232
+    },
+    {
+      "county": "屏東縣",
+      "district": "萬巒鄉",
+      "section": "見月段",
+      "code": "1523",
+      "file": "1523.json",
+      "records": 186
+    },
+    {
+      "county": "屏東縣",
+      "district": "萬巒鄉",
+      "section": "新和段",
+      "code": "1524",
+      "file": "1524.json",
+      "records": 50
+    },
+    {
+      "county": "屏東縣",
+      "district": "潮州鎮",
+      "section": "劉厝庄段",
+      "code": "1525",
+      "file": "1525.json",
+      "records": 221
+    },
+    {
+      "county": "屏東縣",
+      "district": "潮州鎮",
+      "section": "八爺段",
+      "code": "1526",
+      "file": "1526.json",
+      "records": 122
+    },
+    {
+      "county": "屏東縣",
+      "district": "竹田鄉",
+      "section": "新街段",
+      "code": "1527",
+      "file": "1527.json",
+      "records": 273
+    },
+    {
+      "county": "屏東縣",
+      "district": "竹田鄉",
+      "section": "竹洲段",
+      "code": "1528",
+      "file": "1528.json",
+      "records": 372
+    },
+    {
+      "county": "屏東縣",
+      "district": "萬巒鄉",
+      "section": "永慶段",
+      "code": "1529",
+      "file": "1529.json",
+      "records": 469
+    },
+    {
+      "county": "屏東縣",
+      "district": "萬巒鄉",
+      "section": "西盛段",
+      "code": "1530",
+      "file": "1530.json",
+      "records": 280
+    },
+    {
+      "county": "屏東縣",
+      "district": "萬巒鄉",
+      "section": "大林段",
+      "code": "1531",
+      "file": "1531.json",
+      "records": 149
+    },
+    {
+      "county": "屏東縣",
+      "district": "萬巒鄉",
+      "section": "德勝段",
+      "code": "1532",
+      "file": "1532.json",
+      "records": 173
+    },
+    {
+      "county": "屏東縣",
+      "district": "萬巒鄉",
+      "section": "新庄段",
+      "code": "1533",
+      "file": "1533.json",
+      "records": 170
+    },
+    {
+      "county": "屏東縣",
+      "district": "萬巒鄉",
+      "section": "柑園段",
+      "code": "1534",
+      "file": "1534.json",
+      "records": 443
+    },
+    {
+      "county": "屏東縣",
+      "district": "萬巒鄉",
+      "section": "成德段",
+      "code": "1535",
+      "file": "1535.json",
+      "records": 217
+    },
+    {
+      "county": "屏東縣",
+      "district": "萬巒鄉",
+      "section": "三民段",
+      "code": "1536",
+      "file": "1536.json",
+      "records": 241
+    },
+    {
+      "county": "屏東縣",
+      "district": "萬巒鄉",
+      "section": "牛角灣段",
+      "code": "1537",
+      "file": "1537.json",
+      "records": 579
+    },
+    {
+      "county": "屏東縣",
+      "district": "萬巒鄉",
+      "section": "萬金段",
+      "code": "1538",
+      "file": "1538.json",
+      "records": 117
+    },
+    {
+      "county": "屏東縣",
+      "district": "萬巒鄉",
+      "section": "赤新段",
+      "code": "1539",
+      "file": "1539.json",
+      "records": 109
+    },
+    {
+      "county": "屏東縣",
+      "district": "萬巒鄉",
+      "section": "富山段",
+      "code": "1540",
+      "file": "1540.json",
+      "records": 178
+    },
+    {
+      "county": "屏東縣",
+      "district": "萬巒鄉",
+      "section": "新農段",
+      "code": "1541",
+      "file": "1541.json",
+      "records": 97
+    },
+    {
+      "county": "屏東縣",
+      "district": "內埔鄉",
+      "section": "東勢段",
+      "code": "1542",
+      "file": "1542.json",
+      "records": 283
+    },
+    {
+      "county": "屏東縣",
+      "district": "內埔鄉",
+      "section": "大和段",
+      "code": "1543",
+      "file": "1543.json",
+      "records": 119
+    },
+    {
+      "county": "屏東縣",
+      "district": "內埔鄉",
+      "section": "農場段",
+      "code": "1544",
+      "file": "1544.json",
+      "records": 131
+    },
+    {
+      "county": "屏東縣",
+      "district": "內埔鄉",
+      "section": "溝底段",
+      "code": "1545",
+      "file": "1545.json",
+      "records": 147
+    },
+    {
+      "county": "屏東縣",
+      "district": "內埔鄉",
+      "section": "竹圍段",
+      "code": "1546",
+      "file": "1546.json",
+      "records": 129
+    },
+    {
+      "county": "屏東縣",
+      "district": "內埔鄉",
+      "section": "八壽段",
+      "code": "1547",
+      "file": "1547.json",
+      "records": 225
+    },
+    {
+      "county": "屏東縣",
+      "district": "竹田鄉",
+      "section": "龍門段",
+      "code": "1548",
+      "file": "1548.json",
+      "records": 308
+    },
+    {
+      "county": "屏東縣",
+      "district": "內埔鄉",
+      "section": "科大段",
+      "code": "1549",
+      "file": "1549.json",
+      "records": 237
+    },
+    {
+      "county": "屏東縣",
+      "district": "內埔鄉",
+      "section": "東片段",
+      "code": "1550",
+      "file": "1550.json",
+      "records": 118
+    },
+    {
+      "county": "屏東縣",
+      "district": "來義鄉",
+      "section": "新古樓段",
+      "code": "1551",
+      "file": "1551.json",
+      "records": 126
+    },
+    {
+      "county": "屏東縣",
+      "district": "內埔鄉",
+      "section": "新隘寮段",
+      "code": "1552",
+      "file": "1552.json",
+      "records": 276
+    },
+    {
+      "county": "屏東縣",
+      "district": "內埔鄉",
+      "section": "新展段",
+      "code": "1553",
+      "file": "1553.json",
+      "records": 334
+    },
+    {
+      "county": "屏東縣",
+      "district": "內埔鄉",
+      "section": "竹山段",
+      "code": "1554",
+      "file": "1554.json",
+      "records": 285
+    },
+    {
+      "county": "屏東縣",
+      "district": "內埔鄉",
+      "section": "山水段",
+      "code": "1555",
+      "file": "1555.json",
+      "records": 429
+    },
+    {
+      "county": "屏東縣",
+      "district": "竹田鄉",
+      "section": "保隆段",
+      "code": "1556",
+      "file": "1556.json",
+      "records": 51
+    },
+    {
+      "county": "屏東縣",
+      "district": "竹田鄉",
+      "section": "福安段",
+      "code": "1557",
+      "file": "1557.json",
+      "records": 441
+    },
+    {
+      "county": "屏東縣",
+      "district": "萬巒鄉",
+      "section": "永平段",
+      "code": "1558",
+      "file": "1558.json",
+      "records": 246
+    },
+    {
+      "county": "屏東縣",
+      "district": "內埔鄉",
+      "section": "黎東段",
+      "code": "1559",
+      "file": "1559.json",
+      "records": 125
+    },
+    {
+      "county": "屏東縣",
+      "district": "內埔鄉",
+      "section": "黎明段",
+      "code": "1560",
+      "file": "1560.json",
+      "records": 105
+    },
+    {
+      "county": "屏東縣",
+      "district": "內埔鄉",
+      "section": "黎新段",
+      "code": "1561",
+      "file": "1561.json",
+      "records": 153
+    },
+    {
+      "county": "屏東縣",
+      "district": "內埔鄉",
+      "section": "上黎明段",
+      "code": "1562",
+      "file": "1562.json",
+      "records": 320
+    },
+    {
+      "county": "屏東縣",
+      "district": "新埤鄉",
+      "section": "南豐段",
+      "code": "1563",
+      "file": "1563.json",
+      "records": 276
+    },
+    {
+      "county": "屏東縣",
+      "district": "新埤鄉",
+      "section": "東興段",
+      "code": "1564",
+      "file": "1564.json",
+      "records": 177
+    },
+    {
+      "county": "屏東縣",
+      "district": "新埤鄉",
+      "section": "南鐵段",
+      "code": "1566",
+      "file": "1566.json",
+      "records": 197
+    },
+    {
+      "county": "屏東縣",
+      "district": "新埤鄉",
+      "section": "鏡庄段",
+      "code": "1567",
+      "file": "1567.json",
+      "records": 130
+    },
+    {
+      "county": "屏東縣",
+      "district": "新埤鄉",
+      "section": "新建段",
+      "code": "1568",
+      "file": "1568.json",
+      "records": 551
+    },
+    {
+      "county": "屏東縣",
+      "district": "新埤鄉",
+      "section": "箕湖段",
+      "code": "1569",
+      "file": "1569.json",
+      "records": 129
+    },
+    {
+      "county": "屏東縣",
+      "district": "新埤鄉",
+      "section": "新餉潭段",
+      "code": "1570",
+      "file": "1570.json",
+      "records": 226
+    },
+    {
+      "county": "屏東縣",
+      "district": "新埤鄉",
+      "section": "獅頭段",
+      "code": "1571",
+      "file": "1571.json",
+      "records": 155
+    },
+    {
+      "county": "屏東縣",
+      "district": "長治鄉",
+      "section": "昌榮段",
+      "code": "1700",
+      "file": "1700.json",
+      "records": 276
+    },
+    {
+      "county": "屏東縣",
+      "district": "長治鄉",
+      "section": "協華段",
+      "code": "1701",
+      "file": "1701.json",
+      "records": 284
+    },
+    {
+      "county": "屏東縣",
+      "district": "長治鄉",
+      "section": "繁華段",
+      "code": "1702",
+      "file": "1702.json",
+      "records": 151
+    },
+    {
+      "county": "屏東縣",
+      "district": "長治鄉",
+      "section": "興華段",
+      "code": "1703",
+      "file": "1703.json",
+      "records": 405
+    },
+    {
+      "county": "屏東縣",
+      "district": "長治鄉",
+      "section": "繁昌段",
+      "code": "1704",
+      "file": "1704.json",
+      "records": 586
+    },
+    {
+      "county": "屏東縣",
+      "district": "長治鄉",
+      "section": "水源段",
+      "code": "1705",
+      "file": "1705.json",
+      "records": 231
+    },
+    {
+      "county": "屏東縣",
+      "district": "九如鄉",
+      "section": "九堤段",
+      "code": "1706",
+      "file": "1706.json",
+      "records": 180
+    },
+    {
+      "county": "屏東縣",
+      "district": "長治鄉",
+      "section": "繁興段",
+      "code": "1707",
+      "file": "1707.json",
+      "records": 269
+    },
+    {
+      "county": "屏東縣",
+      "district": "長治鄉",
+      "section": "華錦段",
+      "code": "1708",
+      "file": "1708.json",
+      "records": 345
+    },
+    {
+      "county": "屏東縣",
+      "district": "屏東市",
+      "section": "北興段",
+      "code": "1709",
+      "file": "1709.json",
+      "records": 1
+    },
+    {
+      "county": "屏東縣",
+      "district": "九如鄉",
+      "section": "玉泉段",
+      "code": "1710",
+      "file": "1710.json",
+      "records": 120
+    },
+    {
+      "county": "屏東縣",
+      "district": "九如鄉",
+      "section": "惠農段",
+      "code": "1711",
+      "file": "1711.json",
+      "records": 116
+    },
+    {
+      "county": "屏東縣",
+      "district": "九如鄉",
+      "section": "東庄段",
+      "code": "1712",
+      "file": "1712.json",
+      "records": 252
+    },
+    {
+      "county": "屏東縣",
+      "district": "屏東市",
+      "section": "舊酒廠段",
+      "code": "1713",
+      "file": "1713.json",
+      "records": 3
+    },
+    {
+      "county": "屏東縣",
+      "district": "九如鄉",
+      "section": "大坵段",
+      "code": "1714",
+      "file": "1714.json",
+      "records": 202
+    },
+    {
+      "county": "屏東縣",
+      "district": "屏東市",
+      "section": "光明段",
+      "code": "1715",
+      "file": "1715.json",
+      "records": 43
+    },
+    {
+      "county": "屏東縣",
+      "district": "屏東市",
+      "section": "機場段",
+      "code": "1716",
+      "file": "1716.json",
+      "records": 38
+    },
+    {
+      "county": "屏東縣",
+      "district": "九如鄉",
+      "section": "九明段",
+      "code": "1717",
+      "file": "1717.json",
+      "records": 226
+    },
+    {
+      "county": "屏東縣",
+      "district": "九如鄉",
+      "section": "冷水坑段",
+      "code": "1718",
+      "file": "1718.json",
+      "records": 8
+    },
+    {
+      "county": "屏東縣",
+      "district": "屏東市",
+      "section": "大溪段",
+      "code": "1719",
+      "file": "1719.json",
+      "records": 270
+    },
+    {
+      "county": "屏東縣",
+      "district": "屏東市",
+      "section": "北平段",
+      "code": "1720",
+      "file": "1720.json",
+      "records": 113
+    },
+    {
+      "county": "屏東縣",
+      "district": "屏東市",
+      "section": "大武營段",
+      "code": "1721",
+      "file": "1721.json",
+      "records": 2
+    },
+    {
+      "county": "屏東縣",
+      "district": "屏東市",
+      "section": "新清溪段",
+      "code": "1722",
+      "file": "1722.json",
+      "records": 187
+    },
+    {
+      "county": "屏東縣",
+      "district": "萬丹鄉",
+      "section": "興化段",
+      "code": "1723",
+      "file": "1723.json",
+      "records": 124
+    },
+    {
+      "county": "屏東縣",
+      "district": "九如鄉",
+      "section": "九智段一小段",
+      "code": "1724",
+      "file": "1724.json",
+      "records": 3
+    },
+    {
+      "county": "屏東縣",
+      "district": "九如鄉",
+      "section": "九和段一小段",
+      "code": "1725",
+      "file": "1725.json",
+      "records": 1
+    },
+    {
+      "county": "屏東縣",
+      "district": "屏東市",
+      "section": "華富段",
+      "code": "1726",
+      "file": "1726.json",
+      "records": 45
+    },
+    {
+      "county": "屏東縣",
+      "district": "屏東市",
+      "section": "田中段",
+      "code": "1727",
+      "file": "1727.json",
+      "records": 33
+    },
+    {
+      "county": "屏東縣",
+      "district": "屏東市",
+      "section": "清進段",
+      "code": "1728",
+      "file": "1728.json",
+      "records": 205
+    },
+    {
+      "county": "屏東縣",
+      "district": "九如鄉",
+      "section": "九北段",
+      "code": "1729",
+      "file": "1729.json",
+      "records": 21
+    },
+    {
+      "county": "屏東縣",
+      "district": "屏東市",
+      "section": "新和生段",
+      "code": "1730",
+      "file": "1730.json",
+      "records": 4
+    },
+    {
+      "county": "屏東縣",
+      "district": "九如鄉",
+      "section": "九昌段",
+      "code": "1731",
+      "file": "1731.json",
+      "records": 30
+    },
+    {
+      "county": "屏東縣",
+      "district": "屏東市",
+      "section": "大進段",
+      "code": "1732",
+      "file": "1732.json",
+      "records": 66
+    },
+    {
+      "county": "屏東縣",
+      "district": "屏東市",
+      "section": "橋福段",
+      "code": "1733",
+      "file": "1733.json",
+      "records": 74
+    },
+    {
+      "county": "屏東縣",
+      "district": "九如鄉",
+      "section": "九富段",
+      "code": "1734",
+      "file": "1734.json",
+      "records": 43
+    }
+  ]
+}

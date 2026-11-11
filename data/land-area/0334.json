@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "unit": "㎡",
+  "county": "屏東縣",
+  "district": "竹田鄉",
+  "section": "鳳山厝段",
+  "code": "0334",
+  "parcels": [
+    {
+      "lot": "701-140",
+      "area": "106",
+      "issues": []
+    },
+    {
+      "lot": "701-148",
+      "area": "6899",
+      "issues": []
+    }
+  ]
+}

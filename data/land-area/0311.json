@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "unit": "㎡",
+  "county": "屏東縣",
+  "district": "萬巒鄉",
+  "section": "赤山段",
+  "code": "0311",
+  "parcels": [
+    {
+      "lot": "719",
+      "area": "45",
+      "issues": []
+    },
+    {
+      "lot": "720",
+      "area": "55",
+      "issues": []
+    },
+    {
+      "lot": "721",
+      "area": "60",
+      "issues": []
+    },
+    {
+      "lot": "722",
+      "area": "1635",
+      "issues": []
+    },
+    {
+      "lot": "724",
+      "area": "1605",
+      "issues": []
+    },
+    {
+      "lot": "725",
+      "area": "345",
+      "issues": []
+    }
+  ]
+}

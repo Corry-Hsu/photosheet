@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "unit": "㎡",
+  "county": "屏東縣",
+  "district": "獅子鄉",
+  "section": "依泥日安段",
+  "code": "0859",
+  "parcels": [
+    {
+      "lot": "1",
+      "area": "239149.71",
+      "issues": []
+    },
+    {
+      "lot": "2",
+      "area": "289940.53",
+      "issues": []
+    },
+    {
+      "lot": "3",
+      "area": "187717.94",
+      "issues": []
+    },
+    {
+      "lot": "4",
+      "area": "150341.7",
+      "issues": []
+    },
+    {
+      "lot": "5",
+      "area": "328718.36",
+      "issues": []
+    },
+    {
+      "lot": "6",
+      "area": "146494.02",
+      "issues": []
+    },
+    {
+      "lot": "7",
+      "area": "93832.42",
+      "issues": []
+    }
+  ]
+}

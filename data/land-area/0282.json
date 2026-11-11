@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "unit": "㎡",
+  "county": "屏東縣",
+  "district": "三地門鄉",
+  "section": "祝立夫夫段",
+  "code": "0282",
+  "parcels": [
+    {
+      "lot": "1",
+      "area": "2053362.94",
+      "issues": []
+    },
+    {
+      "lot": "2",
+      "area": "1294100.74",
+      "issues": []
+    },
+    {
+      "lot": "3",
+      "area": "1658100.81",
+      "issues": []
+    },
+    {
+      "lot": "4",
+      "area": "717304.34",
+      "issues": []
+    }
+  ]
+}

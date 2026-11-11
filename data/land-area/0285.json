@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "unit": "㎡",
+  "county": "屏東縣",
+  "district": "三地門鄉",
+  "section": "拉利碧段",
+  "code": "0285",
+  "parcels": [
+    {
+      "lot": "1",
+      "area": "1172857.34",
+      "issues": []
+    },
+    {
+      "lot": "2",
+      "area": "12000.49",
+      "issues": []
+    },
+    {
+      "lot": "3",
+      "area": "33091.41",
+      "issues": []
+    },
+    {
+      "lot": "4",
+      "area": "181452.28",
+      "issues": []
+    },
+    {
+      "lot": "5",
+      "area": "752968.05",
+      "issues": []
+    },
+    {
+      "lot": "6",
+      "area": "2988848.58",
+      "issues": []
+    }
+  ]
+}

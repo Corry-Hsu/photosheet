@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "unit": "㎡",
+  "county": "屏東縣",
+  "district": "潮州鎮",
+  "section": "檨子腳段",
+  "code": "0304",
+  "parcels": [
+    {
+      "lot": "655",
+      "area": "2305",
+      "issues": []
+    }
+  ]
+}

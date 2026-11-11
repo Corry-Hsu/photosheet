@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "unit": "㎡",
+  "county": "屏東縣",
+  "district": "屏東市",
+  "section": "舊酒廠段",
+  "code": "1713",
+  "parcels": [
+    {
+      "lot": "3",
+      "area": "9437.24",
+      "issues": []
+    },
+    {
+      "lot": "3-1",
+      "area": "10087.28",
+      "issues": []
+    },
+    {
+      "lot": "5",
+      "area": "1020.33",
+      "issues": []
+    }
+  ]
+}

@@ -1,0 +1,95 @@
+{
+  "schemaVersion": 1,
+  "unit": "㎡",
+  "county": "屏東縣",
+  "district": "屏東市",
+  "section": "大埔段一小段",
+  "code": "0004",
+  "parcels": [
+    {
+      "lot": "2",
+      "area": "54",
+      "issues": []
+    },
+    {
+      "lot": "430",
+      "area": "331",
+      "issues": []
+    },
+    {
+      "lot": "431",
+      "area": "36",
+      "issues": []
+    },
+    {
+      "lot": "503-1",
+      "area": "42",
+      "issues": []
+    },
+    {
+      "lot": "503-2",
+      "area": "1",
+      "issues": []
+    },
+    {
+      "lot": "503-3",
+      "area": "15",
+      "issues": []
+    },
+    {
+      "lot": "503-4",
+      "area": "3",
+      "issues": []
+    },
+    {
+      "lot": "505",
+      "area": "7",
+      "issues": []
+    },
+    {
+      "lot": "505-1",
+      "area": "4",
+      "issues": []
+    },
+    {
+      "lot": "505-2",
+      "area": "12",
+      "issues": []
+    },
+    {
+      "lot": "506",
+      "area": "85",
+      "issues": []
+    },
+    {
+      "lot": "508",
+      "area": "228",
+      "issues": []
+    },
+    {
+      "lot": "510",
+      "area": "182",
+      "issues": []
+    },
+    {
+      "lot": "512",
+      "area": "263",
+      "issues": []
+    },
+    {
+      "lot": "531",
+      "area": "959",
+      "issues": []
+    },
+    {
+      "lot": "532-1",
+      "area": "12",
+      "issues": []
+    },
+    {
+      "lot": "532-2",
+      "area": "7",
+      "issues": []
+    }
+  ]
+}

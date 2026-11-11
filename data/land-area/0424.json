@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "unit": "㎡",
+  "county": "屏東縣",
+  "district": "竹田鄉",
+  "section": "竹鳳段一小段",
+  "code": "0424",
+  "parcels": [
+    {
+      "lot": "34",
+      "area": "155.45",
+      "issues": []
+    },
+    {
+      "lot": "35",
+      "area": "327.51",
+      "issues": []
+    },
+    {
+      "lot": "36",
+      "area": "177",
+      "issues": []
+    },
+    {
+      "lot": "43",
+      "area": "1742.61",
+      "issues": []
+    },
+    {
+      "lot": "142",
+      "area": "10.16",
+      "issues": []
+    }
+  ]
+}

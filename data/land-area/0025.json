@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "unit": "㎡",
+  "county": "屏東縣",
+  "district": "屏東市",
+  "section": "街頭段二小段",
+  "code": "0025",
+  "parcels": [
+    {
+      "lot": "90",
+      "area": "773",
+      "issues": []
+    },
+    {
+      "lot": "91",
+      "area": "763",
+      "issues": []
+    },
+    {
+      "lot": "92",
+      "area": "848",
+      "issues": []
+    }
+  ]
+}

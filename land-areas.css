@@ -1,0 +1,90 @@
+#land-area-dialog {
+  width: min(940px, calc(100% - 24px));
+  max-width: 940px;
+  max-height: 92dvh;
+  box-sizing: border-box;
+  overflow: auto;
+  border: 1px solid #cfddd5;
+  border-radius: 16px;
+  background: #f4f8f5;
+  color: #203d33;
+  padding: 24px;
+}
+#land-area-dialog::backdrop {
+  background: #14382ba6;
+}
+#land-area-dialog .area-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+#land-area-dialog h2 {
+  margin: 0;
+}
+#land-area-dialog input[type="search"] {
+  width: 100%;
+  box-sizing: border-box;
+}
+#area-status {
+  padding: 12px;
+  border-radius: 8px;
+  background: #e7eee9;
+}
+#land-area-dialog .area-result {
+  padding: 16px;
+  margin: 12px 0;
+  background: #fff;
+  border: 1px solid #dce4df;
+  border-radius: 10px;
+  overflow-wrap: anywhere;
+}
+#land-area-dialog .area-choice {
+  display: flex;
+  gap: 12px;
+  align-items: start;
+  margin: 0;
+}
+#land-area-dialog input[type="checkbox"] {
+  width: 22px;
+  height: 22px;
+  flex: 0 0 22px;
+  margin: 2px 0;
+  accent-color: #176a50;
+}
+#land-area-dialog .area-parcel {
+  display: flex;
+  gap: 12px;
+  justify-content: space-between;
+  border-top: 1px solid #e4eae6;
+  padding: 8px 0;
+  font-size: 14px;
+}
+#land-area-dialog summary {
+  cursor: pointer;
+  padding: 8px 0;
+}
+#land-area-dialog button {
+  min-height: 44px;
+  white-space: normal;
+}
+#land-area-dialog .warning {
+  color: #9b3d20;
+}
+@media (max-width: 600px) {
+  #land-area-dialog {
+    padding: 14px;
+    width: calc(100% - 12px);
+    max-height: 96dvh;
+  }
+  #land-area-dialog h2 {
+    font-size: 23px;
+  }
+  #land-area-dialog .area-parcel {
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+  #land-area-dialog .area-result {
+    padding: 12px;
+  }
+}

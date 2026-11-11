@@ -1,0 +1,150 @@
+{
+  "schemaVersion": 1,
+  "unit": "㎡",
+  "county": "屏東縣",
+  "district": "潮州鎮",
+  "section": "五魁寮段二小段",
+  "code": "0392",
+  "parcels": [
+    {
+      "lot": "8",
+      "area": "1503",
+      "issues": []
+    },
+    {
+      "lot": "20",
+      "area": "37",
+      "issues": []
+    },
+    {
+      "lot": "28",
+      "area": "1028",
+      "issues": []
+    },
+    {
+      "lot": "36",
+      "area": "951",
+      "issues": []
+    },
+    {
+      "lot": "37",
+      "area": "774",
+      "issues": []
+    },
+    {
+      "lot": "38",
+      "area": "764",
+      "issues": []
+    },
+    {
+      "lot": "40",
+      "area": "506",
+      "issues": []
+    },
+    {
+      "lot": "47",
+      "area": "189",
+      "issues": []
+    },
+    {
+      "lot": "56",
+      "area": "1094",
+      "issues": []
+    },
+    {
+      "lot": "81",
+      "area": "384",
+      "issues": []
+    },
+    {
+      "lot": "92",
+      "area": "1095",
+      "issues": []
+    },
+    {
+      "lot": "93",
+      "area": "820",
+      "issues": []
+    },
+    {
+      "lot": "94",
+      "area": "2055",
+      "issues": []
+    },
+    {
+      "lot": "95",
+      "area": "184",
+      "issues": []
+    },
+    {
+      "lot": "105",
+      "area": "1081",
+      "issues": []
+    },
+    {
+      "lot": "112",
+      "area": "272.48",
+      "issues": []
+    },
+    {
+      "lot": "126",
+      "area": "32",
+      "issues": []
+    },
+    {
+      "lot": "129",
+      "area": "1026",
+      "issues": []
+    },
+    {
+      "lot": "130",
+      "area": "2869",
+      "issues": []
+    },
+    {
+      "lot": "135",
+      "area": "630",
+      "issues": []
+    },
+    {
+      "lot": "146",
+      "area": "712",
+      "issues": []
+    },
+    {
+      "lot": "158",
+      "area": "929",
+      "issues": []
+    },
+    {
+      "lot": "171",
+      "area": "900",
+      "issues": []
+    },
+    {
+      "lot": "185",
+      "area": "484",
+      "issues": []
+    },
+    {
+      "lot": "186",
+      "area": "2051",
+      "issues": []
+    },
+    {
+      "lot": "187",
+      "area": "624",
+      "issues": []
+    },
+    {
+      "lot": "197",
+      "area": "1741",
+      "issues": []
+    },
+    {
+      "lot": "198",
+      "area": "1603",
+      "issues": []
+    }
+  ]
+}

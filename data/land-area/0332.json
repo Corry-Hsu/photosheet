@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 1,
+  "unit": "㎡",
+  "county": "屏東縣",
+  "district": "竹田鄉",
+  "section": "南勢段一小段",
+  "code": "0332",
+  "parcels": [
+    {
+      "lot": "1",
+      "area": "80",
+      "issues": []
+    },
+    {
+      "lot": "2",
+      "area": "2375",
+      "issues": []
+    },
+    {
+      "lot": "3",
+      "area": "1044",
+      "issues": []
+    },
+    {
+      "lot": "4",
+      "area": "49",
+      "issues": []
+    },
+    {
+      "lot": "41",
+      "area": "2528",
+      "issues": []
+    },
+    {
+      "lot": "42",
+      "area": "423",
+      "issues": []
+    },
+    {
+      "lot": "43",
+      "area": "3118",
+      "issues": []
+    },
+    {
+      "lot": "71",
+      "area": "128",
+      "issues": []
+    },
+    {
+      "lot": "79",
+      "area": "208",
+      "issues": []
+    },
+    {
+      "lot": "87",
+      "area": "76",
+      "issues": []
+    },
+    {
+      "lot": "89",
+      "area": "647",
+      "issues": []
+    },
+    {
+      "lot": "98",
+      "area": "3452",
+      "issues": []
+    },
+    {
+      "lot": "100",
+      "area": "5309",
+      "issues": []
+    },
+    {
+      "lot": "130",
+      "area": "296",
+      "issues": []
+    },
+    {
+      "lot": "131",
+      "area": "1562",
+      "issues": []
+    },
+    {
+      "lot": "153",
+      "area": "1712",
+      "issues": []
+    },
+    {
+      "lot": "160",
+      "area": "180",
+      "issues": []
+    },
+    {
+      "lot": "198",
+      "area": "817",
+      "issues": []
+    },
+    {
+      "lot": "201",
+      "area": "2283",
+      "issues": []
+    },
+    {
+      "lot": "224",
+      "area": "815",
+      "issues": []
+    },
+    {
+      "lot": "230",
+      "area": "1666",
+      "issues": []
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "unit": "㎡",
+  "county": "屏東縣",
+  "district": "恆春鎮",
+  "section": "山腳段",
+  "code": "0601",
+  "parcels": [
+    {
+      "lot": "573",
+      "area": "137",
+      "issues": []
+    },
+    {
+      "lot": "574",
+      "area": "55",
+      "issues": []
+    }
+  ]
+}

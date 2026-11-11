@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "unit": "㎡",
+  "county": "屏東縣",
+  "district": "屏東市",
+  "section": "舊街段二小段",
+  "code": "0016",
+  "parcels": [
+    {
+      "lot": "1",
+      "area": "2583",
+      "issues": []
+    },
+    {
+      "lot": "135",
+      "area": "13",
+      "issues": []
+    },
+    {
+      "lot": "135-2",
+      "area": "3",
+      "issues": []
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "unit": "㎡",
+  "county": "屏東縣",
+  "district": "九如鄉",
+  "section": "冷水坑段",
+  "code": "1718",
+  "parcels": [
+    {
+      "lot": "39",
+      "area": "19738.57",
+      "issues": []
+    },
+    {
+      "lot": "45",
+      "area": "4114.19",
+      "issues": []
+    },
+    {
+      "lot": "49",
+      "area": "31711.23",
+      "issues": []
+    },
+    {
+      "lot": "50",
+      "area": "7505.31",
+      "issues": []
+    },
+    {
+      "lot": "51",
+      "area": "5323.06",
+      "issues": []
+    },
+    {
+      "lot": "59",
+      "area": "96.39",
+      "issues": []
+    },
+    {
+      "lot": "61",
+      "area": "18320.33",
+      "issues": []
+    },
+    {
+      "lot": "63",
+      "area": "744.42",
+      "issues": []
+    }
+  ]
+}

@@ -509,7 +509,7 @@
       n = nav(t);
     open(
       "任務詳情",
-      `<h2>${E(location(t))}</h2><p>${E(t.type)} · ${t.source === "manual" ? "手動新增" : "原表第" + t.row + "列"} · ${E(t.serial)}</p><p>成果指定日期：${E(t.resultDate || "待補")}<br>完成期限：${E(t.due.replace("T", " ") || "未設定")}</p><h3>全部地號</h3>${worker ? "" : '<button id="edit-parcels">修正／新增地段地號</button>'}${t.parcels
+      `<h2>${E(location(t))}</h2><p>${E(t.type)} · ${t.source === "manual" ? "手動新增" : "原表第" + t.row + "列"} · ${E(t.serial)}</p><p>成果指定日期：${E(t.resultDate || "待補")}<br>完成期限：${E(t.due.replace("T", " ") || "未設定")}</p>${!worker ? `<p id="task-land-area">土地登記總面積：${E(window.LandAreaCore?.stale(t) ? "地號已變更，請重新配對" : t.area === undefined || t.area === "" ? "未填" : t.area + " ㎡")}${t.landArea && !window.LandAreaCore?.stale(t) ? "（XML 配對）" : ""}</p><button id="detail-area">線上配對面積</button>` : ""}<h3>全部地號</h3>${worker ? "" : '<button id="edit-parcels">修正／新增地段地號</button>'}${t.parcels
         .map((p, i) => {
           const xs = m.groups[i];
           return `<div class="parcel-row"><strong>${E(p.district + p.section + " " + p.lot)}</strong>${xs.length === 1 ? `<button data-parcel-nav="${i}">導航此地號參考位置</button>` : ""}</div>`;
@@ -526,6 +526,7 @@
         }),
     );
     if (!worker) {
+      bind("#detail-area", () => areaDialog([t.id], t.id));
       bind("#edit-parcels", () => {
         open(
           "修正／新增地段地號",
@@ -591,6 +592,8 @@
           t.district = ps[0].district;
           t.section = ps[0].section;
           t.sectionCode = ps[0].sectionCode || "";
+          if (window.LandAreaCore?.stale(t))
+            Object.assign(t, LandAreaCore.cleanTask(t));
           const parcelKeys = new Set(ps.map((p) => C.key(p)));
           t.parcelChoices = Object.fromEntries(
             Object.entries(t.parcelChoices || {}).filter(([key]) =>
@@ -629,6 +632,8 @@
         if (!v) throw Error("請填鄉鎮");
         for (const p of t.parcels) if (!p.district) p.district = v;
         if (!t.district) t.district = v;
+        if (window.LandAreaCore?.stale(t))
+          Object.assign(t, LandAreaCore.cleanTask(t));
         await persist();
         detail(id);
       });
@@ -703,7 +708,33 @@
       tell("已儲存分派與日期");
     });
   }
+  function areaDialog(ids, taskId = "") {
+    return LandAreas.open({
+      getState: () => state,
+      taskIds: ids,
+      getCatalog: () => sectionCatalog,
+      onApply: async (results, selectedIds) => {
+        const previous = state.tasks;
+        state.tasks = LandAreaCore.apply(
+          state.tasks,
+          results,
+          selectedIds,
+          new Date().toISOString(),
+        );
+        try {
+          await persist();
+        } catch (error) {
+          state.tasks = previous;
+          throw error;
+        }
+        render();
+        if (taskId) await detail(taskId);
+      },
+    });
+  }
   function documentDialog(tasks, kind) {
+    if (window.LandAreaCore)
+      tasks = tasks.map((t) => LandAreaCore.cleanTask(t));
     if (!tasks.length) throw Error("請選取任務");
     open(
       kind === "board" ? "輸出拍攝白板" : "輸出工作單",
@@ -1044,13 +1075,21 @@
   }
   function makeDispatchPackage(person, batch, generatedAt) {
     const tasks = C.dispatchTasks(state.tasks, person.id).map((t) => ({
-      ...t,
+      ...(window.LandAreaCore ? LandAreaCore.cleanTask(t) : t),
       navigation: nav(t),
       parcels: t.parcels.map((p) => ({
         ...p,
         sectionCode: C.parcelCode(t, p, sectionCatalog),
       })),
     }));
+    if (window.LandAreaCore)
+      for (const task of tasks) {
+        if (task.landArea && !task.landArea.stale)
+          task.landArea = {
+            ...task.landArea,
+            signature: LandAreaCore.signature(task),
+          };
+      }
     if (tasks.some((t) => !C.date(t.resultDate)))
       throw Error("所選入口的任務有成果日期缺漏，請先補齊");
     const fs = [
@@ -1263,6 +1302,9 @@
     bind("#orders", () => documentDialog(chosen(), "order"));
     bind("#reload-worker", loadWorker);
     if (worker) return;
+    bind("#land-areas", () =>
+      areaDialog((chosen().length ? chosen() : filtered()).map((t) => t.id)),
+    );
     bind("#dispatch-tools", () =>
       DispatchTools.open({
         getCandidates: (ids) => {

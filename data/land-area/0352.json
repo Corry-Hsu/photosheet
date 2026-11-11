@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "unit": "㎡",
+  "county": "屏東縣",
+  "district": "枋寮鄉",
+  "section": "大響營段二小段",
+  "code": "0352",
+  "parcels": [
+    {
+      "lot": "1",
+      "area": "3571",
+      "issues": []
+    },
+    {
+      "lot": "8",
+      "area": "708",
+      "issues": []
+    },
+    {
+      "lot": "14",
+      "area": "387",
+      "issues": []
+    },
+    {
+      "lot": "21",
+      "area": "2492",
+      "issues": []
+    },
+    {
+      "lot": "21-2",
+      "area": "844",
+      "issues": []
+    },
+    {
+      "lot": "24",
+      "area": "3361",
+      "issues": []
+    },
+    {
+      "lot": "24-1",
+      "area": "679",
+      "issues": []
+    },
+    {
+      "lot": "48-2",
+      "area": "4730",
+      "issues": []
+    }
+  ]
+}

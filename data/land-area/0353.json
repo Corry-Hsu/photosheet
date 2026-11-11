@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "unit": "㎡",
+  "county": "屏東縣",
+  "district": "枋寮鄉",
+  "section": "北旗尾段",
+  "code": "0353",
+  "parcels": [
+    {
+      "lot": "567",
+      "area": "849",
+      "issues": []
+    }
+  ]
+}

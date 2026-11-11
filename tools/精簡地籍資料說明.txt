@@ -1,0 +1,23 @@
+地籍登記面積精簡工具
+
+1. 解壓縮本工具 ZIP（不要直接在 ZIP 裡執行）。
+2. 電腦須安裝 Python 3，無需額外安裝套件。
+   若尚未安裝：https://www.python.org/downloads/
+   安裝時勾選 Add python.exe to PATH。
+3. 保持原始資料夾位於 F:\T_XML，雙擊 run_land_area_converter.bat。
+   若放在其他位置，也可把該資料夾拖曳到 BAT 檔上。
+4. 程式只在本機處理，絕不自行上傳，也不修改原始 XML。
+5. 完成後會產生帶日期時間的資料夾、檢查報告及同名 ZIP，並開啟檔案總管。
+6. 只需把產生的 land-area-日期時間.zip 傳回，不必上傳原始 XML。
+   ZIP 內容只有 land-area/*.json 與 conversion-report.json。
+
+保留資料：縣市、鄉鎮市區、地段名稱、段代碼、地號、登記面積。
+不輸出：所有權人、統一編號、管理者名稱、持分、地價等資料。
+同一地號多筆且面積一致時只保留一次；缺漏或衝突面積會標示 issues，不猜測正確值。
+登記面積以台灣土地登記慣例標示平方公尺（㎡）；範例 XML 未另列單位欄位。
+若資料夾含 manifest.csv/schema-xml.csv，會檢查檔案完整性及必要欄位。
+請保留錯誤訊息供查核；轉檔失敗時不要上傳任何部分產物。
+
+如需手動執行（PowerShell）：
+py -3 .\build_land_area_catalog.py "F:\T_XML" ".\land-area-new"
+輸出資料夾必須不存在或為空，且不得位於原始資料夾內。

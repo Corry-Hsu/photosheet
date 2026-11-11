@@ -1,0 +1,165 @@
+{
+  "schemaVersion": 1,
+  "unit": "㎡",
+  "county": "屏東縣",
+  "district": "屏東市",
+  "section": "公園段二小段",
+  "code": "0019",
+  "parcels": [
+    {
+      "lot": "1-1",
+      "area": "302",
+      "issues": []
+    },
+    {
+      "lot": "2",
+      "area": "892",
+      "issues": []
+    },
+    {
+      "lot": "3",
+      "area": "70",
+      "issues": []
+    },
+    {
+      "lot": "3-2",
+      "area": "10",
+      "issues": []
+    },
+    {
+      "lot": "3-3",
+      "area": "17",
+      "issues": []
+    },
+    {
+      "lot": "3-4",
+      "area": "22",
+      "issues": []
+    },
+    {
+      "lot": "3-7",
+      "area": "31",
+      "issues": []
+    },
+    {
+      "lot": "3-10",
+      "area": "54",
+      "issues": []
+    },
+    {
+      "lot": "3-12",
+      "area": "17",
+      "issues": []
+    },
+    {
+      "lot": "4",
+      "area": "1121",
+      "issues": []
+    },
+    {
+      "lot": "4-1",
+      "area": "4",
+      "issues": []
+    },
+    {
+      "lot": "4-2",
+      "area": "13",
+      "issues": []
+    },
+    {
+      "lot": "4-7",
+      "area": "523",
+      "issues": []
+    },
+    {
+      "lot": "5-19",
+      "area": "5",
+      "issues": []
+    },
+    {
+      "lot": "5-31",
+      "area": "48",
+      "issues": []
+    },
+    {
+      "lot": "5-32",
+      "area": "70",
+      "issues": []
+    },
+    {
+      "lot": "5-34",
+      "area": "104",
+      "issues": []
+    },
+    {
+      "lot": "5-38",
+      "area": "8",
+      "issues": []
+    },
+    {
+      "lot": "5-42",
+      "area": "25",
+      "issues": []
+    },
+    {
+      "lot": "5-56",
+      "area": "242",
+      "issues": []
+    },
+    {
+      "lot": "5-75",
+      "area": "410",
+      "issues": []
+    },
+    {
+      "lot": "5-80",
+      "area": "77",
+      "issues": []
+    },
+    {
+      "lot": "5-133",
+      "area": "8",
+      "issues": []
+    },
+    {
+      "lot": "5-135",
+      "area": "60",
+      "issues": []
+    },
+    {
+      "lot": "5-209",
+      "area": "5",
+      "issues": []
+    },
+    {
+      "lot": "5-215",
+      "area": "39",
+      "issues": []
+    },
+    {
+      "lot": "5-234",
+      "area": "378",
+      "issues": []
+    },
+    {
+      "lot": "43",
+      "area": "46",
+      "issues": []
+    },
+    {
+      "lot": "43-1",
+      "area": "1567",
+      "issues": []
+    },
+    {
+      "lot": "43-2",
+      "area": "60",
+      "issues": []
+    },
+    {
+      "lot": "44",
+      "area": "430",
+      "issues": []
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "unit": "㎡",
+  "county": "屏東縣",
+  "district": "屏東市",
+  "section": "林子內段",
+  "code": "0037",
+  "parcels": [
+    {
+      "lot": "227-3",
+      "area": "545",
+      "issues": []
+    }
+  ]
+}

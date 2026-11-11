@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "unit": "㎡",
+  "county": "屏東縣",
+  "district": "三地門鄉",
+  "section": "嘎拉谷籟段",
+  "code": "0286",
+  "parcels": [
+    {
+      "lot": "1",
+      "area": "1897398.46",
+      "issues": []
+    },
+    {
+      "lot": "2",
+      "area": "1801997.26",
+      "issues": []
+    },
+    {
+      "lot": "3",
+      "area": "23462.93",
+      "issues": []
+    },
+    {
+      "lot": "4",
+      "area": "3203.6",
+      "issues": []
+    },
+    {
+      "lot": "5",
+      "area": "10514.36",
+      "issues": []
+    }
+  ]
+}
