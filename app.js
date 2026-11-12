@@ -358,7 +358,7 @@
         : "smooth",
     });
   }
-  function polygonLayer(fs, style, onClick) {
+  function polygonLayer(fs, onClick) {
     return L.geoJSON(
       fs.map((f) => ({
         type: "Feature",
@@ -366,16 +366,14 @@
         geometry: { type: "MultiPolygon", coordinates: f.polygons },
       })),
       {
-        style: worker
-          ? {
-              color: "#ff0000",
-              weight: 1.5,
-              opacity: 1,
-              fill: true,
-              fillColor: "#ff9800",
-              fillOpacity: 0.25,
-            }
-          : style,
+        style: {
+          color: "#ff0000",
+          weight: 1.5,
+          opacity: 1,
+          fill: true,
+          fillColor: "#ff9800",
+          fillOpacity: 0.25,
+        },
         renderer: map.options.renderer,
         onEachFeature: (f, layer) => {
           const land = featureMap.get(f.properties.id),
@@ -415,7 +413,6 @@
     const fs = matching(t).features;
     landLayer = polygonLayer(
       fs,
-      { color: "#176950", weight: 3, fillColor: "#4eaa70", fillOpacity: 0.3 },
       () => focus(t.id, false),
     ).addTo(map);
     const n = nav(t);
@@ -494,7 +491,6 @@
     }
     contextLayer = polygonLayer(
       hits.map((h) => featureMap.get(h.id)),
-      { color: "#849b89", weight: 1, fillOpacity: 0.06 },
       (id) => {
         let t = taskForFeature(id);
         if (t) focus(t.id, false);
