@@ -206,6 +206,52 @@
           a.id.localeCompare(b.id),
       );
   }
+  const isManualTask = (task) =>
+    !!task &&
+    (task.source === "manual" || String(task.id || "").startsWith("manual:"));
+  let deletingTask = false;
+  async function deleteManualTask(id, fromDetail = false) {
+    const task = state.tasks.find((t) => t.id === id);
+    if (worker || !isManualTask(task))
+      throw Error("只能在管理頁刪除手動新增的任務");
+    if (deletingTask) throw Error("正在刪除任務，請稍候");
+    if (
+      !confirm(
+        `刪除這筆手動任務？\n${location(task)} ${task.parcels.map((p) => p.lot).join("、")}\n\n若已發布，仍需在「整理發布資料」移除對應入口任務並重新發布。`,
+      )
+    ) return;
+    deletingTask = true;
+    const row = $$(".task").find((element) => element.dataset.id === id);
+    const controls = new Map(
+      [...new Set([
+        ...$$("[data-delete-task], #detail-delete"),
+        ...(row?.querySelectorAll("button,input") || []),
+        ...(fromDetail ? $("#dialog").querySelectorAll("button,input,select") : []),
+      ])].map((control) => [control, control.disabled]),
+    );
+    controls.forEach((_, control) => (control.disabled = true));
+    const before = state.tasks;
+    state.tasks = state.tasks.filter((t) => t.id !== id);
+    try {
+      try {
+        await persist();
+      } catch (error) {
+        state.tasks = before;
+        throw error;
+      }
+      selected.delete(id);
+      if (focused === id) {
+        pinMode = false;
+        $("#pin-mode")?.classList.remove("active");
+      }
+      if (fromDetail) $("#dialog").close();
+      render();
+      tell("手動任務已刪除；若已發布，請另行整理發布資料。照片與地籍索引保留。");
+    } finally {
+      deletingTask = false;
+      controls.forEach((disabled, control) => (control.disabled = disabled));
+    }
+  }
   function render() {
     const visible = listSource();
     if (!worker) {
@@ -243,7 +289,7 @@
             const person = state.people.find((p) => p.id === t.assignee);
             if (worker)
               return `<article class="task worker-task ${t.id === focused ? "selected" : ""}" data-id="${E(t.id)}"><input type="checkbox" aria-label="選取 ${E(t.serial)}" data-check="${E(t.id)}" ${selected.has(t.id) ? "checked" : ""}><div class="task-content"><div class="task-topline"><h3>${E(location(t))}</h3><span class="badge">${E(t.type)}</span></div><p class="task-lots">${E(t.parcels.map((p) => p.lot).join("、"))}</p><p class="task-deadline">期限 ${E(t.due ? t.due.slice(5).replace("T", " ") : "未設定")} · 成果 ${E(t.resultDate ? t.resultDate.slice(5) : "待補")}</p></div><button data-detail="${E(t.id)}" aria-label="查看 ${E(location(t))} ${E(t.parcels.map((p) => p.lot).join("、"))}">›</button></article>`;
-            return `<article class="task ${t.id === focused ? "selected" : ""}" data-id="${E(t.id)}"><input type="checkbox" aria-label="選取 ${E(t.serial)}" data-check="${E(t.id)}" ${selected.has(t.id) ? "checked" : ""}><div><h3>${E(location(t))}</h3><p>${E(t.parcels.map((p) => p.lot).join("、"))}</p><span class="badge">${E(t.type)}</span> ${t.completed ? '<span class="badge task-completed">已完成</span>' : ""}<p class="muted">${worker ? "" : E(person?.name || "未指派") + " · "}成果日期 ${E(t.resultDate || "待補")}<br>期限 ${E(t.due.replace("T", " ") || "未設定")}</p></div><div class="task-row-actions"><button data-detail="${E(t.id)}">查看任務</button><button data-complete="${E(t.id)}">${t.completed ? "取消完成" : "標記完成"}</button></div></article>`;
+            return `<article class="task ${t.id === focused ? "selected" : ""}" data-id="${E(t.id)}"><input type="checkbox" aria-label="選取 ${E(t.serial)}" data-check="${E(t.id)}" ${selected.has(t.id) ? "checked" : ""}><div><h3>${E(location(t))}</h3><p>${E(t.parcels.map((p) => p.lot).join("、"))}</p><span class="badge">${E(t.type)}</span> ${t.completed ? '<span class="badge task-completed">已完成</span>' : ""}<p class="muted">${worker ? "" : E(person?.name || "未指派") + " · "}成果日期 ${E(t.resultDate || "待補")}<br>期限 ${E(t.due.replace("T", " ") || "未設定")}</p></div><div class="task-row-actions"><button data-detail="${E(t.id)}">查看任務</button><button data-complete="${E(t.id)}">${t.completed ? "取消完成" : "標記完成"}</button>${isManualTask(t) ? `<button data-delete-task="${E(t.id)}">刪除任務</button>` : ""}</div></article>`;
           })
           .join("")
       : '<p class="muted">沒有符合條件的任務。</p>';
@@ -291,6 +337,18 @@
           }
         }),
     );
+    $$("[data-delete-task]").forEach((button) => {
+      button.onclick = async () => {
+        button.disabled = true;
+        try {
+          await deleteManualTask(button.dataset.deleteTask);
+        } catch (error) {
+          tell(error.message, true);
+        } finally {
+          button.disabled = false;
+        }
+      };
+    });
     $$("[data-detail]").forEach(
       (el) => (el.onclick = () => detail(el.dataset.detail)),
     );
@@ -517,7 +575,7 @@
     ];
     open(
       "任務詳情",
-      `<h2>${E(location(t))}</h2><p>${E(t.type)} · ${t.source === "manual" ? "手動新增" : "原表第" + t.row + "列"} · ${E(t.serial)}</p><p>成果指定日期：${E(t.resultDate || "待補")}<br>完成期限：${E(t.due.replace("T", " ") || "未設定")}</p>${!worker ? `<p id="task-land-area">土地登記總面積：${E(window.LandAreaCore?.stale(t) ? "地號已變更，請重新配對" : t.area === undefined || t.area === "" ? "未填" : t.area + " ㎡")}${t.landArea && !window.LandAreaCore?.stale(t) ? `（XML 配對；地段代號：${E(xmlCodes.join("、") || "未記錄，請重新配對")}）` : ""}</p><button id="detail-area">線上配對面積</button>` : ""}<h3>全部地號</h3>${worker ? "" : '<button id="edit-parcels">修正／新增地段地號</button>'}${t.parcels
+      `<h2>${E(location(t))}</h2><p>${E(t.type)} · ${isManualTask(t) ? "手動新增" : "原表第" + t.row + "列"} · ${E(t.serial)}</p><p>成果指定日期：${E(t.resultDate || "待補")}<br>完成期限：${E(t.due.replace("T", " ") || "未設定")}</p>${!worker ? `<p id="task-land-area">土地登記總面積：${E(window.LandAreaCore?.stale(t) ? "地號已變更，請重新配對" : t.area === undefined || t.area === "" ? "未填" : t.area + " ㎡")}${t.landArea && !window.LandAreaCore?.stale(t) ? `（XML 配對；地段代號：${E(xmlCodes.join("、") || "未記錄，請重新配對")}）` : ""}</p><button id="detail-area">線上配對面積</button>` : ""}<h3>全部地號</h3>${worker ? "" : '<button id="edit-parcels">修正／新增地段地號</button>'}${t.parcels
         .map((p, i) => {
           const xs = m.groups[i];
           const matchedCodes = [
@@ -538,7 +596,7 @@
         })
         .join(
           "",
-        )}<h3>工作項目</h3><ul>${t.items.map((i) => `<li>${E(i.name)}　${E(i.quantity)} ${E(i.unit)} ${E(i.note)}</li>`).join("")}</ul><p>施作廠商：${E(t.vendor)}　${E(t.sourcePerson)}</p><h3>導航入口</h3><p>${n ? (n.confirmed ? "已核對入口" : "地籍參考位置") + "：" + n.point[1].toFixed(6) + ", " + n.point[0].toFixed(6) : "尚無導航位置，可由管理者在地圖上設定"}</p>${n ? `<a class="button" href="${E(C.navURL(n.point))}" target="_blank" rel="noopener">導航前往</a>` : ""}${!worker ? `<div class="nav-fields"><input id="nav-lat" type="number" step="any" placeholder="緯度" aria-label="入口緯度" value="${n?.point[1] ?? ""}"><input id="nav-lng" type="number" step="any" placeholder="經度" aria-label="入口經度" value="${n?.point[0] ?? ""}"><button id="save-nav">保存已核對入口</button><button id="map-pin">改在地圖設定</button></div><div class="form-grid"><label>任務鄉鎮（僅補空值）<input id="fix-district" placeholder="例如：南州鄉"></label><button id="save-district">補齊鄉鎮</button></div>` : ""}<div class="toolbar"><button id="detail-board">輸出白板</button>${worker ? "" : `<button id="detail-edit">分派／日期</button><button id="detail-complete">${t.completed ? "取消已完成" : "標記已完成"}</button>`}<button id="detail-camera">現場拍照</button></div><section id="local-photos"></section>`,
+        )}<h3>工作項目</h3><ul>${t.items.map((i) => `<li>${E(i.name)}　${E(i.quantity)} ${E(i.unit)} ${E(i.note)}</li>`).join("")}</ul><p>施作廠商：${E(t.vendor)}　${E(t.sourcePerson)}</p><h3>導航入口</h3><p>${n ? (n.confirmed ? "已核對入口" : "地籍參考位置") + "：" + n.point[1].toFixed(6) + ", " + n.point[0].toFixed(6) : "尚無導航位置，可由管理者在地圖上設定"}</p>${n ? `<a class="button" href="${E(C.navURL(n.point))}" target="_blank" rel="noopener">導航前往</a>` : ""}${!worker ? `<div class="nav-fields"><input id="nav-lat" type="number" step="any" placeholder="緯度" aria-label="入口緯度" value="${n?.point[1] ?? ""}"><input id="nav-lng" type="number" step="any" placeholder="經度" aria-label="入口經度" value="${n?.point[0] ?? ""}"><button id="save-nav">保存已核對入口</button><button id="map-pin">改在地圖設定</button></div><div class="form-grid"><label>任務鄉鎮（僅補空值）<input id="fix-district" placeholder="例如：南州鄉"></label><button id="save-district">補齊鄉鎮</button></div>` : ""}<div class="toolbar"><button id="detail-board">輸出白板</button>${worker ? "" : `<button id="detail-edit">分派／日期</button><button id="detail-complete">${t.completed ? "取消已完成" : "標記已完成"}</button>${isManualTask(t) ? '<button id="detail-delete">刪除任務</button>' : ""}`}<button id="detail-camera">現場拍照</button></div><section id="local-photos"></section>`,
     );
     $$("[data-parcel-nav]").forEach(
       (el) =>
@@ -659,6 +717,8 @@
         await persist();
         detail(id);
       });
+      if (isManualTask(t))
+        bind("#detail-delete", () => deleteManualTask(t.id, true));
       bind("#detail-edit", () => assignDialog([t]));
       bind("#detail-complete", async () => {
         await markCompleted([t], !t.completed);
