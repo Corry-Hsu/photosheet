@@ -37,7 +37,7 @@ with tempfile.TemporaryDirectory() as tmp,sync_playwright() as p:
   pg.clock.set_fixed_time('2026-10-26T00:00:05Z');pg.wait_for_function('stamps.filter(s=>s.canvas==="live-watermark").some(s=>s.text.includes("08:00:05"))')
   if index==1:
    out=ROOT/'evidence/full-frame';out.mkdir(parents=True,exist_ok=True);pg.screenshot(path=str(out/f'{engine}-portrait-live.png'))
-  pg.click('#shutter');pg.wait_for_function('!document.querySelector("#capture-save").hidden',timeout=60000);assert pg.locator('#live-watermark').is_hidden();assert pg.evaluate('watches.size')==0
+  pg.click('#shutter');pg.wait_for_function('!document.querySelector("#capture-save").hidden',timeout=60000);assert pg.locator('#live-watermark').is_hidden();assert pg.evaluate('watches.size')==1
   with pg.expect_download() as dl:pg.click('#capture-save')
   dest=Path(tmp)/f'{index}.jpg';dl.value.save_as(str(dest));im=Image.open(dest)
   expected=(2000,3000) if mode=='native' else (800,1200) if mode=='exif' else (w,h)

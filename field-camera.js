@@ -27,6 +27,7 @@
     liveResize?.disconnect();
     liveResize = null;
     if ($("#live-watermark")) $("#live-watermark").hidden = true;
+    if (active) active.drawLive = null;
     if (stream) stream.getTracks().forEach((t) => t.stop());
     stream = null;
   }
@@ -39,7 +40,11 @@
     if (previewURL) URL.revokeObjectURL(previewURL);
     previewURL = null;
   }
-  function gps() {
+  function gps(current = active) {
+    const cached = current?.liveGPS;
+    const age = cached ? Date.now() - cached.timestamp : Infinity;
+    if (cached && Number.isFinite(age) && age >= 0 && age <= 5000)
+      return Promise.resolve({ ...cached });
     return new Promise((yes, no) => {
       if (!navigator.geolocation) return no(Error("此瀏覽器不支援定位"));
       navigator.geolocation.getCurrentPosition(
@@ -66,7 +71,7 @@
                 e.message,
             ),
           ),
-        { enableHighAccuracy: true, timeout: 20000, maximumAge: 0 },
+        { enableHighAccuracy: true, timeout: 20000, maximumAge: 5000 },
       );
     });
   }
@@ -234,21 +239,31 @@
       media = $("#camera-media");
     canvas.hidden = false;
     function draw() {
-      if (!active || token !== session || video.hidden || !video.videoWidth)
+      if (
+        !active ||
+        token !== session ||
+        current.phase !== "live" ||
+        video.hidden ||
+        !video.videoWidth
+      )
         return;
       const width = video.videoWidth,
         height = video.videoHeight,
         rect = media.getBoundingClientRect(),
         scale = Math.min(rect.width / width, rect.height / height),
-        dpr = window.devicePixelRatio || 1;
+        dpr = Math.min(window.devicePixelRatio || 1, 2);
       if (!scale) return;
       const w = width * scale,
         h = height * scale;
       canvas.style.width = w + "px";
       canvas.style.height = h + "px";
-      canvas.width = Math.max(1, Math.round(w * dpr));
-      canvas.height = Math.max(1, Math.round(h * dpr));
+      const cw = Math.max(1, Math.round(w * dpr)),
+        ch = Math.max(1, Math.round(h * dpr));
+      if (canvas.width !== cw) canvas.width = cw;
+      if (canvas.height !== ch) canvas.height = ch;
       const x = canvas.getContext("2d");
+      x.setTransform(1, 0, 0, 1, 0, 0);
+      x.clearRect(0, 0, canvas.width, canvas.height);
       x.scale(canvas.width / width, canvas.height / height);
       const location =
         current.liveGPS && Date.now() - current.liveGPS.timestamp <= 60000
@@ -306,7 +321,8 @@
     liveResize = new ResizeObserver(draw);
     liveResize.observe(media);
     video.onresize = draw;
-    liveTimer = setInterval(draw, 250);
+    active.drawLive = draw;
+    liveTimer = setInterval(draw, 1000);
     draw();
   }
   async function decodePhoto(blob) {
@@ -347,78 +363,19 @@
     frame.width = video.videoWidth;
     frame.height = video.videoHeight;
     frame.getContext("2d").drawImage(video, 0, 0);
-    return { original: await blobOf(frame, 0.98), frame };
+    return { original: backend() ? await blobOf(frame, 0.98) : null, frame };
   }
-  // Use only camera capabilities exposed by the browser; never simulate a wide lens by cropping.
+  // Real hardware zoom or an explicitly identified ultra-wide lens; never fake 0.5× by cropping.
   async function cameraTools(token) {
     const currentStream = stream,
-      track = currentStream?.getVideoTracks?.()[0],
-      tools = $("#camera-optics"),
-      zoomRow = $("#camera-zoom-row"),
-      slider = $("#camera-zoom"),
-      output = $("#camera-zoom-value"),
-      lensRow = $("#camera-lens-row"),
-      select = $("#camera-lens"),
-      note = $("#camera-optics-note");
+      track = currentStream?.getVideoTracks?.()[0];
     let caps = {},
-      settings = {};
+      settings = {},
+      cameras = [];
     try {
       caps = track?.getCapabilities?.() || {};
       settings = track?.getSettings?.() || {};
     } catch (_) {}
-    const range = caps.zoom,
-      hasZoom =
-        !!track?.applyConstraints &&
-        Number.isFinite(range?.min) &&
-        Number.isFinite(range?.max) &&
-        range.min > 0 &&
-        range.max > range.min;
-    const showZoom = (value) => {
-      slider.value = value;
-      output.textContent =
-        Number(value)
-          .toFixed(2)
-          .replace(/\.?0+$/, "") + "×";
-    };
-    zoomRow.hidden = !hasZoom;
-    if (hasZoom) {
-      slider.min = range.min;
-      slider.max = range.max;
-      slider.step =
-        Number.isFinite(range.step) && range.step > 0 ? range.step : "any";
-      showZoom(
-        Math.min(range.max, Math.max(range.min, settings.zoom ?? range.min)),
-      );
-      let pending = null,
-        applying = false;
-      slider.oninput = async () => {
-        pending = Number(slider.value);
-        if (applying) return;
-        applying = true;
-        while (
-          pending !== null &&
-          active &&
-          token === session &&
-          stream === currentStream
-        ) {
-          const value = pending;
-          pending = null;
-          try {
-            await track.applyConstraints({ advanced: [{ zoom: value }] });
-            if (token !== session || stream !== currentStream) break;
-            if (pending === null) showZoom(track.getSettings?.().zoom ?? value);
-            note.textContent = "縮放已套用；超廣角需選擇手機提供的鏡頭。";
-          } catch (_) {
-            if (token !== session || stream !== currentStream) break;
-            pending = null;
-            showZoom(track.getSettings?.().zoom ?? settings.zoom ?? range.min);
-            note.textContent = "此鏡頭無法套用該縮放，已保留目前倍率。";
-          }
-        }
-        applying = false;
-      };
-    }
-    let cameras = [];
     try {
       cameras = (
         (await navigator.mediaDevices.enumerateDevices?.()) || []
@@ -430,9 +387,109 @@
       );
     } catch (_) {}
     if (!active || token !== session || stream !== currentStream) return;
-    const hasLenses = cameras.length > 1;
-    lensRow.hidden = !hasLenses;
-    if (hasLenses) {
+    const tools = $("#camera-optics"),
+      buttons = $("#camera-zoom-buttons"),
+      note = $("#camera-optics-note"),
+      select = $("#camera-lens");
+    const ultra = (d) =>
+      /ultra[\s-]*wide|超廣角|超广角|超広角|0[.,]5\s*[x×]/i.test(
+        d?.label || "",
+      );
+    const current = cameras.find((d) => d.deviceId === settings.deviceId);
+    const wide = cameras.find(ultra);
+    const main = cameras.find(
+      (d) =>
+        !ultra(d) &&
+        !/tele|望遠|长焦|長焦/i.test(d.label) &&
+        /back|rear|environment|後置|后置|後鏡|主鏡|wide/i.test(d.label),
+    );
+    const range = caps.zoom;
+    const hasZoom =
+      !!track?.applyConstraints &&
+      Number.isFinite(range?.min) &&
+      Number.isFinite(range?.max) &&
+      range.min > 0 &&
+      range.max >= range.min;
+    const base = hasZoom && range.min < 1 ? 1 : ultra(current) ? 0.5 : 1;
+    const zoom = Number.isFinite(settings.zoom) ? settings.zoom : 1;
+    const actual = base * zoom;
+    const nativeValue = (value) => {
+      const raw = value / base;
+      if (!hasZoom || raw < range.min || raw > range.max) return null;
+      const snapped =
+        Number.isFinite(range.step) && range.step > 0
+          ? range.min + Math.round((raw - range.min) / range.step) * range.step
+          : raw;
+      return Math.abs(snapped - raw) < 0.001 ? raw : null;
+    };
+    const targetLens = (value) =>
+      value === 0.5 && wide && !ultra(current)
+        ? wide
+        : value === 1 && main && ultra(current)
+          ? main
+          : null;
+    buttons.replaceChildren();
+    for (const value of [0.5, 1, 2, 3]) {
+      const native = nativeValue(value),
+        lens = native === null ? targetLens(value) : null;
+      const supported = !!lens || native !== null || value === actual;
+      if (value > 1 && !supported) continue;
+      const button = document.createElement("button");
+      button.type = "button";
+      button.dataset.zoom = value;
+      button.textContent = value.toFixed(1) + "×";
+      button.disabled = !supported;
+      button.setAttribute(
+        "aria-pressed",
+        String(Math.abs(actual - value) < 0.001),
+      );
+      if (!supported) button.title = "此瀏覽器未提供此倍率或鏡頭";
+      button.onclick = async () => {
+        if (
+          !active ||
+          active.busy ||
+          active.phase !== "live" ||
+          token !== session
+        )
+          return;
+        if (!lens && (native === null || Math.abs(actual - value) < 0.001))
+          return;
+        const control = active;
+        control.busy = true;
+        $("#shutter").disabled = true;
+        buttons.querySelectorAll("button").forEach((b) => (b.disabled = true));
+        try {
+          if (lens) {
+            const previous = settings.deviceId;
+            const opened = await startVideo(++session, lens.deviceId);
+            if (!opened && active === control && previous) {
+              await startVideo(++session, previous);
+              if (active === control)
+                $("#camera-optics-note").textContent =
+                  "此鏡頭無法開啟，已回復原鏡頭。";
+            }
+          } else if (native !== null) {
+            await track.applyConstraints({ advanced: [{ zoom: native }] });
+            if (active === control && stream === currentStream)
+              await cameraTools(token);
+          }
+        } catch (_) {
+          if (active === control && stream === currentStream) {
+            await cameraTools(token);
+            $("#camera-optics-note").textContent =
+              "此倍率無法套用，已保留目前倍率。";
+          }
+        } finally {
+          if (active === control) {
+            control.busy = false;
+            $("#shutter").disabled = control.phase !== "live";
+          }
+        }
+      };
+      buttons.append(button);
+    }
+    $("#camera-lens-row").hidden = cameras.length < 2;
+    if (cameras.length > 1) {
       select.innerHTML =
         (cameras.some((d) => d.deviceId === settings.deviceId)
           ? ""
@@ -443,19 +500,25 @@
               `<option value="${E(d.deviceId)}">${E(d.label || "相機 " + (i + 1))}</option>`,
           )
           .join("");
-      if (cameras.some((d) => d.deviceId === settings.deviceId))
-        select.value = settings.deviceId;
-      select.onchange = () => startVideo(++session, select.value);
+      select.value = settings.deviceId || "";
+      select.onchange = async () => {
+        if (!active || active.busy || active.phase !== "live") return;
+        const control = active,
+          previous = active.deviceId;
+        const opened = await startVideo(++session, select.value);
+        if (!opened && active === control)
+          await startVideo(++session, previous);
+      };
     }
-    note.textContent = hasLenses
-      ? "可切換瀏覽器提供的鏡頭；若有超廣角，請在此選擇。"
-      : hasZoom
-        ? "縮放依手機支援；此瀏覽器未提供其他可選鏡頭。"
-        : "此瀏覽器未開放縮放或其他鏡頭；目前使用手機提供的相機。";
-    tools.hidden = false;
+    note.textContent =
+      wide || nativeValue(0.5) !== null || ultra(current)
+        ? "點選倍率切換；0.5× 使用瀏覽器開放的超廣角。"
+        : "此瀏覽器未開放 0.5× 超廣角；可使用已啟用的倍率。";
+    tools.hidden = active.phase !== "live";
   }
   async function startVideo(token, deviceId = active?.deviceId) {
     stopStream();
+    if (active) active.phase = "starting";
     $("#shutter").disabled = true;
     $("#camera-optics").hidden = true;
     try {
@@ -481,33 +544,35 @@
       if (!active || token !== session) return;
       active.deviceId =
         stream.getVideoTracks?.()[0]?.getSettings?.().deviceId || deviceId;
-      await cameraTools(token);
-      if (!active || token !== session) return;
-      $("#shutter").disabled = false;
+      active.phase = "live";
+      $("#shutter").disabled = !!active.busy;
       $("#camera-restart").hidden = true;
-      message("照片保留完整尺寸，不裁切。浮水印固定在長邊：直式靠左，橫式靠下。");
+      message(
+        "照片保留完整尺寸，不裁切。浮水印固定在長邊：直式靠左，橫式靠下。",
+      );
       startLivePreview(token);
+      void cameraTools(token).catch(() => {});
+      return true;
     } catch (e) {
       if (token === session && active) {
         message("無法開啟相機。請允許瀏覽器使用相機後重試：" + e.message);
         $("#camera-restart").hidden = false;
       }
+      return false;
     }
   }
   function showReview(blob, saved) {
-    if (previewURL) URL.revokeObjectURL(previewURL);
-    previewURL = URL.createObjectURL(blob);
-    const img = $("#capture-preview");
-    img.src = previewURL;
-    img.hidden = false;
-    img.onclick = () => {
-      if (active?.record)
-        viewImage(active.record.blob, fileName(active.task, active.record.id));
-    };
+    if (active.reviewBlob !== blob) {
+      if (previewURL) URL.revokeObjectURL(previewURL);
+      previewURL = URL.createObjectURL(blob);
+      active.reviewBlob = blob;
+      $("#capture-preview").src = previewURL;
+    }
+    $("#capture-preview").hidden = false;
+    $("#live-watermark").hidden = true;
     $("#video").hidden = true;
     $("#camera-optics").hidden = true;
     $("#shutter").hidden = true;
-    $("#capture-again").hidden = false;
     $("#capture-save").hidden = !saved;
     $("#capture-retry-save").hidden = saved;
     $("#capture-mode").textContent = saved
@@ -520,56 +585,64 @@
     if (!current?.pending || current.busy) return;
     current.busy = true;
     $("#capture-retry-save").disabled = true;
-    $("#capture-again").disabled = true;
     message("正在取得定位並儲存照片…");
     try {
-      const location = await gps();
-      if (!active || session !== token) return;
-      message("正在製作並保存含日期與座標的照片…");
-      const pending = current.pending,
-        blob = await jpeg(
+      const pending = current.pending;
+      if (!pending.location) {
+        const result = pending.gpsResult
+          ? await pending.gpsResult
+          : await gps(current).then((location) => ({ location }));
+        pending.gpsResult = null;
+        if (result.error) throw result.error;
+        pending.location = result.location;
+      }
+      if (active !== current || session !== token) return;
+      if (!pending.blob)
+        pending.blob = await jpeg(
           pending.frame,
           current.task,
-          location,
+          pending.location,
           pending.capturedAt,
         );
-      if (!active || session !== token) return;
+      if (active !== current || session !== token) return;
+      showReview(pending.blob, false);
+      message("正在保存照片…");
       const record = {
-        id: crypto.randomUUID(),
+        id: pending.id,
         person: current.person,
         role: isVendor(current.person) ? "vendor" : "worker",
         taskId: current.task.id,
         taskSnapshot: structuredClone(current.task),
         capturedAt: pending.capturedAt,
         timeSource: "web-shutter",
-        gps: location,
-        original: pending.original,
-        blob,
+        gps: pending.location,
+        ...(backend() && pending.original
+          ? { original: pending.original }
+          : {}),
+        blob: pending.blob,
         savedAt: new Date().toISOString(),
       };
       if (backend()) await Store.savePhoto(record);
       else await Store.put("photos", record);
-      if (!active || session !== token) return;
+      if (active !== current || session !== token) return;
       current.record = record;
-      current.pending.frame.close?.();
+      pending.frame.close?.();
       current.pending = null;
-      showReview(blob, true);
+      showReview(record.blob, true);
       message(
-        backend()
-          ? "已儲存在手機，正在回傳主機。"
-          : "照片已儲存在此裝置。按「儲存照片」可存到手機或分享。",
+        "已儲存在此裝置。點照片或空白處繼續拍攝；按「儲存照片」可存到手機或分享。" +
+          (backend() ? " 正在回傳主機。" : ""),
       );
       if (backend()) document.dispatchEvent(new Event("hub-photo-saved"));
     } catch (e) {
-      if (active && session === token) {
+      if (active === current && session === token) {
         message(e?.message || "照片尚未儲存，請確認裝置空間後重試");
         $("#capture-retry-save").hidden = false;
       }
     } finally {
-      if (active && session === token) {
+      if (active === current && session === token) {
         current.busy = false;
         $("#capture-retry-save").disabled = false;
-        $("#capture-again").disabled = false;
       }
     }
   }
@@ -577,27 +650,84 @@
     const current = active,
       token = session,
       video = $("#video");
-    if (!current || current.busy || !video.videoWidth) return;
+    if (
+      !current ||
+      current.busy ||
+      current.phase !== "live" ||
+      !video.videoWidth
+    )
+      return;
+    current.busy = true;
+    current.phase = "capturing";
     $("#shutter").disabled = true;
+    $("#camera-optics").hidden = true;
+    message("正在拍攝…");
+    const capturedAt = new Date().toISOString();
+    const gpsResult = gps(current).then(
+      (location) => ({ location }),
+      (error) => ({ error }),
+    );
+    video.pause();
     try {
-      $("#camera-optics").hidden = true;
-      const capturedAt = new Date().toISOString(),
-        { original, frame } = await fullFrame(video);
-      if (!active || session !== token) {
+      const { original, frame } = await fullFrame(video);
+      if (active !== current || session !== token) {
         frame.close?.();
         return;
       }
-      current.pending = { original, frame, capturedAt };
+      current.pending = {
+        id: crypto.randomUUID(),
+        original,
+        frame,
+        capturedAt,
+        gpsResult,
+      };
       current.record = null;
-      stopStream();
-      showReview(original, false);
+      current.phase = "review";
+      current.busy = false;
+      $("#shutter").hidden = true;
+      $("#capture-mode").textContent = "照片處理中";
       await savePending();
     } catch (e) {
-      if (!active || session !== token) return;
-      message(e?.message || "照片尚未儲存，請確認裝置空間後重試");
-      if ($("#shutter")) $("#shutter").disabled = false;
-      if ($("#camera-optics")) $("#camera-optics").hidden = false;
+      if (active !== current || session !== token) return;
+      current.busy = false;
+      current.phase = "live";
+      await video.play().catch(() => {});
+      message(e?.message || "照片尚未儲存，請重試");
+      $("#shutter").disabled = false;
+      $("#camera-optics").hidden = false;
     }
+  }
+  async function resumePreview() {
+    const current = active,
+      token = session;
+    if (!current || current.busy || current.phase !== "review") return;
+    if (current.pending || !current.record) {
+      message("這張照片尚未儲存，請先按「重試儲存」。");
+      return;
+    }
+    current.record = null;
+    current.reviewBlob = null;
+    if (previewURL) URL.revokeObjectURL(previewURL);
+    previewURL = null;
+    $("#capture-preview").hidden = true;
+    $("#capture-preview").removeAttribute("src");
+    $("#video").hidden = false;
+    for (const id of ["#capture-save", "#capture-retry-save"])
+      $(id).hidden = true;
+    $("#shutter").hidden = false;
+    $("#capture-mode").textContent = "現場拍照";
+    if (stream?.getVideoTracks?.().some((t) => t.readyState !== "ended")) {
+      current.phase = "live";
+      await $("#video")
+        .play()
+        .catch(() => {});
+      if (active !== current || token !== session) return;
+      $("#shutter").disabled = false;
+      $("#camera-optics").hidden = false;
+      $("#live-watermark").hidden = false;
+      current.drawLive?.();
+      message("相機已就緒，點「拍照」拍攝下一張。");
+    } else await startVideo(++session);
   }
   function leave() {
     if (active?.pending && !confirm("這張照片尚未儲存，確定離開？")) return;
@@ -617,11 +747,12 @@
       pending: null,
       record: null,
       busy: false,
+      phase: "starting",
     };
     dialog.classList.add("camera-mode");
     $("#dialog-title").textContent = "現場拍照";
     $("#dialog-body").innerHTML =
-      `<section class="field-camera-shell"><header class="field-camera-header"><button id="camera-back">返回任務</button><div><strong id="capture-mode">現場拍照</strong><small>${E(task.parcels.map((p) => p.section + " " + p.lot).join("、"))}</small></div></header><div id="camera-media" class="field-camera-media"><video id="video" autoplay playsinline muted></video><canvas id="live-watermark" aria-label="浮水印即時預覽" hidden></canvas><img id="capture-preview" alt="本次拍攝的照片" hidden></div><footer class="field-camera-controls"><div id="camera-optics" hidden><label id="camera-lens-row" hidden>鏡頭<select id="camera-lens" aria-label="選擇相機鏡頭"></select></label><label id="camera-zoom-row" hidden>縮放 <output id="camera-zoom-value" for="camera-zoom"></output><input id="camera-zoom" type="range" aria-label="相機縮放"></label><p id="camera-optics-note" role="status"></p></div><p id="capture-status" role="status" aria-live="polite">請允許相機及定位。</p><div class="field-camera-buttons"><button id="shutter" disabled>拍照</button><button id="camera-restart" hidden>重新開啟相機</button><button id="capture-save" hidden>儲存照片</button><button id="capture-again" hidden>繼續拍下一張</button><button id="capture-retry-save" hidden>重試儲存</button>${backend() ? '<button id="capture-retry">重試回傳</button>' : ""}</div></footer></section>`;
+      `<section class="field-camera-shell"><header class="field-camera-header"><button id="camera-back">返回任務</button><div><strong id="capture-mode">現場拍照</strong><small>${E(task.parcels.map((p) => p.section + " " + p.lot).join("、"))}</small></div></header><div id="camera-media" class="field-camera-media"><video id="video" autoplay playsinline muted></video><canvas id="live-watermark" aria-label="浮水印即時預覽" hidden></canvas><img id="capture-preview" alt="本次拍攝的照片" hidden></div><footer class="field-camera-controls"><div id="camera-optics" hidden><label id="camera-lens-row" hidden>鏡頭<select id="camera-lens" aria-label="選擇相機鏡頭"></select></label><div id="camera-zoom-buttons" role="group" aria-label="點選相機倍率"><button type="button" data-zoom="0.5" disabled>0.5×</button><button type="button" data-zoom="1" disabled>1.0×</button></div><p id="camera-optics-note" role="status"></p></div><p id="capture-status" role="status" aria-live="polite">請允許相機及定位。</p><div class="field-camera-buttons"><button id="shutter" disabled>拍照</button><button id="camera-restart" hidden>重新開啟相機</button><button id="capture-save" hidden>儲存照片</button><button id="capture-retry-save" hidden>重試儲存</button>${backend() ? '<button id="capture-retry">重試回傳</button>' : ""}</div></footer></section>`;
     if (!dialog.open) dialog.showModal();
     $("#camera-back").onclick = leave;
     $("#shutter").onclick = capture;
@@ -633,24 +764,21 @@
         );
     };
     $("#capture-retry-save").onclick = savePending;
-    $("#capture-again").onclick = () => {
-      if (active?.pending && !confirm("目前照片尚未儲存，確定重新拍攝？"))
+    $(".field-camera-shell").onclick = (e) => {
+      if (e.defaultPrevented || e.target.closest("button,a,input,select,label"))
         return;
-      active.pending?.frame?.close?.();
-      active.pending = null;
-      active.record = null;
-      $("#capture-preview").hidden = true;
-      $("#video").hidden = false;
-      for (const id of [
-        "#capture-save",
-        "#capture-again",
-        "#capture-retry-save",
-      ])
-        $(id).hidden = true;
-      $("#shutter").hidden = false;
-      $("#shutter").disabled = true;
-      $("#capture-mode").textContent = "現場拍照";
-      startVideo(++session);
+      void resumePreview();
+    };
+    $("#capture-preview").tabIndex = 0;
+    $("#capture-preview").setAttribute(
+      "aria-label",
+      "點選照片返回取景，繼續拍攝下一張",
+    );
+    $("#capture-preview").onkeydown = (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        void resumePreview();
+      }
     };
     if ($("#capture-retry"))
       $("#capture-retry").onclick = () =>
