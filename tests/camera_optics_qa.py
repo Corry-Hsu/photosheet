@@ -8,7 +8,7 @@ import json, os
 engine = os.getenv('PS_TEST_ENGINE', 'chromium')
 fixture = json.loads((ROOT/'tests/fixtures/worker-1.json').read_text())
 shim = r'''(()=>{
-window.opticsMode='supported';window.tracks=[];window.requests=[];window.zoomCalls=[];
+window.zoomStep=.05;window.opticsMode='supported';window.tracks=[];window.requests=[];window.zoomCalls=[];
 window.failZoom=false;window.failLens=false;window.holdLens=false;window.holdEnumeration=false;
 window.gpsCalls=0;window.watches=new Set();let sequence=0;
 Object.defineProperty(HTMLVideoElement.prototype,'videoWidth',{get:()=>1600});
@@ -22,7 +22,7 @@ getUserMedia:async constraints=>{
  requests.push(constraints);const id=constraints.video.deviceId?.exact||'rear-main';
  if(failLens&&id==='rear-wide')throw Error('lens unavailable');
  const settings={deviceId:id,zoom:1,facingMode:'environment'};
- const track={stopped:false,readyState:'live',stop(){this.stopped=true;this.readyState='ended'},getSettings:()=>({...settings}),getCapabilities:()=>opticsMode==='unsupported'||opticsMode==='physical'?{}:{zoom:{min:.5,max:4,step:.1}},applyConstraints:async c=>{zoomCalls.push(c);if(failZoom)throw Error('zoom rejected');settings.zoom=c.advanced[0].zoom}};
+ const track={stopped:false,readyState:'live',stop(){this.stopped=true;this.readyState='ended'},getSettings:()=>({...settings}),getCapabilities:()=>opticsMode==='unsupported'||opticsMode==='physical'?{}:{zoom:opticsMode==='physical-zoom'?{min:1,max:3,step:.1}:{min:.5,max:4,step:zoomStep}},applyConstraints:async c=>{zoomCalls.push(c);if(failZoom)throw Error('zoom rejected');settings.zoom=c.advanced[0].zoom}};
  tracks.push(track);if(holdLens&&id==='rear-wide')await new Promise(r=>window.releaseLens=r);
  return {getTracks:()=>[track],getVideoTracks:()=>[track]};
 },enumerateDevices:async()=>{
@@ -64,8 +64,10 @@ with sync_playwright() as p:
     zoom('0.5');assert pg.evaluate('tracks.at(-1).getSettings().zoom')==.5
     assert pg.evaluate('requests.length')==1  # Hardware zoom avoids reopening a lens.
     zoom('1');assert pg.evaluate('tracks.at(-1).getSettings().zoom')==1
-    zoom('2');pg.evaluate('failZoom=true');zoom('3')
-    assert pg.evaluate('tracks.at(-1).getSettings().zoom')==2
+    assert pg.locator('#camera-zoom-buttons button').all_text_contents()==['0.5×','0.75×','1.0×']
+    zoom('0.75');assert pg.evaluate('tracks.at(-1).getSettings().zoom')==.75
+    zoom('1');pg.evaluate('failZoom=true');zoom('0.75')
+    assert pg.evaluate('tracks.at(-1).getSettings().zoom')==1
     assert '無法套用' in pg.locator('#camera-optics-note').inner_text()
     pg.evaluate('failZoom=false')
     # A saved picture returns to the warm stream only on non-button taps.
@@ -110,6 +112,11 @@ with sync_playwright() as p:
     assert pg.evaluate('tracks.at(-1).getSettings().deviceId')=='rear-main'
     assert '回復原鏡頭' in pg.locator('#camera-optics-note').inner_text()
     back()
+    pg.evaluate("opticsMode='physical-zoom';failLens=false");open_camera();ready();zoom('0.5');ready();zoom('0.75')
+    assert pg.evaluate('tracks.at(-1).getSettings().zoom')==1.5
+    assert pg.locator('[data-zoom="0.75"]').get_attribute('aria-pressed')=='true';back()
+    pg.evaluate("opticsMode='supported';zoomStep=.1");open_camera();ready()
+    assert pg.locator('[data-zoom="0.75"]').is_disabled();back()
     pg.evaluate("opticsMode='unsupported'");open_camera();ready()
     assert pg.locator('[data-zoom="0.5"]').is_disabled()
     assert pg.locator('[data-zoom="1"]').is_enabled()
@@ -119,7 +126,7 @@ with sync_playwright() as p:
     assert pg.evaluate('tracks.at(-1).getSettings().zoom')==.5;back()
     # A late stream after leaving must be released, too.
     pg.evaluate("opticsMode='physical';failLens=false;holdLens=true");open_camera();ready()
-    pg.select_option('#camera-lens','rear-wide');pg.wait_for_function('typeof releaseLens==="function"')
+    pg.click('#camera-lens-menu summary');pg.select_option('#camera-lens','rear-wide');pg.wait_for_function('typeof releaseLens==="function"')
     pg.click('#camera-back');pg.wait_for_selector('#detail-board');pg.evaluate('releaseLens()')
     pg.wait_for_function('tracks.every(t=>t.stopped)&&watches.size===0')
     assert not errors,errors
