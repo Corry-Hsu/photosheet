@@ -34,9 +34,10 @@ body[data-worker] .field-camera-shell {
 body[data-worker] .field-camera-header {
   position: relative;
   display: flex;
-  gap: 12px;
+  gap: 6px;
   align-items: center;
-  padding: calc(8px + env(safe-area-inset-top)) 12px 8px;
+  padding: calc(2px + env(safe-area-inset-top)) 8px 2px;
+  font-size: 13px;
   background: #10231c;
   color: white;
 }
@@ -45,15 +46,13 @@ body[data-worker] .field-camera-header > div {
   flex: 1;
 }
 body[data-worker] .field-camera-header small {
-  display: block;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  margin-top: 3px;
+  display: none;
 }
 body[data-worker] .field-camera-header button,
 body[data-worker] .field-camera-buttons button {
   min-height: 44px;
+  padding: 4px 10px;
+  font-size: 13px;
   background: #193e30;
   color: #fff;
   border: 1px solid #8ba89b;
@@ -80,17 +79,23 @@ body[data-worker] .field-camera-shell [hidden] {
   display: none !important;
 }
 body[data-worker] .field-camera-controls {
-  padding: 8px 12px calc(10px + env(safe-area-inset-bottom));
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 4px 6px;
+  padding: 4px 8px calc(4px + env(safe-area-inset-bottom));
   background: #10231c;
   color: white;
 }
 body[data-worker] .field-camera-controls p {
-  font-size: 13px;
-  line-height: 1.4;
-  margin: 0 0 8px;
+  font-size: 11px;
+  line-height: 1.3;
+  margin: 0;
   overflow-wrap: anywhere;
 }
 body[data-worker] .field-camera-buttons {
+  grid-column: 2;
+  grid-row: 1;
   display: flex;
   gap: 8px;
   justify-content: center;
@@ -99,10 +104,10 @@ body[data-worker] .field-camera-buttons {
 body[data-worker] #shutter {
   background: white;
   color: #12372a;
-  font-size: 20px;
+  font-size: 15px;
   font-weight: 700;
-  min-width: 135px;
-  min-height: 54px;
+  min-width: 64px;
+  min-height: 44px;
   border-radius: 28px;
 }
 body[data-worker] .field-photo-thumb {
@@ -138,7 +143,7 @@ body[data-worker] .field-image-shell button {
 }
 @media (orientation: landscape) and (max-height: 600px) {
   body[data-worker] .field-camera-shell {
-    grid-template-columns: minmax(0, 1fr) 170px;
+    grid-template-columns: minmax(0, 1fr) 112px;
     grid-template-rows: minmax(0, 1fr);
   }
   body[data-worker] .field-camera-header {
@@ -146,8 +151,8 @@ body[data-worker] .field-image-shell button {
     left: 0;
     top: 0;
     z-index: 2;
-    max-width: calc(100% - 190px);
-    padding: 6px 10px;
+    max-width: calc(100% - 124px);
+    padding: 2px 6px;
     background: #10231caa;
   }
   body[data-worker] .field-camera-header small {
@@ -183,15 +188,15 @@ body[data-worker] .field-image-shell img {
   max-width: 100%;
 }
 
-body[data-worker] #camera-optics label {
+body[data-worker] #camera-lens-menu label {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
   gap: 6px;
-  font-size: 14px;
-  margin-bottom: 8px;
+  font-size: 12px;
+  margin-bottom: 0;
 }
-body[data-worker] #camera-optics select {
+body[data-worker] #camera-lens-menu select {
   min-width: 0;
   width: 100%;
   min-height: 44px;
@@ -203,13 +208,14 @@ body[data-worker] #camera-optics select {
 body[data-worker] #camera-zoom-buttons {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 8px;
+  gap: 4px;
+  margin-bottom: 0;
 }
 body[data-worker] #camera-zoom-buttons button {
-  min-width: 54px;
+  min-width: 48px;
   min-height: 44px;
-  padding: 6px 10px;
+  padding: 4px 6px;
+  font-size: 13px;
   border: 1px solid #8ba89b;
   border-radius: 24px;
   background: #193e30;
@@ -288,4 +294,60 @@ body[data-worker] #live-watermark {
   pointer-events: none;
   border: 0;
   background: transparent;
+}
+
+/* Keep normal instructions accessible without taking space from the viewfinder. */
+body[data-worker] .camera-quiet {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+body[data-worker] #camera-optics {
+  grid-column: 1;
+  grid-row: 1;
+}
+body[data-worker] #capture-status {
+  grid-column: 1 / -1;
+}
+body[data-worker]
+  .field-camera-controls:has(#camera-optics[hidden])
+  .field-camera-buttons {
+  grid-column: 1 / -1;
+}
+body[data-worker] #camera-lens-menu summary {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 8px;
+  cursor: pointer;
+  list-style: none;
+}
+body[data-worker] #camera-lens-menu summary::-webkit-details-marker {
+  display: none;
+}
+body[data-worker] #camera-lens-menu[open] #camera-lens-row {
+  position: absolute;
+  z-index: 3;
+  top: 100%;
+  right: 8px;
+  width: min(280px, calc(100vw - 16px));
+  padding: 8px;
+  border-radius: 8px;
+  background: #10231c;
+}
+@media (orientation: landscape) and (max-height: 600px) {
+  body[data-worker] #camera-zoom-buttons {
+    display: grid;
+    grid-template-columns: 1fr;
+    width: 100%;
+  }
+  body[data-worker] #camera-optics,
+  body[data-worker] .field-camera-buttons {
+    width: 100%;
+  }
 }
