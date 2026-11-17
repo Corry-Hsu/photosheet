@@ -200,12 +200,31 @@ body[data-worker] #camera-optics select {
   border: 1px solid #8ba89b;
   border-radius: 6px;
 }
-body[data-worker] #camera-zoom {
-  width: 100%;
-  min-width: 0;
-  min-height: 32px;
-  padding: 0;
-  accent-color: #b8e4ca;
+body[data-worker] #camera-zoom-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+body[data-worker] #camera-zoom-buttons button {
+  min-width: 54px;
+  min-height: 44px;
+  padding: 6px 10px;
+  border: 1px solid #8ba89b;
+  border-radius: 24px;
+  background: #193e30;
+  color: white;
+}
+body[data-worker] #camera-zoom-buttons button[aria-pressed="true"] {
+  background: #d7f5df;
+  color: #12372a;
+  font-weight: 700;
+}
+body[data-worker] #camera-zoom-buttons button:disabled {
+  opacity: 0.45;
+}
+body[data-worker] #capture-preview {
+  cursor: pointer;
 }
 body[data-worker] #camera-optics-note {
   font-size: 12px;
