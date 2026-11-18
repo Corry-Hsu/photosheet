@@ -22,3 +22,17 @@ body[data-worker] .field-basemap-controls p {
 body[data-worker] .field-basemap-controls [hidden] {
   display: none !important;
 }
+
+/* Field pages have 10px page padding and 16px panel padding.
+   Let only the mobile map reach the viewport edges; keep controls inset. */
+@media (max-width: 980px) {
+  body[data-worker] .map-panel {
+    margin-inline: -10px;
+    border-inline: 0;
+    border-radius: 0;
+  }
+  body[data-worker] .map-panel > .map {
+    margin-inline: -16px;
+    border-radius: 0;
+  }
+}
