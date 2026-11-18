@@ -248,8 +248,9 @@
       )
         return;
       const width = video.videoWidth,
-        height = video.videoHeight,
-        rect = media.getBoundingClientRect(),
+        height = video.videoHeight;
+      media.style.setProperty("--camera-aspect", width + " / " + height);
+      const rect = media.getBoundingClientRect(),
         scale = Math.min(rect.width / width, rect.height / height),
         dpr = Math.min(window.devicePixelRatio || 1, 2);
       if (!scale) return;
@@ -395,7 +396,8 @@
       /ultra[\s-]*wide|超廣角|超广角|超広角|0[.,]5\s*[x×]/i.test(
         d?.label || "",
       );
-    const current = cameras.find((d) => d.deviceId === settings.deviceId);
+    const currentDevice = settings.deviceId || active.deviceId;
+    const current = cameras.find((d) => d.deviceId === currentDevice);
     const wide = cameras.find(ultra);
     const main = cameras.find(
       (d) =>
@@ -422,6 +424,38 @@
           : raw;
       return Math.abs(snapped - raw) < 0.001 ? raw : null;
     };
+    // Permission reveals physical lens labels. Prefer ultra-wide once per session;
+    // explicit user selections and subsequent warm captures must keep their lens.
+    if (active.preferWide && active.phase === "live" && !active.busy) {
+      const control = active;
+      if (wide && wide.deviceId !== currentDevice && !control.wideTried) {
+        control.wideTried = true;
+        const opened = await startVideo(++session, wide.deviceId);
+        if (!opened && active === control) {
+          control.preferWide = false;
+          await startVideo(++session, currentDevice || control.deviceId);
+        }
+        return;
+      }
+      control.preferWide = false;
+      const preferredZoom = nativeValue(0.5);
+      if (preferredZoom !== null && Math.abs(zoom - preferredZoom) > 0.001) {
+        control.busy = true;
+        $("#shutter").disabled = true;
+        try {
+          await track.applyConstraints({ advanced: [{ zoom: preferredZoom }] });
+        } catch (_) {
+          /* Keep the working rear camera if hardware zoom is rejected. */
+        } finally {
+          if (active === control && token === session) {
+            control.busy = false;
+            $("#shutter").disabled = control.phase !== "live";
+          }
+        }
+        if (active === control && token === session) await cameraTools(token);
+        return;
+      }
+    }
     const targetLens = (value) =>
       value === 0.5 && wide && !ultra(current)
         ? wide
@@ -459,13 +493,15 @@
         buttons.querySelectorAll("button").forEach((b) => (b.disabled = true));
         try {
           if (lens) {
-            const previous = settings.deviceId;
+            const previous = currentDevice;
             const opened = await startVideo(++session, lens.deviceId);
             if (!opened && active === control && previous) {
               await startVideo(++session, previous);
-              if (active === control)
+              if (active === control) {
+                $("#camera-optics-note").hidden = false;
                 $("#camera-optics-note").textContent =
                   "此鏡頭無法開啟，已回復原鏡頭。";
+              }
             }
           } else if (native !== null) {
             await track.applyConstraints({ advanced: [{ zoom: native }] });
@@ -475,6 +511,7 @@
         } catch (_) {
           if (active === control && stream === currentStream) {
             await cameraTools(token);
+            $("#camera-optics-note").hidden = false;
             $("#camera-optics-note").textContent =
               "此倍率無法套用，已保留目前倍率。";
           }
@@ -490,7 +527,7 @@
     $("#camera-lens-row").hidden = cameras.length < 2;
     if (cameras.length > 1) {
       select.innerHTML =
-        (cameras.some((d) => d.deviceId === settings.deviceId)
+        (cameras.some((d) => d.deviceId === currentDevice)
           ? ""
           : '<option value="" disabled selected>目前鏡頭</option>') +
         cameras
@@ -499,7 +536,7 @@
               `<option value="${E(d.deviceId)}">${E(d.label || "相機 " + (i + 1))}</option>`,
           )
           .join("");
-      select.value = settings.deviceId || "";
+      select.value = currentDevice || "";
       select.onchange = async () => {
         if (!active || active.busy || active.phase !== "live") return;
         const control = active,
@@ -509,10 +546,8 @@
           await startVideo(++session, previous);
       };
     }
-    note.textContent =
-      wide || nativeValue(0.5) !== null || ultra(current)
-        ? "點選倍率切換；0.5× 使用瀏覽器開放的超廣角。"
-        : "此瀏覽器未開放 0.5× 超廣角；可使用已啟用的倍率。";
+    note.textContent = "";
+    note.hidden = true;
     tools.hidden = active.phase !== "live";
   }
   async function startVideo(token, deviceId = active?.deviceId) {
@@ -546,9 +581,7 @@
       active.phase = "live";
       $("#shutter").disabled = !!active.busy;
       $("#camera-restart").hidden = true;
-      message(
-        "照片保留完整尺寸，不裁切。浮水印固定在長邊：直式靠左，橫式靠下。",
-      );
+      message("");
       startLivePreview(token);
       void cameraTools(token).catch(() => {});
       return true;
@@ -747,11 +780,13 @@
       record: null,
       busy: false,
       phase: "starting",
+      preferWide: true,
+      wideTried: false,
     };
     dialog.classList.add("camera-mode");
     $("#dialog-title").textContent = "現場拍照";
     $("#dialog-body").innerHTML =
-      `<section class="field-camera-shell"><header class="field-camera-header"><button id="camera-back">返回任務</button><div><strong id="capture-mode">現場拍照</strong><small>${E(task.parcels.map((p) => p.section + " " + p.lot).join("、"))}</small></div></header><div id="camera-media" class="field-camera-media"><video id="video" autoplay playsinline muted></video><canvas id="live-watermark" aria-label="浮水印即時預覽" hidden></canvas><img id="capture-preview" alt="本次拍攝的照片" hidden></div><footer class="field-camera-controls"><div id="camera-optics" hidden><label id="camera-lens-row" hidden>鏡頭<select id="camera-lens" aria-label="選擇相機鏡頭"></select></label><div id="camera-zoom-buttons" role="group" aria-label="點選相機倍率"><button type="button" data-zoom="0.5" disabled>0.5×</button><button type="button" data-zoom="0.75" disabled>0.75×</button><button type="button" data-zoom="1" disabled>1.0×</button></div><p id="camera-optics-note" role="status"></p></div><p id="capture-status" role="status" aria-live="polite">請允許相機及定位。</p><div class="field-camera-buttons"><button id="shutter" disabled>拍照</button><button id="camera-restart" hidden>重新開啟相機</button><button id="capture-save" hidden>儲存照片</button><button id="capture-retry-save" hidden>重試儲存</button>${backend() ? '<button id="capture-retry">重試回傳</button>' : ""}</div></footer></section>`;
+      `<section class="field-camera-shell"><header class="field-camera-header"><button id="camera-back">返回任務</button><div><strong id="capture-mode">現場拍照</strong><small>${E(task.parcels.map((p) => p.section + " " + p.lot).join("、"))}</small></div></header><div id="camera-media" class="field-camera-media"><video id="video" autoplay playsinline muted></video><canvas id="live-watermark" aria-label="浮水印即時預覽" hidden></canvas><img id="capture-preview" alt="本次拍攝的照片" hidden></div><footer class="field-camera-controls"><div id="camera-optics" hidden><label id="camera-lens-row" hidden>鏡頭<select id="camera-lens" aria-label="選擇相機鏡頭"></select></label><div id="camera-zoom-buttons" role="group" aria-label="點選相機倍率"><button type="button" data-zoom="0.5" disabled>0.5×</button><button type="button" data-zoom="0.75" disabled>0.75×</button><button type="button" data-zoom="1" disabled>1.0×</button></div><p id="camera-optics-note" role="status" hidden></p></div><p id="capture-status" role="status" aria-live="polite">請允許相機及定位。</p><div class="field-camera-buttons"><button id="shutter" disabled>拍照</button><button id="camera-restart" hidden>重新開啟相機</button><button id="capture-save" hidden>儲存照片</button><button id="capture-retry-save" hidden>重試儲存</button>${backend() ? '<button id="capture-retry">重試回傳</button>' : ""}</div></footer></section>`;
     if (!dialog.open) dialog.showModal();
     $("#camera-back").onclick = leave;
     $("#shutter").onclick = capture;
@@ -767,6 +802,14 @@
       if (e.defaultPrevented || e.target.closest("button,a,input,select,label"))
         return;
       void resumePreview();
+    };
+    $("#capture-preview").onload = () => {
+      const img = $("#capture-preview");
+      if (active?.phase === "review" && img.naturalWidth && img.naturalHeight)
+        $("#camera-media").style.setProperty(
+          "--camera-aspect",
+          img.naturalWidth + " / " + img.naturalHeight,
+        );
     };
     $("#capture-preview").tabIndex = 0;
     $("#capture-preview").setAttribute(

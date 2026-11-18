@@ -22,17 +22,20 @@ body[data-worker] dialog.camera-mode > .dialog-head {
 body[data-worker] dialog.camera-mode > #dialog-body {
   height: 100%;
   padding: 0;
+  overflow-y: auto;
 }
 body[data-worker] .field-camera-shell {
-  height: 100%;
-  display: grid;
-  grid-template-rows: auto minmax(0, 1fr) auto;
-  grid-template-columns: minmax(0, 1fr);
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
   min-width: 0;
   overscroll-behavior: contain;
 }
 body[data-worker] .field-camera-header {
-  position: relative;
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  flex: none;
   display: flex;
   gap: 12px;
   align-items: center;
@@ -60,6 +63,9 @@ body[data-worker] .field-camera-buttons button {
 }
 body[data-worker] .field-camera-media {
   position: relative;
+  flex: none;
+  width: 100%;
+  aspect-ratio: var(--camera-aspect, 4 / 3);
   min-width: 0;
   min-height: 0;
   overflow: hidden;
@@ -80,6 +86,11 @@ body[data-worker] .field-camera-shell [hidden] {
   display: none !important;
 }
 body[data-worker] .field-camera-controls {
+  position: sticky;
+  bottom: 0;
+  z-index: 2;
+  flex: none;
+  margin-top: auto;
   padding: 8px 12px calc(10px + env(safe-area-inset-bottom));
   background: #10231c;
   color: white;
@@ -136,43 +147,6 @@ body[data-worker] .field-image-shell button {
 .field-image-status {
   margin: 0;
 }
-@media (orientation: landscape) and (max-height: 600px) {
-  body[data-worker] .field-camera-shell {
-    grid-template-columns: minmax(0, 1fr) 170px;
-    grid-template-rows: minmax(0, 1fr);
-  }
-  body[data-worker] .field-camera-header {
-    position: absolute;
-    left: 0;
-    top: 0;
-    z-index: 2;
-    max-width: calc(100% - 190px);
-    padding: 6px 10px;
-    background: #10231caa;
-  }
-  body[data-worker] .field-camera-header small {
-    display: none;
-  }
-  body[data-worker] .field-camera-media {
-    grid-column: 1;
-    grid-row: 1;
-  }
-  body[data-worker] .field-camera-controls {
-    grid-column: 2;
-    grid-row: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding-right: calc(10px + env(safe-area-inset-right));
-  }
-  body[data-worker] .field-camera-buttons {
-    display: grid;
-  }
-  body[data-worker] #shutter {
-    min-width: 0;
-  }
-}
-
 body[data-worker] .field-camera-shell > * {
   min-width: 0;
 }
@@ -230,13 +204,6 @@ body[data-worker] #camera-optics-note {
   font-size: 12px;
   color: #d2e6da;
 }
-@media (orientation: landscape) and (max-height: 600px) {
-  body[data-worker] .field-camera-controls {
-    overflow-y: auto;
-    justify-content: safe center;
-  }
-}
-
 body[data-worker] .field-photo-toolbar,
 body[data-worker] .field-photo-zip {
   display: flex;
@@ -288,4 +255,48 @@ body[data-worker] #live-watermark {
   pointer-events: none;
   border: 0;
   background: transparent;
+}
+
+body[data-worker] #capture-status:empty {
+  display: none;
+}
+/* Keep landscape controls in one row rather than covering most of the image. */
+@media (orientation: landscape) and (min-width: 600px) {
+  body[data-worker] .field-camera-controls {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 8px 12px;
+  }
+  body[data-worker] #camera-optics {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 8px 12px;
+  }
+  body[data-worker] #camera-lens-row {
+    margin: 0;
+    flex-wrap: nowrap;
+    min-width: 0;
+  }
+  body[data-worker] #camera-lens {
+    flex: 1;
+    width: auto;
+  }
+  body[data-worker] #camera-zoom-buttons {
+    margin: 0;
+  }
+  body[data-worker] #camera-optics-note,
+  body[data-worker] #capture-status {
+    grid-column: 1 / -1;
+  }
+  body[data-worker] .field-camera-buttons {
+    grid-column: 2;
+    grid-row: 1;
+  }
+  body[data-worker]
+    .field-camera-controls:has(#camera-optics[hidden])
+    .field-camera-buttons {
+    grid-column: 1 / -1;
+  }
 }
