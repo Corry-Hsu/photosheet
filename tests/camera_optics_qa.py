@@ -126,7 +126,7 @@ with sync_playwright() as p:
     assert pg.evaluate('tracks.at(-1).getSettings().zoom')==.5;back()
     # A late stream after leaving must be released, too.
     pg.evaluate("opticsMode='physical';failLens=false;holdLens=true");open_camera();ready()
-    pg.click('#camera-lens-menu summary');pg.select_option('#camera-lens','rear-wide');pg.wait_for_function('typeof releaseLens==="function"')
+    pg.select_option('#camera-lens','rear-wide');pg.wait_for_function('typeof releaseLens==="function"')
     pg.click('#camera-back');pg.wait_for_selector('#detail-board');pg.evaluate('releaseLens()')
     pg.wait_for_function('tracks.every(t=>t.stopped)&&watches.size===0')
     assert not errors,errors
