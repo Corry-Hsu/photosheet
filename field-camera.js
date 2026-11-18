@@ -16,12 +16,8 @@
   const isVendor = (person) =>
     /^v[123]$/.test(person) || window.HubUser?.role === "vendor";
   const backend = () => !!window.HubAPI;
-  const message = (text, quiet = false) => {
-    const status = $("#capture-status");
-    if (status) {
-      status.textContent = text;
-      status.classList.toggle("camera-quiet", quiet);
-    }
+  const message = (text) => {
+    if ($("#capture-status")) $("#capture-status").textContent = text;
   };
   function stopStream() {
     clearInterval(liveTimer);
@@ -468,8 +464,6 @@
             if (!opened && active === control && previous) {
               await startVideo(++session, previous);
               if (active === control)
-                $("#camera-optics-note").classList.remove("camera-quiet");
-              if (active === control)
                 $("#camera-optics-note").textContent =
                   "此鏡頭無法開啟，已回復原鏡頭。";
             }
@@ -481,7 +475,6 @@
         } catch (_) {
           if (active === control && stream === currentStream) {
             await cameraTools(token);
-            $("#camera-optics-note").classList.remove("camera-quiet");
             $("#camera-optics-note").textContent =
               "此倍率無法套用，已保留目前倍率。";
           }
@@ -495,8 +488,6 @@
       buttons.append(button);
     }
     $("#camera-lens-row").hidden = cameras.length < 2;
-    $("#camera-lens-menu").hidden =
-      cameras.length < 2 || active.phase !== "live";
     if (cameras.length > 1) {
       select.innerHTML =
         (cameras.some((d) => d.deviceId === settings.deviceId)
@@ -518,7 +509,6 @@
           await startVideo(++session, previous);
       };
     }
-    note.classList.add("camera-quiet");
     note.textContent =
       wide || nativeValue(0.5) !== null || ultra(current)
         ? "點選倍率切換；0.5× 使用瀏覽器開放的超廣角。"
@@ -558,7 +548,6 @@
       $("#camera-restart").hidden = true;
       message(
         "照片保留完整尺寸，不裁切。浮水印固定在長邊：直式靠左，橫式靠下。",
-        true,
       );
       startLivePreview(token);
       void cameraTools(token).catch(() => {});
@@ -582,8 +571,6 @@
     $("#live-watermark").hidden = true;
     $("#video").hidden = true;
     $("#camera-optics").hidden = true;
-    $("#camera-lens-menu").hidden = true;
-    $("#camera-lens-menu").open = false;
     $("#shutter").hidden = true;
     $("#capture-save").hidden = !saved;
     $("#capture-retry-save").hidden = saved;
@@ -641,7 +628,10 @@
       pending.frame.close?.();
       current.pending = null;
       showReview(record.blob, true);
-      message("已儲存・點照片繼續拍攝" + (backend() ? " 正在回傳主機。" : ""));
+      message(
+        "已儲存在此裝置。點照片或空白處繼續拍攝；按「儲存照片」可存到手機或分享。" +
+          (backend() ? " 正在回傳主機。" : ""),
+      );
       if (backend()) document.dispatchEvent(new Event("hub-photo-saved"));
     } catch (e) {
       if (active === current && session === token) {
@@ -733,10 +723,9 @@
       if (active !== current || token !== session) return;
       $("#shutter").disabled = false;
       $("#camera-optics").hidden = false;
-      $("#camera-lens-menu").hidden = $("#camera-lens-row").hidden;
       $("#live-watermark").hidden = false;
       current.drawLive?.();
-      message("相機已就緒，點「拍照」拍攝下一張。", true);
+      message("相機已就緒，點「拍照」拍攝下一張。");
     } else await startVideo(++session);
   }
   function leave() {
@@ -762,7 +751,7 @@
     dialog.classList.add("camera-mode");
     $("#dialog-title").textContent = "現場拍照";
     $("#dialog-body").innerHTML =
-      `<section class="field-camera-shell"><header class="field-camera-header"><button id="camera-back">返回任務</button><div><strong id="capture-mode">現場拍照</strong><small>${E(task.parcels.map((p) => p.section + " " + p.lot).join("、"))}</small></div><details id="camera-lens-menu" hidden><summary>鏡頭</summary><label id="camera-lens-row" hidden>鏡頭<select id="camera-lens" aria-label="選擇相機鏡頭"></select></label></details></header><div id="camera-media" class="field-camera-media"><video id="video" autoplay playsinline muted></video><canvas id="live-watermark" aria-label="浮水印即時預覽" hidden></canvas><img id="capture-preview" alt="本次拍攝的照片" hidden></div><footer class="field-camera-controls"><div id="camera-optics" hidden><div id="camera-zoom-buttons" role="group" aria-label="點選相機倍率"><button type="button" data-zoom="0.5" disabled>0.5×</button><button type="button" data-zoom="0.75" disabled>0.75×</button><button type="button" data-zoom="1" disabled>1.0×</button></div><p id="camera-optics-note" role="status"></p></div><p id="capture-status" role="status" aria-live="polite">請允許相機及定位。</p><div class="field-camera-buttons"><button id="shutter" disabled>拍照</button><button id="camera-restart" hidden>重新開啟相機</button><button id="capture-save" hidden>儲存照片</button><button id="capture-retry-save" hidden>重試儲存</button>${backend() ? '<button id="capture-retry">重試回傳</button>' : ""}</div></footer></section>`;
+      `<section class="field-camera-shell"><header class="field-camera-header"><button id="camera-back">返回任務</button><div><strong id="capture-mode">現場拍照</strong><small>${E(task.parcels.map((p) => p.section + " " + p.lot).join("、"))}</small></div></header><div id="camera-media" class="field-camera-media"><video id="video" autoplay playsinline muted></video><canvas id="live-watermark" aria-label="浮水印即時預覽" hidden></canvas><img id="capture-preview" alt="本次拍攝的照片" hidden></div><footer class="field-camera-controls"><div id="camera-optics" hidden><label id="camera-lens-row" hidden>鏡頭<select id="camera-lens" aria-label="選擇相機鏡頭"></select></label><div id="camera-zoom-buttons" role="group" aria-label="點選相機倍率"><button type="button" data-zoom="0.5" disabled>0.5×</button><button type="button" data-zoom="0.75" disabled>0.75×</button><button type="button" data-zoom="1" disabled>1.0×</button></div><p id="camera-optics-note" role="status"></p></div><p id="capture-status" role="status" aria-live="polite">請允許相機及定位。</p><div class="field-camera-buttons"><button id="shutter" disabled>拍照</button><button id="camera-restart" hidden>重新開啟相機</button><button id="capture-save" hidden>儲存照片</button><button id="capture-retry-save" hidden>重試儲存</button>${backend() ? '<button id="capture-retry">重試回傳</button>' : ""}</div></footer></section>`;
     if (!dialog.open) dialog.showModal();
     $("#camera-back").onclick = leave;
     $("#shutter").onclick = capture;
@@ -775,10 +764,7 @@
     };
     $("#capture-retry-save").onclick = savePending;
     $(".field-camera-shell").onclick = (e) => {
-      if (
-        e.defaultPrevented ||
-        e.target.closest("button,a,input,select,label,summary,details")
-      )
+      if (e.defaultPrevented || e.target.closest("button,a,input,select,label"))
         return;
       void resumePreview();
     };

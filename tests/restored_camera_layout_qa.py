@@ -1,4 +1,4 @@
-"""Compare camera space with main and check compact controls on worker/vendor pages."""
+"""Verify the restored camera controls against PR #42 while preserving three presets."""
 from test_config import ROOT, BASE, CHROMIUM, QA_NOW
 from playwright.sync_api import sync_playwright
 import ast, copy, json, subprocess
@@ -35,19 +35,28 @@ with sync_playwright() as p:
      box=button.bounding_box();assert box['height']>=44 and box['width']>=44
      assert box['x']>=0 and box['x']+box['width']<=w+1 and box['y']+box['height']<=h+1,box
     assert pg.evaluate('getComputedStyle(document.querySelector("#video")).objectFit')=='contain'
-    assert not pg.locator('#camera-lens-menu').evaluate('(e)=>e.open')
+    assert pg.locator('#camera-lens-menu').count()==0
+    assert pg.locator('#camera-lens').is_visible()
+    assert pg.locator('#camera-optics-note').is_visible()
+    assert pg.locator('#capture-status').is_visible()
+    assert '完整尺寸' in pg.locator('#capture-status').inner_text()
+    assert pg.locator('#camera-lens').evaluate('(el)=>!!el.closest(".field-camera-controls")')
+    assert pg.locator('#capture-status').evaluate('(el)=>getComputedStyle(el).fontSize')=='13px'
+    assert pg.locator('#shutter').evaluate('(el)=>getComputedStyle(el).fontSize')=='20px'
+    if w<h:
+     assert pg.locator('#shutter').bounding_box()['width']>=135
+     assert pg.locator('.field-camera-header small').is_visible()
+     assert pg.locator('#camera-zoom-buttons').bounding_box()['y']<pg.locator('#shutter').bounding_box()['y']
     old=next(m for m in measurements if m['role']=='baseline' and m['viewport']==[w,h])
-    assert rect['width']*rect['height']>old['viewfinder'][0]*old['viewfinder'][1]*1.04,(old,rect)
-    out=ROOT/'evidence/compact-camera';out.mkdir(parents=True,exist_ok=True)
+    assert abs(rect['width']-old['viewfinder'][0])<=1 and abs(rect['height']-old['viewfinder'][1])<=1,(old,rect)
+    out=ROOT/'evidence/restored-camera';out.mkdir(parents=True,exist_ok=True)
     pg.screenshot(path=str(out/f'{role}-{w}.png'))
   if role!='baseline':
-   pg.click('#camera-lens-menu summary');assert pg.locator('#camera-lens').is_visible()
-   menu=pg.locator('#camera-lens-row').bounding_box();assert menu['x']>=0 and menu['x']+menu['width']<=320
-   pg.click('#camera-lens-menu summary');assert pg.locator('#camera-lens').is_hidden()
    pg.click('#shutter');pg.wait_for_selector('#capture-save:visible')
-   assert pg.locator('#camera-lens-menu').is_hidden()
+   assert pg.locator('#camera-optics').is_hidden()
+   assert '儲存照片' in pg.locator('#capture-status').inner_text()
    pg.click('#capture-preview');pg.wait_for_selector('#shutter:visible')
   pg.click('#camera-back');ctx.close()
  assert not errors,errors
- print(json.dumps({'measurements':measurements,'touch_targets_44px':True,'fixed_three_presets':True,'full_frame_contained':True,'errors':errors},ensure_ascii=False,indent=2))
+ print(json.dumps({'measurements':measurements,'previous_layout_and_text_sizes_restored':True,'touch_targets_44px':True,'fixed_three_presets':True,'full_frame_contained':True,'errors':errors},ensure_ascii=False,indent=2))
  browser.close()
