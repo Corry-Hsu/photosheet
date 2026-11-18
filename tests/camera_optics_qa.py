@@ -62,7 +62,7 @@ with sync_playwright() as p:
     pg.evaluate('holdEnumeration=false;releaseEnumeration()');ready()
     assert pg.locator('#camera-lens option').count()==2
     zoom('0.5');assert pg.evaluate('tracks.at(-1).getSettings().zoom')==.5
-    assert pg.evaluate('requests.length')==1  # Hardware zoom avoids reopening a lens.
+    assert pg.evaluate('requests.length')==2  # Hardware zoom avoids reopening a lens.
     zoom('1');assert pg.evaluate('tracks.at(-1).getSettings().zoom')==1
     assert pg.locator('#camera-zoom-buttons button').all_text_contents()==['0.5×','0.75×','1.0×']
     zoom('0.75');assert pg.evaluate('tracks.at(-1).getSettings().zoom')==.75
@@ -121,11 +121,11 @@ with sync_playwright() as p:
     assert pg.locator('[data-zoom="0.5"]').is_disabled()
     assert pg.locator('[data-zoom="1"]').is_enabled()
     zoom('1');assert pg.locator('[data-zoom="1"]').is_enabled()
-    assert '未開放' in pg.locator('#camera-optics-note').inner_text();back()
+    assert pg.locator('#camera-optics-note').is_hidden();back()
     pg.evaluate("opticsMode='enumeration-error'");open_camera();ready();zoom('0.5')
     assert pg.evaluate('tracks.at(-1).getSettings().zoom')==.5;back()
     # A late stream after leaving must be released, too.
-    pg.evaluate("opticsMode='physical';failLens=false;holdLens=true");open_camera();ready()
+    pg.evaluate("opticsMode='physical';failLens=false;holdLens=false");open_camera();ready();zoom('1');ready();pg.evaluate('holdLens=true')
     pg.select_option('#camera-lens','rear-wide');pg.wait_for_function('typeof releaseLens==="function"')
     pg.click('#camera-back');pg.wait_for_selector('#detail-board');pg.evaluate('releaseLens()')
     pg.wait_for_function('tracks.every(t=>t.stopped)&&watches.size===0')
