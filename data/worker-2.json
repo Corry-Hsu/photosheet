@@ -87,6 +87,180 @@
         "source": "auto",
         "confirmed": false
       }
+    },
+    {
+      "id": "砍樹:153",
+      "type": "砍樹",
+      "row": 154,
+      "serial": "153",
+      "caseNo": "1116-153",
+      "district": "琉球鄉",
+      "section": "本漁段",
+      "sectionCode": "0568",
+      "parcels": [
+        {
+          "county": "屏東縣",
+          "district": "琉球鄉",
+          "section": "本漁段",
+          "lot": "349",
+          "sectionCode": "0568"
+        }
+      ],
+      "notice": "2026-11-17",
+      "resultDate": "2026-11-17",
+      "due": "2026-11-20T17:00",
+      "vendor": "加菲貓工程行",
+      "sourcePerson": "鍾志強",
+      "area": "26.52",
+      "items": [],
+      "assignee": "p2",
+      "navigation": {
+        "point": [
+          120.38760405564516,
+          22.3460235
+        ],
+        "source": "auto",
+        "confirmed": false
+      },
+      "originalArea": "",
+      "landArea": {
+        "schemaVersion": 1,
+        "unit": "㎡",
+        "total": "26.52",
+        "signature": "[[\"屏東縣\",\"琉球鄉\",\"本漁段\",\"349\",\"0568\"]]",
+        "checkedAt": "2026-11-18T06:47:12.634Z",
+        "stale": false,
+        "parcels": [
+          {
+            "county": "屏東縣",
+            "district": "琉球鄉",
+            "section": "本漁段",
+            "lot": "349",
+            "sectionCode": "0568",
+            "area": "26.52",
+            "source": "0568.json"
+          }
+        ]
+      }
+    },
+    {
+      "id": "雜草垃圾:704",
+      "type": "雜草垃圾",
+      "row": 706,
+      "serial": "704",
+      "caseNo": "1116-701",
+      "district": "琉球鄉",
+      "section": "本漁段",
+      "sectionCode": "0568",
+      "parcels": [
+        {
+          "county": "屏東縣",
+          "district": "琉球鄉",
+          "section": "本漁段",
+          "lot": "349",
+          "sectionCode": "0568"
+        }
+      ],
+      "notice": "2026-11-17",
+      "resultDate": "2026-11-17",
+      "due": "",
+      "vendor": "迎騰工程行",
+      "sourcePerson": "范文彬",
+      "area": "26.52",
+      "items": [],
+      "assignee": "p2",
+      "navigation": {
+        "point": [
+          120.38760405564516,
+          22.3460235
+        ],
+        "source": "auto",
+        "confirmed": false
+      },
+      "originalArea": "",
+      "landArea": {
+        "schemaVersion": 1,
+        "unit": "㎡",
+        "total": "26.52",
+        "signature": "[[\"屏東縣\",\"琉球鄉\",\"本漁段\",\"349\",\"0568\"]]",
+        "checkedAt": "2026-11-18T06:47:12.634Z",
+        "stale": false,
+        "parcels": [
+          {
+            "county": "屏東縣",
+            "district": "琉球鄉",
+            "section": "本漁段",
+            "lot": "349",
+            "sectionCode": "0568",
+            "area": "26.52",
+            "source": "0568.json"
+          }
+        ]
+      }
+    },
+    {
+      "id": "雜草垃圾:708",
+      "type": "雜草垃圾",
+      "row": 710,
+      "serial": "708",
+      "caseNo": "1119-705",
+      "district": "東港鎮",
+      "section": "東新段",
+      "sectionCode": "0583",
+      "parcels": [
+        {
+          "county": "屏東縣",
+          "district": "東港鎮",
+          "section": "東新段",
+          "lot": "677",
+          "sectionCode": "0583"
+        }
+      ],
+      "notice": "2026-11-19",
+      "resultDate": "2026-11-19",
+      "due": "",
+      "vendor": "迎騰工程行",
+      "sourcePerson": "范文彬",
+      "area": "192.53",
+      "items": [],
+      "assignee": "p2",
+      "navigation": {
+        "point": [
+          120.4667888607639,
+          22.4728505
+        ],
+        "source": "auto",
+        "confirmed": false
+      },
+      "originalParcels": [
+        {
+          "county": "屏東縣",
+          "district": "",
+          "section": "東新段",
+          "lot": "677"
+        }
+      ],
+      "parcelChoices": {},
+      "originalArea": "",
+      "landArea": {
+        "schemaVersion": 1,
+        "unit": "㎡",
+        "total": "192.53",
+        "signature": "[[\"屏東縣\",\"東港鎮\",\"東新段\",\"677\",\"0583\"]]",
+        "checkedAt": "2026-11-18T06:47:12.634Z",
+        "stale": false,
+        "parcels": [
+          {
+            "county": "屏東縣",
+            "district": "東港鎮",
+            "section": "東新段",
+            "lot": "677",
+            "sectionCode": "0583",
+            "area": "192.53",
+            "source": "0583.json"
+          }
+        ]
+      }
     }
   ],
   "features": [
@@ -426,6 +600,118 @@
         22.424103,
         120.4954,
         22.427942
+      ]
+    },
+    {
+      "id": "0568:349",
+      "code": "0568",
+      "lot": "349",
+      "lands": [],
+      "polygons": [
+        [
+          [
+            [
+              120.387542,
+              22.346039
+            ],
+            [
+              120.38754,
+              22.346028
+            ],
+            [
+              120.387672,
+              22.345997
+            ],
+            [
+              120.38768,
+              22.346019
+            ],
+            [
+              120.387542,
+              22.346039
+            ]
+          ]
+        ]
+      ],
+      "bbox": [
+        120.38754,
+        22.345997,
+        120.38768,
+        22.346039
+      ]
+    },
+    {
+      "id": "0583:677",
+      "code": "0583",
+      "lot": "677",
+      "lands": [],
+      "polygons": [
+        [
+          [
+            [
+              120.466839,
+              22.472998
+            ],
+            [
+              120.466778,
+              22.472906
+            ],
+            [
+              120.466774,
+              22.472875
+            ],
+            [
+              120.466746,
+              22.472785
+            ],
+            [
+              120.466705,
+              22.472451
+            ],
+            [
+              120.466715,
+              22.472448
+            ],
+            [
+              120.466756,
+              22.472776
+            ],
+            [
+              120.466768,
+              22.472826
+            ],
+            [
+              120.466784,
+              22.472777
+            ],
+            [
+              120.466743,
+              22.472442
+            ],
+            [
+              120.466762,
+              22.472438
+            ],
+            [
+              120.466772,
+              22.472528
+            ],
+            [
+              120.466806,
+              22.472822
+            ],
+            [
+              120.466839,
+              22.472998
+            ]
+          ]
+        ]
+      ],
+      "bbox": [
+        120.466705,
+        22.472438,
+        120.466839,
+        22.472998
       ]
     }
   ]

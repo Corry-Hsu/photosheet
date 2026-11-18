@@ -42,7 +42,7 @@
       "due": "1900-01-02T17:00",
       "vendor": "加菲貓工程行",
       "sourcePerson": "鍾志強",
-      "area": "",
+      "area": "10087.28",
       "items": [],
       "assignee": "p1",
       "navigation": {
@@ -52,6 +52,26 @@
         ],
         "source": "auto",
         "confirmed": false
+      },
+      "originalArea": "",
+      "landArea": {
+        "schemaVersion": 1,
+        "unit": "㎡",
+        "total": "10087.28",
+        "signature": "[[\"屏東縣\",\"屏東市\",\"舊酒廠段\",\"3-1\",\"1713\"]]",
+        "checkedAt": "2026-11-18T06:47:12.634Z",
+        "stale": false,
+        "parcels": [
+          {
+            "county": "屏東縣",
+            "district": "屏東市",
+            "section": "舊酒廠段",
+            "lot": "3-1",
+            "sectionCode": "1713",
+            "area": "10087.28",
+            "source": "1713.json"
+          }
+        ]
       }
     },
     {
@@ -169,7 +189,7 @@
       "due": "1900-01-02T17:00",
       "vendor": "加菲貓工程行",
       "sourcePerson": "鍾志強",
-      "area": "",
+      "area": "86.86",
       "items": [],
       "assignee": "p1",
       "navigation": {
@@ -179,6 +199,81 @@
         ],
         "source": "auto",
         "confirmed": false
+      },
+      "originalArea": "",
+      "landArea": {
+        "schemaVersion": 1,
+        "unit": "㎡",
+        "total": "86.86",
+        "signature": "[[\"屏東縣\",\"內埔鄉\",\"中林段\",\"245\",\"0437\"]]",
+        "checkedAt": "2026-11-18T06:47:12.634Z",
+        "stale": false,
+        "parcels": [
+          {
+            "county": "屏東縣",
+            "district": "內埔鄉",
+            "section": "中林段",
+            "lot": "245",
+            "sectionCode": "0437",
+            "area": "86.86",
+            "source": "0437.json"
+          }
+        ]
+      }
+    },
+    {
+      "id": "砍樹:153",
+      "type": "砍樹",
+      "row": 154,
+      "serial": "153",
+      "caseNo": "1116-153",
+      "district": "琉球鄉",
+      "section": "本漁段",
+      "sectionCode": "0568",
+      "parcels": [
+        {
+          "county": "屏東縣",
+          "district": "琉球鄉",
+          "section": "本漁段",
+          "lot": "349",
+          "sectionCode": "0568"
+        }
+      ],
+      "notice": "2026-11-17",
+      "resultDate": "2026-11-17",
+      "due": "2026-11-20T17:00",
+      "vendor": "加菲貓工程行",
+      "sourcePerson": "鍾志強",
+      "area": "26.52",
+      "items": [],
+      "assignee": "p2",
+      "navigation": {
+        "point": [
+          120.38760405564516,
+          22.3460235
+        ],
+        "source": "auto",
+        "confirmed": false
+      },
+      "originalArea": "",
+      "landArea": {
+        "schemaVersion": 1,
+        "unit": "㎡",
+        "total": "26.52",
+        "signature": "[[\"屏東縣\",\"琉球鄉\",\"本漁段\",\"349\",\"0568\"]]",
+        "checkedAt": "2026-11-18T06:47:12.634Z",
+        "stale": false,
+        "parcels": [
+          {
+            "county": "屏東縣",
+            "district": "琉球鄉",
+            "section": "本漁段",
+            "lot": "349",
+            "sectionCode": "0568",
+            "area": "26.52",
+            "source": "0568.json"
+          }
+        ]
       }
     }
   ],
@@ -1153,6 +1248,44 @@
         22.668297,
         120.606928,
         22.668365
+      ]
+    },
+    {
+      "id": "0568:349",
+      "code": "0568",
+      "lot": "349",
+      "lands": [],
+      "polygons": [
+        [
+          [
+            [
+              120.387542,
+              22.346039
+            ],
+            [
+              120.38754,
+              22.346028
+            ],
+            [
+              120.387672,
+              22.345997
+            ],
+            [
+              120.38768,
+              22.346019
+            ],
+            [
+              120.387542,
+              22.346039
+            ]
+          ]
+        ]
+      ],
+      "bbox": [
+        120.38754,
+        22.345997,
+        120.38768,
+        22.346039
       ]
     }
   ]
