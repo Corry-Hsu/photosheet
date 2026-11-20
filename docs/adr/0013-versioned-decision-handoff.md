@@ -27,3 +27,5 @@
 ## 驗證與後續
 
 對應[規格完成定義](../SPECIFICATION.md#9-可驗證完成定義產品變更)，實際結果及未通過項目見[交接](../HANDOFF.md)。修改此決策時新增ADR並標示本編號被取代的確切範圍，不刪除本紀錄。
+
+後續補充：[ADR-0014](0014-clock-consistent-browser-gps-fixtures.md)明確化測試定位fixture與存圖證據；本決策仍有效。

@@ -2,6 +2,22 @@
 
 整理／本次驗證日：**2026-11-20，Asia/Taipei**。閱讀順序：[規格](SPECIFICATION.md) → [ADR索引](adr/README.md) → 本文件 → [新對話指令](START_HERE.md)。
 
+## 本次接續：P0驗證修復（2026-11-20）
+
+本節為最新接續結果；下方第1–6節保留PR #47的歷史紀錄，不把當時16/18改寫成今日全綠。
+
+- 起點：重新clone並fetch後，main／HEAD同為 `2d0b13c0d5830307ed449bc5412d63644edb3762`（PR #47）；無既有使用者改動。最終版本以 `git log -1 -- tests/vendor_manual_qa.py docs/HANDOFF.md` 查詢，不自填尚未產生的SHA。
+- 範圍：`tests/admin_scope_completion_qa.py`、`tests/vendor_manual_qa.py`、新增原生定位診斷探針與規格／ADR／交接。正式runtime與所有公開data不變。
+- 修改與理由：K-01改核對四個可見任務ID和四筆隱藏數；K-02綜合測試改成頁面時鐘一致的callback GPS，先證明有效定位，再檢查定位失敗IDB零張、恢復後原影格重試一張、正確GPS／非空JPEG。存圖成功改讀實際IDB結果，避免Promise輪詢假陽性。
+- 未採：還原舊文案、加長timeout求綠、略過廠商拍照、放寬GPS保護、改公開派工或新增後端。新[ADR-0014](adr/0014-clock-consistent-browser-gps-fixtures.md)補充0013，未取代任何產品決策。
+- 修前實測：在起點重跑兩支，均exit 1，與K-01／K-02失敗位置相同。廠商多頁診斷：可見頁面，native定位maximumAge=Infinity成功但timestamp約比固定Date新25天；maximumAge=5000、timeout=1500則code 3逾時。
+- 修後實測：兩支原腳本完整通過（廠商為合成callback定位），必要回歸`admin_history_qa.py`與`field_photo_flow_qa.py`通過；共4組，不是18組全套。無新pageerror。命令、環境及測試檔SHA-256見[P0紀錄](verification/2026-11-20-p0.json)。
+- 原生最小探針：`PHOTOSHEET_TEST_URL=http://127.0.0.1:8812/ python tests/gps_clock_probe.py` exit 0。單頁原生Date與固定Date均能取得位置，立即與5.1秒後都成功；固定Date的age為負。**未重現多頁逾時，尚未證明時鐘差是唯一根因**。合成fixture修復不代表原生定位／實機問題已排除。
+- Pages：本次查GitHub Actions，main `2d0b13c` 的[run 44646964050](https://github.com/Corry-Hsu/photosheet/actions/runs/44646964050) completed/success；本分支未合併部署。這是建置來源證據，未另作線上實機驗收。
+- 下一步：審查本次測試／文件提交；K-01已修復，K-02的綜合回歸已穩定驗證但原生多頁根因仍未完全確認。至少iPhone Safari／Android Chrome各一台確認GPS拒絕／重試、連拍與背景恢復；私人原檔／圖資、WebKit及全套本次未跑。原生最小探針不是產品通過門檻。
+
+原生對照補充：以起點的 `vendor_manual_qa.py` 只移除兩處 `clock.set_fixed_time(QA_NOW)` 後另存 `/tmp/vendor-native-date-control.py` 執行，仍在 `#capture-save` 等待逾時（exit 1）。因此不能把固定Date認定為充分或唯一原因；多頁／原生模擬定位交互作用仍待查。該暫存診斷不列入四組通過。
+
 ## 1. 版本與目前完成範圍
 
 | 項目 | 可查證基準 |
@@ -69,14 +85,14 @@
 
 ## 4. 已知問題與可重現步驟
 
-### K-01：管理範圍／完成腳本的舊文案斷言
+### K-01：管理範圍／完成腳本的舊文案斷言（歷史；本次P0已修復）
 
 - 重現：`PHOTOSHEET_TEST_URL=http://127.0.0.1:8812/ python tests/admin_scope_completion_qa.py`。
 - 失敗：腳本預期 `4 筆其他`，現行 `app.js` 顯示 `4 筆隱藏資料` 並說明手動加回。
 - 可確認：腳本前一步已見8個儲存任務、4個可見任務；不因此宣稱後續完成／空發布／回滾已由此腳本通過。
 - 下一步：依R-06～R-09改成檢查可見集合與隱藏數，不依賴已取代文案，再跑完整後半流程；不要改產品文案迎合舊測試。預期為測試更新，不需順便改正式派工。
 
-### K-02：舊廠商綜合腳本在照片儲存等待逾時
+### K-02：舊廠商綜合腳本在照片儲存等待逾時（歷史；fixture已修復，原生根因仍待查）
 
 - 重現：`PHOTOSHEET_TEST_URL=http://127.0.0.1:8812/ python tests/vendor_manual_qa.py`。此腳本用Chromium假裝置與瀏覽器地理模擬，包含多個廠商頁／批次／本機入口操作。
 - 初次結果：等 `#capture-save` 不隱藏時逾時，exit 1；不能報廠商流程全通過。

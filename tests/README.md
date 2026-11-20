@@ -1,6 +1,6 @@
 # 重現驗證與測試範圍
 
-現行規格見 [SPECIFICATION](../docs/SPECIFICATION.md)，本次commit／真實成功與失敗見 [HANDOFF](../docs/HANDOFF.md)，可讀取的結果為 [2026-11-20 baseline](../docs/verification/2026-11-20-baseline.json)。**目前基準16/18瀏覽器腳本通過，另2組失敗，不是全套綠燈。**
+現行規格見 [SPECIFICATION](../docs/SPECIFICATION.md)，本次commit／真實成功與失敗見 [HANDOFF](../docs/HANDOFF.md)，可讀取的結果為 [2026-11-20 baseline](../docs/verification/2026-11-20-baseline.json)。**歷史基準16/18，另2組失敗；P0接續修復兩組並執行必要回歸共4組通過，未重跑全套18組，不能合稱全套綠燈。** 詳見 [P0紀錄](../docs/verification/2026-11-20-p0.json)與[ADR-0014](../docs/adr/0014-clock-consistent-browser-gps-fixtures.md)。
 
 ## 環境與安全
 
@@ -59,10 +59,10 @@ python tests/land_area_converter_test.py
 | 手機地圖定位 | `field_location_qa.py` | 回呼模擬，追蹤／過期／前背景／關閉 |
 | 現場底圖 | `field_basemap_qa.py` | 合成瓦片、來源、切圖層保留覆蓋、故障備援 |
 | 緊湊清單、導航、白板PDF／PNG | `mobile_worker_qa.py` | 20筆虛構案；相機細節由專用suite負責 |
-| 管理月份／完成／空清單 | `admin_scope_completion_qa.py` | **本次失敗：舊文字斷言，後半未驗完** |
+| 管理月份／完成／空清單 | `admin_scope_completion_qa.py` | P0通過：任務ID集合／隱藏數、完成及回復後半流程 |
 | 前月搜尋、加回與再發布 | `admin_history_qa.py` | 跨年、閏月、回滾、本機備份；HISTORY_TEST_URL |
 | 鄉鎮自派／選擇發布 | `auto_dispatch_qa.py` | 11鄉鎮、p3保留、舊案保護 |
-| 手動任務＋廠商綜合 | `vendor_manual_qa.py` | **本次拍照等待失敗，診斷GPS逾時**；不能報全通過 |
+| 手動任務＋廠商綜合 | `vendor_manual_qa.py` | P0合成定位通過：GPS失敗零張／恢復重試一張；原生定位逾時仍另列 |
 | 只刪手動來源 | `manual_delete_qa.py` | 不把空號Excel誤刪；交易回復；DELETE_TEST_URL |
 | 修改／新增多地號 | `parcel_add_qa.py` | 來源追溯、空白／重複、跨段；PARCEL_TEST_URL |
 | 差異整理工作區 | `dispatch_tools_qa.py` | 攔截公開基準、欄位核准／刪除、草稿、競態；DISPATCH_TEST_URL |
@@ -95,3 +95,17 @@ python tests/bulk_photos_qa.py
 回歸結果必須記錄基準commit、命令、引擎／資料方式、成功／失敗、未測範圍。歷史evidence無Git追蹤，不是可重現的版本契約。不要將原始私人照片／備份／GPS與大量未整理日誌上傳公開repo。
 
 K-01 舊文案斷言與 K-02 廠商拍攝GPS逾時，詳見 [HANDOFF](../docs/HANDOFF.md#4-已知問題與可重現步驟)。後續先確認規格與fixture，不能為求綠燈還原被使用者拒絕的功能，亦不能只跳過失敗就宣稱全套完成。
+
+## P0接續：定位fixture與原生探針
+
+```sh
+PHOTOSHEET_TEST_URL=http://127.0.0.1:8812/ python tests/admin_scope_completion_qa.py
+PHOTOSHEET_TEST_URL=http://127.0.0.1:8812/ python tests/vendor_manual_qa.py
+HISTORY_TEST_URL=http://127.0.0.1:8812/ python tests/admin_history_qa.py
+PHOTOSHEET_TEST_URL=http://127.0.0.1:8812/ python tests/field_photo_flow_qa.py
+PHOTOSHEET_TEST_URL=http://127.0.0.1:8812/ python tests/gps_clock_probe.py
+```
+
+`vendor_manual`以頁面時鐘產生定位callback，保留真實瀏覽器相機假裝置、IDB及下載，不是原生GPS驗收。探針使用獨立context與CDP固定座標，比較原生Date／固定Date、立即／五秒後的回應；無實體定位、無相機或地圖副作用。探針輸出觀察，不要求特定版本一定逾時，也不計入四組回歸通過數。整支舊多頁腳本曾逾時，但最小探針未重現，不能推定唯一根因；原失敗留在歷史基準。
+
+原生對照補充：以起點的 `vendor_manual_qa.py` 只移除兩處 `clock.set_fixed_time(QA_NOW)` 後另存 `/tmp/vendor-native-date-control.py` 執行，仍在 `#capture-save` 等待逾時（exit 1）。因此不能把固定Date認定為充分或唯一原因；多頁／原生模擬定位交互作用仍待查。該暫存診斷不列入四組通過。
