@@ -1,0 +1,88 @@
+{
+  "date": "2026-11-20",
+  "timezone": "Asia/Taipei",
+  "base_commit": "2d0b13c0d5830307ed449bc5412d63644edb3762",
+  "tested_revision": "working tree on base_commit; script SHA-256 below; containing commit from git log",
+  "scope": "test and documentation only; runtime and public data unchanged",
+  "environment": {
+    "python": "3.12.14",
+    "playwright": "1.62.0",
+    "chromium": "156.0.8078.79",
+    "node": "v24.22.1"
+  },
+  "before": [
+    {
+      "script": "admin_scope_completion_qa.py",
+      "exit_code": 1,
+      "failure": "retired wording: 4 筆其他"
+    },
+    {
+      "script": "vendor_manual_qa.py",
+      "exit_code": 1,
+      "failure": "capture-save wait timeout; original multi-page native geolocation"
+    }
+  ],
+  "after": [
+    {
+      "command": "PHOTOSHEET_TEST_URL=http://127.0.0.1:8812/ python tests/admin_scope_completion_qa.py",
+      "exit_code": 0
+    },
+    {
+      "command": "PHOTOSHEET_TEST_URL=http://127.0.0.1:8812/ python tests/vendor_manual_qa.py",
+      "exit_code": 0
+    },
+    {
+      "command": "HISTORY_TEST_URL=http://127.0.0.1:8812/ python tests/admin_history_qa.py",
+      "exit_code": 0
+    },
+    {
+      "command": "PHOTOSHEET_TEST_URL=http://127.0.0.1:8812/ python tests/field_photo_flow_qa.py",
+      "exit_code": 0
+    }
+  ],
+  "diagnostics": {
+    "multi_page_probe": {
+      "cached_infinite_maximumAge": "success; timestamp newer than fixed Date by about 25 days",
+      "maximumAge_5000_timeout_1500": "code 3 Timeout expired"
+    },
+    "single_page_probe": {
+      "command": "PHOTOSHEET_TEST_URL=http://127.0.0.1:8812/ python tests/gps_clock_probe.py",
+      "exit_code": 0,
+      "result": "native and fixed Date both succeed immediately and after 5.1s; fixed Date has negative age; does not reproduce multi-page timeout"
+    },
+    "native_date_control": {
+      "source": "git show base_commit:tests/vendor_manual_qa.py; remove pg.clock.set_fixed_time(QA_NOW); and field.clock.set_fixed_time(QA_NOW); only",
+      "command": "PHOTOSHEET_TEST_URL=http://127.0.0.1:8812/ python /tmp/vendor-native-date-control.py",
+      "exit_code": 1,
+      "failure": "capture-save wait timeout",
+      "conclusion": "clock difference is not established as sole or sufficient cause"
+    }
+  },
+  "pages": {
+    "sha": "2d0b13c0d5830307ed449bc5412d63644edb3762",
+    "run_id": 44646964050,
+    "status": "completed",
+    "conclusion": "success",
+    "branch_changes_deployed": false
+  },
+  "script_sha256": {
+    "tests/admin_scope_completion_qa.py": "144585fa673864e318f69ba6a47ab4762289790adcb42bedb4b4db4e87a300ba",
+    "tests/vendor_manual_qa.py": "e3007cff5b9dc4005e28b2c5b6e4ddea0da8d84f85cde307ffe5088185da9e9c",
+    "tests/gps_clock_probe.py": "c2d5089802ec4803169785dd078c6113510552237f56aa29736cfce609917d6a",
+    "tests/admin_history_qa.py": "4284d9a3630a9a8186d50d9407fa046a787bea727aba7461608defef15bc216f",
+    "tests/field_photo_flow_qa.py": "953901587243287531f2e0024adc23d0f6e9878f609ff42726fedb121e89e2c4"
+  },
+  "not_run": [
+    "full 18-script suite",
+    "WebKit",
+    "iPhone Safari",
+    "Android Chrome",
+    "private original files",
+    "external imagery availability"
+  ],
+  "limitations": [
+    "4 passing suites are synthetic browser checks, not full or physical-device acceptance",
+    "native multi-page GPS timeout remains unresolved; callback fixture does not prove native behavior fixed",
+    "raw evidence, downloads, photos and diagnostics kept out of Git"
+  ]
+}

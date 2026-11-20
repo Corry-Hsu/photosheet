@@ -3,9 +3,25 @@ from playwright.sync_api import sync_playwright
 from pathlib import Path
 import json,os,tempfile,copy
 import fitz
+# Keep geolocation timestamps on the same clock as the fixed business date.
+# Native Chromium geolocation retains wall-clock timestamps under page.clock.
+gps_fixture="""(()=>{
+ window.qaGPS={fail:false,calls:[]};
+ const locate=(ok,bad,options)=>{
+  qaGPS.calls.push(options);
+  setTimeout(()=>qaGPS.fail?bad({code:3,message:'測試定位失敗'}):ok({
+   coords:{latitude:22.44,longitude:120.44,accuracy:5},timestamp:Date.now()
+  }),0);
+ };
+ Object.defineProperty(navigator,'geolocation',{configurable:true,value:{
+  getCurrentPosition:locate,
+  watchPosition(ok,bad,options){locate(ok,bad,options);return 1},
+  clearWatch(){}
+ }});
+})();"""
 engine=os.getenv('PS_TEST_ENGINE','chromium');out=ROOT/'evidence/vendor-manual';out.mkdir(parents=True,exist_ok=True)
 with tempfile.TemporaryDirectory() as temp,sync_playwright() as p:
- tmp=Path(temp);b=p.chromium.launch(executable_path=CHROMIUM,args=['--no-sandbox','--use-fake-device-for-media-stream','--use-fake-ui-for-media-stream']) if engine=='chromium' else p.webkit.launch();ctx=b.new_context(viewport={'width':390,'height':844},is_mobile=True,accept_downloads=True,permissions=['geolocation']+(['camera'] if engine=='chromium' else []),geolocation={'latitude':22.44,'longitude':120.44,'accuracy':5});ctx.route('https://tile.openstreetmap.org/**',lambda r:r.abort());pg=ctx.new_page();pg.clock.set_fixed_time(QA_NOW);errors=[];pg.on('pageerror',lambda e:errors.append(str(e)));pg.goto(BASE);pg.wait_for_function('document.querySelector("#person-filter").options.length===5')
+ tmp=Path(temp);b=p.chromium.launch(executable_path=CHROMIUM,args=['--no-sandbox','--use-fake-device-for-media-stream','--use-fake-ui-for-media-stream']) if engine=='chromium' else p.webkit.launch();ctx=b.new_context(viewport={'width':390,'height':844},is_mobile=True,accept_downloads=True,permissions=['geolocation']+(['camera'] if engine=='chromium' else []),geolocation={'latitude':22.44,'longitude':120.44,'accuracy':5});ctx.add_init_script(gps_fixture);ctx.route('https://tile.openstreetmap.org/**',lambda r:r.abort());pg=ctx.new_page();pg.clock.set_fixed_time(QA_NOW);errors=[];pg.on('pageerror',lambda e:errors.append(str(e)));pg.goto(BASE);pg.wait_for_function('document.querySelector("#person-filter").options.length===5')
  # Invalid form must stay open with data intact and without a partially added task.
  pg.click('#manual-task');pg.click('#commit-manual');assert pg.locator('#dialog').evaluate('(d)=>d.open');assert pg.evaluate('PSApp.state.tasks.length')==0;assert pg.locator('#manual-error').inner_text();pg.click('#close-dialog')
  def add_task(kind,lots,person='auto',second=False):
@@ -44,11 +60,26 @@ with tempfile.TemporaryDirectory() as temp,sync_playwright() as p:
  with field.expect_download() as dl:field.click('.doc-pdf-download')
  dest=tmp/'board.pdf';dl.value.save_as(str(dest));pdf=fitz.open(dest);assert len(pdf)==1 and sum(v<80 for v in pdf[0].get_pixmap().samples)>1000;field.click('#close-dialog')
  if engine=='chromium':
-  field.locator('[data-detail]').first.click();field.click('#detail-camera');field.wait_for_function('document.querySelector("#video").videoWidth>0');field.click('#shutter');field.wait_for_function('(async()=>{const photos=await Store.photosFor("v1",PSApp.state.tasks[0].id);return photos.length===1})()');field.wait_for_function('!document.querySelector("#capture-save").hidden');assert field.locator('#capture-count').count()==0;assert not field.evaluate('PSApp.state.tasks[0].completed||false');field.click('#camera-back');field.wait_for_selector('[data-photo-select]');assert '2 張' not in field.locator('#local-photos').inner_text();field.click('#close-dialog')
+  # Prove the fixture returns a fresh valid position before testing capture.
+  position=field.evaluate("""()=>new Promise((resolve,reject)=>navigator.geolocation.getCurrentPosition(
+   p=>resolve({latitude:p.coords.latitude,longitude:p.coords.longitude,accuracy:p.coords.accuracy,age:Date.now()-p.timestamp}),reject,
+   {enableHighAccuracy:true,maximumAge:5000,timeout:20000}))""")
+  assert position=={'latitude':22.44,'longitude':120.44,'accuracy':5,'age':0},position
+  field.evaluate('qaGPS.fail=true');field.locator('[data-detail]').first.click();field.click('#detail-camera');field.wait_for_function('document.querySelector("#video").videoWidth>0');field.click('#shutter')
+  field.wait_for_function('document.querySelector("#capture-status").textContent.includes("測試定位失敗")')
+  assert field.locator('#capture-save').is_hidden()
+  assert field.evaluate('async()=> (await Store.photosFor("v1",PSApp.state.tasks[0].id)).length')==0
+  # Retry the pending frame after GPS recovers, without pressing the shutter again.
+  field.evaluate('qaGPS.fail=false');field.click('#capture-retry-save');field.wait_for_function('!document.querySelector("#capture-save").hidden')
+  photos=field.evaluate('async()=> (await Store.photosFor("v1",PSApp.state.tasks[0].id)).map(p=>({gps:p.gps,bytes:p.blob.size}))')
+  assert len(photos)==1 and photos[0]['bytes']>0,photos
+  assert photos[0]['gps']=={'latitude':22.44,'longitude':120.44,'accuracy':5,'timestamp':int(QA_NOW.timestamp()*1000)},photos
+  assert any(call.get('maximumAge')==5000 for call in field.evaluate('qaGPS.calls'))
+  assert field.locator('#capture-count').count()==0;assert not field.evaluate('PSApp.state.tasks[0].completed||false');field.click('#camera-back');field.wait_for_selector('[data-photo-select]');assert '2 張' not in field.locator('#local-photos').inner_text();field.click('#close-dialog')
  assert not pg.evaluate('PSApp.state.tasks[0].completed||false')
  bad=copy.deepcopy(packages['vendor-1.json']);bad['tasks'][0]['type']='砍樹';ctx.unroute('**/data/vendor-1.json');ctx.route('**/data/vendor-1.json',lambda r:r.fulfill(json=bad));field.locator('#worker-tools summary').click();field.click('#reload-worker');field.wait_for_function('document.querySelector("#worker-version").textContent.includes("更新失敗")');assert field.evaluate('PSApp.state.tasks[0].type')=='雜草垃圾'
  # A new published batch discards the previous batch's device entrance override.
  fresh=copy.deepcopy(packages['vendor-1.json']);fresh['batch']='next-batch';ctx.unroute('**/data/vendor-1.json');ctx.route('**/data/vendor-1.json',lambda r:r.fulfill(json=fresh));field.click('#reload-worker');field.wait_for_function('document.querySelector("#worker-version").textContent.includes("next-batch")');assert field.evaluate('PSApp.state.tasks[0].navigation.point')==fresh['tasks'][0]['navigation']['point']
  for view in [pg,*vendor_pages]:
   for width in [360,390,1440]:view.set_viewport_size({'width':width,'height':900});assert view.evaluate('document.documentElement.scrollWidth<=innerWidth')
- assert not errors,errors;report={'engine':engine,'manual_three_types_and_cross_row_parcels':True,'manual_errors_and_rollback':True,'six_json_files':True,'fixed_vendor_types':True,'personnel_unchanged':True,'kml_geometry_and_navigation':True,'local_entrance_coordinates_reload_and_new_batch':True,'vendor_map_edit_controls_absent':True,'cross_label_package_rejected':True,'vendor_camera_no_completion_count':engine=='chromium','whiteboard_pdf':True,'responsive':True,'errors':errors};(out/f'{engine}.json').write_text(json.dumps(report,ensure_ascii=False,indent=2));print(json.dumps(report,ensure_ascii=False,indent=2));b.close()
+ assert not errors,errors;report={'engine':engine,'manual_three_types_and_cross_row_parcels':True,'manual_errors_and_rollback':True,'six_json_files':True,'fixed_vendor_types':True,'personnel_unchanged':True,'kml_geometry_and_navigation':True,'local_entrance_coordinates_reload_and_new_batch':True,'vendor_map_edit_controls_absent':True,'cross_label_package_rejected':True,'vendor_camera_no_completion_count':engine=='chromium','vendor_gps_failure_retry_single_photo':engine=='chromium','gps_fixture':'callback timestamps use fixed page clock','whiteboard_pdf':True,'responsive':True,'errors':errors};(out/f'{engine}.json').write_text(json.dumps(report,ensure_ascii=False,indent=2));print(json.dumps(report,ensure_ascii=False,indent=2));b.close()
