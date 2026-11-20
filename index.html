@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="dispatch-tools.css?v=20261111-dispatch1" />
     <link rel="stylesheet" href="land-areas.css?v=20261111-area1" />
     <link rel="stylesheet" href="admin-basemap.css?v=20261111-ortho1" />
+    <link rel="stylesheet" href="admin-monthly-stats.css?v=20261120-month1" />
   </head>
   <body data-tab="list">
     <header>
@@ -74,6 +75,14 @@
         <p>
           照片只存於這台裝置，不會回傳。請下載備份；清除瀏覽器資料會移除暫存照片。
         </p>
+      </section>
+      <section class="panel monthly-stats" id="monthly-stats" aria-labelledby="monthly-stats-title">
+        <h2 id="monthly-stats-title">每月任務統計</h2>
+        <label>統計月份：<select aria-label="統計月份" id="statistics-month"></select></label>
+        <table aria-label="各類型案件件數與地號筆數" aria-live="polite">
+          <tbody></tbody>
+        </table>
+        <p class="muted">依成果日期統計本機全部任務，包含已完成與隱藏案件，不受清單篩選影響。地號逐案累加，同地號跨案分別計筆。</p>
       </section>
       <p id="task-date-scope" class="muted"></p>
       <div class="summary" id="summary"></div>
@@ -183,6 +192,7 @@
     <script src="land-area-core.js?v=20261111-area1"></script>
     <script src="land-areas.js?v=20261111-area-codes1"></script>
     <script src="admin-basemap.js?v=20261111-ortho1"></script>
-    <script src="app.js?v=20261114-manual-delete1"></script>
+    <script src="admin-monthly-stats.js?v=20261120-month1"></script>
+    <script src="app.js?v=20261120-month1"></script>
   </body>
 </html>

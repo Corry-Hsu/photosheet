@@ -2,6 +2,21 @@
 
 整理／本次驗證日：**2026-11-20，Asia/Taipei**。閱讀順序：[規格](SPECIFICATION.md) → [ADR索引](adr/README.md) → 本文件 → [新對話指令](START_HERE.md)。
 
+## 最新功能：管理頁每月任務統計（2026-11-20）
+
+本節為本次功能交付；以下P0及第1–6節保留歷史，未將不同版本測試合併為全綠。
+
+- 開工檢查：工作目錄乾淨，fetch後主線為`2d0b13c`，本次從PR #48的`7a1b75c0bd50e4b4292f1f618f19812cb06a2fbf`建立獨立功能分支`feat/admin-monthly-statistics`；PR以`fix/verification-baseline`為基底，須先合併#48再將功能PR改指main。無使用者改動被覆蓋。交付commit由`git log -1 -- admin-monthly-stats.js`查詢。
+- 修改：新增管理專用`admin-monthly-stats.js`／CSS與`index.html`統計區，`app.js`的管理render更新統計。預設臺灣本月，可選上月，民國年月；三類與合計各列案件／地號筆數。
+- 理由與口徑：依成果日期計入本機全部任務，包括已完成、隱藏舊案、未指派與重新開放。一任務一件，地號逐案累加；同地號跨案計多筆，不以案號合併，不讀三人／三廠商派工包加總。缺日期／無效日期不計，零資料顯示0。
+- 未採：只算目前可見／當頁、以期限或實拍日分月、跨案去重地號、切換統計月便加回舊案、任意歷史月份或遠端同步。[ADR-0015](adr/0015-admin-monthly-statistics.md)局部取代R-06對新月統計的可見範圍限制；既有清單摘要、篩選／指派／完成／發布與照片保護保持原行為。
+- 影響：管理新增／刪除、改地號／日期、匯入／還原後即時計算，搜尋或完成篩選不影響月總數。聚焦／回前景即檢查月份，前景每分鐘檢查月界，跨月保留相對本月／上月，重載預設本月。現場頁不載入統計模組；無新儲存欄位、資料遷移、API或公開data變更。
+- 實際驗證：`node --test tests/core.test.cjs tests/admin-monthly-stats.test.cjs`通過（core原21個檢查＋新2個test）；新瀏覽器`admin_monthly_stats_qa.py`及必要回歸`admin_scope_completion_qa.py`、`admin_history_qa.py`三組通過。驗證使用者72件／153筆範例、已完成／隱藏／零值、清單篩選獨立、真實新增／改地號／改成果日／刪除與失敗回復、重載、臺灣跨年、320–1440px及人員頁隔離。`node --check`兩個變更JS、`git diff --check`通過。
+- 開發中失敗：舊8812伺服器無回應，改啟8813；測試直接evaluate回傳Store.put函式導致Playwright代為呼叫而報錯，改成不回傳函式的callback後通過。沒有為通過測試放寬產品規則。命令、修正前後結果與檔案SHA-256見[月統計驗證](verification/2026-11-20-monthly-stats.json)。
+- Pages：重新查詢主線`2d0b13c`的[run 44646964050](https://github.com/Corry-Hsu/photosheet/actions/runs/44646964050) completed/success；功能分支未合併、尚未部署。未提交任何原始evidence、照片、私人Excel／XML或備份。
+- 已知限制／下一步：數字只反映這個瀏覽器已匯入的資料；非全月唯一土地數，無跨裝置同步。本次未跑全套18組、實機、WebKit、私人原檔、圖資供應商；P0原生多頁GPS未解狀態仍保留。先審查並依序合併PR #48及本功能PR，再核對Pages來源commit及管理者本機資料。
+
+
 ## 本次接續：P0驗證修復（2026-11-20）
 
 本節為最新接續結果；下方第1–6節保留PR #47的歷史紀錄，不把當時16/18改寫成今日全綠。

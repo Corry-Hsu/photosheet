@@ -63,6 +63,9 @@
       return selected;
     },
   };
+  const monthlyStats = !worker && window.AdminMonthlyStats
+    ? AdminMonthlyStats.mount($("#monthly-stats"), () => state.tasks)
+    : null;
   function bind(sel, fn) {
     $(sel).onclick = async (e) => {
       try {
@@ -253,6 +256,7 @@
     }
   }
   function render() {
+    monthlyStats?.update();
     const visible = listSource();
     if (!worker) {
       const ids = new Set(visible.map((t) => t.id));
