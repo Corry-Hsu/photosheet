@@ -1,0 +1,270 @@
+/* Loaded by the manager only. Field camera and map controls retain their sizes. */
+header {
+  padding: 8px 16px;
+  min-height: 52px;
+}
+header h1 {
+  font-size: 21px;
+  margin: 0;
+}
+header a {
+  font-size: 14px;
+}
+main {
+  padding: 10px 14px;
+}
+.panel {
+  padding: 10px;
+  margin-bottom: 8px;
+  border-radius: 8px;
+}
+.toolbar {
+  gap: 6px;
+  margin: 6px 0;
+}
+button,
+.button,
+input,
+select {
+  min-height: 36px;
+  padding: 6px 10px;
+}
+input[type="checkbox"] {
+  min-height: 24px;
+  padding: 0;
+}
+details > summary {
+  cursor: pointer;
+  padding: 6px 0;
+}
+.admin-overview {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(340px, 0.7fr);
+  gap: 8px;
+  align-items: start;
+}
+.admin-overview > * {
+  min-width: 0;
+}
+#admin-tools > .toolbar {
+  margin-top: 0;
+}
+#admin-tools > .toolbar > button {
+  flex: 1 1 120px;
+}
+.vendor-entrances > summary {
+  font-size: 14px;
+}
+.status-bar {
+  margin: 4px 0 0;
+}
+.monthly-stats {
+  max-width: none;
+}
+.monthly-stats-heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+}
+.monthly-stats h2 {
+  font-size: 16px;
+  margin: 0;
+}
+.monthly-stats label {
+  font-size: 13px;
+  gap: 5px;
+}
+.monthly-stats select {
+  font-size: 14px;
+}
+.monthly-stats table {
+  margin-top: 4px;
+  font-size: 14px;
+}
+.monthly-stats th,
+.monthly-stats td {
+  padding: 5px 4px;
+}
+.admin-list-summary {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 4px 12px;
+}
+.summary {
+  margin: 2px 0;
+  gap: 12px;
+  font-size: 14px;
+}
+.summary strong {
+  font-size: 18px;
+}
+#task-date-scope {
+  margin: 2px 0;
+  font-size: 12px;
+}
+.admin-filters {
+  align-items: center;
+}
+.admin-filters #search {
+  flex: 1 1 200px;
+  min-width: 0;
+}
+.admin-filters label {
+  flex: 0 0 auto;
+  font-size: 14px;
+}
+#date-filters {
+  padding: 0 8px;
+  font-size: 14px;
+}
+.admin-filters #date-filters {
+  margin: 0;
+  flex: 0 1 auto;
+  align-self: start;
+}
+.list-panel > .toolbar > * {
+  flex: 0 0 auto;
+}
+.layout {
+  gap: 8px;
+}
+.task {
+  padding: 8px;
+  margin: 5px 0;
+  gap: 6px;
+  grid-template-columns: 24px minmax(0, 1fr) auto;
+}
+.task > div {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.task h3 {
+  font-size: 16px;
+  margin-bottom: 2px;
+}
+.task p {
+  font-size: 13px;
+  line-height: 1.35;
+  margin: 3px 0;
+}
+.badge {
+  padding: 2px 5px;
+}
+.task-row-actions {
+  gap: 4px;
+}
+.task-row-actions button {
+  font-size: 13px;
+}
+.pages {
+  margin: 6px;
+  gap: 8px;
+}
+.map-panel > .toolbar {
+  margin-top: 0;
+}
+.map-note:empty {
+  display: none;
+}
+.admin-basemap-controls {
+  margin: 6px 0;
+  padding: 6px;
+}
+.admin-basemap-controls > label {
+  margin-bottom: 4px;
+  font-size: 13px;
+}
+dialog {
+  padding: 12px;
+}
+.form-grid {
+  gap: 8px;
+  margin: 8px 0;
+}
+@media (max-width: 1100px) {
+  .admin-overview {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+}
+@media (max-width: 980px) {
+  header {
+    padding: 6px 10px;
+    align-items: center;
+  }
+  header h1 {
+    font-size: 19px;
+  }
+  main {
+    padding: 6px;
+  }
+  button,
+  .button,
+  input,
+  select {
+    min-height: 44px;
+    padding: 6px 8px;
+  }
+  input[type="checkbox"] {
+    min-height: 24px;
+  }
+  .panel {
+    padding: 8px;
+    margin-bottom: 6px;
+  }
+  #admin-tools > .toolbar {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+  #admin-tools > .toolbar > button {
+    font-size: 14px;
+    padding: 5px 4px;
+    min-width: 0;
+  }
+  #admin-tools #dispatch-tools,
+  #admin-tools #publish {
+    grid-column: span 2;
+  }
+  .monthly-stats-heading {
+    gap: 4px;
+  }
+  .monthly-stats th,
+  .monthly-stats td {
+    padding: 4px;
+  }
+  .admin-filters > * {
+    flex: 1 1 110px;
+    min-width: 0;
+  }
+  .admin-filters #search {
+    flex-basis: calc(100% - 160px);
+  }
+  .admin-filters #date-filters {
+    flex: 1 1 110px;
+  }
+  .admin-filters label {
+    flex: 1 1 110px;
+  }
+  .admin-filters label select {
+    flex: 1;
+    min-width: 0;
+  }
+  details > summary {
+    min-height: 44px;
+    align-content: center;
+  }
+  .mobile-tabs {
+    margin: 6px 0;
+    gap: 6px;
+  }
+  .task {
+    grid-template-columns: 24px minmax(0, 1fr);
+  }
+  dialog {
+    padding: 10px;
+  }
+}

@@ -11,35 +11,32 @@
     <link rel="stylesheet" href="land-areas.css?v=20261111-area1" />
     <link rel="stylesheet" href="admin-basemap.css?v=20261111-ortho1" />
     <link rel="stylesheet" href="admin-monthly-stats.css?v=20261120-month1" />
+    <link rel="stylesheet" href="admin-compact.css?v=20261120-compact1" />
   </head>
   <body data-tab="list">
     <header>
       <div>
-        <small>PHOTOSHEET · 靜態派工</small>
         <h1 id="title">地籍任務管理</h1>
-        <div id="edition">Excel × 地籍 × 三人派工</div>
       </div>
-      <a href="photosheet-app.html">原照片排版工具</a>
+      <a href="photosheet-app.html">照片排版</a>
     </header>
     <main>
+      <div class="admin-overview">
       <section class="panel" id="admin-tools">
         <div class="toolbar">
           <button class="primary" id="import-excel">匯入 Excel</button
-          ><button id="manual-task">手動新增任務</button
-          ><button id="import-geo">匯入 KML／XML／ZIP</button
-          ><button id="land-areas">配對地籍面積</button
-          ><button id="auto-assign">依鄉鎮自動分派</button
+          ><button id="manual-task">新增任務</button
+          ><button id="import-geo">匯入地籍</button
+          ><button id="land-areas">配對面積</button
+          ><button id="auto-assign">自動分派</button
           ><button id="people">三人設定</button
-          ><button id="backup">下載本機備份</button
+          ><button id="backup">下載備份</button
           ><button id="restore">還原備份</button
-          ><button id="dispatch-tools" class="primary">整理發布資料</button
-          ><button id="publish">選擇人員／廠商發布</button>
+          ><button id="dispatch-tools" class="primary">整理發布</button
+          ><button id="publish">發布派工</button>
         </div>
-        <p class="muted">
-          資料保存在此瀏覽器；請定期備份。發布檔將放在公開網站，分開網址不構成權限隔離。
-        </p>
         <details class="vendor-entrances">
-          <summary>廠商入口（依工作類型）</summary>
+          <summary>廠商入口</summary>
           <div class="toolbar">
             <a
               class="button"
@@ -61,9 +58,6 @@
               >圍籬廠商</a
             >
           </div>
-          <p class="muted">
-            需先產生並上傳對應 vendor-N.json，廠商只顯示該標籤的任務。
-          </p>
         </details>
         <div id="geo-summary" class="status-bar">尚未匯入地籍資料</div>
         <div id="progress" hidden></div>
@@ -77,16 +71,21 @@
         </p>
       </section>
       <section class="panel monthly-stats" id="monthly-stats" aria-labelledby="monthly-stats-title">
-        <h2 id="monthly-stats-title">每月任務統計</h2>
-        <label>統計月份：<select aria-label="統計月份" id="statistics-month"></select></label>
+        <div class="monthly-stats-heading">
+          <h2 id="monthly-stats-title">每月統計</h2>
+          <label>成果月份<select aria-label="統計月份" id="statistics-month"></select></label>
+        </div>
         <table aria-label="各類型案件件數與地號筆數" aria-live="polite">
           <tbody></tbody>
         </table>
-        <p class="muted">依成果日期統計本機全部任務，包含已完成與隱藏案件，不受清單篩選影響。地號逐案累加，同地號跨案分別計筆。</p>
       </section>
-      <p id="task-date-scope" class="muted"></p>
-      <div class="summary" id="summary"></div>
-      <div class="toolbar">
+      </div>
+      <section class="admin-list-controls" aria-label="任務篩選">
+      <div class="admin-list-summary">
+        <div class="summary" id="summary"></div>
+        <p id="task-date-scope" class="muted"></p>
+      </div>
+      <div class="toolbar admin-filters">
         <input
           id="search"
           placeholder="搜尋地段、地號、鄉鎮、案件編號"
@@ -101,16 +100,13 @@
         ><select id="geo-filter" hidden aria-hidden="true">
           <option value="">全部</option>
         </select>
-      </div>
-      <div class="toolbar">
         <label
-          >完成狀態<select id="complete-filter">
+          >完成<select id="complete-filter">
             <option value="">全部</option>
             <option value="open">未完成</option>
             <option value="done">已完成</option>
           </select></label
         >
-      </div>
       <details id="date-filters" class="panel">
         <summary>依成果日期篩選</summary>
         <div class="toolbar">
@@ -118,6 +114,8 @@
           ><label>迄日<input id="date-to" type="date" /></label>
         </div>
       </details>
+      </div>
+      </section>
       <div class="mobile-tabs">
         <button data-tab="list" class="active">任務清單</button
         ><button data-tab="map">地圖核對</button>
@@ -149,12 +147,7 @@
             ><button id="pin-mode">點地圖設定入口</button>
           </div>
           <div id="map" class="map"></div>
-          <p id="map-status" class="map-note">
-            點選任務查看全部地號。橘色圖釘為導航位置。
-          </p>
-          <p class="map-note">
-            地籍範圍不代表可通行入口。底圖需連網；底圖故障仍可核對已匯入的地籍。
-          </p>
+          <p id="map-status" class="map-note"></p>
         </section>
       </div>
     </main>
@@ -193,6 +186,6 @@
     <script src="land-areas.js?v=20261111-area-codes1"></script>
     <script src="admin-basemap.js?v=20261111-ortho1"></script>
     <script src="admin-monthly-stats.js?v=20261120-month1"></script>
-    <script src="app.js?v=20261120-month1"></script>
+    <script src="app.js?v=20261120-compact1"></script>
   </body>
 </html>
