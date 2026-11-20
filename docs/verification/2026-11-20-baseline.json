@@ -1,0 +1,242 @@
+{
+  "recordDateAsiaTaipei": "2026-11-20",
+  "implementationAndDataCommit": "8258a4226ab3f62e10c0d1ebdcd83f58f631161f",
+  "purpose": "Documentation baseline, no runtime or public dispatch edits",
+  "unitTests": {
+    "command": "node --test tests/core.test.cjs tests/dispatch-plan.test.cjs tests/land-area.test.cjs",
+    "passedFiles": 3,
+    "failedFiles": 0,
+    "status": "pass"
+  },
+  "converter": {
+    "command": "python tests/land_area_converter_test.py",
+    "passedTests": 8,
+    "status": "pass"
+  },
+  "javascriptSyntax": {
+    "command": "node --check on git ls-files *.js",
+    "files": 25,
+    "status": "pass"
+  },
+  "browser": {
+    "engine": "Chromium via Playwright, synthetic camera/GPS/tiles and isolated IndexedDB",
+    "baseUrl": "http://127.0.0.1:8812/",
+    "passed": 16,
+    "failed": 2,
+    "results": [
+      {
+        "test": "tests/full_width_camera_qa.py",
+        "status": "pass",
+        "exitCode": 0,
+        "seconds": 7.57
+      },
+      {
+        "test": "tests/camera_optics_qa.py",
+        "status": "pass",
+        "exitCode": 0,
+        "seconds": 6.14
+      },
+      {
+        "test": "tests/full_frame_live_qa.py",
+        "status": "pass",
+        "exitCode": 0,
+        "seconds": 8.88
+      },
+      {
+        "test": "tests/field_photo_flow_qa.py",
+        "status": "pass",
+        "exitCode": 0,
+        "seconds": 9.33
+      },
+      {
+        "test": "tests/bulk_photos_qa.py",
+        "status": "pass",
+        "exitCode": 0,
+        "seconds": 4.75
+      },
+      {
+        "test": "tests/field_location_qa.py",
+        "status": "pass",
+        "exitCode": 0,
+        "seconds": 2.92
+      },
+      {
+        "test": "tests/field_basemap_qa.py",
+        "status": "pass",
+        "exitCode": 0,
+        "seconds": 6.28
+      },
+      {
+        "test": "tests/mobile_worker_qa.py",
+        "status": "pass",
+        "exitCode": 0,
+        "seconds": 10.22
+      },
+      {
+        "test": "tests/admin_scope_completion_qa.py",
+        "status": "fail",
+        "exitCode": 1,
+        "seconds": 3.26
+      },
+      {
+        "test": "tests/auto_dispatch_qa.py",
+        "status": "pass",
+        "exitCode": 0,
+        "seconds": 4.9
+      },
+      {
+        "test": "tests/vendor_manual_qa.py",
+        "status": "fail",
+        "exitCode": 1,
+        "seconds": 66.89
+      },
+      {
+        "test": "tests/admin_history_qa.py",
+        "status": "pass",
+        "exitCode": 0,
+        "seconds": 6.0
+      },
+      {
+        "test": "tests/manual_delete_qa.py",
+        "status": "pass",
+        "exitCode": 0,
+        "seconds": 4.75
+      },
+      {
+        "test": "tests/parcel_add_qa.py",
+        "status": "pass",
+        "exitCode": 0,
+        "seconds": 3.76
+      },
+      {
+        "test": "tests/dispatch_tools_qa.py",
+        "status": "pass",
+        "exitCode": 0,
+        "seconds": 5.24
+      },
+      {
+        "test": "tests/land_areas_qa.py",
+        "status": "pass",
+        "exitCode": 0,
+        "seconds": 4.89
+      },
+      {
+        "test": "tests/admin_basemap_qa.py",
+        "status": "pass",
+        "exitCode": 0,
+        "seconds": 4.61
+      },
+      {
+        "test": "tests/code_kml_qa.py",
+        "status": "pass",
+        "exitCode": 0,
+        "seconds": 2.86
+      }
+    ]
+  },
+  "dispatchPackages": [
+    {
+      "file": "worker-1.json",
+      "recipient": "p1",
+      "tasks": 11,
+      "features": 8,
+      "duplicateTaskIds": 0,
+      "bytes": 37384,
+      "status": "valid",
+      "sha256": "31b487bb188fb79255c7754799c5afe4793ea507ad2e600429400c476256431b"
+    },
+    {
+      "file": "worker-2.json",
+      "recipient": "p2",
+      "tasks": 3,
+      "features": 2,
+      "duplicateTaskIds": 0,
+      "bytes": 7006,
+      "status": "valid",
+      "sha256": "7a2798fd21c236b2f7b18643797eaf764c2141334332d94062713aabc90376a7"
+    },
+    {
+      "file": "worker-3.json",
+      "recipient": "p3",
+      "tasks": 0,
+      "features": 0,
+      "duplicateTaskIds": 0,
+      "bytes": 321,
+      "status": "valid",
+      "sha256": "3559f7ed6e7e280eb8da0b58ce7f7f1259a62bfb2174ee8e76553edf3e911a1a"
+    },
+    {
+      "file": "vendor-1.json",
+      "recipient": "v1",
+      "tasks": 12,
+      "features": 10,
+      "duplicateTaskIds": 0,
+      "bytes": 32083,
+      "status": "valid",
+      "sha256": "9b47fe01250493189b194ad57e2f13cbb6fb7641ebc6d0a2bd4bdebbb94b6abc"
+    },
+    {
+      "file": "vendor-2.json",
+      "recipient": "v2",
+      "tasks": 4,
+      "features": 4,
+      "duplicateTaskIds": 0,
+      "bytes": 24150,
+      "status": "valid",
+      "sha256": "8dc51b4e5c4866bdc5b099ffe20096b0b6b39607ced973a518d0f0ad90435a23"
+    },
+    {
+      "file": "vendor-3.json",
+      "recipient": "v3",
+      "tasks": 3,
+      "features": 6,
+      "duplicateTaskIds": 0,
+      "bytes": 13824,
+      "status": "valid",
+      "sha256": "54ca06cc13b290edfea5c36bf3f3b95f6ca1d07de3cf5dc4d9bafff602e0baed"
+    }
+  ],
+  "knownFailures": [
+    {
+      "test": "tests/admin_scope_completion_qa.py",
+      "observed": "Expected legacy text \"4 筆其他\"; current app text is \"4 筆隱藏資料\". Execution stopped there.",
+      "classification": "Outdated assertion; later steps not verified by this run."
+    },
+    {
+      "test": "tests/vendor_manual_qa.py",
+      "observed": "Timed out waiting for capture-save. Diagnostic run showed GPS Timeout expired, photos=[], pending image processing and retry instruction.",
+      "classification": "Unresolved GPS/test-harness behavior. Dedicated field photo tests passed with deterministic GPS; no proof of actual phone success."
+    }
+  ],
+  "notRun": [
+    "Original user Excel/T.zip end-to-end acceptance/performance",
+    "Real iPhone Safari and Android Chrome",
+    "Current external UAV/PHOTO2 tile availability",
+    "WebKit engine in this baseline"
+  ],
+  "deploymentAtInspection": {
+    "commit": "8258a4226ab3f62e10c0d1ebdcd83f58f631161f",
+    "pagesStatus": "built",
+    "actionsRun": 44257683651,
+    "actionsConclusion": "success",
+    "branch": "main",
+    "path": "/",
+    "url": "https://corry-hsu.github.io/photosheet/"
+  },
+  "limitations": [
+    "Historical evidence files are untracked and not a baseline acceptance artifact.",
+    "No claim of OCR/photo-return/synchronization capability.",
+    "Test counts are suite/script counts, not a claim of assertion coverage."
+  ],
+  "environment": {
+    "python": "3.12.14",
+    "node": "v24.19.0",
+    "chromium": "Chromium 154.0.8037.57 built on Debian GNU/Linux 13 (trixie)",
+    "pythonPackages": {
+      "playwright": "1.62.0",
+      "Pillow": "12.3.0",
+      "openpyxl": "3.1.5",
+      "PyMuPDF": "1.26.6"
+    }
+  }
+}
