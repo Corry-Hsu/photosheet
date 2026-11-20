@@ -10,7 +10,7 @@
 - 影響模組：`index.html`、管理專用`admin-compact.css`、`app.js`管理清單範圍短文案。CSS只在管理頁載入；派工與相機／GPS／照片資料契約不變，公開data未變。
 - 前後量測：同一組12件虛構資料、960px視窗高度。1440px第一列由1100.19→392px，390px由1562.78→810px，320px由1961.38→842px；月統計390px由400.78→182px。手機控制至少44px高，桌面一般控制至少36px高；320／390／844／1440px皆無橫向溢出。窄手機仍需捲動，非一屏看完的保證。
 - 實測：新`admin_compact_qa.py`與`admin_monthly_stats_qa.py`、`admin_scope_completion_qa.py`、`manual_delete_qa.py`、`admin_basemap_qa.py`必要回歸共5組通過。涵蓋月份／篩選、真實新增／編輯／刪除／失敗回復與照片保留、完成／空發布、管理地圖入口／來源／備援／現場隔離。`node --check app.js`、`git diff --check`通過。命令、前後量測及檔案hash見[緊湊版驗證](verification/2026-11-20-compact-admin.json)。
-- 開發中失敗：首輪320px第一列1018px，未通過850px門檻；進一步調整工具欄數、縮短按鈕與合併日期篩選後842px通過，未放寬最終門檻。截圖與原始日誌只存本機`/tmp`／evidence，未提交。
+- 開發中失敗：首輪320px第一列1018px，未通過850px門檻；進一步調整工具欄數、縮短按鈕與合併日期篩選後842px通過，未放寬最終門檻。另外補查手機展開日期篩選發現橫向溢出，改成展開時獨佔整列與日期欄位自適寬度，重跑新版suite在四種寬度皆通過。截圖與原始日誌只存本機`/tmp`／evidence，未提交。
 - Pages：查主線`2d0b13c`的[run 44646964050](https://github.com/Corry-Hsu/photosheet/actions/runs/44646964050) completed/success，本功能尚未合併部署。下一步依序合併前置PR與本版，再核對Pages來源及實機布局。
 - 限制：本次無全套18組、WebKit、實機、私人原Excel／XML／大檔及圖資供應商可用性證據；P0原生多頁GPS未解仍保留。未提交私人檔案、公開派工變更或GitHub寫入憑證。
 

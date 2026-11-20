@@ -126,6 +126,19 @@ details > summary {
   flex: 0 1 auto;
   align-self: start;
 }
+.admin-filters #date-filters[open] {
+  flex: 1 0 100%;
+}
+.admin-filters #date-filters label {
+  flex: 1 1 200px;
+  flex-direction: column;
+  align-items: stretch;
+  min-width: 0;
+}
+.admin-filters #date-filters input {
+  width: 100%;
+  min-width: 0;
+}
 .list-panel > .toolbar > * {
   flex: 0 0 auto;
 }

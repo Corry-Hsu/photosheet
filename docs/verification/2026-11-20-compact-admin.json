@@ -136,10 +136,14 @@
     {
       "failure": "first compact iteration: 320px first task at 1018px failed <850px target",
       "resolution": "reduced toolbar rows, merged date filter, shortened button labels; final 842px passes same 850px threshold"
+    },
+    {
+      "failure": "expanded date filter overflowed on narrow viewport; extra date-open check failed",
+      "resolution": "expanded date filter occupies full row; date labels and inputs adapt to available width; final compact suite passed all four viewport widths"
     }
   ],
   "sha256": {
-    "admin-compact.css": "047026f13247d3732bbf28b68db2eb55d96cfcccef7a23943d171b2fb9fcc93e",
+    "admin-compact.css": "236d8568bba5f6ea05c16338920d9b82ce11f17ecc535a48e74cc0ad1b8a7d74",
     "index.html": "3cad85a878fcdb184ea81b33ac790b0db822c2bde6826885700be06b94543133",
     "app.js": "55e2f6957ef117d87c8e1c19c0d03dca5f49c6efe5f62674c49ed783cb139223",
     "tests/admin_compact_qa.py": "2d9eeba5083571266d67b63c5821c51c9345e5818f0d9a2414242e2828641049"
