@@ -1,0 +1,172 @@
+{
+  "date": "2026-11-20",
+  "timezone": "Asia/Taipei",
+  "base_commit": "2dc059396345f311f51ba2941af66dc13a30ce40",
+  "main_at_fetch": "2d0b13c0d5830307ed449bc5412d63644edb3762",
+  "dependency": "PR #49, which depends on #48; compact PR targets feat/admin-monthly-statistics",
+  "tested_revision": "working tree on base_commit; source hashes below; containing commit via git log",
+  "environment": {
+    "python": "3.12.14",
+    "playwright": "1.62.0",
+    "chromium": "156.0.8078.79"
+  },
+  "measurement": {
+    "synthetic_cases": 12,
+    "viewport_height": 960,
+    "before": {
+      "320": {
+        "first_task_top": 1961.375,
+        "task_height": 259,
+        "tools_height": 721,
+        "statistics_height": 457.375,
+        "overflow": false,
+        "min_control_height": 44,
+        "tools_buttons": 10,
+        "same_top": false
+      },
+      "390": {
+        "first_task_top": 1562.78125,
+        "task_height": 259,
+        "tools_height": 479,
+        "statistics_height": 400.78125,
+        "overflow": false,
+        "min_control_height": 44,
+        "tools_buttons": 10,
+        "same_top": false
+      },
+      "844": {
+        "first_task_top": 1255.1875,
+        "task_height": 209,
+        "tools_height": 305,
+        "statistics_height": 375.1875,
+        "overflow": false,
+        "min_control_height": 44,
+        "tools_buttons": 10,
+        "same_top": false
+      },
+      "1440": {
+        "first_task_top": 1100.1875,
+        "task_height": 170,
+        "tools_height": 205,
+        "statistics_height": 375.1875,
+        "overflow": false,
+        "min_control_height": 44,
+        "tools_buttons": 10,
+        "same_top": false
+      }
+    },
+    "after": {
+      "320": {
+        "first_task_top": 842,
+        "task_height": 177.640625,
+        "tools_height": 239,
+        "statistics_height": 210,
+        "overflow": false,
+        "min_control_height": 44,
+        "tools_buttons": 10,
+        "same_top": false
+      },
+      "390": {
+        "first_task_top": 810,
+        "task_height": 177.640625,
+        "tools_height": 235,
+        "statistics_height": 182,
+        "overflow": false,
+        "min_control_height": 44,
+        "tools_buttons": 10,
+        "same_top": false
+      },
+      "844": {
+        "first_task_top": 735,
+        "task_height": 177.640625,
+        "tools_height": 235,
+        "statistics_height": 182,
+        "overflow": false,
+        "min_control_height": 44,
+        "tools_buttons": 10,
+        "same_top": false
+      },
+      "1440": {
+        "first_task_top": 392,
+        "task_height": 134,
+        "tools_height": 165,
+        "statistics_height": 186,
+        "overflow": false,
+        "min_control_height": 36,
+        "tools_buttons": 10,
+        "same_top": true
+      }
+    }
+  },
+  "commands": [
+    {
+      "command": "PHOTOSHEET_TEST_URL=http://127.0.0.1:8814/ python tests/admin_compact_qa.py --baseline",
+      "exit_code": 0
+    },
+    {
+      "command": "PHOTOSHEET_TEST_URL=http://127.0.0.1:8814/ python tests/admin_compact_qa.py",
+      "exit_code": 0
+    },
+    {
+      "command": "PHOTOSHEET_TEST_URL=http://127.0.0.1:8814/ python tests/admin_monthly_stats_qa.py",
+      "exit_code": 0
+    },
+    {
+      "command": "PHOTOSHEET_TEST_URL=http://127.0.0.1:8814/ python tests/admin_scope_completion_qa.py",
+      "exit_code": 0
+    },
+    {
+      "command": "DELETE_TEST_URL=http://127.0.0.1:8814/ python tests/manual_delete_qa.py",
+      "exit_code": 0
+    },
+    {
+      "command": "ADMIN_MAP_TEST_URL=http://127.0.0.1:8814/ python tests/admin_basemap_qa.py",
+      "exit_code": 0
+    },
+    {
+      "command": "node --check app.js",
+      "exit_code": 0
+    },
+    {
+      "command": "git diff --check",
+      "exit_code": 0
+    }
+  ],
+  "development_failures": [
+    {
+      "failure": "first compact iteration: 320px first task at 1018px failed <850px target",
+      "resolution": "reduced toolbar rows, merged date filter, shortened button labels; final 842px passes same 850px threshold"
+    },
+    {
+      "failure": "expanded date filter overflowed on narrow viewport; extra date-open check failed",
+      "resolution": "expanded date filter occupies full row; date labels and inputs adapt to available width; final compact suite passed all four viewport widths"
+    }
+  ],
+  "sha256": {
+    "admin-compact.css": "236d8568bba5f6ea05c16338920d9b82ce11f17ecc535a48e74cc0ad1b8a7d74",
+    "index.html": "3cad85a878fcdb184ea81b33ac790b0db822c2bde6826885700be06b94543133",
+    "app.js": "55e2f6957ef117d87c8e1c19c0d03dca5f49c6efe5f62674c49ed783cb139223",
+    "tests/admin_compact_qa.py": "2d9eeba5083571266d67b63c5821c51c9345e5818f0d9a2414242e2828641049"
+  },
+  "pages": {
+    "sha": "2d0b13c0d5830307ed449bc5412d63644edb3762",
+    "run_id": 44646964050,
+    "status": "completed",
+    "conclusion": "success",
+    "compact_branch_deployed": false
+  },
+  "not_run": [
+    "full 18-script suite",
+    "physical iPhone/Android",
+    "WebKit",
+    "private original files",
+    "external imagery real availability"
+  ],
+  "known_limitations": [
+    "narrow mobile still scrolls; all controls cannot fit one screen",
+    "manager only; field camera/map sizes unchanged",
+    "P0 native multi-page GPS timeout remains unresolved"
+  ],
+  "public_data_changed": false,
+  "private_evidence_committed": false
+}
