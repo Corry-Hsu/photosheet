@@ -31,10 +31,14 @@ body[data-worker] .field-camera-shell {
   min-width: 0;
   overscroll-behavior: contain;
 }
-body[data-worker] .field-camera-header {
+body[data-worker] .field-camera-top {
   position: sticky;
   top: 0;
   z-index: 3;
+  flex: none;
+  background: #10231c;
+}
+body[data-worker] .field-camera-header {
   flex: none;
   display: flex;
   gap: 12px;
@@ -106,18 +110,22 @@ body[data-worker] .field-camera-buttons {
   gap: 8px;
   justify-content: center;
   flex-wrap: wrap;
-  margin-top: 12px;
-  padding-top: 12px;
-  border-top: 1px solid #668779;
 }
 body[data-worker] #shutter {
+  width: 76px;
+  height: 76px;
+  min-width: 76px;
+  min-height: 76px;
+  flex: 0 0 76px;
+  padding: 0;
+  border: 4px solid white;
+  border-radius: 50%;
   background: white;
-  color: #12372a;
-  font-size: 20px;
-  font-weight: 700;
-  min-width: 135px;
-  min-height: 54px;
-  border-radius: 28px;
+  box-shadow: inset 0 0 0 4px #10231c;
+}
+body[data-worker] #shutter:focus-visible {
+  outline: 3px solid #8fdfb2;
+  outline-offset: 3px;
 }
 body[data-worker] .field-photo-thumb {
   border: 0;
@@ -160,17 +168,21 @@ body[data-worker] .field-image-shell img {
   max-width: 100%;
 }
 
+body[data-worker] #camera-optics {
+  padding: 0 12px 8px;
+}
 body[data-worker] #camera-optics label {
   display: flex;
   align-items: center;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: 6px;
   font-size: 14px;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 body[data-worker] #camera-optics select {
   min-width: 0;
-  width: 100%;
+  flex: 1;
+  width: auto;
   min-height: 44px;
   color: white;
   background: #193e30;
@@ -179,9 +191,10 @@ body[data-worker] #camera-optics select {
 }
 body[data-worker] #camera-zoom-buttons {
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
   gap: 8px;
-  margin-bottom: 8px;
+  margin: 0;
 }
 body[data-worker] #camera-zoom-buttons button {
   min-width: 54px;
@@ -263,56 +276,19 @@ body[data-worker] #live-watermark {
 body[data-worker] #capture-status:empty {
   display: none;
 }
-/* Keep landscape controls in one row rather than covering most of the image. */
+/* Lens controls remain above the image, including short landscape viewports. */
 @media (orientation: landscape) and (min-width: 600px) {
-  body[data-worker] .field-camera-controls {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
-    align-items: center;
-    gap: 8px 24px;
-  }
   body[data-worker] #camera-optics {
     display: grid;
     grid-template-columns: minmax(0, 1fr) auto;
     align-items: center;
-    gap: 8px 12px;
+    gap: 6px 12px;
   }
   body[data-worker] #camera-lens-row {
     margin: 0;
-    flex-wrap: nowrap;
     min-width: 0;
   }
-  body[data-worker] #camera-lens {
-    flex: 1;
-    width: auto;
-  }
-  body[data-worker] #camera-zoom-buttons {
-    margin: 0;
-  }
-  body[data-worker] #camera-optics-note,
-  body[data-worker] #capture-status {
+  body[data-worker] #camera-optics-note {
     grid-column: 1 / -1;
   }
-  body[data-worker] .field-camera-buttons {
-    grid-column: 2;
-    grid-row: 1;
-    margin-top: 0;
-    padding-top: 0;
-    border-top: 0;
-    padding-left: 20px;
-    border-left: 1px solid #668779;
-  }
-  body[data-worker]
-    .field-camera-controls:has(#camera-optics[hidden])
-    .field-camera-buttons {
-    grid-column: 1 / -1;
-  }
-}
-/* Review/retry has no lens controls to separate from the action buttons. */
-body[data-worker]
-  .field-camera-controls:has(#camera-optics[hidden])
-  .field-camera-buttons {
-  margin: 0;
-  padding: 0;
-  border: 0;
 }

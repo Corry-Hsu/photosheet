@@ -1,0 +1,187 @@
+{
+  "base_commit": "67c6e030aed2fe5d3fe23dc04e7a59dbf96acbf6",
+  "pr_base": "main",
+  "tested_revision": "working tree on base_commit; hashes below; containing commit from git log",
+  "commands": [
+    {
+      "command": "PHOTOSHEET_TEST_URL=http://127.0.0.1:8816/ python tests/full_width_camera_qa.py",
+      "exit_code": 0
+    },
+    {
+      "command": "PHOTOSHEET_TEST_URL=http://127.0.0.1:8816/ python tests/camera_optics_qa.py",
+      "exit_code": 0
+    },
+    {
+      "command": "PHOTOSHEET_TEST_URL=http://127.0.0.1:8816/ python tests/field_photo_flow_qa.py",
+      "exit_code": 0
+    },
+    {
+      "command": "PHOTOSHEET_TEST_URL=http://127.0.0.1:8816/ python tests/full_frame_live_qa.py",
+      "exit_code": 0
+    },
+    {
+      "command": "node --check field-camera.js",
+      "exit_code": 0
+    },
+    {
+      "command": "git diff --check",
+      "exit_code": 0
+    }
+  ],
+  "new_failures": [],
+  "measurements": [
+    {
+      "role": "worker",
+      "viewport": [
+        390,
+        844
+      ],
+      "vertical_gap_css_px": 594,
+      "shutter_dimensions": [
+        76,
+        76
+      ],
+      "shutter_centered": true,
+      "min_optics_height": 44
+    },
+    {
+      "role": "worker",
+      "viewport": [
+        320,
+        568
+      ],
+      "vertical_gap_css_px": 318,
+      "shutter_dimensions": [
+        76,
+        76
+      ],
+      "shutter_centered": true,
+      "min_optics_height": 44
+    },
+    {
+      "role": "worker",
+      "viewport": [
+        600,
+        320
+      ],
+      "vertical_gap_css_px": 114,
+      "shutter_dimensions": [
+        76,
+        76
+      ],
+      "shutter_centered": true,
+      "min_optics_height": 44
+    },
+    {
+      "role": "worker",
+      "viewport": [
+        844,
+        390
+      ],
+      "vertical_gap_css_px": 184,
+      "shutter_dimensions": [
+        76,
+        76
+      ],
+      "shutter_centered": true,
+      "min_optics_height": 44
+    },
+    {
+      "role": "vendor",
+      "viewport": [
+        390,
+        844
+      ],
+      "vertical_gap_css_px": 594,
+      "shutter_dimensions": [
+        76,
+        76
+      ],
+      "shutter_centered": true,
+      "min_optics_height": 44
+    },
+    {
+      "role": "vendor",
+      "viewport": [
+        320,
+        568
+      ],
+      "vertical_gap_css_px": 318,
+      "shutter_dimensions": [
+        76,
+        76
+      ],
+      "shutter_centered": true,
+      "min_optics_height": 44
+    },
+    {
+      "role": "vendor",
+      "viewport": [
+        600,
+        320
+      ],
+      "vertical_gap_css_px": 114,
+      "shutter_dimensions": [
+        76,
+        76
+      ],
+      "shutter_centered": true,
+      "min_optics_height": 44
+    },
+    {
+      "role": "vendor",
+      "viewport": [
+        844,
+        390
+      ],
+      "vertical_gap_css_px": 184,
+      "shutter_dimensions": [
+        76,
+        76
+      ],
+      "shutter_centered": true,
+      "min_optics_height": 44
+    }
+  ],
+  "coverage": [
+    "top optics and bottom centered circular shutter",
+    "no visible shutter text; accessible name and Enter capture",
+    "gap clicks do not capture",
+    "shutter reachable and no horizontal overflow",
+    "native full-width aspect ratio unchanged",
+    "camera fallback and warm stream reuse",
+    "pending GPS/storage retries",
+    "full dimensions, EXIF, watermark position"
+  ],
+  "sha256": {
+    "field-camera.js": "1504521a7e5e1da3b037a939d5ce214289d1ee18496ad2e7c99c42d6c5dd2312",
+    "field-camera.css": "b801d4b7d5c4a3c16ff2fb54a3643422e1eb7aa894d95bc8c992c0f18fe54341",
+    "tests/full_width_camera_qa.py": "807a59930e686761d4eda490c3855fefe362e9b22cdf5788f3de577172f7400d",
+    "worker-1.html": "80dbfe967bc214e3297ab5c43efb66a73d5e254d6e59d31560ea24cf84627e6f",
+    "worker-2.html": "35e65058493561f6337a8ddae08c57b4bd43c9773a809c74d987af32a71cc0ae",
+    "worker-3.html": "b2585ed8cd15479905247ceb49c09656ba4ad652f9c649b9fbe51afcbf268c9d",
+    "vendor-1.html": "d4fb52ae57b392f7714505ff876713228423ee24a61215403d2315034c56c1fd",
+    "vendor-2.html": "467fc15a336ae0868bfe23e48de19ab650dd94b0642e0b9c3ca01e1187b8a51d",
+    "vendor-3.html": "83483a827f6b1ecfda3c7ee2121d16048d37bd03ecd74f543b3b20679e5b186b"
+  },
+  "pages": {
+    "sha": "67c6e030aed2fe5d3fe23dc04e7a59dbf96acbf6",
+    "run_id": 45020167897,
+    "status": "completed",
+    "conclusion": "success",
+    "new_layout_deployed": false
+  },
+  "not_run": [
+    "full 18 browser suites",
+    "WebKit",
+    "physical iPhone/Android",
+    "private original data"
+  ],
+  "known_limitations": [
+    "top settings and bottom shutter occupy space; full-aspect image may require scrolling",
+    "synthetic tests do not measure actual accidental-touch rates",
+    "P0 native multi-page GPS timeout remains unresolved"
+  ],
+  "public_data_changed": false,
+  "private_evidence_committed": false
+}

@@ -2,7 +2,20 @@
 
 現行規格見 [SPECIFICATION](../docs/SPECIFICATION.md)，本次commit／真實成功與失敗見 [HANDOFF](../docs/HANDOFF.md)，可讀取的結果為 [2026-11-20 baseline](../docs/verification/2026-11-20-baseline.json)。**歷史基準16/18，另2組失敗；P0接續修復兩組並執行必要回歸共4組通過，未重跑全套18組，不能合稱全套綠燈。** 詳見 [P0紀錄](../docs/verification/2026-11-20-p0.json)與[ADR-0014](../docs/adr/0014-clock-consistent-browser-gps-fixtures.md)。
 
-## 相機操作分隔
+## 圓形快門與上方鏡頭／倍率
+
+以8816根目錄網站執行：
+
+```sh
+PHOTOSHEET_TEST_URL=http://127.0.0.1:8816/ python tests/full_width_camera_qa.py
+PHOTOSHEET_TEST_URL=http://127.0.0.1:8816/ python tests/camera_optics_qa.py
+PHOTOSHEET_TEST_URL=http://127.0.0.1:8816/ python tests/field_photo_flow_qa.py
+PHOTOSHEET_TEST_URL=http://127.0.0.1:8816/ python tests/full_frame_live_qa.py
+```
+
+full_width量測現行上下分區、76px圓形快門置中、無可見文字但有「拍照」名稱及Enter鍵拍攝；設定控制最小44px，四種視窗上下間隔至少64px，點間隔不拍照。沿用取景滿寬／串流與其他照片故障回歸，不能代替實機誤觸率驗收。見[現行驗證](../docs/verification/round-shutter-top-optics.json)。
+
+## 相機操作分隔（前版）
 
 在網站根目錄啟動8815本機伺服器後：
 
@@ -12,7 +25,7 @@ PHOTOSHEET_TEST_URL=http://127.0.0.1:8815/ python tests/camera_optics_qa.py
 PHOTOSHEET_TEST_URL=http://127.0.0.1:8815/ python tests/field_photo_flow_qa.py
 ```
 
-full_width新增人員／廠商四種視窗的鏡頭／快門間隔量測、控制尺寸與分隔區點擊不拍照，以及拍後分隔移除；維持原有滿寬／鏡頭／串流檢查。測試仍為合成裝置，非實機誤觸率證據。結果見[相機分隔紀錄](../docs/verification/camera-action-separation.json)。
+前版full_width驗證底部分隔線布局；現行依上方圓形快門規格，已取代舊橫式左右間距斷言，保留滿寬／鏡頭／串流與誤觸保護檢查。測試仍為合成裝置，非實機誤觸率證據。結果見[相機分隔紀錄](../docs/verification/camera-action-separation.json)。
 
 ## 管理頁緊湊化（2026-11-20）
 
