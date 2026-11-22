@@ -1,5 +1,16 @@
 # photosheet 交接紀錄
 
+## 最新功能：中央圓形快門、上方鏡頭／倍率
+
+- 開工核對：工作目錄乾淨，重新fetch確認main已到`67c6e030aed2fe5d3fe23dc04e7a59dbf96acbf6`（#53已合併）。本次從origin/main建立`feat/round-shutter-top-optics`，PR直接對main，無前置分支依賴。保留#52及後續既有資料，沒有使用者未提交改動被覆蓋。
+- 修改與理由：依使用者參考相機，快門改為76px白色圓形、底部中央、無可見文字；保留原生button、「拍照」無障礙名稱、焦點與鍵盤操作。鏡頭／倍率移到取景上方，和標題共同固定；寬橫式的設定一列，快門仍底部中央。兩區由取景隔開，拍後設定隱藏與文字儲存／重試沿用。
+- 未採與影響：未增加2×、錄影、濾鏡／定時器／縮圖，未縮小鏡頭控制或收合選單，未加教學、裁切影像或改取像／GPS／浮水印／存檔邏輯。`field-camera.js`只調整生成HTML位置與快門無障礙標籤，CSS調整固定上下區；六個現場HTML更新JS/CSS資源版本。公開data及管理頁不變。[ADR-0018](adr/0018-round-shutter-top-optics.md)取代0017呈現與0009橫式共列部分，R-19同步。
+- 實際驗證：8816本機網站，`full_width_camera_qa.py`、`camera_optics_qa.py`、`field_photo_flow_qa.py`、`full_frame_live_qa.py`四組Chromium合成測試通過，無新增失敗。人員／廠商四種視窗驗證圓形76px／置中、可存取名稱及Enter拍攝、鏡頭44px、間隔點擊不拍照、快門可達、拍後設定隱藏、鏡頭備援與串流沿用、GPS／寫入失敗重試、完整尺寸／EXIF／長邊浮水印。`node --check field-camera.js`與`git diff --check`通過。命令及來源hash見[驗證紀錄](verification/round-shutter-top-optics.json)。
+- 間隔量測：390×844為594px、320×568為318px、600×320為114px、844×390為184px；人員／廠商相同，這是合成視窗的上下控制距離，不是所有裝置保證。上方固定區與底部快門占空間，長影像仍需捲動。
+- Pages：main `67c6e03`的[run 45020167897](https://github.com/Corry-Hsu/photosheet/actions/runs/45020167897) completed/success；本次尚未合併部署。交付commit以`git log -1 -- field-camera.js field-camera.css`查詢，未提交參考照片／私人evidence。
+- 已知限制／下一步：未跑全套18組、WebKit、實機／原生鏡頭及私人原檔；P0原生多頁GPS未解狀態保留。合併本次直接對main的PR後核對Pages，再於手機確認直／橫式可達性、上方設定、圓形快門與拍後重試。
+
+
 ## 最新資料發布：人員一／二調整（2026-11-22）
 
 - 起點：重新fetch主線 `290d75352d05c81420610d5998f535f3b638e97a`，建立獨立資料分支；已有#48、#50、#51主線變更全部保留。下方11/20的未合併敘述是當時歷史，不能當目前狀態。
