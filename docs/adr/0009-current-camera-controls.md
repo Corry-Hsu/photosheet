@@ -1,6 +1,6 @@
 # ADR-0009：現場相機控制、滿寬及超廣角演進
 
-- 狀態：已採用（本次回溯整理；原始實作時間見PR）。
+- 狀態：已採用（本次回溯整理；原始實作時間見PR）；控制區緊鄰排列局部由[ADR-0017](0017-camera-action-separation.md)取代。
 - 整理日：2026-11-20；核對基準：8258a42。
 - 證據與範圍：[PR #12](https://github.com/Corry-Hsu/photosheet/pull/12)、[#42](https://github.com/Corry-Hsu/photosheet/pull/42)、[#43](https://github.com/Corry-Hsu/photosheet/pull/43)、[#44](https://github.com/Corry-Hsu/photosheet/pull/44)、[#46](https://github.com/Corry-Hsu/photosheet/pull/46)；[field-camera.js](../../field-camera.js)、[樣式](../../field-camera.css)。
 
@@ -27,3 +27,5 @@
 ## 驗證與後續
 
 對應[規格完成定義](../SPECIFICATION.md#9-可驗證完成定義產品變更)，實際結果及未通過項目見[交接](../HANDOFF.md)。修改此決策時新增ADR並標示本編號被取代的確切範圍，不刪除本紀錄。
+
+後續：[ADR-0017](0017-camera-action-separation.md)新增鏡頭／倍率與快門分隔；控制尺寸、滿寬原比例、橫式單列及串流生命週期保留。

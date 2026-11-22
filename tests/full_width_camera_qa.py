@@ -35,20 +35,37 @@ with sync_playwright() as p:
   assert pg.locator('#camera-optics-note').is_hidden()
   assert '點選倍率切換' not in pg.locator('#dialog-body').inner_text()
   assert '照片保留完整尺寸' not in pg.locator('#dialog-body').inner_text()
-  for w,h,vw,vh in [(390,844,900,1600),(320,568,900,1600),(844,390,1600,900)]:
+  for w,h,vw,vh in [(390,844,900,1600),(320,568,900,1600),(600,320,1600,900),(844,390,1600,900)]:
    pg.set_viewport_size({'width':w,'height':h});pg.evaluate('(s)=>{testWidth=s.w;testHeight=s.h;document.querySelector("#video").onresize()}',{'w':vw,'h':vh})
    pg.wait_for_function('Math.abs(document.querySelector("#live-watermark").getBoundingClientRect().width-innerWidth)<1')
    m=pg.locator('#camera-media').bounding_box();v=pg.locator('#video').bounding_box()
    assert abs(m['x'])<1 and abs(m['width']-w)<1 and abs(v['width']-w)<1
    assert abs(m['height']-w*vh/vw)<1 and abs(v['height']-m['height'])<1,(m,w,vw,vh)
    button=pg.locator('#shutter').bounding_box();assert button['y']>=0 and button['y']+button['height']<=h+1,button
+   optics=pg.locator('#camera-optics').bounding_box()
+   controls=[pg.locator('#camera-lens').bounding_box(), *[b.bounding_box() for b in pg.locator('#camera-zoom-buttons button').all()]]
+   assert button['height']>=54 and all(c['height']>=44 for c in controls)
+   if w>h:
+    gap=button['x']-(optics['x']+optics['width'])
+    tap={'x':(button['x']+optics['x']+optics['width'])/2,'y':button['y']+button['height']/2}
+   else:
+    gap=button['y']-(optics['y']+optics['height'])
+    tap={'x':button['x']+button['width']/2,'y':(button['y']+optics['y']+optics['height'])/2}
+   assert gap>=24,{'screen':(w,h),'gap':gap}
+   pg.mouse.click(**tap)
+   assert pg.locator('#video').is_visible()
+   assert pg.evaluate('async()=> (await Store.photosFor(PSApp.state.person?.id||document.body.dataset.worker,PSApp.state.tasks[0].id)).length')==0
+
    if w>h:assert pg.locator('.field-camera-controls').bounding_box()['height']<h*.3
    assert pg.evaluate('document.querySelector("#dialog-body").scrollWidth<=innerWidth')
    out=ROOT/'evidence/full-width-camera';out.mkdir(parents=True,exist_ok=True)
-   pg.screenshot(path=str(out/f'{role}-{w}.png'));measurements.append({'role':role,'screen':w,'image_width':round(v['width'])})
+   pg.screenshot(path=str(out/f'{role}-{w}.png'));measurements.append({'role':role,'screen':w,'image_width':round(v['width']),'optics_shutter_gap':round(gap,2)})
   # Keep the selected lens and active stream when resuming after a saved shot.
   count=pg.evaluate('requests.length');pg.click('#shutter');pg.wait_for_selector('#capture-save:visible')
   pg.wait_for_function('document.querySelector("#capture-preview").naturalWidth>0')
+  assert pg.locator('.field-camera-buttons').evaluate('(e)=>getComputedStyle(e).paddingLeft')=='0px'
+  assert pg.locator('.field-camera-buttons').evaluate('(e)=>getComputedStyle(e).borderLeftWidth')=='0px'
+
   assert pg.locator('#capture-preview').bounding_box()['width']==844
   pg.click('#capture-preview');pg.wait_for_selector('#shutter:visible');assert pg.evaluate('requests.length')==count
   back()

@@ -16,6 +16,16 @@
 
 歷史完整基準驗證日：**2026-11-20，Asia/Taipei**。閱讀順序：[規格](SPECIFICATION.md) → [ADR索引](adr/README.md) → 本文件 → [新對話指令](START_HERE.md)。
 
+## 最新版：鏡頭／倍率與快門分隔
+
+- 開工核對：工作目錄乾淨，重新fetch後主線為`354a90cceb14c007cf83c33d6b4b110cff80f3ca`，包含PR #51月統計／緊湊版整合及PR #52資料更新。本次從origin/main建立`fix/camera-control-separation`，PR直接對main，無前置分支依賴，無覆蓋使用者改動。
+- 修改與理由：使用者手機截圖指出鏡頭／倍率與快門緊鄰容易誤按；`field-camera.css`在直式加入上下分隔線與空間、600px以上橫式改左右分區，維持原控制大小。實測間隔25／45 CSS px，鏡頭／倍率44px高、快門54px高；拍後設定區隱藏時移除分隔。六個現場HTML更新CSS版本。
+- 未採與影響：未縮按鈕、收合鏡頭、復活滑桿或常駐說明，未改拍攝JS、比例、倍率能力、定位／存檔／連拍及本機照片規則。直式控制列略增高，沿用原比例滿寬可捲動。[ADR-0017](adr/0017-camera-action-separation.md)局部取代0009控制緊鄰排列；規格R-19／20語意沿用。
+- 實際驗證：`PHOTOSHEET_TEST_URL=http://127.0.0.1:8815/ python tests/full_width_camera_qa.py`、同URL的`camera_optics_qa.py`與`field_photo_flow_qa.py`三組通過，無新增失敗；`git diff --check`通過。人員／廠商各測390×844、320×568、600×320、844×390，分隔空間點擊不拍照、按鈕尺寸及快門可達、取景滿寬不裁切、拍後分隔移除、鏡頭備援、串流沿用、GPS／寫入失敗重試仍正常。詳見[驗證紀錄](verification/camera-action-separation.json)。
+- 資料與Pages：公開data沿用最新354a90c，未回退前次資料、未提交使用者截圖或其他私人evidence。查main的[run 45018182209](https://github.com/Corry-Hsu/photosheet/actions/runs/45018182209) completed/success；本次功能分支尚未部署。最終commit用`git log -1 -- field-camera.css`查詢。
+- 已知限制／下一步：合成鏡頭與GPS驗證不等於iPhone實機誤觸率或原生鏡頭驗收；未跑全套18組、WebKit、實機及私人原檔，P0原生多頁GPS未解仍保留。先合併本次直接對main的PR，再核對Pages來源，於使用者手機試直／橫式、鏡頭切換及連拍。
+
+
 ## 前版：管理頁緊湊化（2026-11-20）
 
 - 起點與主線：開工工作目錄乾淨；重新fetch確認主線仍為`2d0b13c`，本次從月統計PR #49的`2dc059396345f311f51ba2941af66dc13a30ce40`建立`feat/compact-admin-layout`。功能PR以`feat/admin-monthly-statistics`為base，需先合併#48、#49，再改指main。無覆蓋使用者改動；本版commit用`git log -1 -- admin-compact.css`查詢。
