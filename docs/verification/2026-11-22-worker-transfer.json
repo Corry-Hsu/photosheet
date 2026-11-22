@@ -1,0 +1,102 @@
+{
+  "sourceBaseCommit": "290d75352d05c81420610d5998f535f3b638e97a",
+  "changeDate": "2026-11-22",
+  "generatedAt": "2026-11-22T11:30:23.721Z",
+  "worker1": {
+    "beforeTasks": 11,
+    "afterTasks": 2,
+    "beforeFeatures": 8,
+    "afterFeatures": 1,
+    "removedIds": [
+      "砍樹:152",
+      "雜草垃圾:697",
+      "雜草垃圾:698",
+      "砍樹:150",
+      "雜草垃圾:699",
+      "雜草垃圾:700",
+      "雜草垃圾:701",
+      "雜草垃圾:702",
+      "雜草垃圾:703",
+      "雜草垃圾:706",
+      "雜草垃圾:707"
+    ],
+    "addedIds": [
+      "砍樹:153",
+      "雜草垃圾:704"
+    ],
+    "batch": "2026-11-22-reassign-p1"
+  },
+  "worker2": {
+    "beforeTasks": 3,
+    "afterTasks": 2,
+    "beforeFeatures": 2,
+    "afterFeatures": 3,
+    "movedOutIds": [
+      "砍樹:153",
+      "雜草垃圾:704"
+    ],
+    "addedIds": [
+      "圍籬:66"
+    ],
+    "retainedIds": [
+      "雜草垃圾:708"
+    ],
+    "batch": "2026-11-22-reassign-p2"
+  },
+  "validation": {
+    "sixPackagesValid": true,
+    "duplicateTaskIds": false,
+    "allNewParcelsHaveUniqueKml": true,
+    "keptTaskAndNavigationUnchanged": true,
+    "vendorSourceUnchanged": true,
+    "unselectedPackagesUnchanged": true,
+    "onlyAssigneeChangedOnTransferredTasks": true
+  },
+  "photos": "No device photo records are edited; person-scoped old photos are not migrated.",
+  "browser": {
+    "status": "pass",
+    "cases": [
+      {
+        "page": "worker-1.html",
+        "id": "砍樹:153",
+        "date": "2026-11-17",
+        "polygons": 1,
+        "navigationPreserved": true
+      },
+      {
+        "page": "worker-1.html",
+        "id": "雜草垃圾:704",
+        "date": "2026-11-17",
+        "polygons": 1,
+        "navigationPreserved": true
+      },
+      {
+        "page": "worker-2.html",
+        "id": "雜草垃圾:708",
+        "date": "2026-11-19",
+        "polygons": 1,
+        "navigationPreserved": true
+      },
+      {
+        "page": "worker-2.html",
+        "id": "圍籬:66",
+        "date": "2026-10-07",
+        "polygons": 2,
+        "navigationPreserved": true
+      }
+    ],
+    "newBatchIgnoresOldOverrides": true,
+    "oldLocalPhotosPreserved": true,
+    "mobileNoOverflow": true,
+    "errors": []
+  },
+  "scope": "Only worker-1.json and worker-2.json are republished; no HTML/JS/CSS or vendor packages change.",
+  "dataSha256": {
+    "worker-1.json": "997552204422b8b1dd1d0eebc58fde30a7fc69a9e1dd905f2c313582258a2567",
+    "worker-2.json": "ac3ae72bc77bc41488ae783ec1cd2f77a86bcac9a1cd4cdd583c6292f9a785d5",
+    "worker-3.json": "3559f7ed6e7e280eb8da0b58ce7f7f1259a62bfb2174ee8e76553edf3e911a1a",
+    "vendor-1.json": "9b47fe01250493189b194ad57e2f13cbb6fb7641ebc6d0a2bd4bdebbb94b6abc",
+    "vendor-2.json": "8dc51b4e5c4866bdc5b099ffe20096b0b6b39607ced973a518d0f0ad90435a23",
+    "vendor-3.json": "54ca06cc13b290edfea5c36bf3f3b95f6ca1d07de3cf5dc4d9bafff602e0baed"
+  }
+}
