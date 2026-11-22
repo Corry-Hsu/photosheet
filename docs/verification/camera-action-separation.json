@@ -1,0 +1,151 @@
+{
+  "base_commit": "354a90cceb14c007cf83c33d6b4b110cff80f3ca",
+  "branch": "fix/camera-control-separation",
+  "pr_base": "main",
+  "tested_revision": "working tree on base_commit; source hashes below; containing commit via git log",
+  "environment": {
+    "python": "3.12.14",
+    "playwright": "1.62.0",
+    "chromium": "156.0.8078.79"
+  },
+  "commands": [
+    {
+      "command": "PHOTOSHEET_TEST_URL=http://127.0.0.1:8815/ python tests/full_width_camera_qa.py",
+      "exit_code": 0
+    },
+    {
+      "command": "PHOTOSHEET_TEST_URL=http://127.0.0.1:8815/ python tests/camera_optics_qa.py",
+      "exit_code": 0
+    },
+    {
+      "command": "PHOTOSHEET_TEST_URL=http://127.0.0.1:8815/ python tests/field_photo_flow_qa.py",
+      "exit_code": 0
+    },
+    {
+      "command": "git diff --check",
+      "exit_code": 0
+    }
+  ],
+  "new_failures": [],
+  "measurements": [
+    {
+      "role": "worker",
+      "viewport": [
+        390,
+        844
+      ],
+      "optics_shutter_gap_css_px": 25,
+      "min_optics_control_height": 44,
+      "min_shutter_height": 54
+    },
+    {
+      "role": "worker",
+      "viewport": [
+        320,
+        568
+      ],
+      "optics_shutter_gap_css_px": 25,
+      "min_optics_control_height": 44,
+      "min_shutter_height": 54
+    },
+    {
+      "role": "worker",
+      "viewport": [
+        600,
+        320
+      ],
+      "optics_shutter_gap_css_px": 45,
+      "min_optics_control_height": 44,
+      "min_shutter_height": 54
+    },
+    {
+      "role": "worker",
+      "viewport": [
+        844,
+        390
+      ],
+      "optics_shutter_gap_css_px": 45,
+      "min_optics_control_height": 44,
+      "min_shutter_height": 54
+    },
+    {
+      "role": "vendor",
+      "viewport": [
+        390,
+        844
+      ],
+      "optics_shutter_gap_css_px": 25,
+      "min_optics_control_height": 44,
+      "min_shutter_height": 54
+    },
+    {
+      "role": "vendor",
+      "viewport": [
+        320,
+        568
+      ],
+      "optics_shutter_gap_css_px": 25,
+      "min_optics_control_height": 44,
+      "min_shutter_height": 54
+    },
+    {
+      "role": "vendor",
+      "viewport": [
+        600,
+        320
+      ],
+      "optics_shutter_gap_css_px": 45,
+      "min_optics_control_height": 44,
+      "min_shutter_height": 54
+    },
+    {
+      "role": "vendor",
+      "viewport": [
+        844,
+        390
+      ],
+      "optics_shutter_gap_css_px": 45,
+      "min_optics_control_height": 44,
+      "min_shutter_height": 54
+    }
+  ],
+  "coverage": [
+    "at least 24px separation",
+    "blank separator clicks do not capture",
+    "shutter remains in viewport",
+    "image stays full width at native aspect",
+    "review removes separator",
+    "rear ultra-wide and fallback",
+    "warm stream and pending failure retry"
+  ],
+  "sha256": {
+    "field-camera.css": "58660fd4d4e4bc636306e2d42cf5404c806ce04cf12de9714211a5c04f76cc54",
+    "tests/full_width_camera_qa.py": "f52ccebca3d8fa403d9c4d65791cdf10fe631e42b65303db64136ac27d828203",
+    "worker-1.html": "c45c950306101694138090e890ac06c3a1eb1990721bb304c89c899e5409d27c",
+    "worker-2.html": "9e53feeceac228cd53134e1cecf1108964cbc327b49d1cbc9dd38240097a541d",
+    "worker-3.html": "f58d9b78085b081975789caceace7869bf48f1f2e442678130aa40f6332cee13",
+    "vendor-1.html": "9812babab3d49062f9e866e4ec9328ac80626189fcdbdba37df2c53cd67a3585",
+    "vendor-2.html": "ffbe870ac79940187027aa30adfb0897f2f6260a8f81a3b32239afb181f19320",
+    "vendor-3.html": "3478bca2436af0c93b792b0da16c73a13f9b1cd34d43ad36ddcc04a7d1c1aa3e"
+  },
+  "pages": {
+    "sha": "354a90cceb14c007cf83c33d6b4b110cff80f3ca",
+    "run_id": 45018182209,
+    "status": "completed",
+    "conclusion": "success",
+    "this_change_deployed": false
+  },
+  "not_run": [
+    "full 18-script suite",
+    "physical iPhone/Android",
+    "WebKit",
+    "private original files"
+  ],
+  "limitations": [
+    "synthetic clicks are not a measured physical-device accidental-touch rate",
+    "portrait footer slightly taller; original aspect preview remains scrollable",
+    "P0 native multi-page GPS timeout remains unresolved"
+  ],
+  "public_data_changed": false,
+  "private_evidence_committed": false
+}
