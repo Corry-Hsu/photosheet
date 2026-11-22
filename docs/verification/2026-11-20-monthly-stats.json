@@ -1,0 +1,96 @@
+{
+  "date": "2026-11-20",
+  "timezone": "Asia/Taipei",
+  "base_commit": "7a1b75c0bd50e4b4292f1f618f19812cb06a2fbf",
+  "main_at_fetch": "2d0b13c0d5830307ed449bc5412d63644edb3762",
+  "dependency": "PR #48; feature PR targets fix/verification-baseline until #48 merges",
+  "tested_revision": "working tree on base_commit; file hashes below; containing commit from git log",
+  "environment": {
+    "python": "3.12.14",
+    "playwright": "1.62.0",
+    "chromium": "156.0.8078.79",
+    "node": "v24.22.1"
+  },
+  "commands": [
+    {
+      "command": "node --test tests/core.test.cjs tests/admin-monthly-stats.test.cjs",
+      "exit_code": 0
+    },
+    {
+      "command": "PHOTOSHEET_TEST_URL=http://127.0.0.1:8813/ python tests/admin_monthly_stats_qa.py",
+      "exit_code": 0
+    },
+    {
+      "command": "PHOTOSHEET_TEST_URL=http://127.0.0.1:8813/ python tests/admin_scope_completion_qa.py",
+      "exit_code": 0
+    },
+    {
+      "command": "HISTORY_TEST_URL=http://127.0.0.1:8813/ python tests/admin_history_qa.py",
+      "exit_code": 0
+    },
+    {
+      "command": "node --check admin-monthly-stats.js",
+      "exit_code": 0
+    },
+    {
+      "command": "node --check app.js",
+      "exit_code": 0
+    },
+    {
+      "command": "git diff --check",
+      "exit_code": 0
+    }
+  ],
+  "development_failures": [
+    {
+      "failure": "old port 8812 returned ERR_EMPTY_RESPONSE",
+      "resolution": "started root-only server on port 8813"
+    },
+    {
+      "failure": "test evaluate returned Store.put function, which Playwright invoked; d.transaction is not a function",
+      "resolution": "restored fixture with a callback that returns no function; full suite passed"
+    }
+  ],
+  "coverage": [
+    "72 cases and 153 parcel entries example",
+    "current/last month with ROC labels",
+    "hidden and completed tasks included",
+    "case IDs preserved despite same serial",
+    "parcel count per task, not globally unique lots",
+    "search/type/status filters independent",
+    "actual add/edit parcel/edit result date/delete/failed deletion rollback",
+    "reload and empty month",
+    "Taiwan January rollover; leap date in unit test",
+    "320,390,844,1440px; field module absent"
+  ],
+  "pages": {
+    "sha": "2d0b13c0d5830307ed449bc5412d63644edb3762",
+    "run_id": 44646964050,
+    "status": "completed",
+    "conclusion": "success",
+    "feature_deployed": false
+  },
+  "sha256": {
+    "admin-monthly-stats.js": "f11b6c623f5b92eea0be88fca1de6e15127672b89dd1e775e535d682282f029f",
+    "admin-monthly-stats.css": "44af38a2cb18aa9d2b0e8be11351a18939d612ac9295c84f6f6b6a4b4723ed80",
+    "app.js": "9f4240d93c11f4ac0bcaf45b22dde4421bbcbfa6786e2733cbba3171c921637b",
+    "index.html": "3e1beeaf4a40e00b220c7c753143d3dbb60c72ec02f6797f86188beb9b87db49",
+    "tests/admin-monthly-stats.test.cjs": "17fadbfb6887a7ab7bb6284eddb7d11482bcc616f8f4bb474a50898d08f3aaf2",
+    "tests/admin_monthly_stats_qa.py": "e346d52242c648a96f075568b81fbd10c185451e836976e175299037ae4c1a4f"
+  },
+  "not_run": [
+    "full 18 browser suites",
+    "WebKit",
+    "physical iPhone/Android",
+    "private original files",
+    "external imagery availability"
+  ],
+  "known_limitations": [
+    "local imported task state only",
+    "month selection does not change dispatch eligibility",
+    "native multi-page GPS investigation from P0 remains unresolved",
+    "foreground month rollover checks once per minute or on focus/visibility; not server synchronization"
+  ],
+  "public_data_changed": false,
+  "private_evidence_committed": false
+}

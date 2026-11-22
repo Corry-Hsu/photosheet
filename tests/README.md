@@ -2,6 +2,31 @@
 
 現行規格見 [SPECIFICATION](../docs/SPECIFICATION.md)，本次commit／真實成功與失敗見 [HANDOFF](../docs/HANDOFF.md)，可讀取的結果為 [2026-11-20 baseline](../docs/verification/2026-11-20-baseline.json)。**歷史基準16/18，另2組失敗；P0接續修復兩組並執行必要回歸共4組通過，未重跑全套18組，不能合稱全套綠燈。** 詳見 [P0紀錄](../docs/verification/2026-11-20-p0.json)與[ADR-0014](../docs/adr/0014-clock-consistent-browser-gps-fixtures.md)。
 
+## 管理頁緊湊化（2026-11-20）
+
+在網站根目錄啟動8814本機伺服器後：
+
+```sh
+PHOTOSHEET_TEST_URL=http://127.0.0.1:8814/ python tests/admin_compact_qa.py
+PHOTOSHEET_TEST_URL=http://127.0.0.1:8814/ python tests/admin_monthly_stats_qa.py
+PHOTOSHEET_TEST_URL=http://127.0.0.1:8814/ python tests/admin_scope_completion_qa.py
+DELETE_TEST_URL=http://127.0.0.1:8814/ python tests/manual_delete_qa.py
+ADMIN_MAP_TEST_URL=http://127.0.0.1:8814/ python tests/admin_basemap_qa.py
+```
+
+新suite以12件合成任務量測第一列位置、統計高度、控制尺寸、功能可達性與320–1440px無溢出。`--baseline`只量測未調整版本，不執行新版門檻；前後JSON／截圖存`/tmp`，不提交。結果見[緊湊版驗證](../docs/verification/2026-11-20-compact-admin.json)。外部圖資使用合成或攔截，不能代表供應商可用性。
+
+## 管理月統計（2026-11-20新增）
+
+```sh
+node --test tests/core.test.cjs tests/admin-monthly-stats.test.cjs
+PHOTOSHEET_TEST_URL=http://127.0.0.1:8813/ python tests/admin_monthly_stats_qa.py
+PHOTOSHEET_TEST_URL=http://127.0.0.1:8813/ python tests/admin_scope_completion_qa.py
+HISTORY_TEST_URL=http://127.0.0.1:8813/ python tests/admin_history_qa.py
+```
+
+需先在網站根目錄啟動8813伺服器。新suite以虛構資料驗證72件／153筆範例、月份切換、完成／隱藏案件、篩選獨立、真實管理新增／改地號／改日期／刪除及失敗回復、重載、臺灣跨年、零資料、手機版面與人員頁隔離。截圖只存`/tmp`，非真實案件，未提交。實際結果見[月統計紀錄](../docs/verification/2026-11-20-monthly-stats.json)；沒有重跑全套或宣稱GPS未解問題消失。
+
 ## 環境與安全
 
 Node.js、Python、Playwright、Chromium，Python套件包含 Pillow、openpyxl、PyMuPDF：

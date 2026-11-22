@@ -63,6 +63,9 @@
       return selected;
     },
   };
+  const monthlyStats = !worker && window.AdminMonthlyStats
+    ? AdminMonthlyStats.mount($("#monthly-stats"), () => state.tasks)
+    : null;
   function bind(sel, fn) {
     $(sel).onclick = async (e) => {
       try {
@@ -253,6 +256,7 @@
     }
   }
   function render() {
+    monthlyStats?.update();
     const visible = listSource();
     if (!worker) {
       const ids = new Set(visible.map((t) => t.id));
@@ -265,7 +269,7 @@
       }
       if ($("#task-date-scope")) {
         $("#task-date-scope").textContent =
-          `清單顯示 ${C.today().slice(0, 7)}-01 至 ${C.today().slice(0, 4)}-12-31 及手動加回的任務；另有 ${state.tasks.length - visible.length} 筆隱藏資料，可用「搜尋上個月任務」找回符合日期的案件。`;
+          `清單 ${C.today().slice(0, 7)}-01～${C.today().slice(0, 4)}-12-31（含加回）｜${state.tasks.length - visible.length} 筆隱藏資料`;
       }
     }
     sectionCatalog = C.sectionCatalog(
