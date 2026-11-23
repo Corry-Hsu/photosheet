@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "batch": "2026-11-11-33c123f1",
-  "generatedAt": "2026-11-11T05:51:49.217Z",
+  "batch": "2026-11-23-981aaafb",
+  "generatedAt": "2026-11-23T09:04:56.215Z",
   "person": {
     "id": "v1",
     "name": "雜草垃圾廠商"
@@ -19,417 +19,6 @@
     "fence_terms": "依契約規定辦理。"
   },
   "tasks": [
-    {
-      "id": "雜草垃圾:697",
-      "type": "雜草垃圾",
-      "row": 699,
-      "serial": "697",
-      "caseNo": "1116-694",
-      "district": "內埔鄉",
-      "section": "中林段",
-      "sectionCode": "0437",
-      "parcels": [
-        {
-          "county": "屏東縣",
-          "district": "內埔鄉",
-          "section": "中林段",
-          "lot": "245",
-          "sectionCode": "0437"
-        }
-      ],
-      "notice": "2026-11-17",
-      "resultDate": "2026-11-17",
-      "due": "",
-      "vendor": "迎騰工程行",
-      "sourcePerson": "范文彬",
-      "area": "",
-      "items": [],
-      "assignee": "p1",
-      "navigation": {
-        "point": [
-          120.60682498245615,
-          22.66833
-        ],
-        "source": "auto",
-        "confirmed": false
-      }
-    },
-    {
-      "id": "雜草垃圾:698",
-      "type": "雜草垃圾",
-      "row": 700,
-      "serial": "698",
-      "caseNo": "1116-695",
-      "district": "屏東市",
-      "section": "大同段",
-      "sectionCode": "0052",
-      "parcels": [
-        {
-          "county": "屏東縣",
-          "district": "屏東市",
-          "section": "大同段",
-          "lot": "553",
-          "sectionCode": "0052"
-        },
-        {
-          "county": "屏東縣",
-          "district": "屏東市",
-          "section": "大同段",
-          "lot": "553-2",
-          "sectionCode": "0052"
-        },
-        {
-          "county": "屏東縣",
-          "district": "屏東市",
-          "section": "大同段",
-          "lot": "554-1",
-          "sectionCode": "0052"
-        }
-      ],
-      "notice": "2026-11-17",
-      "resultDate": "2026-11-17",
-      "due": "",
-      "vendor": "迎騰工程行",
-      "sourcePerson": "范文彬",
-      "area": "",
-      "items": [],
-      "assignee": "p1",
-      "navigation": {
-        "point": [
-          120.47211493224671,
-          22.6683605
-        ],
-        "source": "auto",
-        "confirmed": false
-      }
-    },
-    {
-      "id": "雜草垃圾:699",
-      "type": "雜草垃圾",
-      "row": 701,
-      "serial": "699",
-      "caseNo": "1116-696",
-      "district": "高樹鄉",
-      "section": "長榮段",
-      "sectionCode": "0246",
-      "parcels": [
-        {
-          "county": "屏東縣",
-          "district": "高樹鄉",
-          "section": "長榮段",
-          "lot": "165",
-          "sectionCode": "0246"
-        }
-      ],
-      "notice": "2026-11-17",
-      "resultDate": "2026-11-17",
-      "due": "",
-      "vendor": "迎騰工程行",
-      "sourcePerson": "范文彬",
-      "area": "8391",
-      "items": [],
-      "assignee": "p1",
-      "navigation": null,
-      "originalArea": "",
-      "landArea": {
-        "schemaVersion": 1,
-        "unit": "㎡",
-        "total": "8391",
-        "signature": "[[\"屏東縣\",\"高樹鄉\",\"長榮段\",\"165\",\"0246\"]]",
-        "checkedAt": "2026-11-18T06:47:12.634Z",
-        "stale": false,
-        "parcels": [
-          {
-            "county": "屏東縣",
-            "district": "高樹鄉",
-            "section": "長榮段",
-            "lot": "165",
-            "sectionCode": "0246",
-            "area": "8391",
-            "source": "0246.json"
-          }
-        ]
-      }
-    },
-    {
-      "id": "雜草垃圾:700",
-      "type": "雜草垃圾",
-      "row": 702,
-      "serial": "700",
-      "caseNo": "1116-697",
-      "district": "屏東市",
-      "section": "新海豐段",
-      "sectionCode": "0192",
-      "parcels": [
-        {
-          "county": "屏東縣",
-          "district": "屏東市",
-          "section": "新海豐段",
-          "lot": "135",
-          "sectionCode": "0192"
-        }
-      ],
-      "notice": "2026-11-17",
-      "resultDate": "2026-11-17",
-      "due": "",
-      "vendor": "迎騰工程行",
-      "sourcePerson": "范文彬",
-      "area": "1662",
-      "items": [],
-      "assignee": "p1",
-      "navigation": {
-        "point": [
-          120.52168898533951,
-          22.705638999999998
-        ],
-        "source": "auto",
-        "confirmed": false
-      },
-      "originalArea": "",
-      "landArea": {
-        "schemaVersion": 1,
-        "unit": "㎡",
-        "total": "1662",
-        "signature": "[[\"屏東縣\",\"屏東市\",\"新海豐段\",\"135\",\"0192\"]]",
-        "checkedAt": "2026-11-18T06:47:12.634Z",
-        "stale": false,
-        "parcels": [
-          {
-            "county": "屏東縣",
-            "district": "屏東市",
-            "section": "新海豐段",
-            "lot": "135",
-            "sectionCode": "0192",
-            "area": "1662",
-            "source": "0192.json"
-          }
-        ]
-      }
-    },
-    {
-      "id": "雜草垃圾:701",
-      "type": "雜草垃圾",
-      "row": 703,
-      "serial": "701",
-      "caseNo": "1116-698",
-      "district": "屏東市",
-      "section": "華富段",
-      "sectionCode": "1726",
-      "parcels": [
-        {
-          "county": "屏東縣",
-          "district": "屏東市",
-          "section": "華富段",
-          "lot": "148",
-          "sectionCode": "1726"
-        }
-      ],
-      "notice": "2026-11-17",
-      "resultDate": "2026-11-17",
-      "due": "",
-      "vendor": "迎騰工程行",
-      "sourcePerson": "范文彬",
-      "area": "964.31",
-      "items": [],
-      "assignee": "p1",
-      "navigation": null,
-      "originalArea": "",
-      "landArea": {
-        "schemaVersion": 1,
-        "unit": "㎡",
-        "total": "964.31",
-        "signature": "[[\"屏東縣\",\"屏東市\",\"華富段\",\"148\",\"1726\"]]",
-        "checkedAt": "2026-11-18T06:47:12.634Z",
-        "stale": false,
-        "parcels": [
-          {
-            "county": "屏東縣",
-            "district": "屏東市",
-            "section": "華富段",
-            "lot": "148",
-            "sectionCode": "1726",
-            "area": "964.31",
-            "source": "1726.json"
-          }
-        ]
-      }
-    },
-    {
-      "id": "雜草垃圾:702",
-      "type": "雜草垃圾",
-      "row": 704,
-      "serial": "702",
-      "caseNo": "1116-699",
-      "district": "屏東市",
-      "section": "光明段",
-      "sectionCode": "1715",
-      "parcels": [
-        {
-          "county": "屏東縣",
-          "district": "屏東市",
-          "section": "光明段",
-          "lot": "477",
-          "sectionCode": "1715"
-        },
-        {
-          "county": "屏東縣",
-          "district": "屏東市",
-          "section": "光明段",
-          "lot": "512",
-          "sectionCode": "1715"
-        },
-        {
-          "county": "屏東縣",
-          "district": "屏東市",
-          "section": "光明段",
-          "lot": "514",
-          "sectionCode": "1715"
-        },
-        {
-          "county": "屏東縣",
-          "district": "屏東市",
-          "section": "光明段",
-          "lot": "834",
-          "sectionCode": "1715"
-        },
-        {
-          "county": "屏東縣",
-          "district": "屏東市",
-          "section": "光明段",
-          "lot": "836",
-          "sectionCode": "1715"
-        },
-        {
-          "county": "屏東縣",
-          "district": "屏東市",
-          "section": "光明段",
-          "lot": "847",
-          "sectionCode": "1715"
-        }
-      ],
-      "notice": "2026-11-17",
-      "resultDate": "2026-11-17",
-      "due": "",
-      "vendor": "迎騰工程行",
-      "sourcePerson": "范文彬",
-      "area": "818.6",
-      "items": [],
-      "assignee": "p1",
-      "navigation": null,
-      "originalArea": "",
-      "landArea": {
-        "schemaVersion": 1,
-        "unit": "㎡",
-        "total": "818.6",
-        "signature": "[[\"屏東縣\",\"屏東市\",\"光明段\",\"477\",\"1715\"],[\"屏東縣\",\"屏東市\",\"光明段\",\"512\",\"1715\"],[\"屏東縣\",\"屏東市\",\"光明段\",\"514\",\"1715\"],[\"屏東縣\",\"屏東市\",\"光明段\",\"834\",\"1715\"],[\"屏東縣\",\"屏東市\",\"光明段\",\"836\",\"1715\"],[\"屏東縣\",\"屏東市\",\"光明段\",\"847\",\"1715\"]]",
-        "checkedAt": "2026-11-18T06:47:12.634Z",
-        "stale": false,
-        "parcels": [
-          {
-            "county": "屏東縣",
-            "district": "屏東市",
-            "section": "光明段",
-            "lot": "477",
-            "sectionCode": "1715",
-            "area": "86.86",
-            "source": "1715.json"
-          },
-          {
-            "county": "屏東縣",
-            "district": "屏東市",
-            "section": "光明段",
-            "lot": "512",
-            "sectionCode": "1715",
-            "area": "307.58",
-            "source": "1715.json"
-          },
-          {
-            "county": "屏東縣",
-            "district": "屏東市",
-            "section": "光明段",
-            "lot": "514",
-            "sectionCode": "1715",
-            "area": "36.24",
-            "source": "1715.json"
-          },
-          {
-            "county": "屏東縣",
-            "district": "屏東市",
-            "section": "光明段",
-            "lot": "834",
-            "sectionCode": "1715",
-            "area": "162.88",
-            "source": "1715.json"
-          },
-          {
-            "county": "屏東縣",
-            "district": "屏東市",
-            "section": "光明段",
-            "lot": "836",
-            "sectionCode": "1715",
-            "area": "22.09",
-            "source": "1715.json"
-          },
-          {
-            "county": "屏東縣",
-            "district": "屏東市",
-            "section": "光明段",
-            "lot": "847",
-            "sectionCode": "1715",
-            "area": "202.95",
-            "source": "1715.json"
-          }
-        ]
-      }
-    },
-    {
-      "id": "雜草垃圾:703",
-      "type": "雜草垃圾",
-      "row": 705,
-      "serial": "703",
-      "caseNo": "1116-700",
-      "district": "屏東市",
-      "section": "光明段",
-      "sectionCode": "1715",
-      "parcels": [
-        {
-          "county": "屏東縣",
-          "district": "屏東市",
-          "section": "光明段",
-          "lot": "562",
-          "sectionCode": "1715"
-        }
-      ],
-      "notice": "2026-11-17",
-      "resultDate": "2026-11-17",
-      "due": "",
-      "vendor": "迎騰工程行",
-      "sourcePerson": "范文彬",
-      "area": "881.46",
-      "items": [],
-      "assignee": "p1",
-      "navigation": null,
-      "originalArea": "",
-      "landArea": {
-        "schemaVersion": 1,
-        "unit": "㎡",
-        "total": "881.46",
-        "signature": "[[\"屏東縣\",\"屏東市\",\"光明段\",\"562\",\"1715\"]]",
-        "checkedAt": "2026-11-18T06:47:12.634Z",
-        "stale": false,
-        "parcels": [
-          {
-            "county": "屏東縣",
-            "district": "屏東市",
-            "section": "光明段",
-            "lot": "562",
-            "sectionCode": "1715",
-            "area": "881.46",
-            "source": "1715.json"
-          }
-        ]
-      }
-    },
     {
       "id": "雜草垃圾:704",
       "type": "雜草垃圾",
@@ -455,7 +44,7 @@
       "sourcePerson": "范文彬",
       "area": "26.52",
       "items": [],
-      "assignee": "p2",
+      "assignee": "p1",
       "navigation": {
         "point": [
           120.38760405564516,
@@ -464,13 +53,13 @@
         "source": "auto",
         "confirmed": false
       },
-      "originalArea": "",
+      "originalArea": "26.52",
       "landArea": {
         "schemaVersion": 1,
         "unit": "㎡",
         "total": "26.52",
         "signature": "[[\"屏東縣\",\"琉球鄉\",\"本漁段\",\"349\",\"0568\"]]",
-        "checkedAt": "2026-11-18T06:47:12.634Z",
+        "checkedAt": "2026-11-23T08:11:07.345Z",
         "stale": false,
         "parcels": [
           {
@@ -483,135 +72,16 @@
             "source": "0568.json"
           }
         ]
-      }
-    },
-    {
-      "id": "雜草垃圾:705",
-      "type": "雜草垃圾",
-      "row": 707,
-      "serial": "705",
-      "caseNo": "1117-702",
-      "district": "屏東市",
-      "section": "明正段",
-      "sectionCode": "0048",
-      "parcels": [
-        {
-          "county": "屏東縣",
-          "district": "屏東市",
-          "section": "明正段",
-          "lot": "350",
-          "sectionCode": "0048"
-        }
-      ],
-      "notice": "2026-11-17",
-      "resultDate": "2026-11-17",
-      "due": "",
-      "vendor": "迎騰工程行",
-      "sourcePerson": "范文彬",
-      "area": "162",
-      "items": [],
-      "assignee": "p1",
-      "navigation": {
-        "point": [
-          120.49855157432432,
-          22.682909000000002
-        ],
-        "source": "auto",
-        "confirmed": false
       },
-      "originalParcels": [
-        {
-          "county": "屏東縣",
-          "district": "",
-          "section": "明正段",
-          "lot": "350"
-        }
-      ],
-      "parcelChoices": {},
-      "originalArea": "",
-      "landArea": {
-        "schemaVersion": 1,
-        "unit": "㎡",
-        "total": "162",
-        "signature": "[[\"屏東縣\",\"屏東市\",\"明正段\",\"350\",\"0048\"]]",
-        "checkedAt": "2026-11-18T06:47:12.634Z",
-        "stale": false,
-        "parcels": [
-          {
-            "county": "屏東縣",
-            "district": "屏東市",
-            "section": "明正段",
-            "lot": "350",
-            "sectionCode": "0048",
-            "area": "162",
-            "source": "0048.json"
-          }
-        ]
-      }
-    },
-    {
-      "id": "雜草垃圾:706",
-      "type": "雜草垃圾",
-      "row": 708,
-      "serial": "706",
-      "caseNo": "1117-703",
-      "district": "屏東市",
-      "section": "光明段",
-      "sectionCode": "1715",
-      "parcels": [
-        {
-          "county": "屏東縣",
-          "district": "屏東市",
-          "section": "光明段",
-          "lot": "871",
-          "sectionCode": "1715"
-        }
-      ],
-      "notice": "2026-11-17",
-      "resultDate": "2026-11-17",
-      "due": "",
-      "vendor": "迎騰工程行",
-      "sourcePerson": "范文彬",
-      "area": "95.52",
-      "items": [],
-      "assignee": "p1",
-      "navigation": null,
-      "originalParcels": [
-        {
-          "county": "屏東縣",
-          "district": "",
-          "section": "光明段",
-          "lot": "871"
-        }
-      ],
-      "parcelChoices": {},
-      "originalArea": "",
-      "landArea": {
-        "schemaVersion": 1,
-        "unit": "㎡",
-        "total": "95.52",
-        "signature": "[[\"屏東縣\",\"屏東市\",\"光明段\",\"871\",\"1715\"]]",
-        "checkedAt": "2026-11-18T06:47:12.634Z",
-        "stale": false,
-        "parcels": [
-          {
-            "county": "屏東縣",
-            "district": "屏東市",
-            "section": "光明段",
-            "lot": "871",
-            "sectionCode": "1715",
-            "area": "95.52",
-            "source": "1715.json"
-          }
-        ]
-      }
+      "completed": false,
+      "completedAt": ""
     },
     {
       "id": "雜草垃圾:707",
       "type": "雜草垃圾",
       "row": 709,
       "serial": "707",
-      "caseNo": "1118-704",
+      "caseNo": "1117-704",
       "district": "屏東市",
       "section": "勝興段",
       "sectionCode": "0030",
@@ -629,6 +99,20 @@
           "section": "勝興段",
           "lot": "795-2",
           "sectionCode": "0030"
+        },
+        {
+          "county": "屏東縣",
+          "district": "屏東市",
+          "section": "勝興段",
+          "lot": "795-3",
+          "sectionCode": "0030"
+        },
+        {
+          "county": "屏東縣",
+          "district": "屏東市",
+          "section": "勝興段",
+          "lot": "795",
+          "sectionCode": "0030"
         }
       ],
       "notice": "2026-11-18",
@@ -636,7 +120,7 @@
       "due": "",
       "vendor": "迎騰工程行",
       "sourcePerson": "范文彬",
-      "area": "97",
+      "area": "437",
       "items": [],
       "assignee": "p1",
       "navigation": {
@@ -647,28 +131,13 @@
         "source": "auto",
         "confirmed": false
       },
-      "originalParcels": [
-        {
-          "county": "屏東縣",
-          "district": "",
-          "section": "勝興段",
-          "lot": "795-1"
-        },
-        {
-          "county": "屏東縣",
-          "district": "",
-          "section": "勝興段",
-          "lot": "795-2"
-        }
-      ],
-      "parcelChoices": {},
-      "originalArea": "",
+      "originalArea": "97",
       "landArea": {
         "schemaVersion": 1,
         "unit": "㎡",
-        "total": "97",
-        "signature": "[[\"屏東縣\",\"屏東市\",\"勝興段\",\"795-1\",\"0030\"],[\"屏東縣\",\"屏東市\",\"勝興段\",\"795-2\",\"0030\"]]",
-        "checkedAt": "2026-11-18T06:47:12.634Z",
+        "total": "437",
+        "signature": "[[\"屏東縣\",\"屏東市\",\"勝興段\",\"795-1\",\"0030\"],[\"屏東縣\",\"屏東市\",\"勝興段\",\"795-2\",\"0030\"],[\"屏東縣\",\"屏東市\",\"勝興段\",\"795-3\",\"0030\"],[\"屏東縣\",\"屏東市\",\"勝興段\",\"795\",\"0030\"]]",
+        "checkedAt": "2026-11-23T08:16:45.983Z",
         "stale": false,
         "parcels": [
           {
@@ -688,16 +157,49 @@
             "sectionCode": "0030",
             "area": "44",
             "source": "0030.json"
+          },
+          {
+            "county": "屏東縣",
+            "district": "屏東市",
+            "section": "勝興段",
+            "lot": "795-3",
+            "sectionCode": "0030",
+            "area": "15",
+            "source": "0030.json"
+          },
+          {
+            "county": "屏東縣",
+            "district": "屏東市",
+            "section": "勝興段",
+            "lot": "795",
+            "sectionCode": "0030",
+            "area": "325",
+            "source": "0030.json"
           }
         ]
-      }
+      },
+      "originalParcels": [
+        {
+          "county": "屏東縣",
+          "district": "屏東市",
+          "section": "勝興段",
+          "lot": "795-1"
+        },
+        {
+          "county": "屏東縣",
+          "district": "屏東市",
+          "section": "勝興段",
+          "lot": "795-2"
+        }
+      ],
+      "parcelChoices": {}
     },
     {
       "id": "雜草垃圾:708",
       "type": "雜草垃圾",
       "row": 710,
       "serial": "708",
-      "caseNo": "1119-705",
+      "caseNo": "1118-705",
       "district": "東港鎮",
       "section": "東新段",
       "sectionCode": "0583",
@@ -718,30 +220,14 @@
       "area": "192.53",
       "items": [],
       "assignee": "p2",
-      "navigation": {
-        "point": [
-          120.4667888607639,
-          22.4728505
-        ],
-        "source": "auto",
-        "confirmed": false
-      },
-      "originalParcels": [
-        {
-          "county": "屏東縣",
-          "district": "",
-          "section": "東新段",
-          "lot": "677"
-        }
-      ],
-      "parcelChoices": {},
-      "originalArea": "",
+      "navigation": null,
+      "originalArea": "192.53",
       "landArea": {
         "schemaVersion": 1,
         "unit": "㎡",
         "total": "192.53",
         "signature": "[[\"屏東縣\",\"東港鎮\",\"東新段\",\"677\",\"0583\"]]",
-        "checkedAt": "2026-11-18T06:47:12.634Z",
+        "checkedAt": "2026-11-23T08:11:07.345Z",
         "stale": false,
         "parcels": [
           {
@@ -755,363 +241,561 @@
           }
         ]
       }
+    },
+    {
+      "id": "雜草垃圾:709",
+      "type": "雜草垃圾",
+      "row": 711,
+      "serial": "709",
+      "caseNo": "1120-706",
+      "district": "屏東市",
+      "section": "橋福段",
+      "sectionCode": "1733",
+      "parcels": [
+        {
+          "county": "屏東縣",
+          "district": "屏東市",
+          "section": "橋福段",
+          "lot": "574",
+          "sectionCode": "1733"
+        },
+        {
+          "county": "屏東縣",
+          "district": "屏東市",
+          "section": "橋福段",
+          "lot": "550",
+          "sectionCode": "1733"
+        },
+        {
+          "county": "屏東縣",
+          "district": "屏東市",
+          "section": "橋福段",
+          "lot": "549",
+          "sectionCode": "1733"
+        }
+      ],
+      "notice": "2026-11-21",
+      "resultDate": "2026-11-21",
+      "due": "",
+      "vendor": "迎騰工程行",
+      "sourcePerson": "范文彬",
+      "area": "5801.08",
+      "items": [],
+      "assignee": "p1",
+      "navigation": {
+        "point": [
+          120.50007223494728,
+          22.666013999999997
+        ],
+        "source": "auto",
+        "confirmed": false
+      },
+      "originalArea": "",
+      "landArea": {
+        "schemaVersion": 1,
+        "unit": "㎡",
+        "total": "5801.08",
+        "signature": "[[\"屏東縣\",\"屏東市\",\"橋福段\",\"574\",\"1733\"],[\"屏東縣\",\"屏東市\",\"橋福段\",\"550\",\"1733\"],[\"屏東縣\",\"屏東市\",\"橋福段\",\"549\",\"1733\"]]",
+        "checkedAt": "2026-11-23T08:11:07.345Z",
+        "stale": false,
+        "parcels": [
+          {
+            "county": "屏東縣",
+            "district": "屏東市",
+            "section": "橋福段",
+            "lot": "574",
+            "sectionCode": "1733",
+            "area": "265.24",
+            "source": "1733.json"
+          },
+          {
+            "county": "屏東縣",
+            "district": "屏東市",
+            "section": "橋福段",
+            "lot": "550",
+            "sectionCode": "1733",
+            "area": "2418.24",
+            "source": "1733.json"
+          },
+          {
+            "county": "屏東縣",
+            "district": "屏東市",
+            "section": "橋福段",
+            "lot": "549",
+            "sectionCode": "1733",
+            "area": "3117.6",
+            "source": "1733.json"
+          }
+        ]
+      }
+    },
+    {
+      "id": "雜草垃圾:710",
+      "type": "雜草垃圾",
+      "row": 712,
+      "serial": "710",
+      "caseNo": "1120-707",
+      "district": "麟洛鄉",
+      "section": "農場段",
+      "sectionCode": "0173",
+      "parcels": [
+        {
+          "county": "屏東縣",
+          "district": "麟洛鄉",
+          "section": "農場段",
+          "lot": "774-1",
+          "sectionCode": "0173"
+        },
+        {
+          "county": "屏東縣",
+          "district": "麟洛鄉",
+          "section": "農場段",
+          "lot": "774-2",
+          "sectionCode": "0173"
+        }
+      ],
+      "notice": "2026-11-21",
+      "resultDate": "2026-11-21",
+      "due": "",
+      "vendor": "迎騰工程行",
+      "sourcePerson": "范文彬",
+      "area": "3020.39",
+      "items": [],
+      "assignee": "p1",
+      "navigation": {
+        "point": [
+          120.55298465147447,
+          22.6592175
+        ],
+        "source": "auto",
+        "confirmed": false
+      },
+      "originalArea": "",
+      "landArea": {
+        "schemaVersion": 1,
+        "unit": "㎡",
+        "total": "3020.39",
+        "signature": "[[\"屏東縣\",\"麟洛鄉\",\"農場段\",\"774-1\",\"0173\"],[\"屏東縣\",\"麟洛鄉\",\"農場段\",\"774-2\",\"0173\"]]",
+        "checkedAt": "2026-11-23T08:11:07.345Z",
+        "stale": false,
+        "parcels": [
+          {
+            "county": "屏東縣",
+            "district": "麟洛鄉",
+            "section": "農場段",
+            "lot": "774-1",
+            "sectionCode": "0173",
+            "area": "1640",
+            "source": "0173.json"
+          },
+          {
+            "county": "屏東縣",
+            "district": "麟洛鄉",
+            "section": "農場段",
+            "lot": "774-2",
+            "sectionCode": "0173",
+            "area": "1380.39",
+            "source": "0173.json"
+          }
+        ]
+      }
+    },
+    {
+      "id": "雜草垃圾:711",
+      "type": "雜草垃圾",
+      "row": 713,
+      "serial": "711",
+      "caseNo": "1120-708",
+      "district": "屏東市",
+      "section": "香揚段",
+      "sectionCode": "0058",
+      "parcels": [
+        {
+          "county": "屏東縣",
+          "district": "屏東市",
+          "section": "香揚段",
+          "lot": "15",
+          "sectionCode": "0058"
+        },
+        {
+          "county": "屏東縣",
+          "district": "屏東市",
+          "section": "香揚段",
+          "lot": "15-10",
+          "sectionCode": "0058"
+        },
+        {
+          "county": "屏東縣",
+          "district": "屏東市",
+          "section": "香揚段",
+          "lot": "15-8",
+          "sectionCode": "0058"
+        },
+        {
+          "county": "屏東縣",
+          "district": "屏東市",
+          "section": "香揚段",
+          "lot": "14-2",
+          "sectionCode": "0058"
+        },
+        {
+          "county": "屏東縣",
+          "district": "長治鄉",
+          "section": "長治段",
+          "lot": "204-7",
+          "sectionCode": "0086"
+        }
+      ],
+      "notice": "2026-11-21",
+      "resultDate": "2026-11-21",
+      "due": "",
+      "vendor": "迎騰工程行",
+      "sourcePerson": "范文彬",
+      "area": "1357",
+      "items": [],
+      "assignee": "p1",
+      "navigation": {
+        "point": [
+          120.51004796022727,
+          22.665062499999998
+        ],
+        "source": "auto",
+        "confirmed": false
+      },
+      "originalArea": "",
+      "landArea": {
+        "schemaVersion": 1,
+        "unit": "㎡",
+        "total": "1357",
+        "signature": "[[\"屏東縣\",\"屏東市\",\"香揚段\",\"15\",\"0058\"],[\"屏東縣\",\"屏東市\",\"香揚段\",\"15-10\",\"0058\"],[\"屏東縣\",\"屏東市\",\"香揚段\",\"15-8\",\"0058\"],[\"屏東縣\",\"屏東市\",\"香揚段\",\"14-2\",\"0058\"],[\"屏東縣\",\"長治鄉\",\"長治段\",\"204-7\",\"0086\"]]",
+        "checkedAt": "2026-11-23T08:11:07.345Z",
+        "stale": false,
+        "parcels": [
+          {
+            "county": "屏東縣",
+            "district": "屏東市",
+            "section": "香揚段",
+            "lot": "15",
+            "sectionCode": "0058",
+            "area": "948",
+            "source": "0058.json"
+          },
+          {
+            "county": "屏東縣",
+            "district": "屏東市",
+            "section": "香揚段",
+            "lot": "15-10",
+            "sectionCode": "0058",
+            "area": "85",
+            "source": "0058.json"
+          },
+          {
+            "county": "屏東縣",
+            "district": "屏東市",
+            "section": "香揚段",
+            "lot": "15-8",
+            "sectionCode": "0058",
+            "area": "123",
+            "source": "0058.json"
+          },
+          {
+            "county": "屏東縣",
+            "district": "屏東市",
+            "section": "香揚段",
+            "lot": "14-2",
+            "sectionCode": "0058",
+            "area": "162",
+            "source": "0058.json"
+          },
+          {
+            "county": "屏東縣",
+            "district": "長治鄉",
+            "section": "長治段",
+            "lot": "204-7",
+            "sectionCode": "0086",
+            "area": "39",
+            "source": "0086.json"
+          }
+        ]
+      }
+    },
+    {
+      "id": "雜草垃圾:712",
+      "type": "雜草垃圾",
+      "row": 714,
+      "serial": "712",
+      "caseNo": "1120-709",
+      "district": "里港鄉",
+      "section": "定國段",
+      "sectionCode": "0248",
+      "parcels": [
+        {
+          "county": "屏東縣",
+          "district": "里港鄉",
+          "section": "定國段",
+          "lot": "450",
+          "sectionCode": "0248"
+        }
+      ],
+      "notice": "2026-11-21",
+      "resultDate": "2026-11-21",
+      "due": "",
+      "vendor": "迎騰工程行",
+      "sourcePerson": "范文彬",
+      "area": "838.82",
+      "items": [],
+      "assignee": "p1",
+      "navigation": {
+        "point": [
+          120.53386861021994,
+          22.819903500000002
+        ],
+        "source": "auto",
+        "confirmed": false
+      },
+      "originalArea": "",
+      "landArea": {
+        "schemaVersion": 1,
+        "unit": "㎡",
+        "total": "838.82",
+        "signature": "[[\"屏東縣\",\"里港鄉\",\"定國段\",\"450\",\"0248\"]]",
+        "checkedAt": "2026-11-23T08:11:07.345Z",
+        "stale": false,
+        "parcels": [
+          {
+            "county": "屏東縣",
+            "district": "里港鄉",
+            "section": "定國段",
+            "lot": "450",
+            "sectionCode": "0248",
+            "area": "838.82",
+            "source": "0248.json"
+          }
+        ]
+      }
+    },
+    {
+      "id": "雜草垃圾:713",
+      "type": "雜草垃圾",
+      "row": 715,
+      "serial": "713",
+      "caseNo": "1123-710",
+      "district": "長治鄉",
+      "section": "水源段",
+      "sectionCode": "1705",
+      "parcels": [
+        {
+          "county": "屏東縣",
+          "district": "長治鄉",
+          "section": "水源段",
+          "lot": "55",
+          "sectionCode": "1705"
+        }
+      ],
+      "notice": "2026-11-24",
+      "resultDate": "2026-11-24",
+      "due": "",
+      "vendor": "迎騰工程行",
+      "sourcePerson": "范文彬",
+      "area": "8600.3",
+      "items": [],
+      "assignee": "p1",
+      "navigation": {
+        "point": [
+          120.57954787622148,
+          22.707801
+        ],
+        "source": "auto",
+        "confirmed": false
+      },
+      "originalArea": "",
+      "landArea": {
+        "schemaVersion": 1,
+        "unit": "㎡",
+        "total": "8600.3",
+        "signature": "[[\"屏東縣\",\"長治鄉\",\"水源段\",\"55\",\"1705\"]]",
+        "checkedAt": "2026-11-23T08:11:07.345Z",
+        "stale": false,
+        "parcels": [
+          {
+            "county": "屏東縣",
+            "district": "長治鄉",
+            "section": "水源段",
+            "lot": "55",
+            "sectionCode": "1705",
+            "area": "8600.3",
+            "source": "1705.json"
+          }
+        ]
+      }
+    },
+    {
+      "id": "雜草垃圾:714",
+      "type": "雜草垃圾",
+      "row": 716,
+      "serial": "714",
+      "caseNo": "1123-711",
+      "district": "屏東市",
+      "section": "灰磘段",
+      "sectionCode": "0049",
+      "parcels": [
+        {
+          "county": "屏東縣",
+          "district": "屏東市",
+          "section": "灰磘段",
+          "lot": "2215",
+          "sectionCode": "0049"
+        }
+      ],
+      "notice": "2026-11-24",
+      "resultDate": "2026-11-24",
+      "due": "",
+      "vendor": "迎騰工程行",
+      "sourcePerson": "范文彬",
+      "area": "337",
+      "items": [],
+      "assignee": "p1",
+      "navigation": {
+        "point": [
+          120.47918815818181,
+          22.668112999999998
+        ],
+        "source": "auto",
+        "confirmed": false
+      },
+      "originalArea": "",
+      "landArea": {
+        "schemaVersion": 1,
+        "unit": "㎡",
+        "total": "337",
+        "signature": "[[\"屏東縣\",\"屏東市\",\"灰磘段\",\"2215\",\"0049\"]]",
+        "checkedAt": "2026-11-23T08:11:07.345Z",
+        "stale": false,
+        "parcels": [
+          {
+            "county": "屏東縣",
+            "district": "屏東市",
+            "section": "灰磘段",
+            "lot": "2215",
+            "sectionCode": "0049",
+            "area": "337",
+            "source": "0049.json"
+          }
+        ]
+      }
+    },
+    {
+      "id": "雜草垃圾:715",
+      "type": "雜草垃圾",
+      "row": 717,
+      "serial": "715",
+      "caseNo": "1123-712",
+      "district": "屏東市",
+      "section": "勝興段",
+      "sectionCode": "0030",
+      "parcels": [
+        {
+          "county": "屏東縣",
+          "district": "屏東市",
+          "section": "勝興段",
+          "lot": "776-10",
+          "sectionCode": "0030"
+        }
+      ],
+      "notice": "2026-11-24",
+      "resultDate": "2026-11-24",
+      "due": "",
+      "vendor": "迎騰工程行",
+      "sourcePerson": "范文彬",
+      "area": "116",
+      "items": [],
+      "assignee": "p1",
+      "navigation": {
+        "point": [
+          120.47378444180328,
+          22.683963499999997
+        ],
+        "source": "auto",
+        "confirmed": false
+      },
+      "originalArea": "",
+      "landArea": {
+        "schemaVersion": 1,
+        "unit": "㎡",
+        "total": "116",
+        "signature": "[[\"屏東縣\",\"屏東市\",\"勝興段\",\"776-10\",\"0030\"]]",
+        "checkedAt": "2026-11-23T08:11:07.345Z",
+        "stale": false,
+        "parcels": [
+          {
+            "county": "屏東縣",
+            "district": "屏東市",
+            "section": "勝興段",
+            "lot": "776-10",
+            "sectionCode": "0030",
+            "area": "116",
+            "source": "0030.json"
+          }
+        ]
+      }
+    },
+    {
+      "id": "雜草垃圾:716",
+      "type": "雜草垃圾",
+      "row": 718,
+      "serial": "716",
+      "caseNo": "1123-713",
+      "district": "恆春鎮",
+      "section": "湖內段",
+      "sectionCode": "0732",
+      "parcels": [
+        {
+          "county": "屏東縣",
+          "district": "恆春鎮",
+          "section": "湖內段",
+          "lot": "576",
+          "sectionCode": "0732"
+        }
+      ],
+      "notice": "2026-11-24",
+      "resultDate": "2026-11-24",
+      "due": "",
+      "vendor": "迎騰工程行",
+      "sourcePerson": "范文彬",
+      "area": "1842.38",
+      "items": [],
+      "assignee": "p2",
+      "navigation": {
+        "point": [
+          120.7490460263042,
+          21.99005
+        ],
+        "source": "auto",
+        "confirmed": false
+      },
+      "originalArea": "",
+      "landArea": {
+        "schemaVersion": 1,
+        "unit": "㎡",
+        "total": "1842.38",
+        "signature": "[[\"屏東縣\",\"恆春鎮\",\"湖內段\",\"576\",\"0732\"]]",
+        "checkedAt": "2026-11-23T08:11:07.345Z",
+        "stale": false,
+        "parcels": [
+          {
+            "county": "屏東縣",
+            "district": "恆春鎮",
+            "section": "湖內段",
+            "lot": "576",
+            "sectionCode": "0732",
+            "area": "1842.38",
+            "source": "0732.json"
+          }
+        ]
+      }
     }
   ],
   "features": [
-    {
-      "id": "0437:245",
-      "code": "0437",
-      "lot": "245",
-      "lands": [],
-      "polygons": [
-        [
-          [
-            [
-              120.60673,
-              22.668365
-            ],
-            [
-              120.606722,
-              22.668327
-            ],
-            [
-              120.60683,
-              22.668311
-            ],
-            [
-              120.60692,
-              22.668297
-            ],
-            [
-              120.606928,
-              22.668333
-            ],
-            [
-              120.60673,
-              22.668365
-            ]
-          ]
-        ]
-      ],
-      "bbox": [
-        120.606722,
-        22.668297,
-        120.606928,
-        22.668365
-      ]
-    },
-    {
-      "id": "0052:553",
-      "code": "0052",
-      "lot": "553",
-      "lands": [],
-      "polygons": [
-        [
-          [
-            [
-              120.47238,
-              22.668355
-            ],
-            [
-              120.472393,
-              22.668417
-            ],
-            [
-              120.472295,
-              22.668473
-            ],
-            [
-              120.472163,
-              22.668549
-            ],
-            [
-              120.472113,
-              22.668541
-            ],
-            [
-              120.472081,
-              22.66851
-            ],
-            [
-              120.472056,
-              22.668489
-            ],
-            [
-              120.472022,
-              22.668466
-            ],
-            [
-              120.471986,
-              22.668446
-            ],
-            [
-              120.471955,
-              22.668431
-            ],
-            [
-              120.471931,
-              22.668423
-            ],
-            [
-              120.471893,
-              22.668412
-            ],
-            [
-              120.471846,
-              22.668366
-            ],
-            [
-              120.471916,
-              22.668224
-            ],
-            [
-              120.47238,
-              22.668355
-            ]
-          ]
-        ]
-      ],
-      "bbox": [
-        120.471846,
-        22.668224,
-        120.472393,
-        22.668549
-      ]
-    },
-    {
-      "id": "0052:553-2",
-      "code": "0052",
-      "lot": "553-2",
-      "lands": [],
-      "polygons": [
-        [
-          [
-            [
-              120.471753,
-              22.668179
-            ],
-            [
-              120.471896,
-              22.668219
-            ],
-            [
-              120.471916,
-              22.668224
-            ],
-            [
-              120.471846,
-              22.668366
-            ],
-            [
-              120.471805,
-              22.668325
-            ],
-            [
-              120.471762,
-              22.668284
-            ],
-            [
-              120.471762,
-              22.668284
-            ],
-            [
-              120.471733,
-              22.668247
-            ],
-            [
-              120.471739,
-              22.668243
-            ],
-            [
-              120.471707,
-              22.668203
-            ],
-            [
-              120.471693,
-              22.668214
-            ],
-            [
-              120.471663,
-              22.668178
-            ],
-            [
-              120.471753,
-              22.668179
-            ]
-          ]
-        ],
-        [
-          [
-            [
-              120.471653,
-              22.668178
-            ],
-            [
-              120.471659,
-              22.668178
-            ],
-            [
-              120.471656,
-              22.66818
-            ],
-            [
-              120.471653,
-              22.668178
-            ]
-          ]
-        ],
-        [
-          [
-            [
-              120.471614,
-              22.668138
-            ],
-            [
-              120.471755,
-              22.668178
-            ],
-            [
-              120.471662,
-              22.668177
-            ],
-            [
-              120.471661,
-              22.668175
-            ],
-            [
-              120.471658,
-              22.668177
-            ],
-            [
-              120.471653,
-              22.668177
-            ],
-            [
-              120.471614,
-              22.668138
-            ]
-          ]
-        ]
-      ],
-      "bbox": [
-        120.471614,
-        22.668138,
-        120.471916,
-        22.668366
-      ]
-    },
-    {
-      "id": "0052:554-1",
-      "code": "0052",
-      "lot": "554-1",
-      "lands": [],
-      "polygons": [
-        [
-          [
-            [
-              120.471753,
-              22.668179
-            ],
-            [
-              120.471865,
-              22.668179
-            ],
-            [
-              120.471929,
-              22.668198
-            ],
-            [
-              120.471916,
-              22.668224
-            ],
-            [
-              120.471896,
-              22.668219
-            ],
-            [
-              120.471753,
-              22.668179
-            ]
-          ]
-        ],
-        [
-          [
-            [
-              120.471571,
-              22.668094
-            ],
-            [
-              120.471716,
-              22.668136
-            ],
-            [
-              120.471865,
-              22.668179
-            ],
-            [
-              120.471755,
-              22.668178
-            ],
-            [
-              120.471614,
-              22.668138
-            ],
-            [
-              120.471571,
-              22.668094
-            ]
-          ]
-        ]
-      ],
-      "bbox": [
-        120.471571,
-        22.668094,
-        120.471929,
-        22.668224
-      ]
-    },
-    {
-      "id": "0192:135",
-      "code": "0192",
-      "lot": "135",
-      "lands": [],
-      "polygons": [
-        [
-          [
-            [
-              120.521544,
-              22.705857
-            ],
-            [
-              120.521506,
-              22.705452
-            ],
-            [
-              120.521546,
-              22.705405
-            ],
-            [
-              120.521832,
-              22.705386
-            ],
-            [
-              120.521871,
-              22.705826
-            ],
-            [
-              120.521544,
-              22.705857
-            ]
-          ]
-        ]
-      ],
-      "bbox": [
-        120.521506,
-        22.705386,
-        120.521871,
-        22.705857
-      ]
-    },
     {
       "id": "0568:349",
       "code": "0568",
@@ -1148,80 +832,6 @@
         22.345997,
         120.38768,
         22.346039
-      ]
-    },
-    {
-      "id": "0048:350",
-      "code": "0048",
-      "lot": "350",
-      "lands": [],
-      "polygons": [
-        [
-          [
-            [
-              120.498713,
-              22.682799
-            ],
-            [
-              120.498686,
-              22.682824
-            ],
-            [
-              120.498663,
-              22.682844
-            ],
-            [
-              120.498631,
-              22.682873
-            ],
-            [
-              120.498603,
-              22.682898
-            ],
-            [
-              120.498572,
-              22.68292
-            ],
-            [
-              120.498516,
-              22.682958
-            ],
-            [
-              120.498483,
-              22.682982
-            ],
-            [
-              120.498439,
-              22.683013
-            ],
-            [
-              120.498437,
-              22.683014
-            ],
-            [
-              120.498413,
-              22.682981
-            ],
-            [
-              120.498624,
-              22.682833
-            ],
-            [
-              120.498674,
-              22.682761
-            ],
-            [
-              120.498713,
-              22.682799
-            ]
-          ]
-        ]
-      ],
-      "bbox": [
-        120.498413,
-        22.682761,
-        120.498713,
-        22.683014
       ]
     },
     {
@@ -1353,77 +963,1075 @@
       ]
     },
     {
-      "id": "0583:677",
-      "code": "0583",
-      "lot": "677",
+      "id": "0030:795-3",
+      "code": "0030",
+      "lot": "795-3",
       "lands": [],
       "polygons": [
         [
           [
             [
-              120.466839,
-              22.472998
+              120.471492,
+              22.682581
             ],
             [
-              120.466778,
-              22.472906
+              120.471525,
+              22.682581
             ],
             [
-              120.466774,
-              22.472875
+              120.471481,
+              22.682662
             ],
             [
-              120.466746,
-              22.472785
+              120.471483,
+              22.682646
             ],
             [
-              120.466705,
-              22.472451
-            ],
-            [
-              120.466715,
-              22.472448
-            ],
-            [
-              120.466756,
-              22.472776
-            ],
-            [
-              120.466768,
-              22.472826
-            ],
-            [
-              120.466784,
-              22.472777
-            ],
-            [
-              120.466743,
-              22.472442
-            ],
-            [
-              120.466762,
-              22.472438
-            ],
-            [
-              120.466772,
-              22.472528
-            ],
-            [
-              120.466806,
-              22.472822
-            ],
-            [
-              120.466839,
-              22.472998
+              120.471492,
+              22.682581
             ]
           ]
         ]
       ],
       "bbox": [
-        120.466705,
-        22.472438,
-        120.466839,
-        22.472998
+        120.471481,
+        22.682581,
+        120.471525,
+        22.682662
+      ]
+    },
+    {
+      "id": "0030:795",
+      "code": "0030",
+      "lot": "795",
+      "lands": [],
+      "polygons": [
+        [
+          [
+            [
+              120.471763,
+              22.682579
+            ],
+            [
+              120.471766,
+              22.682663
+            ],
+            [
+              120.471767,
+              22.682685
+            ],
+            [
+              120.471616,
+              22.682687
+            ],
+            [
+              120.471477,
+              22.682687
+            ],
+            [
+              120.471481,
+              22.682662
+            ],
+            [
+              120.471525,
+              22.682581
+            ],
+            [
+              120.471576,
+              22.68258
+            ],
+            [
+              120.471763,
+              22.682579
+            ]
+          ]
+        ]
+      ],
+      "bbox": [
+        120.471477,
+        22.682579,
+        120.471767,
+        22.682687
+      ]
+    },
+    {
+      "id": "1733:574",
+      "code": "1733",
+      "lot": "574",
+      "lands": [],
+      "polygons": [
+        [
+          [
+            [
+              120.500141,
+              22.665905
+            ],
+            [
+              120.500203,
+              22.666002
+            ],
+            [
+              120.500189,
+              22.666055
+            ],
+            [
+              120.500121,
+              22.666093
+            ],
+            [
+              120.50008,
+              22.666026
+            ],
+            [
+              120.499992,
+              22.666027
+            ],
+            [
+              120.49997,
+              22.666027
+            ],
+            [
+              120.499969,
+              22.666037
+            ],
+            [
+              120.499932,
+              22.666043
+            ],
+            [
+              120.499896,
+              22.666041
+            ],
+            [
+              120.500141,
+              22.665905
+            ]
+          ]
+        ]
+      ],
+      "bbox": [
+        120.499896,
+        22.665905,
+        120.500203,
+        22.666093
+      ]
+    },
+    {
+      "id": "1733:550",
+      "code": "1733",
+      "lot": "550",
+      "lands": [],
+      "polygons": [
+        [
+          [
+            [
+              120.500026,
+              22.665723
+            ],
+            [
+              120.499896,
+              22.665795
+            ],
+            [
+              120.49934,
+              22.665496
+            ],
+            [
+              120.499618,
+              22.665083
+            ],
+            [
+              120.500026,
+              22.665723
+            ]
+          ]
+        ]
+      ],
+      "bbox": [
+        120.49934,
+        22.665083,
+        120.500026,
+        22.665795
+      ]
+    },
+    {
+      "id": "1733:549",
+      "code": "1733",
+      "lot": "549",
+      "lands": [],
+      "polygons": [
+        [
+          [
+            [
+              120.500141,
+              22.665905
+            ],
+            [
+              120.499896,
+              22.666041
+            ],
+            [
+              120.499869,
+              22.66604
+            ],
+            [
+              120.499786,
+              22.666037
+            ],
+            [
+              120.499771,
+              22.666031
+            ],
+            [
+              120.499688,
+              22.666019
+            ],
+            [
+              120.499661,
+              22.666001
+            ],
+            [
+              120.499612,
+              22.66597
+            ],
+            [
+              120.499438,
+              22.665916
+            ],
+            [
+              120.499123,
+              22.665828
+            ],
+            [
+              120.499118,
+              22.665826
+            ],
+            [
+              120.49934,
+              22.665496
+            ],
+            [
+              120.499896,
+              22.665795
+            ],
+            [
+              120.500026,
+              22.665723
+            ],
+            [
+              120.500141,
+              22.665905
+            ]
+          ]
+        ]
+      ],
+      "bbox": [
+        120.499118,
+        22.665496,
+        120.500141,
+        22.666041
+      ]
+    },
+    {
+      "id": "0173:774-1",
+      "code": "0173",
+      "lot": "774-1",
+      "lands": [],
+      "polygons": [
+        [
+          [
+            [
+              120.55402,
+              22.660263
+            ],
+            [
+              120.553181,
+              22.659542
+            ],
+            [
+              120.553224,
+              22.659491
+            ],
+            [
+              120.552775,
+              22.659116
+            ],
+            [
+              120.552882,
+              22.659012
+            ],
+            [
+              120.553167,
+              22.659319
+            ],
+            [
+              120.553481,
+              22.659663
+            ],
+            [
+              120.553792,
+              22.660008
+            ],
+            [
+              120.55402,
+              22.660263
+            ]
+          ]
+        ]
+      ],
+      "bbox": [
+        120.552775,
+        22.659012,
+        120.55402,
+        22.660263
+      ]
+    },
+    {
+      "id": "0173:774-2",
+      "code": "0173",
+      "lot": "774-2",
+      "lands": [],
+      "polygons": [
+        [
+          [
+            [
+              120.55285,
+              22.658977
+            ],
+            [
+              120.552882,
+              22.659012
+            ],
+            [
+              120.552775,
+              22.659116
+            ],
+            [
+              120.552283,
+              22.658706
+            ],
+            [
+              120.552449,
+              22.658545
+            ],
+            [
+              120.552533,
+              22.658635
+            ],
+            [
+              120.55285,
+              22.658977
+            ]
+          ]
+        ]
+      ],
+      "bbox": [
+        120.552283,
+        22.658545,
+        120.552882,
+        22.659116
+      ]
+    },
+    {
+      "id": "0058:15",
+      "code": "0058",
+      "lot": "15",
+      "lands": [],
+      "polygons": [
+        [
+          [
+            [
+              120.509995,
+              22.664819
+            ],
+            [
+              120.510007,
+              22.66477
+            ],
+            [
+              120.510028,
+              22.664779
+            ],
+            [
+              120.510034,
+              22.664789
+            ],
+            [
+              120.510097,
+              22.664865
+            ],
+            [
+              120.510143,
+              22.664963
+            ],
+            [
+              120.510195,
+              22.665058
+            ],
+            [
+              120.510194,
+              22.665058
+            ],
+            [
+              120.510184,
+              22.665067
+            ],
+            [
+              120.510179,
+              22.665201
+            ],
+            [
+              120.510103,
+              22.665191
+            ],
+            [
+              120.509901,
+              22.665167
+            ],
+            [
+              120.509902,
+              22.665155
+            ],
+            [
+              120.509903,
+              22.665135
+            ],
+            [
+              120.509906,
+              22.665076
+            ],
+            [
+              120.509909,
+              22.665032
+            ],
+            [
+              120.509911,
+              22.664996
+            ],
+            [
+              120.509914,
+              22.664956
+            ],
+            [
+              120.509986,
+              22.664835
+            ],
+            [
+              120.509995,
+              22.664819
+            ]
+          ]
+        ]
+      ],
+      "bbox": [
+        120.509901,
+        22.66477,
+        120.510195,
+        22.665201
+      ]
+    },
+    {
+      "id": "0058:15-10",
+      "code": "0058",
+      "lot": "15-10",
+      "lands": [],
+      "polygons": [
+        [
+          [
+            [
+              120.510211,
+              22.665044
+            ],
+            [
+              120.510195,
+              22.665058
+            ],
+            [
+              120.510143,
+              22.664963
+            ],
+            [
+              120.510097,
+              22.664865
+            ],
+            [
+              120.510034,
+              22.664789
+            ],
+            [
+              120.510028,
+              22.664779
+            ],
+            [
+              120.510099,
+              22.664811
+            ],
+            [
+              120.510181,
+              22.664993
+            ],
+            [
+              120.510211,
+              22.665028
+            ],
+            [
+              120.510211,
+              22.665044
+            ]
+          ]
+        ]
+      ],
+      "bbox": [
+        120.510028,
+        22.664779,
+        120.510211,
+        22.665058
+      ]
+    },
+    {
+      "id": "0058:15-8",
+      "code": "0058",
+      "lot": "15-8",
+      "lands": [],
+      "polygons": [
+        [
+          [
+            [
+              120.509935,
+              22.664566
+            ],
+            [
+              120.509945,
+              22.664559
+            ],
+            [
+              120.509974,
+              22.664593
+            ],
+            [
+              120.510018,
+              22.664704
+            ],
+            [
+              120.510035,
+              22.664752
+            ],
+            [
+              120.510012,
+              22.664752
+            ],
+            [
+              120.510007,
+              22.66477
+            ],
+            [
+              120.509995,
+              22.664819
+            ],
+            [
+              120.50993,
+              22.664611
+            ],
+            [
+              120.509935,
+              22.664566
+            ]
+          ]
+        ]
+      ],
+      "bbox": [
+        120.50993,
+        22.664559,
+        120.510035,
+        22.664819
+      ]
+    },
+    {
+      "id": "0058:14-2",
+      "code": "0058",
+      "lot": "14-2",
+      "lands": [],
+      "polygons": [
+        [
+          [
+            [
+              120.509916,
+              22.664567
+            ],
+            [
+              120.509916,
+              22.664612
+            ],
+            [
+              120.509848,
+              22.664616
+            ],
+            [
+              120.509849,
+              22.664592
+            ],
+            [
+              120.509848,
+              22.664572
+            ],
+            [
+              120.509916,
+              22.664567
+            ]
+          ]
+        ],
+        [
+          [
+            [
+              120.50985,
+              22.664574
+            ],
+            [
+              120.50985,
+              22.664617
+            ],
+            [
+              120.509789,
+              22.664621
+            ],
+            [
+              120.509586,
+              22.66465
+            ],
+            [
+              120.509478,
+              22.664665
+            ],
+            [
+              120.509476,
+              22.664662
+            ],
+            [
+              120.509457,
+              22.664634
+            ],
+            [
+              120.509774,
+              22.664582
+            ],
+            [
+              120.509801,
+              22.664577
+            ],
+            [
+              120.50985,
+              22.664574
+            ]
+          ]
+        ]
+      ],
+      "bbox": [
+        120.509457,
+        22.664567,
+        120.509916,
+        22.664665
+      ]
+    },
+    {
+      "id": "0086:204-7",
+      "code": "0086",
+      "lot": "204-7",
+      "lands": [],
+      "polygons": [
+        [
+          [
+            [
+              120.510209,
+              22.665049
+            ],
+            [
+              120.510204,
+              22.665185
+            ],
+            [
+              120.510176,
+              22.665208
+            ],
+            [
+              120.510177,
+              22.665192
+            ],
+            [
+              120.510179,
+              22.665151
+            ],
+            [
+              120.510182,
+              22.665072
+            ],
+            [
+              120.510209,
+              22.665049
+            ]
+          ]
+        ]
+      ],
+      "bbox": [
+        120.510176,
+        22.665049,
+        120.510209,
+        22.665208
+      ]
+    },
+    {
+      "id": "0248:450",
+      "code": "0248",
+      "lot": "450",
+      "lands": [],
+      "polygons": [
+        [
+          [
+            [
+              120.533869,
+              22.820152
+            ],
+            [
+              120.53367,
+              22.820071
+            ],
+            [
+              120.533744,
+              22.8199
+            ],
+            [
+              120.533615,
+              22.819843
+            ],
+            [
+              120.533661,
+              22.819757
+            ],
+            [
+              120.533996,
+              22.819901
+            ],
+            [
+              120.533869,
+              22.820152
+            ]
+          ],
+          [
+            [
+              120.533723,
+              22.819963
+            ],
+            [
+              120.533762,
+              22.81998
+            ],
+            [
+              120.533791,
+              22.819923
+            ],
+            [
+              120.533752,
+              22.819906
+            ],
+            [
+              120.533723,
+              22.819963
+            ]
+          ]
+        ]
+      ],
+      "bbox": [
+        120.533615,
+        22.819757,
+        120.533996,
+        22.820152
+      ]
+    },
+    {
+      "id": "1705:55",
+      "code": "1705",
+      "lot": "55",
+      "lands": [],
+      "polygons": [
+        [
+          [
+            [
+              120.580441,
+              22.708533
+            ],
+            [
+              120.579561,
+              22.708138
+            ],
+            [
+              120.578594,
+              22.707524
+            ],
+            [
+              120.57929,
+              22.707591
+            ],
+            [
+              120.579307,
+              22.707593
+            ],
+            [
+              120.579432,
+              22.707623
+            ],
+            [
+              120.580018,
+              22.707763
+            ],
+            [
+              120.580113,
+              22.707839
+            ],
+            [
+              120.580363,
+              22.708041
+            ],
+            [
+              120.580524,
+              22.708171
+            ],
+            [
+              120.580683,
+              22.708284
+            ],
+            [
+              120.580441,
+              22.708533
+            ]
+          ]
+        ]
+      ],
+      "bbox": [
+        120.578594,
+        22.707524,
+        120.580683,
+        22.708533
+      ]
+    },
+    {
+      "id": "0049:2215",
+      "code": "0049",
+      "lot": "2215",
+      "lands": [],
+      "polygons": [
+        [
+          [
+            [
+              120.47924,
+              22.667986
+            ],
+            [
+              120.479271,
+              22.668261
+            ],
+            [
+              120.479145,
+              22.668201
+            ],
+            [
+              120.479099,
+              22.668025
+            ],
+            [
+              120.479128,
+              22.668017
+            ],
+            [
+              120.479162,
+              22.668008
+            ],
+            [
+              120.479195,
+              22.667999
+            ],
+            [
+              120.479195,
+              22.667997
+            ],
+            [
+              120.479236,
+              22.667986
+            ],
+            [
+              120.479237,
+              22.667987
+            ],
+            [
+              120.47924,
+              22.667986
+            ]
+          ]
+        ]
+      ],
+      "bbox": [
+        120.479099,
+        22.667986,
+        120.479271,
+        22.668261
+      ]
+    },
+    {
+      "id": "0030:776-10",
+      "code": "0030",
+      "lot": "776-10",
+      "lands": [],
+      "polygons": [
+        [
+          [
+            [
+              120.47377,
+              22.683953
+            ],
+            [
+              120.473773,
+              22.683953
+            ],
+            [
+              120.473804,
+              22.683957
+            ],
+            [
+              120.473799,
+              22.68397
+            ],
+            [
+              120.473798,
+              22.683974
+            ],
+            [
+              120.47379,
+              22.684006
+            ],
+            [
+              120.473781,
+              22.684043
+            ],
+            [
+              120.473772,
+              22.684078
+            ],
+            [
+              120.473763,
+              22.684114
+            ],
+            [
+              120.473754,
+              22.684151
+            ],
+            [
+              120.473745,
+              22.684187
+            ],
+            [
+              120.473735,
+              22.684223
+            ],
+            [
+              120.473723,
+              22.68427
+            ],
+            [
+              120.473692,
+              22.684267
+            ],
+            [
+              120.473694,
+              22.684258
+            ],
+            [
+              120.47377,
+              22.683953
+            ]
+          ]
+        ]
+      ],
+      "bbox": [
+        120.473692,
+        22.683953,
+        120.473804,
+        22.68427
+      ]
+    },
+    {
+      "id": "0732:576",
+      "code": "0732",
+      "lot": "576",
+      "lands": [],
+      "polygons": [
+        [
+          [
+            [
+              120.749151,
+              21.990776
+            ],
+            [
+              120.749095,
+              21.990745
+            ],
+            [
+              120.74908,
+              21.990737
+            ],
+            [
+              120.749071,
+              21.99059
+            ],
+            [
+              120.748987,
+              21.990194
+            ],
+            [
+              120.748975,
+              21.989905
+            ],
+            [
+              120.748926,
+              21.989438
+            ],
+            [
+              120.748956,
+              21.989357
+            ],
+            [
+              120.749058,
+              21.989419
+            ],
+            [
+              120.749038,
+              21.989474
+            ],
+            [
+              120.749104,
+              21.989906
+            ],
+            [
+              120.749127,
+              21.990377
+            ],
+            [
+              120.749197,
+              21.990722
+            ],
+            [
+              120.749188,
+              21.990796
+            ],
+            [
+              120.749151,
+              21.990776
+            ]
+          ]
+        ]
+      ],
+      "bbox": [
+        120.748926,
+        21.989357,
+        120.749197,
+        21.990796
       ]
     }
   ]
