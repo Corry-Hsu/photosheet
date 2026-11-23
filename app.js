@@ -1523,67 +1523,6 @@
         },
       }),
     );
-    bind("#import-excel", () => $("#excel-file").click());
-    $("#excel-file").onchange = async () => {
-      try {
-        const file = $("#excel-file").files[0];
-        if (!file) return;
-        if (file.size > 12 * 1024 * 1024) throw Error("Excel 超過12MB");
-        const excelBytes = new Uint8Array(await file.arrayBuffer());
-        C.checkArchive(excelBytes, 80 * 1024 * 1024, 4000);
-        let result = await readExcel(excelBytes);
-        if (!result.tasks.length) throw Error("沒有有效任務");
-        open(
-          "Excel 匯入預覽",
-          `<p>共 ${result.tasks.length} 筆任務。每列一筆；新任務依鄉鎮自動分派。</p><div class="toolbar">${["雜草垃圾", "砍樹", "圍籬"].map((n) => `<label><input type="checkbox" data-import-type="${n}" checked>${n} ${result.tasks.filter((t) => t.type === n).length}</label>`).join("")}</div><label>統一成果日期（選填）<input id="import-date" type="date"></label><div class="preview">${result.tasks.map((t, i) => `<div class="preview-row"><span>${E(t.type)} 第${t.row}列 · ${E(location(t))} ${E(t.parcels.map((p) => p.lot).join("、"))}</span><input type="date" data-import-date="${i}" value="${t.resultDate}" aria-label="第${i + 1}筆成果日期"></div>`).join("")}</div><details><summary>${result.warnings.length} 項資料提醒</summary><pre>${E(result.warnings.join("\n"))}</pre></details><button id="commit-import" class="primary">確認匯入</button>`,
-        );
-        $("#import-date").onchange = () => {
-          if ($("#import-date").value)
-            $$("[data-import-date]").forEach(
-              (el) => (el.value = $("#import-date").value),
-            );
-        };
-        bind("#commit-import", async () => {
-          let types = $$("[data-import-type]:checked").map(
-              (el) => el.dataset.importType,
-            ),
-            ids = new Set(state.tasks.map((t) => t.id));
-          $$("[data-import-date]").forEach(
-            (el) =>
-              (result.tasks[+el.dataset.importDate].resultDate = el.value),
-          );
-          const add = result.tasks
-            .filter((t) => types.includes(t.type) && !ids.has(t.id))
-            .map((t) => C.autoAssign(C.monthPolicy(t)));
-          if (!types.length) throw Error("請勾選工作類型");
-          const old = state.tasks,
-            oldReference = state.sectionReference;
-          state.sectionReference = [
-            ...new Map(
-              [
-                ...(state.sectionReference || []),
-                ...(result.sectionReference || []),
-              ].map((p) => [C.sectionKey(p) + "|" + p.code, p]),
-            ).values(),
-          ];
-          state.tasks = [...state.tasks, ...add];
-          try {
-            await persist();
-          } catch (e) {
-            state.tasks = old;
-            state.sectionReference = oldReference;
-            throw e;
-          }
-          $("#dialog").close();
-          render();
-          tell(`新增 ${add.length} 筆；重匯的既有任務維持原分派與日期`);
-        });
-      } catch (e) {
-        tell(e.message, true);
-      } finally {
-        $("#excel-file").value = "";
-      }
-    };
     bind("#import-geo", () => $("#geo-files").click());
     $("#geo-files").onchange = () => {
       importGeo([...$("#geo-files").files]).catch((e) => tell(e.message, true));

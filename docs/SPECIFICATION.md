@@ -182,3 +182,9 @@ flowchart TD
 管理頁新增匯入cw015-dispatch-tasks格式；新案未指派追加，既有同ID案件逐欄勾選更新。保留指派、完成、舊案鎖、導航及未知欄位，不刪無關任務，不觸及照片；更正成果日期仍保留原舊案鎖。state及geo以單一IndexedDB交易及預覽快照比對提交；其他視窗更新則拒絕，寫入失敗全回滾。新KML可追加，既有不同範圍保留並提示。[操作及契約](document-task-exchange.md)、[ADR-0020](adr/0020-document-task-exchange.md)。不改原Excel、派工、發布或相機功能，交換檔不是管理備份或發布包。
 
 
+## R-28 文件主來源與地籍回傳（2026-11-23）
+
+依使用者最新指示，管理頁移除Excel匯入按鈕、隱藏輸入、事件處理及excel.js載入。案件改由文件工具匯出JSON，管理頁仍可手動新增；任務ID、舊案保護、XML/KML匯入、面積配對、備份／還原與發布維持。ExcelJS保留供既有文件輸出。此規則取代先前規格中管理頁仍可Excel匯入的部分。
+
+管理頁「下載備份」已包含KML features及task.landArea逐地號配對面積，文件工具可用專門地籍回傳入口讀取；無須改備份schema。原XML未配對內容不在備份中，不能宣稱復原所有原始XML。操作見[地籍回傳](document-task-exchange.md)，決策見[ADR-0021](adr/0021-document-source-and-geo-return.md)。
+

@@ -219,3 +219,11 @@ git log -8 --oneline
 
 文書更正用新的docs提交；產品回退只選授權的程式變更，不整包把main/data退回舊月。每次公開JSON提交核對入口、任務ID與欄位／KML引用；Pages完成後比對對應來源。要開始新對話，使用START_HERE與本次目標，不把整份試錯聊天餵回去。
 
+## 最新修訂：文件作案件主來源、備份回傳地籍（2026-11-23）
+
+主線基準 `33c3b4e5125ea38be1ddda118ed7bf9d695dedb8`（#56已合併，Pages成功）；本次使用者要求移除管理頁Excel匯入，並詢問既有XML/KML可否回到文件工具。移除管理頁按鈕、file input、事件與excel.js載入；保留ExcelJS以便文件下載，手動新增、原任務、地籍配對與發布保留。沒有修改公開data、照片或六個現場入口。
+
+備份既有features、task.landArea已足以提供KML範圍與逐地號面積證據，無需新格式。使用者在原管理裝置按「下載備份」，再於本機文件工具「地籍圖與圖例→匯入派工地籍」預覽勾選。文件端保留日期、工作項目、徑級與原欄，衝突KML須確認，失效面積拒用，不是即時同步。詳見ADR-0021及交換操作。
+
+測試：`node tests/document-task-core.test.cjs`、`node tests/document-task-import-browser.test.cjs`；後者增加管理頁無Excel入口檢查，保留JSON匯入、派工鎖／照片保護、競態、原子回滾及原發布驗證。文件工具另測真正管理頁下載→文件端選擇性帶回三工種XML面積/KML、重匯、ZIP恢復及原欄保護，合成fixture與私人證據不提交。不是手機／相機全套驗收。本節是修改交接，尚未合併部署本次後續PR。
+

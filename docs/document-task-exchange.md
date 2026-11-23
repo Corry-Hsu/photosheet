@@ -30,3 +30,16 @@ kind=`cw015-dispatch-tasks`、schemaVersion=1，含projectId、exportId、export
 `node tests/document-task-import-browser.test.cjs`：合成資料操作真正管理頁，驗證追加／選欄、既有照片與無關案保留、拒絕錯誤封包、重匯、其他視窗更新時拒絕、儲存失敗原子回滾及原廠商發布JSON有效。需要Playwright；Windows用Edge，其他平台用Chromium。此測試不修改公開data；原始證據只在evidence/document-task-import，不能提交私人證據。
 
 本機合成測試不等於iPhone／Android實機或全套相機驗證。原外部圖資可用性、本機與正式網站各自的IndexedDB也不能視為自動同步。
+## 文件主來源與地籍回傳
+
+管理頁已移除Excel匯入，改由文件產生器建立／編修案件，再按「匯出派工任務」送回本頁。手動新增仍保留；Excel來源可在文件產生器匯入，不在兩邊重建同一批案件。
+
+要讓文件使用既有配對成果：
+
+1. 在原本配對XML/KML的管理裝置按「下載備份」。
+2. 本機文件產生器開啟既有文件專案，選「地籍圖與圖例→匯入派工地籍」，讀取該JSON。
+3. 勾選案件地籍／已配對面積及KML。衝突範圍須確認後勾選取代，原文件工作項目、日期、圖例及照片保留。
+4. 儲存文件專案ZIP。備份不含未配對的原始XML全文，也不是自動同步；不要把私密備份上傳GitHub data。
+
+不同工種仍沿用不同task.id，但同地號可共用KML與逐地號面積索引。文件中不存在的管理案件會略過。既有任務JSON與管理備份是不同格式，仍須使用對應入口。
+
