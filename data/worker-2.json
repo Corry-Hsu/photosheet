@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "batch": "2026-11-23-981aaafb",
-  "generatedAt": "2026-11-23T09:04:56.215Z",
+  "batch": "2026-11-23-3cb66120",
+  "generatedAt": "2026-11-23T10:34:19.299Z",
   "person": {
     "id": "p2",
     "name": "康哥"
@@ -18,70 +18,6 @@
     "fence_terms": "依契約規定辦理。"
   },
   "tasks": [
-    {
-      "id": "圍籬:67",
-      "type": "圍籬",
-      "row": 68,
-      "serial": "67",
-      "caseNo": "1105-67",
-      "district": "恆春鎮",
-      "section": "城南段",
-      "sectionCode": "0730",
-      "parcels": [
-        {
-          "county": "屏東縣",
-          "district": "恆春鎮",
-          "section": "城南段",
-          "lot": "239",
-          "sectionCode": "0730"
-        },
-        {
-          "county": "屏東縣",
-          "district": "恆春鎮",
-          "section": "城南段",
-          "lot": "240",
-          "sectionCode": "0730"
-        }
-      ],
-      "notice": "2026-11-06",
-      "resultDate": "2026-11-06",
-      "due": "",
-      "vendor": "全威測量工程有限公司",
-      "sourcePerson": "陳釧嘉",
-      "area": "118.09",
-      "items": [],
-      "assignee": "p2",
-      "navigation": null,
-      "originalArea": "",
-      "landArea": {
-        "schemaVersion": 1,
-        "unit": "㎡",
-        "total": "118.09",
-        "signature": "[[\"屏東縣\",\"恆春鎮\",\"城南段\",\"239\",\"0730\"],[\"屏東縣\",\"恆春鎮\",\"城南段\",\"240\",\"0730\"]]",
-        "checkedAt": "2026-11-23T08:11:07.345Z",
-        "stale": false,
-        "parcels": [
-          {
-            "county": "屏東縣",
-            "district": "恆春鎮",
-            "section": "城南段",
-            "lot": "239",
-            "sectionCode": "0730",
-            "area": "64",
-            "source": "0730.json"
-          },
-          {
-            "county": "屏東縣",
-            "district": "恆春鎮",
-            "section": "城南段",
-            "lot": "240",
-            "sectionCode": "0730",
-            "area": "54.09",
-            "source": "0730.json"
-          }
-        ]
-      }
-    },
     {
       "id": "圍籬:70",
       "type": "圍籬",
