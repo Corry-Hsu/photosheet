@@ -1,0 +1,71 @@
+{
+  "date": "2026-11-23",
+  "timezone": "Asia/Taipei",
+  "base_commit": "24f6822621111e8d7b71b28bbce0b0a0ffd89884",
+  "pr_base": "main",
+  "tested_revision": "working tree on base_commit; source hashes below; containing commit via git log",
+  "before": {
+    "command": "PHOTOSHEET_TEST_URL=http://127.0.0.1:8817/ python tests/bulk_photos_qa.py",
+    "exit_code": 1,
+    "failure": "new complete share-payload assertion sees title in addition to files"
+  },
+  "after": [
+    {
+      "command": "PHOTOSHEET_TEST_URL=http://127.0.0.1:8817/ python tests/bulk_photos_qa.py",
+      "exit_code": 0
+    },
+    {
+      "command": "PHOTOSHEET_TEST_URL=http://127.0.0.1:8817/ python tests/field_photo_flow_qa.py",
+      "exit_code": 0
+    },
+    {
+      "command": "node --check field-camera.js",
+      "exit_code": 0
+    },
+    {
+      "command": "git diff --check",
+      "exit_code": 0
+    }
+  ],
+  "coverage": [
+    "exact share-payload keys equal files",
+    "JPEG post-capture and enlarged viewer",
+    "worker and vendor ZIP",
+    "one original-named file per share",
+    "same JPEG/ZIP bytes; only selected JPEGs in archive",
+    "cancel keeps data and avoids fallback download",
+    "JPEG share failure falls back to identical JPEG download",
+    "ZIP fresh-gesture retry",
+    "atomic deletion and photo isolation regression"
+  ],
+  "sha256": {
+    "field-camera.js": "c4eba09492a1e449f455c0200274d27f097882a69582f8f687ba96b7355f1db5",
+    "tests/bulk_photos_qa.py": "c362f03023e2bd1930f97767c85da60df3acabac3809208c573fd6028f3d4df3",
+    "tests/field_photo_flow_qa.py": "ece8c28401281b8cc53d4d1792d587873ef147cdf8134adef5b9463a2ba1ff8e",
+    "worker-1.html": "bb48d1d792f311451192aa034b214670b1a8d79c1cb69e73fb186fdb73216296",
+    "worker-2.html": "5a73eab0341f0d58e66b13372f7353efc609e0503ca37592a96ef14928c60f0d",
+    "worker-3.html": "9ca4bf11b09a67d5aafe7cebd126a00f675a962cdd1691437e77aa16599edc21",
+    "vendor-1.html": "43aade43192f8066dfdd9c007f64a71b34d405a6af421c0459f4855e17885fb2",
+    "vendor-2.html": "655998d15ca27e81064ef496ae30b9b2c9c79a53b35f80b425bee440a9264b65",
+    "vendor-3.html": "cb3b79a18300c0129500dd2a23bd3e88deca14a177e713c0160cb593585bb265"
+  },
+  "pages": {
+    "sha": "24f6822621111e8d7b71b28bbce0b0a0ffd89884",
+    "run_id": 45034047129,
+    "status": "completed",
+    "conclusion": "success",
+    "this_change_deployed": false
+  },
+  "not_run": [
+    "physical iPhone/Android",
+    "actual LINE sending",
+    "WebKit",
+    "full suite"
+  ],
+  "known_limitations": [
+    "receiving OS/LINE presentation still requires physical-device check",
+    "P0 native multi-page GPS timeout unresolved"
+  ],
+  "public_data_changed": false,
+  "private_evidence_committed": false
+}

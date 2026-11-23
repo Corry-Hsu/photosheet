@@ -2,6 +2,17 @@
 
 現行規格見 [SPECIFICATION](../docs/SPECIFICATION.md)，本次commit／真實成功與失敗見 [HANDOFF](../docs/HANDOFF.md)，可讀取的結果為 [2026-11-20 baseline](../docs/verification/2026-11-20-baseline.json)。**歷史基準16/18，另2組失敗；P0接續修復兩組並執行必要回歸共4組通過，未重跑全套18組，不能合稱全套綠燈。** 詳見 [P0紀錄](../docs/verification/2026-11-20-p0.json)與[ADR-0014](../docs/adr/0014-clock-consistent-browser-gps-fixtures.md)。
 
+## 僅檔案分享
+
+8817根目錄本機網站：
+
+```sh
+PHOTOSHEET_TEST_URL=http://127.0.0.1:8817/ python tests/bulk_photos_qa.py
+PHOTOSHEET_TEST_URL=http://127.0.0.1:8817/ python tests/field_photo_flow_qa.py
+```
+
+攔截navigator.share完整payload，驗證JPEG拍後／放大檢視及人員／廠商ZIP只有files，不允許title／text／url。沿用取消、位元組、手勢重試、下載備援與本機資料保護檢查。這不會向LINE傳送，原生分享面板與LINE呈現仍待實機。結果見[分享驗證](../docs/verification/file-only-photo-share.json)。
+
 ## 圓形快門與上方鏡頭／倍率
 
 以8816根目錄網站執行：

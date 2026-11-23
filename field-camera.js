@@ -91,7 +91,7 @@
     const file = new File([blob], name, { type: "image/jpeg" });
     if (navigator.share && navigator.canShare?.({ files: [file] })) {
       try {
-        await navigator.share({ files: [file], title: "任務照片" });
+        await navigator.share({ files: [file] });
         return;
       } catch (e) {
         if (e.name === "AbortError") return;
@@ -969,7 +969,7 @@
       busy = true;
       update();
       try {
-        await navigator.share({ files: [archive], title: "任務照片 ZIP" });
+        await navigator.share({ files: [archive] });
         status.textContent = "ZIP 已交給分享面板；也可再次下載。";
       } catch (e) {
         status.textContent =

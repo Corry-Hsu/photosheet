@@ -31,12 +31,38 @@ with tempfile.TemporaryDirectory() as tmp,sync_playwright() as p:
  (ROOT/'evidence/field-photo-flow').mkdir(parents=True,exist_ok=True);pg.screenshot(path=str(ROOT/'evidence/field-photo-flow'/f'{engine}-review.png'))
  with pg.expect_download() as download:pg.click('#capture-save')
  path=Path(tmp)/'saved.jpg';download.value.save_as(str(path));im=Image.open(path);assert abs(im.width/im.height-expected_ratio)<.01
+ # Share the saved JPEG without sending an accompanying title/text/url.
+ pg.evaluate('''()=>{
+  window.jpegShareMode='success';window.jpegShareCalls=[];
+  Object.defineProperty(navigator,'canShare',{configurable:true,value:({files})=>files.length===1&&files[0].type==='image/jpeg'});
+  Object.defineProperty(navigator,'share',{configurable:true,value:async payload=>{
+   const file=payload.files[0];jpegShareCalls.push({keys:Object.keys(payload).sort(),count:payload.files.length,name:file.name,type:file.type});
+   if(jpegShareMode==='cancel')throw new DOMException('cancel','AbortError');
+   if(jpegShareMode==='fail')throw new DOMException('not allowed','NotAllowedError');
+   window.jpegSharedBytes=Array.from(new Uint8Array(await file.arrayBuffer()));
+  }});
+ }''')
+ share_downloads=[];pg.on('download',lambda d:share_downloads.append(d.suggested_filename))
+ pg.click('#capture-save');pg.wait_for_function('!!window.jpegSharedBytes')
+ assert pg.evaluate('jpegShareCalls.at(-1).keys')==['files']
+ assert bytes(pg.evaluate('jpegSharedBytes'))==path.read_bytes()
+ assert not share_downloads
+ pg.evaluate("jpegShareMode='cancel'");pg.click('#capture-save')
+ assert len(pg.evaluate('jpegShareCalls'))==2 and not share_downloads
+ assert pg.evaluate('async()=> (await Store.photosFor("p1",PSApp.state.tasks[0].id)).length')==1
+ pg.evaluate("jpegShareMode='fail'")
+ with pg.expect_download() as download:pg.click('#capture-save')
+ fallback=Path(tmp)/'fallback.jpg';download.value.save_as(str(fallback));assert fallback.read_bytes()==path.read_bytes()
+ pg.evaluate("jpegShareMode='success'")
  pg.click('#capture-preview');pg.wait_for_function('!document.querySelector("#shutter").disabled');pg.wait_for_timeout(1100)
  pg.evaluate("()=>{window.originalPut=Store.put;Store.put=async(store,value)=>{if(store==='photos')throw Error('測試儲存失敗');return originalPut.call(Store,store,value)}}")
  pg.click('#shutter');pg.wait_for_function('document.querySelector("#capture-status").textContent.includes("儲存失敗")');assert pg.locator('#capture-save').is_hidden();assert pg.evaluate('(async()=>{return (await Store.photosFor("p1",PSApp.state.tasks[0].id)).length})()')==1
  pg.evaluate('()=>{Store.put=originalPut}');pg.click('#capture-retry-save');pg.wait_for_function('!document.querySelector("#capture-save").hidden');assert pg.evaluate('(async()=>{return (await Store.photosFor("p1",PSApp.state.tasks[0].id)).length})()')==2
  pg.click('#camera-back');pg.wait_for_selector('[data-photo-select]');assert pg.locator('[data-photo-original]').count()==0;assert '下載浮水印' not in pg.locator('#local-photos').inner_text();assert pg.locator('[data-photo-select]').count()==2
- pg.locator('[data-photo-view]').first.click();pg.wait_for_selector('.field-image-dialog');assert pg.locator('.field-image-dialog img').is_visible();pg.click('.field-image-close')
+ pg.locator('[data-photo-view]').first.click();pg.wait_for_selector('.field-image-dialog');assert pg.locator('.field-image-dialog img').is_visible()
+ before_share=pg.evaluate('jpegShareCalls.length');pg.click('.field-image-save');pg.wait_for_function('(n)=>jpegShareCalls.length===n+1',arg=before_share)
+ assert all(c['keys']==['files'] and c['count']==1 and c['type']=='image/jpeg' and c['name'].endswith('.jpg') for c in pg.evaluate('jpegShareCalls'))
+ pg.click('.field-image-close')
  pg.click('#detail-camera');pg.wait_for_function('!document.querySelector("#shutter").disabled');pg.click('#camera-back');pg.wait_for_selector('#detail-board');pg.click('#close-dialog')
  # Stored bytes roundtrip, and legacy Blob records remain readable.
  assert pg.evaluate('(async()=>{const rows=await Store.photosFor("p1",PSApp.state.tasks[0].id);const db=await Store.open();const row=await new Promise((resolve,reject)=>{const q=db.transaction("photos").objectStore("photos").get(rows[0].id);q.onsuccess=()=>resolve(q.result);q.onerror=()=>reject(q.error)});return row._photoBytes instanceof ArrayBuffer&&!row.blob&&rows[0].blob instanceof Blob})()')
@@ -45,4 +71,4 @@ with tempfile.TemporaryDirectory() as tmp,sync_playwright() as p:
  # Vendor still has navigation and actions, but no redundant type filter.
  vendor=copy.deepcopy(fixture);vendor['person']={'id':'v1','name':'示範廠商'};vendor['vendorType']='雜草垃圾';vendor['tasks']=[{**vendor['tasks'][0],'type':'雜草垃圾'}];ctx.route('**/data/vendor-1.json',lambda r:r.fulfill(json=vendor));vp=ctx.new_page();vp.clock.set_fixed_time(QA_NOW);vp.on('pageerror',lambda e:errors.append(str(e)));vp.goto(BASE+'vendor-1.html');vp.wait_for_function('PSApp.state.tasks.length===1');assert vp.locator('#worker-filter-toggle').count()==0;assert vp.locator('#worker-map-jump').count()==0;vp.locator('.task-content').first.click();assert vp.locator('#worker-board').count()==0;assert not vp.locator('#worker-camera').is_disabled();assert vp.locator('#worker-navigate').get_attribute('href')
  vp.click('#worker-camera');vp.wait_for_function('!document.querySelector("#shutter").disabled');vp.evaluate('failGPS=false');vp.click('#shutter');vp.wait_for_selector('#capture-save:visible');vp.click('#capture-preview');vp.wait_for_selector('#shutter:visible');vp.click('#camera-back');vp.wait_for_selector('[data-photo-select]');assert vp.locator('[data-photo-select]').count()==1
- assert not errors,errors;result={'engine':engine,'task_auto_scroll_preserved':True,'map_camera_and_detail_whiteboard_actions':True,'fullscreen_portrait_landscape':True,'instant_stamped_review':True,'gps_failure_retry_without_retake':True,'storage_failure_keeps_pending_image':True,'save_stamped_jpeg':True,'continue_shooting':True,'gallery_inline_viewer_no_original_controls':True,'vendor_filter_removed_person_filter_preserved':True,'errors':errors};out=ROOT/'evidence/field-photo-flow';out.mkdir(exist_ok=True,parents=True);(out/f'{engine}.json').write_text(json.dumps(result,ensure_ascii=False,indent=2));pg.screenshot(path=str(out/f'{engine}.png'));print(json.dumps(result,ensure_ascii=False,indent=2));browser.close()
+ assert not errors,errors;result={'engine':engine,'task_auto_scroll_preserved':True,'map_camera_and_detail_whiteboard_actions':True,'fullscreen_portrait_landscape':True,'instant_stamped_review':True,'gps_failure_retry_without_retake':True,'storage_failure_keeps_pending_image':True,'save_stamped_jpeg':True,'files_only_jpeg_share_review_and_viewer':True,'jpeg_cancel_keeps_data_failure_downloads_same_bytes':True,'continue_shooting':True,'gallery_inline_viewer_no_original_controls':True,'vendor_filter_removed_person_filter_preserved':True,'errors':errors};out=ROOT/'evidence/field-photo-flow';out.mkdir(exist_ok=True,parents=True);(out/f'{engine}.json').write_text(json.dumps(result,ensure_ascii=False,indent=2));pg.screenshot(path=str(out/f'{engine}.png'));print(json.dumps(result,ensure_ascii=False,indent=2));browser.close()
