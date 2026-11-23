@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="admin-basemap.css?v=20261111-ortho1" />
     <link rel="stylesheet" href="admin-monthly-stats.css?v=20261120-month1" />
     <link rel="stylesheet" href="admin-compact.css?v=20261120-compact1" />
+  <link rel="stylesheet" href="document-task-import.css?v=20261123-bridge1" />
   </head>
   <body data-tab="list">
     <header>
@@ -25,6 +26,7 @@
       <section class="panel" id="admin-tools">
         <div class="toolbar">
           <button class="primary" id="import-excel">匯入 Excel</button
+          ><button id="import-document-tasks">匯入文件任務</button
           ><button id="manual-task">新增任務</button
           ><button id="import-geo">匯入地籍</button
           ><button id="land-areas">配對面積</button
@@ -186,6 +188,9 @@
     <script src="land-areas.js?v=20261111-area-codes1"></script>
     <script src="admin-basemap.js?v=20261111-ortho1"></script>
     <script src="admin-monthly-stats.js?v=20261120-month1"></script>
-    <script src="app.js?v=20261120-compact1"></script>
+    <script src="document-task-core.js?v=20261123-bridge1"></script>
+    <script src="document-task-import.js?v=20261123-bridge1"></script>
+    <script src="app.js?v=20261123-document-tasks1"></script>
   </body>
 </html>
+
