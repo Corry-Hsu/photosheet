@@ -1,5 +1,14 @@
 # photosheet 交接紀錄
 
+## 文件任務交換與差異合併（2026-11-23，Asia/Taipei）
+
+- 基準main為`6bb7a1560c382c7d45a4817c8d5f8c7a59846bf6`；本機獨立快照保留#55及原資料，不修改公開data。
+- 新增管理頁「匯入文件任務」，接收cw015-dispatch-tasks/schemaVersion1。新案未指派追加，既有案逐欄勾選；原ID與多地號、未知欄位及人員／設定保留。拒絕指派／完成／導航等受保護輸入，同ID工種變更拒絕。
+- app.js接上管理端模組與原子提交。預覽比對本頁與IndexedDB state/geo，競態拒絕，寫入失敗全回滾，photos store不寫入；舊案更正成果日不解除原鎖。新KML可追加，衝突保留派工端。現場相機及六入口HTML不修改。
+- 實測：`node tests/document-task-core.test.cjs`及`node tests/document-task-import-browser.test.cjs`通過。真Edge/Chromium合成UI驗證追加／選欄、六項工作、派工生命週期／導航／照片／無關案／設定保留、重匯、其他視窗競態、儲存失敗回滾及原廠商發布包驗證。全部封鎖外網，只用合成資料；evidence不提交。
+- 未測全套相機、WebKit／iPhone／Android與外部圖資。文件端另有跨兩端的真匯出下載測試；不將其私密Excel／照片／管理備份帶入本庫。[交換操作](document-task-exchange.md)、[ADR-0020](adr/0020-document-task-exchange.md)。
+- 此紀錄不宣稱已合併或部署。正式使用須先合併接收端並核對Pages，在原管理裝置匯入；交換JSON不能放進公開data，發布沿用原流程。
+
 ## 最新修正：照片分享僅傳檔案（2026-11-23，Asia/Taipei）
 
 - 開工核對：工作目錄乾淨，fetch確認main為`24f6822621111e8d7b71b28bbce0b0a0ffd89884`（#54已合併）。由origin/main建立`fix/file-only-photo-share`，PR直接對main，保留現有資料與圓形快門，無覆蓋使用者改動。
@@ -209,3 +218,4 @@ git log -8 --oneline
 乾淨checkout啟動本機伺服器後，依 [tests/README](../tests/README.md) 設定各suite URL。不要服務含私人備份的工作區上層目錄。測試使用固定日期，但使用者工作與顯示日期採Asia/Taipei。
 
 文書更正用新的docs提交；產品回退只選授權的程式變更，不整包把main/data退回舊月。每次公開JSON提交核對入口、任務ID與欄位／KML引用；Pages完成後比對對應來源。要開始新對話，使用START_HERE與本次目標，不把整份試錯聊天餵回去。
+
