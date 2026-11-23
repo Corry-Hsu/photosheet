@@ -8,7 +8,7 @@
 
 | 入口 | 資料身分 | 主要功能與限制 |
 |---|---|---|
-| `index.html` | 本機 manager | Excel／手動任務、地籍、面積、指派、完成、發布、備份 |
+| `index.html` | 本機 manager | 文件任務JSON／手動任務、地籍、面積、指派、完成、發布、備份 |
 | `worker-1/2/3.html` | p1／p2／p3 | 固定派工清單、搜尋／篩選、地圖／GPS／導航、詳情白板與拍照 |
 | `vendor-1/2/3.html` | v1 雜草垃圾／v2 砍樹／v3 圍籬 | 同類現場操作，固定類型不能混入別類，照片不計完成張數 |
 | `photosheet-app.html` | 舊照片排版工具 | 保留，非目前派工架構的等價入口 |
@@ -19,7 +19,7 @@
 
 ```mermaid
 flowchart TD
-  EX[Excel／手動資料] --> CORE[core.js＋excel.js]
+  EX[文件任務JSON／手動資料] --> CORE[core.js＋document-task-core.js]
   GEO[KML／XML／ZIP] --> W[geo-worker.js]
   W --> IDX[範圍索引＋RBush]
   CORE --> ADMIN[app.js 管理狀態]
@@ -53,7 +53,7 @@ flowchart TD
 
 **R-01 一案多地號**：Excel 一行一任務，以 task.id 識別；serial／案號不是唯一鍵。不得按地號拆案、重算工作數量，亦不得因地號相同就合併不同工作類型或案件。
 
-**R-02 Excel**：支援砍樹、圍籬、雜草垃圾工作表及「段」對照；可勾匯入類型、逐筆或統一修改成果日。公式只讀快取值，不執行公式。成果日初值取「通知」；期限取「完成」日期搭配臺灣時間17:00，匯入需核對。重匯保留已有人工分派等保護欄位，不覆蓋 manual 任務。
+**R-02 文件來源**：管理頁移除Excel匯入，案件改由文件產生器解析原Excel或建立，再以專用文件任務JSON匯入，見R-27、R-28。歷史Excel任務ID及原有派工資料保留，不重新解析或重建任務；管理頁仍可手動新增。Excel解析器檔案保留作歷史相容來源，管理頁不載入或綁定。
 
 **R-03 手動任務**：可填類型、案號、成果日、期限、人員、多地段地號、四碼段代號、工作項目／數量、廠商／人員、選填導航。ID 以 `manual:` 開頭；可修正／新增地號，保留 originalParcels；拒絕空白、非法及重複地號。跨段時不能沿用不相符的舊代碼。
 
@@ -142,7 +142,7 @@ flowchart TD
 - 所有本機資料依瀏覽器origin保存；換裝置／改網域不自動同步。清除資料、無痕關閉或配額不足會失去暫存，需下載備份與照片。
 - HTTPS或localhost才有可靠相機／定位安全環境；使用者必須授權。裝置時間、GPS與浮水印不防偽。
 - 無Service Worker，不保證離線重新開啟；圖資、Google導航與線上JSON需網路。底圖失效仍應可看本機範圍與既有導航。
-- Excel上限12MiB；解壓80MiB／4000檔、單工作表30000列。地籍ZIP預檢解壓1GiB／30000檔、單一壓縮XML/KML內容48MiB；48MiB限制不等於所有直接選檔的全域限制。管理備份上限350MiB。
+- 舊Excel解析器限制12MiB、解壓80MiB／4000檔、單工作表30000列，現行管理頁無此入口。地籍ZIP預檢解壓1GiB／30000檔、單一壓縮XML/KML內容48MiB；48MiB限制不等於所有直接選檔的全域限制。管理備份上限350MiB。
 - 不執行Excel公式、KML NetworkLink、HTML、DTD或外部實體；KMZ不列為保證支援格式。無效檔案或退化幾何需提醒，不留半套已取代索引。
 - 套件封裝版本 `1.0.0-rc.1` 是既有metadata，沒有正式SemVer發版流程；以commit與Pages建置作版本證據。
 
@@ -181,4 +181,10 @@ flowchart TD
 
 管理頁新增匯入cw015-dispatch-tasks格式；新案未指派追加，既有同ID案件逐欄勾選更新。保留指派、完成、舊案鎖、導航及未知欄位，不刪無關任務，不觸及照片；更正成果日期仍保留原舊案鎖。state及geo以單一IndexedDB交易及預覽快照比對提交；其他視窗更新則拒絕，寫入失敗全回滾。新KML可追加，既有不同範圍保留並提示。[操作及契約](document-task-exchange.md)、[ADR-0020](adr/0020-document-task-exchange.md)。不改原Excel、派工、發布或相機功能，交換檔不是管理備份或發布包。
 
+
+## R-28 文件主來源與地籍回傳（2026-11-23）
+
+依使用者最新指示，管理頁移除Excel匯入按鈕、隱藏輸入、事件處理及excel.js載入。案件改由文件工具匯出JSON，管理頁仍可手動新增；任務ID、舊案保護、XML/KML匯入、面積配對、備份／還原與發布維持。ExcelJS保留供既有文件輸出。此規則取代先前規格中管理頁仍可Excel匯入的部分。
+
+管理頁「下載備份」已包含KML features及task.landArea逐地號配對面積，文件工具可用專門地籍回傳入口讀取；無須改備份schema。原XML未配對內容不在備份中，不能宣稱復原所有原始XML。操作見[地籍回傳](document-task-exchange.md)，決策見[ADR-0021](adr/0021-document-source-and-geo-return.md)。
 
