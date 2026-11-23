@@ -1389,6 +1389,28 @@
     bind("#orders", () => documentDialog(chosen(), "order"));
     bind("#reload-worker", loadWorker);
     if (worker) return;
+    if (window.DocumentTaskImport) DocumentTaskImport.mount({
+      tell,
+      snapshot: async () => ({state:structuredClone(state), features:structuredClone(features), geoCounts:structuredClone(geoCounts), diskState:await Store.get('state','manager'), diskGeo:await Store.all('geo')}),
+      commit: async (snapshot, result) => {
+        const X=DocumentTaskCore;
+        if(!X.equal(state,snapshot.state)||!X.equal(features,snapshot.features))throw Error('管理資料在預覽後已變更，請重新匯入核對');
+        const database=await Store.open();
+        await new Promise((resolve,reject)=>{
+          const transaction=database.transaction(['state','geo'],'readwrite');
+          const a=transaction.objectStore('state').get('manager'),b=transaction.objectStore('geo').getAll();
+          let complete=0,reason;
+          const checked=()=>{if(++complete!==2)return;
+            if(!X.equal(a.result,snapshot.diskState)||!X.equal(b.result,snapshot.diskGeo)||!X.equal(state,snapshot.state)||!X.equal(features,snapshot.features)){reason=Error('其他視窗已更新管理資料，請重新匯入核對');transaction.abort();return}
+            try{transaction.objectStore('state').put(result.state);
+            if(result.addedFeatures)Store.writeGeo(transaction,{features:result.features,counts:geoCounts||{xml:0,kml:0}})}catch(error){reason=error;transaction.abort()}
+          };
+          a.onsuccess=checked;b.onsuccess=checked;
+          transaction.oncomplete=resolve;transaction.onerror=()=>reject(transaction.error||reason);transaction.onabort=()=>reject(reason||transaction.error||Error('文件任務合併交易未完成'));
+        });
+        state=result.state;features=result.features;page=1;rebuild();setupFilters();render();
+      }
+    });
     bind("#land-areas", () =>
       areaDialog((chosen().length ? chosen() : filtered()).map((t) => t.id)),
     );
@@ -1734,3 +1756,4 @@
     console.error(e);
   });
 })();
+
