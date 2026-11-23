@@ -10,8 +10,9 @@ fixture=json.loads((ROOT/'tests/fixtures/worker-1.json').read_text())
 share_shim=r'''(()=>{
 window.shareMode='unsupported';window.shareCalls=[];
 Object.defineProperty(navigator,'canShare',{configurable:true,value:({files})=>shareMode!=='unsupported'&&files[0].type==='application/zip'});
-Object.defineProperty(navigator,'share',{configurable:true,value:async({files})=>{
- shareCalls.push({name:files[0].name,type:files[0].type,size:files[0].size});
+Object.defineProperty(navigator,'share',{configurable:true,value:async(payload)=>{
+ const {files}=payload;
+ shareCalls.push({keys:Object.keys(payload).sort(),count:files.length,name:files[0].name,type:files[0].type,size:files[0].size});
  if(shareMode==='cancel')throw new DOMException('cancel','AbortError');
  if(shareMode==='activation'){shareMode='success';throw new DOMException('gesture required','NotAllowedError')}
  window.sharedBytes=Array.from(new Uint8Array(await files[0].arrayBuffer()));
@@ -67,6 +68,8 @@ with tempfile.TemporaryDirectory() as temp, sync_playwright() as p:
     pg.wait_for_function('document.querySelector("[data-photos-status]").textContent.includes("已交給")')
     validate_zip(bytes(pg.evaluate('sharedBytes')),['photo/a'])
     assert pg.evaluate('shareCalls.at(-1).type')=='application/zip'
+    assert pg.evaluate('shareCalls.at(-1).keys')==['files']
+    assert pg.evaluate('shareCalls.at(-1).count')==1
     # A cancelled share never triggers a fallback download or changes the photos.
     downloads=[];pg.on('download',lambda d:downloads.append(d.suggested_filename))
     pg.evaluate("shareMode='cancel'");pg.click('[data-photos-share]')
@@ -77,6 +80,7 @@ with tempfile.TemporaryDirectory() as temp, sync_playwright() as p:
     pg.wait_for_function('document.querySelector("[data-photos-status]").textContent.includes("已備妥")')
     pg.click('[data-photos-share]');pg.wait_for_function('document.querySelector("[data-photos-status]").textContent.includes("已交給")')
     assert not downloads
+    assert all(c['keys']==['files'] and c['count']==1 for c in pg.evaluate('shareCalls'))
     # ZIP failures leave all data and the selection intact, and can be retried.
     pg.evaluate("()=>{window.realZip=fflate.zipSync;fflate.zipSync=()=>{throw Error('test ZIP failure')}}")
     pg.click('[data-photos-export]');pg.wait_for_function('document.querySelector("[data-photos-status]").textContent.includes("打包失敗")')
@@ -105,6 +109,10 @@ with tempfile.TemporaryDirectory() as temp, sync_playwright() as p:
     vp.evaluate('''async()=>{const source=await Store.get('photos','other-person');await Store.put('photos',{...source,id:'vendor-photo',person:'v1',taskId:PSApp.state.tasks[0].id})}''')
     vp.locator('[data-detail]').first.click();vp.wait_for_selector('[data-photo-select]');assert vp.locator('[data-photo-select]').count()==1
     vp.locator('[data-photos-all]').check();assert not vp.locator('[data-photos-export]').is_disabled();assert not vp.evaluate('PSApp.state.tasks[0].completed||false')
+    vp.evaluate("shareMode='success'");vp.click('[data-photos-export]')
+    vp.wait_for_function('document.querySelector("[data-photos-status]").textContent.includes("已交給")')
+    assert vp.evaluate('shareCalls.at(-1).keys')==['files']
+    validate_zip(bytes(vp.evaluate('sharedBytes')),['other-person'])
     assert not errors,errors
-    result={'engine':engine,'only_selected_stamped_jpegs_in_zip':True,'collision_safe_names':True,'all_and_partial_selection':True,'share_success_cancel_and_fresh_gesture':True,'zip_failure_retains_data':True,'atomic_delete_error_and_retry':True,'only_current_task_person_deleted':True,'late_ack_no_resurrection_and_webkit_bytes':True,'deletion_persists_after_reload':True,'empty_gallery_and_vendor':True,'responsive':True,'errors':errors}
+    result={'engine':engine,'only_selected_stamped_jpegs_in_zip':True,'collision_safe_names':True,'all_and_partial_selection':True,'share_success_cancel_and_fresh_gesture':True,'files_only_share_payload_worker_and_vendor':True,'zip_failure_retains_data':True,'atomic_delete_error_and_retry':True,'only_current_task_person_deleted':True,'late_ack_no_resurrection_and_webkit_bytes':True,'deletion_persists_after_reload':True,'empty_gallery_and_vendor':True,'responsive':True,'errors':errors}
     (out/f'{engine}.json').write_text(json.dumps(result,ensure_ascii=False,indent=2));print(json.dumps(result,ensure_ascii=False,indent=2));browser.close()

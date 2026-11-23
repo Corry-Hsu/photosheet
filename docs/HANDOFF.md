@@ -1,6 +1,16 @@
 # photosheet 交接紀錄
 
-## 最新功能：中央圓形快門、上方鏡頭／倍率
+## 最新修正：照片分享僅傳檔案（2026-11-23，Asia/Taipei）
+
+- 開工核對：工作目錄乾淨，fetch確認main為`24f6822621111e8d7b71b28bbce0b0a0ffd89884`（#54已合併）。由origin/main建立`fix/file-only-photo-share`，PR直接對main，保留現有資料與圓形快門，無覆蓋使用者改動。
+- 修改與理由：LINE截圖的額外「任務照片 ZIP」對應程式主動傳入的title；單張JPEG也有「任務照片」。兩處navigator.share均改成只傳files，不附title／text／url。拍後與放大檢視共用saveImage，人員／廠商ZIP共用shareArchive，檔名與內容不變。六入口JS版本更新。[ADR-0019](adr/0019-file-only-photo-sharing.md)補充0010並取代附title行為，規格R-23同步。
+- 未採與影響：不改LINE或發訊息、不新增API、不改ZIP檔名／位元組、不移除頁面相簿標題，也不改相機／GPS／保存。保留單張分享失敗下載、ZIP手勢失效後再次分享／下載、取消不刪照片與批刪失敗回復。公開data未變，截圖與原始evidence不提交。
+- 實測與失敗：新增payload完整鍵值檢查後，修正前bulk suite因仍有title而exit 1；移除後`PHOTOSHEET_TEST_URL=http://127.0.0.1:8817/ python tests/bulk_photos_qa.py`及同URL的`field_photo_flow_qa.py`兩組通過。涵蓋JPEG拍後／放大分享、人員／廠商ZIP只含files、取消保留、JPEG失敗下載同位元組、ZIP再次手勢分享、ZIP選取內容及本機資料保護。`node --check field-camera.js`與`git diff --check`通過。見[驗證紀錄](verification/file-only-photo-share.json)。
+- Pages：main24f6822的[run 45034047129](https://github.com/Corry-Hsu/photosheet/actions/runs/45034047129) completed/success；本次尚未合併部署。交付commit可由`git log -1 -- field-camera.js`查詢。
+- 限制／下一步：瀏覽器模擬分享面板，未對真實LINE傳送，未跑iPhone／Android、WebKit或全套；不能推定所有LINE版本最終呈現一致。P0原生多頁GPS限制仍保留。合併本次直接對main的PR，核對Pages來源後，在使用者手機分享一份ZIP與JPEG確認沒有額外文字。
+
+
+## 前版功能：中央圓形快門、上方鏡頭／倍率
 
 - 開工核對：工作目錄乾淨，重新fetch確認main已到`67c6e030aed2fe5d3fe23dc04e7a59dbf96acbf6`（#53已合併）。本次從origin/main建立`feat/round-shutter-top-optics`，PR直接對main，無前置分支依賴。保留#52及後續既有資料，沒有使用者未提交改動被覆蓋。
 - 修改與理由：依使用者參考相機，快門改為76px白色圓形、底部中央、無可見文字；保留原生button、「拍照」無障礙名稱、焦點與鍵盤操作。鏡頭／倍率移到取景上方，和標題共同固定；寬橫式的設定一列，快門仍底部中央。兩區由取景隔開，拍後設定隱藏與文字儲存／重試沿用。

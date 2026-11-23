@@ -27,3 +27,5 @@
 ## 驗證與後續
 
 對應[規格完成定義](../SPECIFICATION.md#9-可驗證完成定義產品變更)，實際結果及未通過項目見[交接](../HANDOFF.md)。修改此決策時新增ADR並標示本編號被取代的確切範圍，不刪除本紀錄。
+
+後續：[ADR-0019](0019-file-only-photo-sharing.md)明定單張JPEG／ZIP分享僅含files，不再附title／text／url；本ADR的照片保存、取消與重試決策沿用。
