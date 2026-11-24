@@ -1,0 +1,103 @@
+{
+  "base_commit": "11b1c236395e52d55bdb43a21c1d91382d8caaaf",
+  "pr_base": "main",
+  "tested_revision": "working tree on base_commit; source hashes below; containing commit via git log",
+  "commands": [
+    {
+      "command": "PHOTOSHEET_TEST_URL=http://127.0.0.1:8819/ python tests/selected_task_map_qa.py",
+      "exit_code": 0
+    },
+    {
+      "command": "DELETE_TEST_URL=http://127.0.0.1:8819/ python tests/manual_delete_qa.py",
+      "exit_code": 0
+    },
+    {
+      "command": "ADMIN_MAP_TEST_URL=http://127.0.0.1:8819/ python tests/admin_basemap_qa.py",
+      "exit_code": 0
+    },
+    {
+      "command": "PHOTOSHEET_TEST_URL=http://127.0.0.1:8819/ python tests/admin_scope_completion_qa.py",
+      "exit_code": 0
+    },
+    {
+      "command": "HISTORY_TEST_URL=http://127.0.0.1:8819/ python tests/admin_history_qa.py",
+      "exit_code": 0
+    },
+    {
+      "command": "PARCEL_TEST_URL=http://127.0.0.1:8819/ python tests/parcel_add_qa.py",
+      "exit_code": 0
+    },
+    {
+      "command": "PHOTOSHEET_CHROMIUM=/usr/bin/chromium node tests/document-task-import-browser.test.cjs",
+      "exit_code": 0
+    },
+    {
+      "command": "node --check app.js",
+      "exit_code": 0
+    },
+    {
+      "command": "git diff --check",
+      "exit_code": 0
+    }
+  ],
+  "development_failures": [
+    {
+      "failure": "test clicked batch-map while mobile list panel hidden on map tab",
+      "resolution": "switch back to list before clicking, matching normal UI flow; full suite passed"
+    },
+    {
+      "failure": "Node document-import suite default Chromium executable missing",
+      "resolution": "support PHOTOSHEET_CHROMIUM and use existing /usr/bin/chromium; full suite passed"
+    }
+  ],
+  "synthetic_data": {
+    "cases": 26,
+    "features": 7,
+    "viewport_widths": [
+      320,
+      390,
+      844,
+      1440
+    ]
+  },
+  "coverage": [
+    "all selected tasks across pages and retained filtered selection",
+    "shared feature ID deduplication",
+    "holes and MultiPolygon unchanged",
+    "missing and ambiguous groups not guessed",
+    "bounds encompass selected WGS84 shapes",
+    "mobile explicit map switch and fit",
+    "multi-selection map navigation writes prevented",
+    "delete selected task removes layer but keeps shared geometry and photos",
+    "single field map unchanged",
+    "manual parcel edits and completion/history regression",
+    "document import selective atomic writes regression"
+  ],
+  "sha256": {
+    "app.js": "9097a2cc4e6aea2184c74e50ef7e6fe584545bd61b317eca0405b4cd78eb4e46",
+    "index.html": "f05fa97967a68cf59cf04738a1801a73d1d871e9fdc4f6fda575594210a4ea80",
+    "tests/selected_task_map_qa.py": "2f0f1856eb6281eae59e64364b06a6004fabb7410e518c4503a2a051e6cf09be",
+    "tests/document-task-import-browser.test.cjs": "fa929fd326ed46b1bcdd320ee7684384660f9ac7a68b8b308efdff3317ffaace"
+  },
+  "pages": {
+    "sha": "11b1c236395e52d55bdb43a21c1d91382d8caaaf",
+    "run_id": 45160815326,
+    "status": "completed",
+    "conclusion": "success",
+    "this_change_deployed": false
+  },
+  "not_run": [
+    "full suite",
+    "physical mobile devices",
+    "WebKit",
+    "large KML performance",
+    "external imagery real availability"
+  ],
+  "known_limitations": [
+    "only local uniquely matched geometry can be shown",
+    "widely separated selected areas may appear small after fit",
+    "P0 native multi-page GPS timeout remains unresolved"
+  ],
+  "public_data_changed": false,
+  "private_evidence_committed": false
+}
