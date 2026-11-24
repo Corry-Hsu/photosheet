@@ -1,5 +1,17 @@
 # photosheet 交接紀錄
 
+## 最新功能：管理多選任務KML總覽
+
+- 開工：工作目錄乾淨，fetch主線已到`11b1c236395e52d55bdb43a21c1d91382d8caaaf`，包含文件任務交換與後續資料補充；從origin/main建立`feat/selected-task-map-overview`，PR直接對main，沒有覆蓋使用者改動。前次交接SHA不是本次HEAD。
+- 修改與理由：管理多選後畫全部選取任務的唯一配對地籍，共用feature.id去重，一案多地號／孔洞／MultiPolygon保留。新增批次「查看選取範圍」，手機可直接切圖並縮放；原地圖縮放鈕也採選取集合。跨頁與仍保留勾選的篩選外任務納入；一般重繪不強制拉回視野。
+- 導航與缺漏：多選時移除單案導航釘、取消入口設定模式並停用地圖入口修改，避免誤改。單筆／清除恢復單案；刪除／可見來源變更清理選取與圖層。缺漏或歧義不猜測，無範圍不畫假導航地籍；狀態簡短提示。選取集合優先於聚焦；需單案地圖核對時可清除選取。
+- 未採與影響：不只畫當頁、不重複疊共用範圍、不改任務ID或拆地號，不新增後端／路線排序。只改app.js管理分支、index批次按鈕與JS版本；公開data、文件交換契約、現場相機、照片都不改。[ADR-0021](adr/0021-selected-task-map-overview.md)與R-28同步；沿用0004／0006／0012，其多選單案呈現由本次擴充。
+- 實測：新`selected_task_map_qa.py`及`manual_delete_qa.py`、`admin_basemap_qa.py`、`admin_scope_completion_qa.py`、`admin_history_qa.py`、`parcel_add_qa.py`、`document-task-import-browser.test.cjs`共七組通過。新suite以26筆合成案件／7圖形驗證多地號、共用去重、孔洞／多區塊、跨頁／篩選、缺漏／歧義、fitBounds、320–1440px、導航不誤寫、刪選中案但留照片地籍及現場單案隔離。JS語法／diff檢查通過，命令及hash見[驗證紀錄](verification/selected-task-map-overview.json)。
+- 初次失敗與修正：新suite在手機已切地圖後點清單內的批次鈕，因清單頁籤隱藏而逾時；改成先切回任務清單再操作，未用force繞過。Node文件匯入回歸找不到預設Chromium，為該suite加PHOTOSHEET_CHROMIUM選項，指定/usr/bin/chromium後完整通過。沒有忽略失敗或改產品規則求綠。
+- Pages：查main11b1c23的[run 45160815326](https://github.com/Corry-Hsu/photosheet/actions/runs/45160815326) completed/success；本版尚未部署。交付commit可用`git log -1 -- app.js`查詢。截圖只含虛構資料存/tmp，未提交私人evidence、照片、原Excel/XML或管理備份。
+- 限制／下一步：未跑全套、實機、WebKit、大量KML效能與圖資真實可用性；P0原生多頁GPS仍未解。總覽只能畫本機已有且唯一配對範圍，遠距多案縮放後每塊可能較小。審查本PR合入main後核對Pages，於原管理裝置匯入地籍後勾選並查看總覽。
+
+
 ## 文件任務交換與差異合併（2026-11-23，Asia/Taipei）
 
 - 基準main為`6bb7a1560c382c7d45a4817c8d5f8c7a59846bf6`；本機獨立快照保留#55及原資料，不修改公開data。

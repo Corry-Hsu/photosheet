@@ -2,6 +2,22 @@
 
 現行規格見 [SPECIFICATION](../docs/SPECIFICATION.md)，本次commit／真實成功與失敗見 [HANDOFF](../docs/HANDOFF.md)，可讀取的結果為 [2026-11-20 baseline](../docs/verification/2026-11-20-baseline.json)。**歷史基準16/18，另2組失敗；P0接續修復兩組並執行必要回歸共4組通過，未重跑全套18組，不能合稱全套綠燈。** 詳見 [P0紀錄](../docs/verification/2026-11-20-p0.json)與[ADR-0014](../docs/adr/0014-clock-consistent-browser-gps-fixtures.md)。
 
+## 管理多選KML總覽
+
+網站根目錄啟動8819本機伺服器：
+
+```sh
+PHOTOSHEET_TEST_URL=http://127.0.0.1:8819/ python tests/selected_task_map_qa.py
+DELETE_TEST_URL=http://127.0.0.1:8819/ python tests/manual_delete_qa.py
+ADMIN_MAP_TEST_URL=http://127.0.0.1:8819/ python tests/admin_basemap_qa.py
+PHOTOSHEET_TEST_URL=http://127.0.0.1:8819/ python tests/admin_scope_completion_qa.py
+HISTORY_TEST_URL=http://127.0.0.1:8819/ python tests/admin_history_qa.py
+PARCEL_TEST_URL=http://127.0.0.1:8819/ python tests/parcel_add_qa.py
+PHOTOSHEET_CHROMIUM=/usr/bin/chromium node tests/document-task-import-browser.test.cjs
+```
+
+新suite使用26件合成案，直接檢查Leaflet geometry／圖層、WGS84 bounds、孔洞、多區塊、共用去重、跨頁及篩選後保留的選取集合、缺漏／歧義、手機切頁籤與導航／照片保護。合成底圖與截圖不代表實際圖資可用性。Node文件匯入suite可用PHOTOSHEET_CHROMIUM指定瀏覽器；未設定時沿用原預設。結果見[選取總覽驗證](../docs/verification/selected-task-map-overview.json)。
+
 ## 僅檔案分享
 
 8817根目錄本機網站：

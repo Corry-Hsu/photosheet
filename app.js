@@ -25,6 +25,7 @@
     featureMap = new Map(),
     spatial = new RBush(),
     selected = new Set(),
+    selectionMapActive = false,
     focused = "",
     fieldBatch = "",
     page = 1,
@@ -303,7 +304,7 @@
           el.checked
             ? selected.add(el.dataset.check)
             : selected.delete(el.dataset.check);
-          updateBatch();
+          updateBatch(true);
           if (worker) focus(el.dataset.check, false);
         }),
     );
@@ -374,9 +375,35 @@
     render();
     tell(done ? "已標記完成；現場清單請重新發布派工檔後更新。" : "已取消完成");
   }
-  function updateBatch() {
+  function selectionTasks() {
+    return listSource().filter((t) => selected.has(t.id));
+  }
+  function updateBatch(fit = false) {
     $("#batch").hidden = !selected.size;
     $("#selected-count").textContent = `已選 ${selected.size} 筆`;
+    if (worker) return;
+    $("#fit-map").textContent = selected.size ? "縮放至選取任務" : "縮放至目前任務";
+    $("#pin-mode").disabled = selected.size > 1;
+    const tasks = selectionTasks();
+    if (tasks.length) {
+      selectionMapActive = true;
+      if (tasks.length > 1) drawSelection(fit);
+      else {
+        focused = tasks[0].id;
+        draw(tasks[0], fit);
+        $$(".task").forEach((row) => row.classList.toggle("selected", row.dataset.id === focused));
+      }
+    } else if (selectionMapActive) {
+      selectionMapActive = false;
+      const t = listSource().find((t) => t.id === focused);
+      if (t) draw(t, false);
+      else {
+        if (landLayer) map.removeLayer(landLayer);
+        if (pin) map.removeLayer(pin);
+        landLayer = pin = null;
+        $("#map-status").textContent = "";
+      }
+    }
   }
   function setupFilters() {
     const v = $("#person-filter").value;
@@ -393,6 +420,7 @@
     if (!$("#dialog").open) $("#dialog").showModal();
   }
   function focus(id, fit = true) {
+    if (!worker && selected.size === 1) id = selectionTasks()[0]?.id || id;
     const t = listSource().find((t) => t.id === id);
     if (!t) return;
     focused = id;
@@ -469,6 +497,14 @@
     );
   }
   function draw(t, fit) {
+    if (!worker && selected.size > 1) {
+      drawSelection(fit);
+      return;
+    }
+    if (!worker && selected.size === 1) {
+      t = selectionTasks()[0] || t;
+      focused = t.id;
+    }
     if (landLayer) map.removeLayer(landLayer);
     if (pin) map.removeLayer(pin);
     pin = null;
@@ -512,6 +548,33 @@
       else if (n) map.setView([n.point[1], n.point[0]], 17, { animate: false });
     }
     setTimeout(() => map.invalidateSize(), 20);
+  }
+  function drawSelection(fit) {
+    const tasks = selectionTasks(),
+      matches = tasks.map((t) => matching(t)),
+      fs = [...new Map(matches.flatMap((m) => m.features).map((f) => [f.id, f])).values()],
+      partial = matches.some((m) => m.groups.some((group) => group.length !== 1));
+    if (landLayer) map.removeLayer(landLayer);
+    if (pin) map.removeLayer(pin);
+    pin = null;
+    pinMode = false;
+    $("#pin-mode").classList.remove("active");
+    landLayer = polygonLayer(fs, (id) => {
+      const task = tasks.find((t) => matching(t).features.some((f) => f.id === id));
+      if (task) focus(task.id, false);
+    }).addTo(map);
+    $("#map-status").textContent = `已選 ${tasks.length} 筆任務` +
+      (!fs.length ? "；無可顯示的地籍範圍" : partial ? "；部分地籍缺少唯一範圍" : "");
+    if (fit && fs.length) {
+      map.stop();
+      map.fitBounds(landLayer.getBounds(), { padding: [25, 25], maxZoom: 18, animate: false });
+    }
+    setTimeout(() => map.invalidateSize(), 20);
+  }
+  function fitSelection() {
+    const tasks = selectionTasks();
+    if (tasks.length > 1) drawSelection(true);
+    else if (tasks.length) focus(tasks[0].id);
   }
   async function setNavigation(t, p) {
     C.navURL(p);
@@ -1326,6 +1389,7 @@
       for (const t of filtered().slice((page - 1) * PAGE, page * PAGE))
         selected.add(t.id);
       render();
+      if (!worker) updateBatch(true);
     });
     bind("#clear-select", () => {
       selected.clear();
@@ -1361,12 +1425,25 @@
             $$(".mobile-tabs button").forEach((x) =>
               x.classList.toggle("active", x === b),
             );
-            setTimeout(() => map.invalidateSize(), 20);
+            setTimeout(() => {
+              map.invalidateSize();
+              if (!worker && b.dataset.tab === "map" && selected.size) fitSelection();
+            }, 20);
           }),
       );
     bind("#fit-map", () => {
+      if (!worker && selected.size) {
+        fitSelection();
+        return;
+      }
       const t = state.tasks.find((t) => t.id === focused) || filtered()[0];
       if (t) focus(t.id);
+    });
+    if ($("#batch-map")) bind("#batch-map", () => {
+      document.body.dataset.tab = "map";
+      $$(".mobile-tabs button").forEach((b) => b.classList.toggle("active", b.dataset.tab === "map"));
+      scrollFieldMap();
+      fitSelection();
     });
     bind("#show-context", () => {
       contextOn = !contextOn;
