@@ -281,3 +281,7 @@ dialog {
     padding: 10px;
   }
 }
+
+.task-identity {
+  overflow-wrap: anywhere;
+}

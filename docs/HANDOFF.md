@@ -1,5 +1,17 @@
 # photosheet 交接紀錄
 
+## 最新修正：管理頁可逐筆刪除匯入任務（2026-11-26，Asia/Taipei）
+
+- 開工核對：工作目錄乾淨，重新fetch main為`ddad59222b17e435dd0f2c070524a56cf20b8639`，保留11/26最新公開資料。從origin/main建立`fix/delete-imported-tasks`，PR直接對main；使用者「繼續」後核對保留同一工作目錄變更，未重做或覆蓋其他改動。
+- 問題：既有R-04只允許manual來源，Excel／文件等跨來源重複案沒有刪除入口。使用者截圖兩案期限不同，未取得實際task.id及來源，重複產生完整歷史未確認；不猜哪筆應保留。
+- 修改／理由：管理清單與詳情各來源均可逐筆刪除，確認列來源、ID、類型／案號、全部地號、成果日與期限；詳情顯示來源與可換行ID，文件來源不再顯示原表第0列。只刪唯一task.id，缺／空／重複ID拒絕；沿用儲存中停用、失敗回復、選取／地圖／分頁及統計更新，照片與共用地籍不刪、人員／廠商不能刪。R-04／D03與[ADR-0022](adr/0022-manager-delete-imported-tasks.md)同步取代舊來源限制。
+- 未採／影響：不自動合併或判重、不依地號／期限猜保留案、不批次清舊案、不改來源檔、公開data或GitHub，不新增刪除墓碑。本機刪除已發布案仍需工作區另行移除重發；重匯原檔可能重新加入。只改app.js刪除來源／顯示、管理ID換行CSS與index資源版本，不改相機、資料契約或檔案內容。
+- 實際驗證：各來源刪除（沿用檔名manual_delete_qa.py）、多選地圖、月統計、文件任務匯入四組瀏覽器測試通過；node --check app.js及git diff --check通過。驗證相同地號但不同ID與期限保留為兩案、文件刪除取消／失敗／重試、空serial Excel刪除、重複／不存在ID阻擋、原交易／選取／地圖／分頁、未刪案／照片／共用地籍與人員／廠商隔離。命令與hash見[驗證紀錄](verification/delete-imported-tasks.json)。
+- 開發中失敗：原測試假定只有一個刪除鈕，新版有三個而strict locator失敗，改以精確目標ID操作；文件寫入失敗後重試逾時，診斷為測試重載後沿用已失效window.originalPut，改在當前頁重新保存／還原Store.put後通過。未將這些fixture問題改寫為產品交易故障，沒有刪去保護斷言求綠。
+- Pages：main ddad592的[run 45778790614](https://github.com/Corry-Hsu/photosheet/actions/runs/45778790614) completed/success；本修正尚未部署，交付commit由git log -1 -- app.js查詢。沒有讀取或刪除使用者本機真案，也未提交使用者截圖、原Excel／XML、照片、備份或原始evidence。
+- 限制／下一步：無自動跨來源去重與永久排除重匯；照片仍存本機但建議刪前備份，若task.id本身重複需先備份核對。未跑全套、實機、WebKit，P0原生多頁GPS未解仍保留。審查本PR合入main、核對Pages後，由管理者在原瀏覽器核對來源／期限逐筆刪多出的一案，必要時另處理公開派工。
+
+
 ## 最新功能：管理多選任務KML總覽
 
 - 開工：工作目錄乾淨，fetch主線已到`11b1c236395e52d55bdb43a21c1d91382d8caaaf`，包含文件任務交換與後續資料補充；從origin/main建立`feat/selected-task-map-overview`，PR直接對main，沒有覆蓋使用者改動。前次交接SHA不是本次HEAD。
