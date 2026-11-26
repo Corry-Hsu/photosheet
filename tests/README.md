@@ -2,6 +2,19 @@
 
 現行規格見 [SPECIFICATION](../docs/SPECIFICATION.md)，本次commit／真實成功與失敗見 [HANDOFF](../docs/HANDOFF.md)，可讀取的結果為 [2026-11-20 baseline](../docs/verification/2026-11-20-baseline.json)。**歷史基準16/18，另2組失敗；P0接續修復兩組並執行必要回歸共4組通過，未重跑全套18組，不能合稱全套綠燈。** 詳見 [P0紀錄](../docs/verification/2026-11-20-p0.json)與[ADR-0014](../docs/adr/0014-clock-consistent-browser-gps-fixtures.md)。
 
+## 各來源任務刪除
+
+在網站根目錄啟動8820伺服器後：
+
+```sh
+DELETE_TEST_URL=http://127.0.0.1:8820/ python tests/manual_delete_qa.py
+PHOTOSHEET_TEST_URL=http://127.0.0.1:8820/ python tests/selected_task_map_qa.py
+PHOTOSHEET_TEST_URL=http://127.0.0.1:8820/ python tests/admin_monthly_stats_qa.py
+PHOTOSHEET_CHROMIUM=/usr/bin/chromium node tests/document-task-import-browser.test.cjs
+```
+
+manual_delete沿用歷史檔名，現為各來源管理刪除：同地號／不同ID／期限的文件與Excel案由使用者逐筆確認，取消、寫入失敗重試、空案號、重複／不存在ID、分頁／選取／地圖與照片地籍保護、人員／廠商無刪除。原「Excel不可刪」斷言依ADR-0022取代，未移除資料保護。合成資料不代表已替使用者清理真案，來源檔再次匯入仍可能再出現。結果見[驗證紀錄](../docs/verification/delete-imported-tasks.json)。
+
 ## 管理多選KML總覽
 
 網站根目錄啟動8819本機伺服器：
@@ -140,7 +153,7 @@ python tests/land_area_converter_test.py
 | 前月搜尋、加回與再發布 | `admin_history_qa.py` | 跨年、閏月、回滾、本機備份；HISTORY_TEST_URL |
 | 鄉鎮自派／選擇發布 | `auto_dispatch_qa.py` | 11鄉鎮、p3保留、舊案保護 |
 | 手動任務＋廠商綜合 | `vendor_manual_qa.py` | P0合成定位通過：GPS失敗零張／恢復重試一張；原生定位逾時仍另列 |
-| 只刪手動來源 | `manual_delete_qa.py` | 不把空號Excel誤刪；交易回復；DELETE_TEST_URL |
+| 管理各來源逐筆刪除 | `manual_delete_qa.py` | 沿用歷史檔名；確認ID／來源、文件與Excel刪除、缺／重複ID拒絕、交易回復及現場隔離；DELETE_TEST_URL |
 | 修改／新增多地號 | `parcel_add_qa.py` | 來源追溯、空白／重複、跨段；PARCEL_TEST_URL |
 | 差異整理工作區 | `dispatch_tools_qa.py` | 攔截公開基準、欄位核准／刪除、草稿、競態；DISPATCH_TEST_URL |
 | 線上登記面積 | `land_areas_qa.py` | 真實精簡JSON＋合成管理案，含輸出；AREA_TEST_URL |

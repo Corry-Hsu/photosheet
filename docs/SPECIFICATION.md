@@ -57,7 +57,7 @@ flowchart TD
 
 **R-03 手動任務**：可填類型、案號、成果日、期限、人員、多地段地號、四碼段代號、工作項目／數量、廠商／人員、選填導航。ID 以 `manual:` 開頭；可修正／新增地號，保留 originalParcels；拒絕空白、非法及重複地號。跨段時不能沿用不相符的舊代碼。
 
-**R-04 刪除**：只有 `source=manual` 或 manual: ID 的管理者建立任務可刪；空白 serial 的 Excel 任務不因此可刪。需確認、寫入失敗回復；共用地籍與裝置照片保留。已公開派工需另在發布工作區移除並重新發布，本機刪除不改 GitHub。
+**R-04 刪除**：管理頁可逐筆刪除手動、Excel、文件等各來源任務，不以serial是否空白決定可刪。清單與詳情都有入口，確認視窗列來源、task.id、類型／案號、全部地號、成果日與期限，由管理者明確選定一筆；不自動判重或合併。找不到／空白ID或同ID多筆則拒絕，避免一次刪多案。儲存中停用重複操作，失敗回復，成功清理選取／地圖／分頁與統計；共用地籍及裝置照片保留，不搬照片至另一案。人員／廠商無刪除入口。已公開派工需另在發布工作區移除並重新發布，本機刪除不改GitHub或原始匯入檔；來源仍含該案時重匯可能再加入。詳情顯示來源與任務ID供核對；缺乏來源紀錄不猜測。此規則取代只刪手動來源限制，見[ADR-0022](adr/0022-manager-delete-imported-tasks.md)。
 
 ## 4. 日期、顯示、指派與完成
 
@@ -154,7 +154,7 @@ flowchart TD
 |---|---|---|
 | D01 | 一Excel列一案，多地號不拆、不重計，類型／日期／快取公式正確 | core、code_kml；真實原檔驗收另列 |
 | D02 | 舊月不可改派、當年範圍、完成單批次／取消、重新開放可再發布 | core、admin_scope_completion、admin_history、auto_dispatch |
-| D03 | 手動新增可修／增地號；只手動來源可刪、失敗回復，共用範圍與照片不刪 | parcel_add、manual_delete；vendor_manual |
+| D03 | 手動新增可修／增地號；管理逐筆確認刪各來源、缺／重複ID拒絕、失敗回復，共用範圍與照片不刪 | parcel_add、manual_delete；vendor_manual |
 | D04 | 純代號KML、跨段、孔洞／多區塊、無效幾何與WGS84順序正確 | core、code_kml |
 | D05 | 指定11鄉鎮分派、p3保留、廠商類型不混、所選JSON／空清單有效 | core、auto_dispatch、dispatch-plan；vendor_manual |
 | D06 | 差異預設不覆蓋、逐欄／移除審查、KML引用保留、基準變動阻擋 | dispatch-plan、dispatch_tools |

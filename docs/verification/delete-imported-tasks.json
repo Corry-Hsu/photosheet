@@ -1,0 +1,86 @@
+{
+  "date": "2026-11-26",
+  "timezone": "Asia/Taipei",
+  "base_commit": "ddad59222b17e435dd0f2c070524a56cf20b8639",
+  "pr_base": "main",
+  "tested_revision": "working tree on base_commit; hashes below; containing commit via git log",
+  "commands": [
+    {
+      "command": "DELETE_TEST_URL=http://127.0.0.1:8820/ python tests/manual_delete_qa.py",
+      "exit_code": 0
+    },
+    {
+      "command": "PHOTOSHEET_TEST_URL=http://127.0.0.1:8820/ python tests/selected_task_map_qa.py",
+      "exit_code": 0
+    },
+    {
+      "command": "PHOTOSHEET_TEST_URL=http://127.0.0.1:8820/ python tests/admin_monthly_stats_qa.py",
+      "exit_code": 0
+    },
+    {
+      "command": "PHOTOSHEET_CHROMIUM=/usr/bin/chromium node tests/document-task-import-browser.test.cjs",
+      "exit_code": 0
+    },
+    {
+      "command": "node --check app.js",
+      "exit_code": 0
+    },
+    {
+      "command": "git diff --check",
+      "exit_code": 0
+    }
+  ],
+  "development_failures": [
+    {
+      "failure": "old locator expected a single delete button, now resolves three",
+      "resolution": "target explicit synthetic task ID; strict locator kept"
+    },
+    {
+      "failure": "document deletion retry timed out after fixture restored undefined Store.put from before reload",
+      "resolution": "diagnostic confirmed writer undefined; capture and restore original writer on current page; full suite passed"
+    }
+  ],
+  "coverage": [
+    "all-source manager row/detail deletion",
+    "source/ID/parcel/result date/due confirmation",
+    "cross-source lookalikes not automatically merged or deleted",
+    "document cancel and failed-write rollback/retry",
+    "blank-serial Excel explicit deletion",
+    "missing and duplicate IDs rejected",
+    "pending duplicate-operation guard",
+    "surviving task fields and shared geo/photos retained",
+    "selection/map/pagination/monthly totals",
+    "snapshot publication excludes deleted tasks",
+    "worker and vendor deletion controls absent",
+    "document import regression"
+  ],
+  "sha256": {
+    "app.js": "7189780d73208d152dfc32419a4d27c47d7a882f28818f4f6e551d8fe6bd9769",
+    "admin-compact.css": "9021b52245a12ce30ff891882340db60b06fb9e69a386f9104521b1a33067296",
+    "index.html": "d33189f6c6e8f0b04a41ce910993a08bd6e5856a17d4171e8988228ebe41f652",
+    "tests/manual_delete_qa.py": "97b96c697a5f143c66f32c8561e79791f7a12b2e1ad1428c39754e5953e69d4f"
+  },
+  "pages": {
+    "sha": "ddad59222b17e435dd0f2c070524a56cf20b8639",
+    "run_id": 45778790614,
+    "status": "completed",
+    "conclusion": "success",
+    "this_change_deployed": false
+  },
+  "not_run": [
+    "full suite",
+    "physical devices",
+    "WebKit",
+    "actual user case data"
+  ],
+  "known_limitations": [
+    "real duplicate source/history not confirmed from screenshot alone",
+    "local deletion does not update published dispatch or source files",
+    "reimport may restore a deleted task; no tombstones or automatic deduplication",
+    "duplicate task IDs require backup and manual investigation",
+    "P0 native multi-page GPS unresolved"
+  ],
+  "public_data_changed": false,
+  "user_local_records_accessed": false,
+  "private_evidence_committed": false
+}

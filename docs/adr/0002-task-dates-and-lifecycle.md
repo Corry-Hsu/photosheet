@@ -1,6 +1,6 @@
 # ADR-0002：任務粒度、日期、舊案與重新開放
 
-- 狀態：已採用（本次回溯整理；原始實作時間見PR）。
+- 狀態：已採用（本次回溯整理；原始實作時間見PR）；僅手動來源可刪的部分由[ADR-0022](0022-manager-delete-imported-tasks.md)取代。
 - 整理日：2026-11-20；核對基準：8258a42。
 - 證據與範圍：[PR #1](https://github.com/Corry-Hsu/photosheet/pull/1)、[#4](https://github.com/Corry-Hsu/photosheet/pull/4)、[#26](https://github.com/Corry-Hsu/photosheet/pull/26)；[core.js](../../core.js)、[admin-history.js](../../admin-history.js)。
 
@@ -31,3 +31,5 @@
 對應[規格完成定義](../SPECIFICATION.md#9-可驗證完成定義產品變更)，實際結果及未通過項目見[交接](../HANDOFF.md)。修改此決策時新增ADR並標示本編號被取代的確切範圍，不刪除本紀錄。
 
 2026-11-20補充：[ADR-0015](0015-admin-monthly-statistics.md)為管理月統計採用全部本機任務，局部取代規格R-06對統計的可見範圍限制；本ADR的任務、日期與生命週期決策仍有效。
+
+後續：[ADR-0022](0022-manager-delete-imported-tasks.md)允許管理者確認後逐筆刪除Excel／文件等來源，取代只刪手動來源限制；任務粒度、舊案、完成、照片與地籍保護仍沿用。
